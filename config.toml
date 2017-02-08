@@ -1,0 +1,13 @@
+baseurl = "http://localhost/"
+languageCode = "en-us"
+title = "Pilosa"
+
+enableRobotsTXT = false
+
+[params]
+    company = "Pilosa"
+    logo = "logo.png"
+    title = "Pilosa"
+    subtitle = "Beyond the cloud."
+
+    tagline = "it's fast."

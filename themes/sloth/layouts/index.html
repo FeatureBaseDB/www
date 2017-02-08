@@ -1,0 +1,25 @@
+{{ partial "header.html" . }}
+
+<div class="blog-cover" style="background-image:url(/images/{{ .Site.Params.cover_image }});">
+    <section>
+        <div class="container">
+            <h1>{{ .Site.Params.title }}</h1>
+            {{ with .Site.Params.subtitle }}<h3>{{ . }}</h3>{{ end }}
+        
+            {{ with .Site.Params.twitter }}
+            <a href="https://twitter.com/{{ . }}" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter"></i></a>
+            {{ end }}
+            {{ with .Site.Params.github }}
+            <a href="https://github.com/{{ . }}" title="Follow on Github" target="_blank"><i class="icon icon-github"></i></a>
+            {{ end }}
+            {{ with .Site.Params.facebook }}
+            <a href="http://facebook.com/{{ . }}" title="Like on Facebook" target="_blank"><i class="icon icon-facebook"></i></a>
+            {{ end }}
+            <a href="/index.xml" title="RSS Feed">
+                <i class="icon icon-rss"></i>
+            </a>
+        </div>
+    </section>
+</div>
+
+{{ partial "footer.html" . }}

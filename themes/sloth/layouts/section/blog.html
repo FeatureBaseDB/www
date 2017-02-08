@@ -1,0 +1,16 @@
+{{ partial "header.html" . }}
+
+SECTION BLOG
+<section id="main">
+  <div>
+   <h1 id="title">{{ .Title }}</h1>
+        <ul id="list">
+            {{ range first 5 .Data.Pages }}
+                {{ .Render "summary"}}
+            {{ end }}
+        </ul>
+  </div>
+</section>
+
+{{ partial "footer.html" . }}
+
