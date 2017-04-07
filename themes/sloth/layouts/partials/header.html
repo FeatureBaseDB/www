@@ -1,40 +1,44 @@
-<!doctype html>
-<html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     <title>{{ .Site.Params.title }} &mdash; {{ .Site.Params.subtitle }}</title>
-    {{ with .Site.Params.google_font }}<link href="https://fonts.googleapis.com/css?family={{ . }}" rel="stylesheet" type="text/css">{{ end }}
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="/img/{{ .Site.Params.logo }}"/>
-    <link href="{{ .Site.BaseURL }}/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Params.title }}" />
-    <meta name="title" content="{{ .Site.BaseURL }}">
-    <link rel="canonical" href="{{ .Site.BaseURL }}">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="{{ .Site.Params.title }}">
+
     <meta property="og:title" content="{{ .Site.Params.title }}"/>
     <meta property="og:url" content="{{ .Site.BaseURL }}"/>
     <meta property="og:image" content="{{ .Site.BaseURL }}/img/{{ .Site.Params.logo }}"/>   
     <meta property="og:site_name" content="{{ .Site.Params.title }}">
-</head>
-<body>
 
-{{ .Site.Params.inc }}
-<section class="site-nav">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="{{ .Site.BaseURL }}">
+
+    <!--<link rel="apple-touch-icon" href="/img/{{ .Site.Params.logo }}"/>-->
+    <!--<link href="{{ .Site.BaseURL }}/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Params.title }}" />-->
+
+  </head>
+  <body>
     <header>
-        <nav id="navigation">
-            <a class="brand" href="/">
-                <img src="/img/{{ .Site.Params.logo }}" alt="Inc">
-            </a>
-            <a href="/faq" class="home">faq</a>
-            <a href="/docs" class="home">docs</a>
-            <a href="/blog" class="home">blog</a>
-            {{ with .Site.Params.product_link }}<a href="{{ . }}">Product</a>{{ end }}
-            {{ with .Site.Params.about_link }}<a href="{{ . }}">About</a>{{ end }}
-        </nav>
-        <nav class="tagline">
-            {{ with .Site.Params.tagline }}<span>{{ . }}</span>{{ end }}
-            {{ with .Site.Params.product_link }}<a href="{{ . }}" class="btn btn-outline">Learn More</a>{{ end }}
-        </nav>
+      <a href="/">
+        <img id="logo" src="/img/{{ .Site.Params.logo }}" alt="{{ .Site.Params.subtitle }}">
+      </a>
+      <nav>
+        <ul>
+          <li><a href="/about/">About</a>
+          <li><a href="/use-cases/">Use Cases</a>
+          <li><a href="/docs/">Docs</a>
+          <li><a href="/community/">Community</a>
+          <li><a href="/enterprise/">Enterprise</a>
+          <li><a href="/blog/">Blog</a>
+          <li><a href="/contact/">Contact</a>
+        </ul>
+      </nav>
+      <aside id="search">
+          Search
+      </aside>
     </header>
-</section>
-

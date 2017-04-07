@@ -1,29 +1,5 @@
-<footer class="site-footer">
-    <div class="container">
-        <nav>
-            <a href="/">{{ .Site.Params.company }}</a> &middot;
-            <a href="/blog">Blog</a> &middot;
-            {{ with .Site.Params.product_link }}<a href="{{ . }}">Product</a> &middot; {{ end }}
-            {{ with .Site.Params.about_link }}<a href="{{ . }}">About</a>{{ end }}
-        </nav>
-        
-        <nav class="social">
-            {{ with .Site.Params.twitter }}
-            <a href="https://twitter.com/{{ . }}" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter black"></i></a>
-            {{ end }}
-            {{ with .Site.Params.github }}
-            <a href="https://github.com/{{ . }}" title="Follow on Github" target="_blank"><i class="icon icon-github black"></i></a>
-            {{ end }}
-            {{ with .Site.Params.facebook }}
-            <a href="http://facebook.com/{{ . }}" title="Follow on Facebook" target="_blank"><i class="icon icon-facebook black"></i></a>
-            {{ end }}    
-            {{ with .Site.Params.rss }}
-            <a href="/index.xml" title="RSS Feed"><i class="icon icon-rss black"></i></a>
-            {{ end }}    
-        </nav>
-    </div>
+<footer>
 </footer>
 {{ partial "_scripts.html" . }}
-
 </body>
 </html>

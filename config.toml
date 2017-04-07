@@ -1,8 +1,9 @@
 baseurl = "http://localhost/"
 languageCode = "en-us"
 title = "Pilosa"
+theme = "sloth"
 
-enableRobotsTXT = false
+#enableRobotsTXT = false
 
 [params]
     company = "Pilosa"

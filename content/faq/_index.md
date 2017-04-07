@@ -1,11 +1,8 @@
 +++
 date = "2016-09-06T12:48:36-05:00"
-draft = true
 title = "FAQ"
 slug = "faq"
-
 +++
-
 
 # Question 1
 

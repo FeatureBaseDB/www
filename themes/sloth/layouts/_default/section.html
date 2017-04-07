@@ -1,15 +1,6 @@
 {{ partial "header.html" . }}
-
-SECTION
 <div id="content">
-    <div id="content-left">
-        {{ partial "navbar.html" . }}
-    </div>
-
-    <div id="content-right">
-        {{ .Content }}
-    </div>
+    {{ .Content }}
 </div>
-
 {{ partial "footer.html" . }}
 
