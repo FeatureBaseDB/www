@@ -1,0 +1,31 @@
+footer{
+  background-color: #2a4871;
+  color:white;
+}
+
+.btn-pilosa{
+  font-family: "aaux-next",;
+  letter-spacing: 2.5px;
+  padding: 1rem 3.5rem;
+}
+
+
+.footer-col-header{
+  font-family: Montserrat;
+  font-weight:500;
+}
+
+.footer-col-p{
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight:200
+
+}
+
+.footer-link{
+  color: white;
+}
+.footer-link:hover{
+  color: #b1dbde;
+  text-decoration: none;
+}
