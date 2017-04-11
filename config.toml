@@ -9,6 +9,7 @@ theme = "sloth"
     company = "Pilosa"
     logo = "logo.svg"
     logo_white = "logo_white.svg"
+    concepts = "concepts.svg"
     title = "Pilosa"
     subtitle = "Beyond the cloud."
 
