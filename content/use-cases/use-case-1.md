@@ -1,26 +1,16 @@
 +++
 date = "2017-02-05T18:52:36-06:00"
-title = "My First Blog Post"
+title = "Use Case 1"
 tags = ["bitmap","pql"]
 author = "Travis Turner"
+layout = "single"
+type = "blog"
 +++
 
-This is the abstract of this blog post.
+This is the abstract of this use case.
 It will show up in the summary.
 
 <!--more-->
-# hash
-
-ok
-
-## hashash
-
-yeis o
-
-### hashahahash
-
-kbia
-
 
 ## Section 1
 
@@ -36,5 +26,3 @@ func foo(s string) string, error {
 ## Section 2
 
 Some info about section 2
-
-

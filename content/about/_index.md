@@ -1,6 +1,3 @@
-+++
-title = "About"
-slug = "about"
-+++
-
 # About Pilosa
+
+This is our story
