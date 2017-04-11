@@ -1,0 +1,13 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts":{
+    "sass": "node-sass -w --output-style expanded --source-map true --precision 6 bootstrap/scss/bootstrap.scss ../css/bootstrap-pilosa.css"
+  },
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "node-sass": "^4.5.2"
+  }
+}
