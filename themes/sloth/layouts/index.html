@@ -1,96 +1,237 @@
 {{ partial "header.html" . }}
+<div class="page-container">
+  <div  class='home-hero pt-3 '>
 
-<div  class='home-hero pt-3 '>
-  <div  class="container  flex-wrap ">
+    <div class='home-hero-img-container'>
+      <img height='550px' width='100%' class="home-hero-img"src="/img/{{ .Site.Params.splash }}" alt="">
+    </div>
+    <div  class="container  flex-wrap ">
 
-    <div class='py-5  home-hero-left col-md'>
-      <h1 class='mb-4 home-hero-header'>Faster data analytics</h1>
-      <p class="mb-5 home-hero-text">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <button  type="button" class="mb-5  btn-pilosa btn btn-danger ">Install</button>
-    </div>
-    <div  class='home-hero-right mt-5'>
-      <img  width='100%' src="//placehold.it/750x350" alt="">
-    </div>
-    </div>
-  </div>
-
-<div  class='home-cta'>
-  <div  class="py-5  container justify-content-between d-flex flex-wrap ">
-    <div class="mt-5 mr-5 d-flex flex-column ">
-      <h6 class='home-cta-title'>Secure, fast, <br> & Portable</h6>
-      <h6 class=" mt-2 home-cta-subtitle">
-        Watch the video
-        <i  class="fa fa-play-circle" aria-hidden="true"></i>
-      </h6>
-    </div>
-    <div class='home-cta-text  my-4 d-flex flex-column col-md' >
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br><br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-    </div>
-  </div>
-<div>
-
-<div class="home-concepts">
-  <div  class="py-5  container d-flex flex-wrap ">
-    <div class='img-container' >
-
-      <img height=450px src="/img/{{ .Site.Params.concepts }}" alt='concepts'>
-    </div>
-    <div  class="card-container">
-      <div class='card-col-1'>
-        <div class="home-concept">
-          <h3 class="home-concept-title">
-            Rapid accessibilty
-          </h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
-          </p>
-        </div>
-        <div class="home-concept">
-          <h3 class="home-concept-title">
-            Distributed
-          </h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
-          </p>
-        </div>
-        <div class="home-concept">
-          <h3 class="home-concept-title">
-            Algorithms
-          </h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
-          </p>
+      <div class='py-5  home-hero-content col-md'>
+        <h1 class='mb-4 home-hero-header'>Faster data analytics</h1>
+        <p class="mb-5 home-hero-text">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <button  type="button" class="mb-5  btn-pilosa btn btn-danger ">Install Pilosa</button>
         </div>
       </div>
-      <div  class='card-col-2'>
-        <div class="home-concept">
-          <h3 class="home-concept-title">
-            High Cardinality
-          </h3>
-          <p class="home-concept-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
-          </p>
+    </div>
+
+  <div  class='home-cta'>
+    <div   class="py-5  container justify-content-between d-flex flex-wrap ">
+      <div class="mt-5 mr-5 d-flex flex-column ">
+        <h6 class='home-cta-title'>Secure, fast, <br> & Portable</h6>
+        <h6 class=" mt-2 home-cta-subtitle">
+          Watch the video
+          <i  class="fa fa-play-circle" aria-hidden="true"></i>
+        </h6>
+      </div>
+      <div class='home-cta-text  my-4 d-flex flex-column col-md' >
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br><br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-concepts">
+    <div  class="py-5  container d-flex flex-wrap ">
+      <div class='img-container' >
+
+        <img height=450px src="/img/{{ .Site.Params.concepts }}" alt='concepts'>
+      </div>
+      <div  class="card-container">
+        <div class='card-col-1'>
+          <div class="home-concept">
+            <h3 class="home-concept-title">
+              Rapid accessibilty
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
+            </p>
+          </div>
+          <div class="home-concept">
+            <h3 class="home-concept-title">
+              Distributed
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+            </p>
+          </div>
+          <div class="home-concept">
+            <h3 class="home-concept-title">
+              Algorithms
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+            </p>
+          </div>
         </div>
-        <div class="home-concept">
-          <h3 class="home-concept-title">
-            Segmentation
-          </h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
-          </p>
+        <div  class='card-col-2'>
+          <div class="home-concept">
+            <h3 class="home-concept-title">
+              High Cardinality
+            </h3>
+            <p >
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+            </p>
+          </div>
+          <div class="home-concept">
+            <h3 class="home-concept-title">
+              Segmentation
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+            </p>
+          </div>
         </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="use-cases-container ">
+    <div class="container py-5 ">
+      <div class="use-cases-header my-4">
+        <h1 class="use-cases-title">Use Cases</h1>
+        <p class="use-cases-text">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, <br> sed do eiusmod tempor cupidatat non proident, sunt in culpa.
+        </p>
+      </div>
+      <div class="use-cases-cards">
+        <div class="use-cases-card">
+
+          <div class="use-cases-card-img">
+            <img src="//placehold.it/100" alt="abstract logo" >
+          </div>
+          <div class="use-cases-card-title-cont">
+
+            <h3 class="use-cases-card-title">
+              Chemical Similarity & <br>Tanimoro Algorithms
+            </h3>
+          </div>
+          <h5>Bioinformatics</h5>
+          <p class="use-cases-card-text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <div class="use-cases-card-arrow">
+            <a href="">&rarr;</a>
+          </div>
+
+        </div>
+        <div class="use-cases-card">
+
+          <div class="use-cases-card-img">
+            <img src="//placehold.it/100" alt="abstract logo" >
+          </div>
+          <div class="use-cases-card-title-cont">
+            <h3 class="use-cases-card-title">
+              Taming Transportation Data
+            </h3>
+          </div>
+          <h5>Smart Cities</h5>
+          <p class="use-cases-card-text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <div class="use-cases-card-arrow">
+            <a href="">&rarr;</a>
+          </div>
+
+        </div>
+        <div class="use-cases-card">
+          <div class="use-cases-card-img">
+            <img src="//placehold.it/100" alt="abstract logo" >
+          </div>
+          <div class="use-cases-card-title-cont">
+            <h3 class="use-cases-card-title">
+              Umbel
+            </h3>
+          </div>
+          <h5>Audience Segmentation</h5>
+          <p class="use-cases-card-text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <div class="use-cases-card-arrow">
+            <a href="">&rarr;</a>
+          </div>
+        </div>
+        <div class="use-cases-card">
+          <div class="use-cases-card-img">
+            <img src="//placehold.it/100" alt="abstract logo" >
+          </div>
+          <div class="use-cases-card-title-cont">
+            <h3 class="use-cases-card-title">
+              Monitoring Network Traffic
+            </h3>
+          </div>
+          <h5>Information Security</h5>
+          <p class="use-cases-card-text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <div class="use-cases-card-arrow">
+            <a href="">&rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="use-cases-button">
+        <button  type="button" class="btn-pilosa btn btn-primary ">More use cases</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="oscon-container py-5 my-4 ">
+    <div class='oscon-img-container'>
+      <img src="//placehold.it/220/102445" alt="Sloth handing pass">
+    </div>
+    <div class='oscon-img-overlay'></div>
+
+    <div class="oscon-content">
+      <h2>See us at OSCON!</h2>
+      <p class='oscon-text'>Find us at OSCON on May 8th, 2017 to talk all things open source, including the world premier of Pilosa!</p>
+    </div>
+    <button  type="button" class="btn-pilosa btn btn-primary ">More events</button>
+  </div>
+
+
+  <div class="get-more-container ">
+    <div class="container py-5">
+      <div class="get-more-content ">
+        <div class="get-more-col-1">
+          <h2>
+            Get even more from Pilosa
+          </h2>
+          <p class="get-more-text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+
+          <div class="get-more-col-2">
+            <input class='input-light' type="text"  placeholder="Your email">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button  type="button" class="btn-pilosa btn btn-success ">Sign up</button>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="our-story-container ">
+    <div class="container py-5 d-flex flex-wrap ">
+      <div class="our-story-img">
+        <img src="//placehold.it/212/2a4871" alt="">
+      </div>
+      <div class="our-story-content">
+        <h2 class="light-text">Our story</h2>
+        <p class="light-text">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <button  type="button" class="btn-pilosa btn btn-success ">More about us</button>
       </div>
 
     </div>
   </div>
-</div>
 
-<div class="home-use-cases">
-  features
 </div>
 
 

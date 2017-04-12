@@ -10,6 +10,8 @@ theme = "sloth"
     logo = "logo.svg"
     logo_white = "logo_white.svg"
     concepts = "concepts.svg"
+    splash = "splash.svg"
+    splash_about = "splash_about.svg"
     title = "Pilosa"
     subtitle = "Beyond the cloud."
 
