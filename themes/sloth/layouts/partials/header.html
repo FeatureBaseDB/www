@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{{ .Site.Params.title }} &mdash; {{ .Site.Params.subtitle }}</title>
+      <title>{{ if eq .URL "/" }}Pilosa &#45; Home{{ else }}{{ .Title }} &#45; Pilosa{{ end }}</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,7 +9,7 @@
 
     <meta property="og:title" content="{{ .Site.Params.title }}"/>
     <meta property="og:url" content="{{ .Site.BaseURL }}"/>
-    <meta property="og:image" content="{{ .Site.BaseURL }}/img/{{ .Site.Params.logo }}"/>
+    <meta property="og:image" content="{{ .Site.BaseURL }}img/{{ .Site.Params.logo }}"/>
     <meta property="og:site_name" content="{{ .Site.Params.title }}">
 
     <link rel="stylesheet" href="/css/bootstrap-pilosa.css" >
