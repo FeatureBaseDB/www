@@ -1,3 +1,97 @@
 {{ partial "header.html" . }}
-<h1>Home</h1>
+
+<div  class='home-hero pt-3 '>
+  <div  class="container  flex-wrap ">
+
+    <div class='py-5  home-hero-left col-md'>
+      <h1 class='mb-4 home-hero-header'>Faster data analytics</h1>
+      <p class="mb-5 home-hero-text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <button  type="button" class="mb-5  btn-pilosa btn btn-danger ">Install</button>
+    </div>
+    <div  class='home-hero-right mt-5'>
+      <img  width='100%' src="//placehold.it/750x350" alt="">
+    </div>
+    </div>
+  </div>
+
+<div  class='home-cta'>
+  <div  class="py-5  container justify-content-between d-flex flex-wrap ">
+    <div class="mt-5 mr-5 d-flex flex-column ">
+      <h6 class='home-cta-title'>Secure, fast, <br> & Portable</h6>
+      <h6 class=" mt-2 home-cta-subtitle">
+        Watch the video
+        <i  class="fa fa-play-circle" aria-hidden="true"></i>
+      </h6>
+    </div>
+    <div class='home-cta-text  my-4 d-flex flex-column col-md' >
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br><br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div>
+  </div>
+<div>
+
+<div class="home-concepts">
+  <div  class="py-5  container d-flex flex-wrap ">
+    <div class='img-container' >
+
+      <img height=450px src="/img/{{ .Site.Params.concepts }}" alt='concepts'>
+    </div>
+    <div  class="card-container">
+      <div class='card-col-1'>
+        <div class="home-concept">
+          <h3 class="home-concept-title">
+            Rapid accessibilty
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
+          </p>
+        </div>
+        <div class="home-concept">
+          <h3 class="home-concept-title">
+            Distributed
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+          </p>
+        </div>
+        <div class="home-concept">
+          <h3 class="home-concept-title">
+            Algorithms
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+          </p>
+        </div>
+      </div>
+      <div  class='card-col-2'>
+        <div class="home-concept">
+          <h3 class="home-concept-title">
+            High Cardinality
+          </h3>
+          <p class="home-concept-text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+          </p>
+        </div>
+        <div class="home-concept">
+          <h3 class="home-concept-title">
+            Segmentation
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="home-use-cases">
+  features
+</div>
+
+
 {{ partial "footer.html" . }}
