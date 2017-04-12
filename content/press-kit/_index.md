@@ -1,5 +1,6 @@
 +++
 aliases = ["/press/kit/"]
+title = "Press Kit"
 +++
 # Press Kit
 

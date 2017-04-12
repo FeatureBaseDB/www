@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
 
 <div class="container">
-   <h1 id="title">Blog</h1>
+   <h1 id="title">Documentation</h1>
    {{ range first 5 .Data.Pages }}
      {{ .Render "summary"}}
    {{ end }}
