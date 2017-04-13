@@ -1,0 +1,21 @@
+.about-hero{
+  background:  #1db598;
+  display: flex;
+  justify-content: center;
+  height:498px;
+
+}
+
+
+.about-title-container{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.about-title{
+  color:white;
+  margin-right: 35%;
+  font-size: 3.5rem;
+}
