@@ -1,7 +1,15 @@
-@import "home.css";
 @import "about.css";
+@import "home.css";
 a:hover{
   text-decoration: none;
+}
+
+p{
+  font-family: Montserrat;
+	font-size: 16px;
+	/*font-weight: 300;*/
+	line-height: 1.5;
+	letter-spacing: 0.2px;
 }
 
 
@@ -9,7 +17,7 @@ h2{
   font-size: 65px;
   letter-spacing: 1.25;
   color: #102445;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 h5{
@@ -25,14 +33,18 @@ h5{
   color: white;
 }
 .input-light{
+  height: 60px;
   border-radius: 3px;
+  background-color: #fbfcfd;
+  border: solid 1.5px #eaf2f6;
   outline: none;
-  border: transparent;
   color: #3c5f8d;
-  font-weight: 600;
+  letter-spacing: 1.25px;
+  font-weight: 500;
   padding: 13px;
   font-family: Montserrat;
-  width: 50%;
+  width: 300px;
+
 }
 .input-light::placeholder{
   color: #3c5f8d;

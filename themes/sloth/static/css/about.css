@@ -1,21 +1,102 @@
-.about-hero{
+.hero-container{
   background:  #1db598;
   display: flex;
   justify-content: center;
-  height:498px;
-
+  background-image: url("/img/splash_about.svg") ;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: right;
 }
 
 
-.about-title-container{
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+.hero-title-container{
+  margin-top: 11%;
+  margin-bottom: 8.7%;
 }
-.about-title{
+
+.hero-title{
   color:white;
   margin-right: 35%;
-  font-size: 3.5rem;
+  font-weight: 600;
+  font-size: 4em;
+}
+
+
+.our-team-container{}
+.our-team-cards{
+  /*background: pink;*/
+  display: flex;
+  padding-left: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.our-team-card{
+  height:278px;
+  width:252px;
+  background: #fbfbfb;
+  margin: 10px;
+}
+
+
+.select {
+    border: 1px solid #ccc;
+    overflow: hidden;
+    height: 40px;
+    width: 240px;
+    position: relative;
+    display: block;
+}
+
+
+
+
+.contact-us-container{
+  background: #f2f7f9;
+
+}
+.contact-us-header{
+  margin-right: 50%;
+  padding: 0px 18px;
+}
+
+.contact-us-form{
+  display: flex;
+  flex-direction: column;
+  padding: 10px 18px;
+
+}
+.contact-us-input{
+  /*height: 60px;*/
+  box-sizing: content-box;
+  padding: 20px;
+  border-radius: 3px;
+  background-color: #fbfcfd;
+  border: solid 1.5px #eaf2f6;
+  outline: none;
+  color: #3c5f8d;
+  letter-spacing: 1.25px;
+  font-weight: 500;
+  font-family: Montserrat;
+  margin: 10px 18px;
+}
+
+.rm-appearance{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+}
+
+.contact-us-input::placeholder{color: #3c5f8d;}
+
+.contact-us-row{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+
+.contact-us-col{
+  flex: 1;
+  margin: 10px 18px;
 }
