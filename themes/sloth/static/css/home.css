@@ -5,17 +5,19 @@
 }
 .home-hero-img-container{
   position: relative;
-  top: -20px;
+  top: 0px;
 }
 .home-hero-img{
   display: flex;
   position:absolute;
-  top: 0px;
+  top: -30px;
 }
 
 .home-hero-content{
   position: relative;
   z-index: 1;
+  width: 60%;
+  margin-left: 10%;
 }
 
 
@@ -23,9 +25,9 @@
 .home-hero-header{
   line-height: 6rem;
   font-size: 6.5rem;
-  font-weight: 600;
-  margin-right: 15%;
+  font-weight: 700;
   color: #102445;
+
 }
 
 .home-hero-text{
@@ -103,7 +105,7 @@
 }
 
 .use-cases-title{
-  font-weight: 600;
+  font-weight: 700;
   font-size: 4rem;
   margin-bottom: 15px;
 }
