@@ -11,7 +11,6 @@
 .home-hero-img{
   display: flex;
   position:absolute;
-  /*top: -30px;*/
 }
 
 .home-hero-content{
@@ -23,16 +22,11 @@
 
 
 
-.home-hero-header{
-  line-height: 6rem;
-  font-size: 6.5rem;
-  font-weight: 700;
-  color: #102445;
 
-}
 
 .home-hero-text{
-  margin-right: 60%;
+  margin-right: 40%;
+  font-size: 18px;
 }
 
 .home-cta{
@@ -40,18 +34,9 @@
   color: white;
 }
 
-.home-cta-text{
-   color: #f2f7f9;
-}
 
-.home-cta-title{
-  font-size: 3.5rem;
-  font-weight:600;
-}
-.home-cta-subtitle{
-  font-size: 2rem;
-  color: #ff2b2b;
-}
+
+
 
 .home-concepts{
 
@@ -93,27 +78,16 @@
   width:300px;
   height: 170px;
 }
-.home-concept-title{
-  color: #1db598;
-  margin-bottom: 15px;
-  font-weight: 500;
-}
+
 
 .use-cases-container{
   color: #102445;
   background-color: #f2f7f9;
 }
 
-.use-cases-header{
 
-  margin-left: 8%;
-}
 
-.use-cases-title{
-  font-weight: 700;
-  font-size: 4rem;
-  margin-bottom: 15px;
-}
+
 .use-cases-text{
   color: #3c5f8d;
 }
@@ -121,24 +95,27 @@
 .use-cases-cards{
   display: flex;
   flex-wrap: wrap;
-  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   margin-top: 40px;
+  width:100%;
 }
 .use-cases-card{
   background: white;
-  width:435px;
+  display: flex;
+  flex-direction: column;
+
+  width:556px;
+  min-height: 494px;
   margin: 13px;
   border-radius: 3px;
   padding: 25px;
+  justify-content: space-between;
 }
 .use-cases-card-img{
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 35px;
 
 }
 
@@ -148,21 +125,10 @@
   height: 65px;
 }
 
-.use-cases-card-title{
-  color: #1db598;
-  font-weight: 600;
-  margin-bottom: 25px;
-}
 
-.use-cases-card-text{
-  color: #3c5f8d;
-  font-size: 15px;
-
-}
 
 .use-cases-card-arrow{
-
-  font-size: 20px;
+  font-size: 30px;
   color: #2a4871;
 }
 
@@ -231,21 +197,4 @@
 }
 .get-more-text{
   color: #3c5f8d;
-}
-
-.our-story-container{
-  background: #3c5f8d;
-  padding: 30px 0px;
-
-}
-.our-story-img{
-
-
-  margin-top: 10px;
-  margin-left: 10%;
-  margin-bottom: 20px;
-}
-.our-story-content{
-  margin-left: 10%;
-  max-width: 500px;
 }

@@ -1,34 +1,10 @@
 @import "about.css";
 @import "home.css";
-
+@import 'typography.css';
 
 a:hover{
   text-decoration: none;
 }
-
-p{
-  font-family: Montserrat;
-	font-size: 16px;
-	/*font-weight: 300;*/
-	line-height: 1.5;
-	letter-spacing: 0.2px;
-}
-
-
-h2{
-  font-size: 65px;
-  letter-spacing: 1.25;
-  color: #102445;
-  font-weight: 700;
-}
-
-h5{
-  text-transform: uppercase;
-  color: #3c5f8d;
-  font-size: 14px;
-  font-weight: 600;
-}
-
 
 
 

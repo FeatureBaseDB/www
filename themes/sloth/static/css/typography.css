@@ -1,0 +1,278 @@
+
+/* Text styles */
+p {
+	/*font-family: Montserrat;*/
+	font-size: 16px;
+	/*font-weight: 300;*/
+	line-height: 1.5;
+	letter-spacing: 0
+}
+
+h1 {
+	font-size: 110px;
+	font-weight: bold;
+	line-height: 1.02;
+	letter-spacing: -1px;
+	color: #102445;
+}
+
+
+.h-1-white {
+	font-size: 110px;
+	font-weight: 600;
+	line-height: 1.02;
+	letter-spacing: -2px;
+	color: #ffffff;
+}
+
+
+.h-2-white-center {
+	font-size: 65px;
+	font-weight: bold;
+	line-height: 1.05;
+	letter-spacing: 0.2px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.h-2-blue {
+	font-size: 65px;
+	font-weight: 700;
+	line-height: 1.05;
+	letter-spacing: 0.2px;
+	color: #102445;
+}
+
+.h-2-blue-center {
+	font-size: 65px;
+	font-weight: bold;
+	letter-spacing: 0.2px;
+	text-align: center;
+	color: #102445;
+}
+
+.h-2-white {
+	font-size: 65px;
+  font-weight: 600;
+	line-height: 1.05;
+	line-height: 1.05;
+	letter-spacing: 0.2px;
+	color: #ffffff;
+}
+
+
+
+.h-3-white-center {
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 1.28;
+	text-align: center;
+	color: #ffffff;
+}
+
+.h-3-blue-center {
+	font-size: 36px;
+	font-weight: bold;
+	line-height: 1.17;
+	letter-spacing: 0.2px;
+	text-align: center;
+	color: #102445;
+}
+
+.h-3-bold-green {
+	font-size: 36px;
+	font-weight: 600;
+	line-height: 1.33;
+	letter-spacing: 0.2px;
+	color: #1db598;
+}
+
+.h-3-blue {
+	font-size: 36px;
+	font-weight: bold;
+	line-height: 1.17;
+	letter-spacing: 0.2px;
+	color: #102445;
+}
+
+.h-3-white {
+	font-size: 36px;
+	font-weight: bold;
+	line-height: 1.28;
+	color: #ffffff;
+}
+
+.h-3-red {
+	font-size: 36px;
+	font-weight: 600;
+	line-height: 1.28;
+	color: #ff2b2b;
+}
+
+.h-4-white-center {
+	font-size: 26px;
+	font-weight: 500;
+	line-height: 1.23;
+	letter-spacing: 0.2px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.h-4-blue {
+	font-size: 26px;
+	font-weight: 500;
+	line-height: 1.23;
+	letter-spacing: 0.2px;
+	color: #102445;
+}
+
+.h-4-white {
+	font-size: 26px;
+	font-weight: 500;
+	line-height: 1.23;
+	letter-spacing: 0.2px;
+	color: #ffffff;
+}
+
+.button-white {
+	font-size: 24px;
+	font-weight: bold;
+	letter-spacing: 1.5px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.h-5-green {
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 1.0;
+	letter-spacing: 0.4px;
+	color: #1db598;
+}
+
+.h-5-green-center {
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 1.0;
+	letter-spacing: 0.4px;
+	text-align: center;
+	color: #1db598;
+}
+
+.h-5-blue {
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 1.22;
+	letter-spacing: 0.2px;
+	color: #102445;
+}
+
+
+
+.button-white {
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.body-bold-white-center {
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.5;
+	letter-spacing: 0.2px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.body-bold {
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.5;
+	letter-spacing: 0.2px;
+	color: #102445;
+}
+
+.body-bold-white {
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.5;
+	letter-spacing: 0.2px;
+	color: #ffffff;
+}
+
+
+.body-center {
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.5;
+	letter-spacing: 0.2px;
+	text-align: center;
+	color: #102445;
+}
+
+
+
+.body-numbered {
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.38;
+	letter-spacing: 0.2px;
+	color: #102445;
+}
+
+.body-bulleted {
+	font-family: Montserrat;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.5;
+	letter-spacing: 0.2px;
+	color: #303030;
+}
+
+.monospace {
+	font-family: RobotoMono;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.5;
+	color: #102445;
+}
+
+.h-6-c-a-p-s-w-h-i-t-e {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1.21;
+	letter-spacing: 2px;
+	color: #ffffff;
+}
+
+.h-6-caps {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1.21;
+	letter-spacing: 2px;
+	color: #102445;
+  text-transform: uppercase;
+}
+
+.error-text {
+	font-family: Montserrat;
+	font-size: 14px;
+	line-height: 1.14;
+	letter-spacing: 0.2px;
+	color: #ff2b2b;
+}
+
+.form-secondary {
+	font-family: Montserrat;
+	font-size: 14px;
+	line-height: 1.14;
+	letter-spacing: 0.2px;
+	color: #102445;
+}

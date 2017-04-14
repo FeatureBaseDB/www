@@ -11,7 +11,9 @@ enableRobotsTXT = true
     logo_white = "logo_white.svg"
     concepts = "concepts.svg"
     splash = "splash.svg"
+    hands = "hands.svg"
     splash_about = "splash_about.svg"
+    press-release = "press-release.svg"
     title = "Pilosa"
     subtitle = "Beyond the cloud."
 
