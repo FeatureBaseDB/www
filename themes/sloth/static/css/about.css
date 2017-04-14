@@ -10,25 +10,77 @@
 
 
 .hero-title-container{
-  margin-top: 11%;
-  margin-bottom: 8.7%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-title{
+  margin: 100px 0px;
+	font-size: 60px;
+  font-weight: 600;
   color:white;
   margin-right: 35%;
-  font-weight: 600;
-  font-size: 4em;
+
 }
 
 
-.our-team-container{}
+.nearly-18000-hours {
+	width: 848px;
+	height: 48px;
+	/*font-family: AauxNext;*/
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 1.33;
+	letter-spacing: 0.2px;
+  color: #1db598;
+  margin-bottom: 30px;
+}
+.talking-points-text{
+  font-family: 'Montserrat';
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0.2px
+}
+.talking-points-text  li{
+    margin-bottom: 30px;
+}
+
+.about-our-story-container{
+  background-color:#f8fafb;
+
+}
+.about-our-story-text{
+  max-width: 600px;
+  color: #3c5f8d;
+}
+.about-our-story-content{
+  max-width: 600px;
+}
+
+.talking-points-container{
+  background: #f3f7fa;
+}
+.our-team-header{
+
+  margin: 0px 20% 40px 20%;
+  text-align: center;
+}
+.our-team-text{
+  font-weight: 400;
+	line-height: 1.5;
+	letter-spacing: 0.2px;
+  color: #3c5f8d;
+
+}
 .our-team-cards{
   /*background: pink;*/
   display: flex;
-  padding-left: 10px;
+  /*padding-left: 10px;*/
   flex-wrap: wrap;
   justify-content: center;
+
 }
 
 .our-team-card{
@@ -38,6 +90,36 @@
   margin: 10px;
 }
 
+.our-team-card:hover .our-team-card-overlay{
+  display: flex;
+}
+
+.our-team-card-overlay{
+  display: none;
+  position: absolute;
+  background: rgba(28, 181, 152, 0.68);;
+  height:278px;
+  width:252px;
+  flex:1;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.our-team-name{
+  color: white;
+  font-size: 20px;
+  line-height: 1.21;
+  letter-spacing: 2px;
+}
+.our-team-title{
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 2px;
+  color:#102445;
+}
 
 .select {
     border: 1px solid #ccc;
