@@ -1,16 +1,55 @@
-.hero-container{
-  background:  #1db598;
-  display: flex;
-  justify-content: center;
-  background-image: url("/img/splash_about.svg") ;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  background-position: right;
+
+
+
+@media (min-width: 1200px) {
+  .h-2-responsive{
+    	font-size: 65px;
+      font-weight: 600;
+    	line-height: 1.05;
+    	line-height: 1.05;
+    	letter-spacing: 0.2px;
+    	color: #ffffff;
+  }
+  .hero-container{
+    background:  #1db598;
+    display: flex;
+    background-image: url("/img/splash_about.svg") ;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+  .press-release-container{
+    background: #f2f7f9;
+    justify-content: center;
+    background-image: url("/img/press-releases.svg") ;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+
+  }
+}
+@media (max-width: 1199px) {
+  .h-2-responsive{
+    	font-size: 38px;
+      font-weight: 600;
+    	line-height: 1.05;
+    	line-height: 1.05;
+    	letter-spacing: 0.2px;
+    	color: #ffffff;
+  }
+  .hero-container{
+    background:  #1db598;
+    display: flex;
+  }
+  .press-release-container{
+    background: #f2f7f9;
+  }
 }
 
 
+
 .hero-title-container{
-  margin-right: 35%;
+  max-width: 750px;
 
 }
 
@@ -65,9 +104,7 @@
 
 }
 .our-team-cards{
-  /*background: pink;*/
   display: flex;
-  /*padding-left: 10px;*/
   flex-wrap: wrap;
   justify-content: center;
 
@@ -87,7 +124,7 @@
 .our-team-card-overlay{
   display: none;
   position: absolute;
-  background: rgba(28, 181, 152, 0.68);;
+  background: rgba(28, 181, 152, 0.68);
   height:278px;
   width:252px;
   flex:1;
@@ -209,14 +246,5 @@
   background-repeat: no-repeat;
   background-position: bottom;
   text-align: center;
-
-}
-.press-release-container{
-  background: #f2f7f9;
-  justify-content: center;
-  background-image: url("/img/press-releases.svg") ;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  background-position: right;
 
 }
