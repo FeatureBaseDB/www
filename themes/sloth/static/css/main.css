@@ -1,11 +1,9 @@
-@import "enterprise.css";
-@import "about.css";
-@import "home.css";
 @import 'typography.css';
+@import "home.css";
+@import "about.css";
+@import "enterprise.css";
+@import "community.css";
 
-a:hover{
-  text-decoration: none;
-}
 
 
 
@@ -48,7 +46,7 @@ footer{
 
 
 .btn-pilosa{
-  font-family: "aaux-next",;
+  font-family: "aaux-next" !important;
   letter-spacing: 1.5px;
   padding: 0.9rem 2rem;
   font-size: 14px;

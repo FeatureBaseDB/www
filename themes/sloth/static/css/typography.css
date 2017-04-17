@@ -1,12 +1,24 @@
 
 /* Text styles */
 p {
-	/*font-family: Montserrat;*/
+
 	font-size: 16px;
-	/*font-weight: 300;*/
 	line-height: 1.5;
 	letter-spacing: 0
 }
+
+a{
+	font-family: Montserrat;
+	font-size: 16px;
+	line-height: 1.5;
+	letter-spacing: 0;
+	text-decoration: none;
+	color: #102445;
+}
+a:hover{
+  text-decoration: underline;
+}
+
 
 h1 {
 	font-size: 110px;
@@ -15,7 +27,12 @@ h1 {
 	letter-spacing: -1px;
 	color: #102445;
 }
-
+.p-center{
+	font-size: 16px;
+	line-height: 1.5;
+	letter-spacing: 0;
+	text-align: center;
+}
 
 .h-1-white {
 	font-size: 110px;
@@ -216,7 +233,9 @@ h1 {
 	color: #102445;
 }
 
-
+.body-green{
+	color: #1db598;
+}
 
 .body-numbered {
 	font-family: Montserrat;
@@ -226,6 +245,7 @@ h1 {
 	letter-spacing: 0.2px;
 	color: #102445;
 }
+
 
 .body-bulleted {
 	font-family: Montserrat;
