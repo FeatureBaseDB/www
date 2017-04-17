@@ -41,6 +41,14 @@ h1 {
 	letter-spacing: -2px;
 	color: #ffffff;
 }
+.h-1-white-center {
+	font-size: 110px;
+	font-weight: 600;
+	line-height: 1.02;
+	letter-spacing: -2px;
+	text-align: center;
+	color: #ffffff;
+}
 
 
 .h-2-white-center {
@@ -128,7 +136,7 @@ h1 {
 
 .h-4-white-center {
 	font-size: 26px;
-	font-weight: 500;
+	font-weight: 400;
 	line-height: 1.23;
 	letter-spacing: 0.2px;
 	text-align: center;

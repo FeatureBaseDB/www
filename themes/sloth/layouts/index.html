@@ -114,7 +114,9 @@
         <div  class="use-cases-card">
 
           <div class="use-cases-card-img">
-            <img src="//placehold.it/126" alt="abstract logo" >
+            <div class="use-cases-icon-container">
+              <img src="/img/{{ .Site.Params.info_security }}" alt="abstract logo" >
+            </div>
           </div>
 
             <h3 class="h-3-bold-green">
@@ -135,7 +137,9 @@
         <div class="use-cases-card">
 
           <div class="use-cases-card-img">
-            <img src="//placehold.it/126" alt="abstract logo" >
+            <div class="use-cases-icon-container">
+              <img src="/img/{{ .Site.Params.info_security }}" alt="abstract logo" >
+            </div>
           </div>
 
             <h3 class="h-3-bold-green">
@@ -153,7 +157,9 @@
         </div>
         <div class="use-cases-card">
           <div class="use-cases-card-img">
-            <img src="//placehold.it/126" alt="abstract logo" >
+            <div class="use-cases-icon-container">
+              <img src="/img/{{ .Site.Params.info_security }}" alt="abstract logo" >
+            </div>
           </div>
 
             <h3 class="h-3-bold-green">
@@ -170,7 +176,9 @@
         </div>
         <div class="use-cases-card">
           <div class="use-cases-card-img">
-            <img src="//placehold.it/126" alt="abstract logo" >
+            <div class="use-cases-icon-container">
+              <img src="/img/{{ .Site.Params.info_security }}" alt="abstract logo" >
+            </div>
           </div>
 
             <h3 class="h-3-bold-green">
@@ -196,22 +204,22 @@
 
   <div class="oscon-container py-5 my-4 ">
     <div class='oscon-img-container'>
-      <img src="//placehold.it/220/102445" alt="Sloth handing pass">
+      <img width='300px' src="/img/{{ .Site.Params.badge }}" alt="Sloth handing pass">
     </div>
     <div class='oscon-img-overlay'></div>
 
     <div class="oscon-content">
       <h2 class="h-2-blue">See us at OSCON!</h2>
       <p class='oscon-text'>Find us at OSCON on May 8th, 2017 to talk all things open source, including the world premier of Pilosa!</p>
+      <button  type="button" class="btn-pilosa btn btn-primary ">More events</button>
     </div>
-    <button  type="button" class="btn-pilosa btn btn-primary ">More events</button>
   </div>
 
 
   <div class="get-more-container ">
     <div class="container py-5">
-      <div class="get-more-content">
-        <div class="get-more-col-1">
+      <div class="get-more-content align-items-center">
+        <div class="col">
           <h2 class="h-2-blue">
             Get even more from Pilosa
           </h2>
@@ -219,7 +227,7 @@
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </div>
 
-          <form class="get-more-col-2">
+          <form class="col">
             <input class='input-light' type="email"  placeholder="Your email">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button  type="submit" class="btn-pilosa btn btn-success ">Sign up</button>

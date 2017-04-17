@@ -113,12 +113,19 @@
   padding: 25px;
   justify-content: space-between;
 }
+
+.use-cases-card:hover{
+  background: #eaf2f6;
+}
 .use-cases-card-img{
   display: flex;
   justify-content: flex-end;
 
 }
-
+.use-cases-icon-container{
+  background: #f2f7f9;
+  border-radius: 50%;
+}
 .use-cases-card-title-cont{
   display: flex;
   align-items: flex-end;
@@ -161,10 +168,10 @@
 }
 
 
-@media (max-width: 850px) {
+@media (max-width: 1050px) {
   .oscon-img-overlay{
-    width: 220px;
-    height:220px;
+    width: 660px;
+    height:290px;
     position: absolute;
     right: 0px;
     background:  rgba(255, 255, 255, 0.8);
