@@ -11,7 +11,7 @@ Note that Pilosa server requires a high limit for open files. Check the document
 
 ## Starting Pilosa
 
-Follow the steps in the [Install](install) document to install Pilosa.
+Follow the steps in the [Install]({{< ref "installation.md" >}}) document to install Pilosa.
 Execute the following in a terminal to run Pilosa with the default configuration (Pilosa will be available at `localhost:10101`):
 ```
 pilosa server
