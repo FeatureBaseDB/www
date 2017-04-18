@@ -1,0 +1,53 @@
+{{ partial "header.html" . }}
+<div id="doc-nav">
+    <ul>
+        <li>
+            <a href="/docs/installation/">Installation</a>
+            <ul>
+                <li><a href="/docs/installation/#installing-on-macos">Installing on OS X</a></li>
+                <li><a href="/docs/installation/#installing-on-linux">Installing on Linux</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="/docs/getting-started/">Getting Started</a>
+        </li>
+        <li>
+            <a href="/docs/tutorials/">Tutorials</a>
+        </li>
+        <li>
+            <a href="/docs/data-model/">Data Model</a>
+        </li>
+        <li>
+            <a href="/docs/query-language/">Query Language</a>
+        </li>
+        <li>
+            <a href="/docs/configuration/">Configuration</a>
+        </li>
+        <li>
+            <a href="/docs/api-reference/">API Reference</a>
+        </li>
+        <li>
+            <a href="/docs/pdk/">PDK</a>
+        </li>
+        <li>
+            <a href="/docs/client-libraries/">Client Libraries</a>
+        </li>
+        <li>
+            <a href="/docs/administration-guide/">Administration Guide</a>
+        </li>
+        <li>
+            <a href="/docs/glossary/">Glossary</a>
+        </li>
+        <li>
+            <a href="/docs/contributing/">Contributing</a>
+        </li>
+        <li>
+            <a href="/docs/release-notes/">Release Notes</a>
+        </li>
+    </ul>
+</div>
+
+<div id="content">
+    {{ .Content }}
+</div>
+{{ partial "footer.html" . }}

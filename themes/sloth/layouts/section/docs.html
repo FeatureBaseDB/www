@@ -1,10 +1,14 @@
-{{ partial "header.html" . }}
-
-<div class="container">
-   <h1 id="title">Documentation</h1>
-   {{ range first 5 .Data.Pages }}
-     {{ .Render "summary"}}
-   {{ end }}
-</div>
-
-{{ partial "footer.html" . }}
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="0; url={{ .Site.BaseURL }}docs/getting-started/">
+        <script type="text/javascript">
+            window.location.href = "{{ .Site.BaseURL }}docs/getting-started/"
+        </script>
+        <title>Page Redirection</title>
+    </head>
+    <body>
+        If you are not redirected automatically, follow <a href='{{ .Site.BaseURL }}docs/getting-started/'>this link</a>.
+    </body>
+</html>

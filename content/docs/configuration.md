@@ -1,11 +1,5 @@
 +++
-date = "2017-02-07T17:19:23-06:00"
 title = "Configuration"
-draft = true
-
-menu = "docsConfiguration"
-slug = "configuration"
-weight = 7
 +++
 
 # Configuration

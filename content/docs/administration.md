@@ -1,11 +1,5 @@
 +++
-date = "2017-02-07T17:19:23-06:00"
 title = "Administration Guide"
-draft = true
-
-menu = "docsAdministration"
-slug = "administration-guide"
-weight = 7
 +++
 
 # Administration Guide

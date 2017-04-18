@@ -1,11 +1,5 @@
 +++
-date = "2017-02-07T17:19:23-06:00"
 title = "Tutorials"
-draft = true
-
-menu = "docsTutorials"
-slug = "tutorials"
-weight = 7
 +++
 
 # Tutorials
