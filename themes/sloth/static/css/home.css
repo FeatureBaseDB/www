@@ -1,13 +1,46 @@
 
+/* superhero 💪🏿 */
+@media (min-width: 1199px) {
+
+  .home-hero-img-responsive{
+    display: none;
+  }
+  .home-hero-content{
+      padding: 90px 0px;
+      width: 50%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .home-hero-img-container{
+    display: none;
+  }
+  .home-hero-img-responsive{
+    display: flex;
+  }
+  .home-hero-header{
+    font-size: 65px;
+  }
+  .home-hero-content{
+
+    padding-bottom: 20px;
+    width: 100%;
+  }
+}
+
 .home-hero{
   background-color: #f2f7f9;
-
-
 }
+
 .home-hero-img-container{
   position: relative;
-  top: 0px;
+  top: 70px;
+
 }
+
+
+
+
 .home-hero-img{
   display: flex;
   position:absolute;
@@ -15,12 +48,11 @@
 
 .home-hero-content{
   position: relative;
+
   z-index: 1;
-  width: 60%;
+
   margin-left: 10%;
 }
-
-
 
 
 
@@ -29,35 +61,53 @@
   font-size: 18px;
 }
 
+/*call to action */
+
 .home-cta{
   background: #102445;
   color: white;
 }
 
+/*concepts */
 
+@media (min-width: 1199px) {
+
+  .concepts-img-container:{
+    display: block;
+  }
+  .concepts-card-container{
+    margin-left: 25%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .concepts-img-container{
+    display: none;
+  }
+}
 
 
 
 .home-concepts{
-
   color: #e4eff4;
   background-color: #2a4871;
 
 }
 
-.img-container{
+.concepts-img-container{
   position: relative;
   width:0;
   height:0;
   left:0px;
-  top:50px;
+  top:100px;
 }
 
 
-.card-container{
+
+.concepts-card-container{
   position: relative;
   z-index: 1;
-  margin-left: 25%;
+
   width:100%;
   display: flex;
   flex-direction: row;
@@ -78,6 +128,11 @@
   width:300px;
   height: 170px;
 }
+
+
+
+
+
 
 
 .use-cases-container{

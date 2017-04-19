@@ -1,10 +1,68 @@
 {{ partial "header.html" . }}
 
-<div class="container">
-   <h1 id="title">Blog</h1>
-   {{ range first 5 .Data.Pages }}
-     {{ .Render "summary"}}
-   {{ end }}
+<div class="page-container">
+
+  <div class="blog-hero-container py-5 ">
+    <div class='blog-hero-img-container'>
+      <img width='490px' src="/img/{{ .Site.Params.splash_blog }}" alt="Sloth handing pass">
+    </div>
+    <div class='blog-hero-img-overlay'></div>
+    <div class="blog-hero-content mt-4">
+
+      <h1 class="h-1-blue">Big ideas</h1>
+
+      <h4 class="h-4-blue ">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+      </h4>
+    </div>
+  </div>
+
+  <div class="blog-list-container py-5">
+    <div class="container">
+
+      <div class="blog-list-dropdown-container py-4">
+        <div class="blog-list-show">Show: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </div>
+        <div class="dropdown">
+          <button class="dropdown-btn btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class='inner-dropdown'>
+              All
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </div>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+          </div>
+        </div>
+
+
+    </div>
+    <div class="blog-cards-container">
+
+      <div class="blog-card-featured">
+
+        <div class="blog-card-featured-img-container">
+
+
+            <img  class='blog-card-img' src="//placehold.it/900x500" alt="">
+            <div class="blog-card-featured-img-overlay"></div>
+
+        </div>
+        <div class="blog-card-featured">
+          test
+        </div>
+      </div>
+
+      <!-- <div class="blog-card-container">
+        <div class="blog-card-content">test</div>
+      </div>
+      <div class="blog-card-container">
+        <div class="blog-card-content">test</div>
+      </div> -->
+
+    </div>
+    </div>
+  </div>
+
 </div>
 
 {{ partial "footer.html" . }}
