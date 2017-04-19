@@ -4,9 +4,33 @@
 @import "enterprise.css";
 @import "community.css";
 @import "coc.css";
+@import "blog.css";
 
 
+.dropdown-btn{
 
+  padding-bottom: 5px;
+  padding-top: 20px;
+  border-radius: 3px;
+  background-color: #fbfcfd;
+  border: solid 2px #eaf2f6;
+  outline: none;
+  color: #3c5f8d;
+  letter-spacing: 1.25px;
+  font-weight: 600;
+}
+.dropdown-toggle::after {
+    display:none
+}
+
+.inner-dropdown{
+
+  width: 137px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: solid 2px #e4eff4;
+}
 
 .flex-container{
   justify-content: space-around;
