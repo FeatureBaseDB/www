@@ -63,80 +63,16 @@
       </div>
       <div class="our-team-cards">
 
+        {{ range $.Site.Data.team.team }}
         <div class="our-team-card">
           <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
+            <p class="our-team-name">{{ .name }}</p>
+            <p class="our-team-title">{{ .title }}</p>
           </div>
-          <img src="//placehold.it/252x278" alt="">
+          <img src="/img/team/{{ .img }}" width="252" height="278" alt="{{ .name }}">
         </div>
+        {{ end }}
 
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
-        <div class="our-team-card">
-          <div class="our-team-card-overlay">
-            <p class="our-team-name">Jeffrey Brewer</p>
-            <p class="our-team-title">Engineer</p>
-          </div>
-        </div>
       </div>
     </div>
   </div>

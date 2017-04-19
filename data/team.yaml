@@ -1,0 +1,40 @@
+team:
+  - name: Michael Baird
+    title: Engineering
+    img: baird.png
+  - name: Alan Bernstein
+    title: Engineering
+    img: bernstein.png
+  - name: Alexia Cooley
+    title: Operations
+    img: cooley.png
+  - name: Todd Gruben
+    title: Engineering
+    img: gruben.png
+  - name: Matt Jaffee
+    title: Engineering
+    img: jaffee.png
+  - name: Zach Landry
+    title: Operations
+    img: landry.png
+  - name: Troy Lanier
+    title: Donut Maker
+    img: lanier.png
+  - name: HO Maycotte
+    title: Operations
+    img: maycotte.png
+  - name: Cody Soyland
+    title: Engineering
+    img: soyland.png
+  - name: Jonathan Spillman
+    title: Operations
+    img: spillman.png
+  - name: Yuce Tekol
+    title: Engineering
+    img: tekol.png
+  - name: Travis Turner
+    title: Engineering
+    img: turner.png
+  - name: Linh Vo
+    title: Engineering
+    img: vo.png
