@@ -67,6 +67,12 @@
 
 }
 
+.blog-card:hover,
+.blog-card-featured:hover{
+  background: #eaf2f6;
+}
+
+
 .blog-card-featured-img-container{
   min-width: 310px;
   width: 494px;
@@ -149,4 +155,8 @@ background: rgba(29,181, 152, 0.68);
   min-width: 300px;
   width: 90%;
   height: 100%;
+}
+
+.btn-container{
+  background: pink;
 }
