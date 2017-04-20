@@ -1,8 +1,135 @@
 {{ partial "header.html" . }}
-<h1>{{ .Title }}</h1>
-blog/single.html:
-<div id="content">
-    {{ .Content }}
+<div class="page-container">
+
+  <div class="single-hero-container">
+
+
+    <div class="single-hero-img">
+      <img style='object-fit: cover;'  height='500px'  width='100%'  src="//placehold.it/1200x555" alt=""/>
+    </div>
+
+    <div class="single-hero-overlay blue-overlay"></div>
+    <div class="single-hero-title">
+      <h1 class="h-1-white">Hello, World</h1>
+    </div>
+  </div>
+
+  <div class="single-body-container py-5  row justify-content-center">
+    <div class="col-6">
+
+      <h4 class="h-4-blue mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <br><br>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <img  class='mb-4' src="//placehold.it/655x361" alt="">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <h3 class="h-3-bold-green m-4">
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad."
+      </h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <br><br>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <div class="blog-card-author-content mt-5">
+          <img class='mr-3' src="/img/{{ .Site.Params.author_06}}" alt="">
+          <div class="body-bold">Ryan Partelow</div>
+      </div>
+
+
+  </div>
+</div>
+
+  <div class="get-more-container ">
+    <div class="container py-5">
+      <div class="get-more-content align-items-center">
+        <div class="col">
+          <h2 class="h-2-blue">
+            Get even more from Pilosa
+          </h2>
+          <p class="get-more-text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+
+          <form class="col">
+            <input class='input-light' type="email"  placeholder="Your email">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button  type="submit" class="btn-pilosa btn btn-success ">Sign up</button>
+          </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="other-posts-container py-5">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-7 ml-4">
+            <h2 class="h-2-blue">
+              Other sloths have enjoyed these posts
+            </h2>
+      </div>
+      </div>
+    </div>
+
+    <div class="blog-cards-container">
+      <div class="blog-card">
+        <div class="blog-card-container">
+
+          <div class="blog-card-img-container mb-4">
+            <div class="blog-card-overlay blog-card-blue"></div>
+            <div class="blog-card-img">
+              <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
+            </div>
+          </div>
+
+          <div class="blog-card-content">
+            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
+            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
+            <p class="mb-5">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
+            </p>
+            <div class="blog-card-author-content">
+                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
+                <div class="body-bold">Rob Sonic</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="blog-card">
+        <div class="blog-card-container">
+
+          <div class="blog-card-img-container mb-4">
+            <div class="blog-card-overlay blog-card-blue"></div>
+            <div class="blog-card-img">
+              <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
+            </div>
+          </div>
+
+          <div class="blog-card-content">
+            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
+            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
+            <p class="mb-5">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
+            </p>
+            <div class="blog-card-author-content">
+                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
+                <div class="body-bold">Rob Sonic</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+
 
 </div>
 {{ partial "footer.html" . }}

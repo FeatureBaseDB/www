@@ -1,0 +1,42 @@
+.single-hero-container{
+  height: 500px;
+  width: 100%;
+  position: relative;
+}
+
+
+
+.single-hero-overlay,
+.single-hero-title,
+.single-hero-img{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.single-hero-overlay{
+    z-index: 1;
+}
+.single-hero-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    text-align: center;
+    padding: 15px;
+}
+.blue-overlay{
+  background: rgba(60, 95, 141, 0.68);
+}
+
+.other-posts-container{
+  background: #f2f7f9;
+}
+
+.other-posts-header{
+  background: pink;
+  margin-right: 30%;
+}
