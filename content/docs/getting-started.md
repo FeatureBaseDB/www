@@ -2,14 +2,14 @@
 title = "Getting Started"
 +++
 
-# Getting Started
+## Getting Started
 
-Pilosa supports an HTTP interface which uses JSON by default. 
+Pilosa supports an HTTP interface which uses JSON by default.
 Any HTTP tool can be used to interact with the Pilosa server. The examples in this documentation will use [curl](https://curl.haxx.se/) which is available by default on many UNIX-like systems including Linux and MacOS. Windows users can download curl [here](https://curl.haxx.se/download.html).
 
 Note that Pilosa server requires a high limit for open files. Check the documentation of your system to see how to increase it in case you hit that limit.
 
-## Starting Pilosa
+#### Starting Pilosa
 
 Follow the steps in the [Install]({{< ref "installation.md" >}}) document to install Pilosa.
 Execute the following in a terminal to run Pilosa with the default configuration (Pilosa will be available at `localhost:10101`):
@@ -29,13 +29,13 @@ curl localhost:10101/nodes
 
 Which should output: `[{"host":":10101"}]`
 
-## Sample Project
+#### Sample Project
 
 In order to better understand Pilosa's capabilities, we will create a sample project called "Star Trace" containing information about the top 1,000 most recently updated Github repositories which have "Austin" in their name. The Star Trace index will include data points such as programming language, tags, and stargazers—people who have starred a project.
 
 Although Pilosa doesn't keep the data in a tabular format, we still use the terms "columns" and "rows" when describing the data model. We put the primary objects in columns, and the properties of those objects in rows. For example, the Star Trace project will contain a database called "repository" which contains columns representing Github repositories, and rows representing properties like programming languages and tags. We can better organize the rows by grouping them into sets called Frames. So our Star Trace project might have a "languages" frame as well as a "tags" frame. You can learn more about databases and frames in the [Data Model](data_model) section of the documentation.
 
-### Create the Schema
+##### Create the Schema
 
 Before we can import data or run queries, we need to create the schema for our databases. Let's create the repository database first:
 ```
@@ -58,7 +58,7 @@ Next up is the `language` frame, which will contain IDs for programming language
 ```
 $ curl -XPOST localhost:10101/frame -d '{"db": "repository", "frame": "language", "options": {"rowLabel": "language_id"}}'
 ```
-### Import Some Data
+##### Import Some Data
 
 The sample data for the "Star Trace" project is at [Pilosa Getting Started repository](https://github.com/pilosa/getting-started). Download `*.csv` files in that repo and run the following commands to import the data into Pilosa.
 
@@ -78,7 +78,7 @@ docker exec -it pilosa pilosa import -d repository -f language /repository-langu
 
 Note that, both the user IDs and the repository IDs were remapped to sequential integers in the data files, they don't correspond to actual Github IDs anymore. You can check out `language.txt` to see the mapping for languages.
 
-### Make Some Queries
+##### Make Some Queries
 
 Which repositories did user 8 star:
 ```
@@ -110,6 +110,6 @@ Set user 99999 as a stargazer for repository 77777:
 curl -XPOST 'localhost:10101/query?db=repository' -d 'SetBit(frame="stargazer", repo_id=77777, stargazer_id=99999)'
 ```
 
-## What's Next?
+#### What's Next?
 
 You can jump to [Query Language](query_language) for more details about **PQL**, the query language of Pilosa, or [Tutorials](tutorials) for in-depth tutorials about real world use cases of Pilosa. Check out our small but expanding set of official [Client Libraries](client_libraries).

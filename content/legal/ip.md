@@ -1,9 +1,13 @@
-# Legal
+## Legal
 
-## Intellectual Property
+#### Intellectual Property
+  - one point
+  - two point
+  - three point
 
-### Copyright
 
-### Trademark
+##### Copyright
 
-### Patents
+##### Trademark
+
+##### Patents
