@@ -1,11 +1,5 @@
 +++
-date = "2017-02-07T17:19:23-06:00"
 title = "PDK"
-draft = true
-
-menu = "docsPdk"
-slug = "pdk"
-weight = 7
 +++
 
 # PDK

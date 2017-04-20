@@ -1,12 +1,5 @@
 +++
-date = "2017-02-06T19:12:50-06:00"
-title = "Quick Start"
-draft = true
-
-menu = "docsGettingStarted"
-slug = "quick-start"
-weight = 1
-
+title = "Getting Started"
 +++
 
 # Getting Started
@@ -18,7 +11,7 @@ Note that Pilosa server requires a high limit for open files. Check the document
 
 ## Starting Pilosa
 
-Follow the steps in the [Install](install) document to install Pilosa.
+Follow the steps in the [Install]({{< ref "installation.md" >}}) document to install Pilosa.
 Execute the following in a terminal to run Pilosa with the default configuration (Pilosa will be available at `localhost:10101`):
 ```
 pilosa server
