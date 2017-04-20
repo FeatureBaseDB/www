@@ -272,12 +272,13 @@ h1 {
 	color: #102445;
 }
 
-.h-6-c-a-p-s-w-h-i-t-e {
+.h-6-caps-white {
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 1.21;
 	letter-spacing: 2px;
 	color: #ffffff;
+  text-transform: uppercase;
 }
 
 .h-6-caps {
