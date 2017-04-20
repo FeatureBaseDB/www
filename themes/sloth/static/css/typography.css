@@ -1,7 +1,9 @@
-
+body{
+	color: #102445;
+}
 /* Text styles */
 p {
-
+	color: #102445;
 	font-size: 16px;
 	line-height: 1.5;
 	letter-spacing: 0
@@ -13,10 +15,11 @@ a{
 	line-height: 1.5;
 	letter-spacing: 0;
 	text-decoration: none;
-	color: #102445;
+	color: #3c5e8c;
 }
 a:hover{
-  text-decoration: underline;
+  color: #1db598;
+	text-decoration: none;	
 }
 
 

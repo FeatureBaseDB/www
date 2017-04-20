@@ -1,4 +1,5 @@
 {{ partial "header.html" . }}
+
 <div class="page-container">
 
   <div class="single-hero-container">
@@ -10,8 +11,8 @@
 
     <div class="single-hero-overlay blue-overlay"></div>
     <div class="single-hero-header">
-      <h1 class="h-1-white mb-5">Hello, World</h1>
-      <h6 class="h-6-caps-white">featured 10/27/2017 • 4 min read</h6>
+      <h1 class="h-1-white mb-4">{{ .Title }}</h1>
+      <h6 class="h-6-caps-white">10/27/2017 • 4 min read</h6>
     </div>
   </div>
 
@@ -37,34 +38,16 @@
     </div>
     <div class="single-body-content col-md-6 mx-3">
 
-
-      <h4 class="h-4-blue mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        <br><br>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-      <img  width='100%' class='mb-4' src="//placehold.it/655x361" alt="">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
+      {{ .Content }}
 
 
-      <h3 class="h-3-bold-green m-4">
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad."
-      </h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        <br><br>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
+
+
+
       <div class="blog-card-author-content mt-5">
-          <img class='mr-3' src="/img/{{ .Site.Params.author_06}}" alt="">
-          <div class="body-bold">Ryan Partelow</div>
+        <img class='mr-3' src="/img/{{ .Site.Params.author_06}}" alt="">
+        <div class="body-bold">{{ .Author }}</div>
       </div>
-
-
-
   </div>
 </div>
 
