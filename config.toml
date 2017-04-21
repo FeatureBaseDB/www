@@ -31,6 +31,7 @@ enableRobotsTXT = true
     fb = "fb.svg"
     linkedin = "linkedin.svg"
     author_06 = "author_06.svg"
+    author_01 = "author_01.svg"
     title = "Pilosa"
     subtitle = "Beyond the cloud."
 

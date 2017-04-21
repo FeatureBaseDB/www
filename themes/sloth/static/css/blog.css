@@ -1,7 +1,7 @@
 .blog-hero-container{
   /*background: pink;*/
-  height: 508px;
-  box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.1);
+  height: 528px;
+
 
 
 }
@@ -9,6 +9,7 @@
 .blog-hero-img-container{
   position: absolute;
   right: 0px;
+  top: 69px;
 }
 
 @media (max-width: 1050px) {
@@ -17,6 +18,7 @@
     height:460px ;
     position: absolute;
     right: 0px;
+    top: 69px;
     background:  rgba(255, 255, 255, 0.8);
   }
 }
@@ -55,21 +57,106 @@
 }
 
 .blog-card-featured{
-    width: 100%;
-    background: white;
-    display: flex;
+  width: 93%;
+  min-width: 320px;
+  margin: 15px;
+  background: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:  center;
+
 }
 
+.blog-card:hover,
+.blog-card-featured:hover{
+  background: #eaf2f6;
+}
+
+
 .blog-card-featured-img-container{
-  marging:30px;
-  flex: 1;
-  background: pink;
-  /*width:380px;*/
+  min-width: 310px;
+  width: 494px;
+  height: 385px;
+  position: relative;
+  margin: 30px;
+
 }
+.blog-card-overlay{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.blog-card-green{
+background: rgba(29,181, 152, 0.68);
+}
+
+.blog-card-blue{
+  background: rgba(60, 95, 141, 0.68);
+}
+.blog-card-light{
+  background: rgba(177, 219, 222, 0.68);
+}
+
 .blog-card-img{
-  
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-.blog-card-featured{
-  background: lightgreen;
-  flex:1;
+
+.blog-card-featured-content{
+
+  padding: 30px;
+  padding-right: 30px;
+  flex: 1;
+  min-width: 310px;
+  width: 494px;
+  /*margin: auto;*/
+}
+.blog-card-author-content{
+  display: flex;
+  align-items: center;
+}
+.blog-card{
+  margin: 15px;
+  background: white;
+  width: 498px;
+  min-width: 320px;
+  min-height: 563px;
+}
+.no-img-light{
+  border-top: 4px solid #cfeaec;
+}
+.no-img-green{
+  border-top: 4px solid #1db598;
+}
+
+
+.blog-card-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+
+}
+
+.blog-card-img-container{
+  min-width: 310px;
+  width: 100%;
+  height: 210px;
+  position: relative;
+}
+.blog-card-content{
+
+  min-width: 300px;
+  width: 90%;
+  height: 100%;
+}
+
+.btn-container{
+  background: pink;
 }
