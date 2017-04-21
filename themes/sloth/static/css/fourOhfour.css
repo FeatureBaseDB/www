@@ -1,0 +1,8 @@
+.fourOhfour-message{
+  height: 276px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin: auto;
+}
