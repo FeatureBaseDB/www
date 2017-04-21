@@ -29,6 +29,7 @@ Field2 -> fieldName2 -> parsed2 -> [              ]
 This definition file can quickly get long, and defining it manually would be quite tedious. That's why we have a tool to generate a definition file by looking at a data set. This will handle most of the legwork, but since it can only guess at the application, it uses the simplest mappings - each column gets mapped to one frame in an appropriate way. This is intended as a starting point, to be updated to suit your use of the PDK.
 
 With this definition available, the PDK tool can run the import, which consists of these steps:
+
 - create the database
 - create all frames
 - for each CSV file, read all rows
@@ -38,6 +39,7 @@ With this definition available, the PDK tool can run the import, which consists 
   - set the appropriate bit. schematically: SetBit(id=rowID, frame=frame, profileID=columnID)
 
 Some of the simple mapper functions available with PDK include:
+
 * YearMapper: Maps a `time.Time` value to an integer equal to the `Time`'s year. 
 * MonthMapper: Maps a `time.Time` value to an integer equal to the `Time`'s month, in [0, 11].
 * DayOfWeekMapper: Maps a `time.Time` value to an integer equal to the `Time`'s day of the week, in [0, 6].
