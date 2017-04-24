@@ -94,29 +94,29 @@ curl -XPOST localhost:10101/index/repository/query -d 'Bitmap(frame="stargazer",
 
 What are the top 5 languages in the sample data:
 ```
-curl -XPOST 'localhost:10101/query?db=repository' -d 'TopN(frame="language", n=5)'
+curl -XPOST 'localhost:10101/index/repository/query' -d 'TopN(frame="language", n=5)'
 ```
 
 Which repositories were starred by user 8 and 18:
 ```
-curl -XPOST 'localhost:10101/query?db=repository' -d 'Intersect(Bitmap(frame="stargazer", stargazer_id=8), Bitmap(frame="stargazer", stargazer_id=18))'
+curl -XPOST 'localhost:10101/index/repository/query' -d 'Intersect(Bitmap(frame="stargazer", stargazer_id=8), Bitmap(frame="stargazer", stargazer_id=18))'
 ```
 
 Which repositories were starred by user 8 or 18:
 ```
-curl -XPOST 'localhost:10101/query?db=repository' -d 'Union(Bitmap(frame="stargazer", stargazer_id=8), Bitmap(frame="stargazer", stargazer_id=18))'
+curl -XPOST 'localhost:10101/index/repository/query' -d 'Union(Bitmap(frame="stargazer", stargazer_id=8), Bitmap(frame="stargazer", stargazer_id=18))'
 ```
 
 Which repositories were starred by user 8 and 18 and also were written in language 1:
 ```
-curl -XPOST 'localhost:10101/query?db=repository' -d 'Intersect(Bitmap(frame="stargazer", id=8), Bitmap(frame="stargazer", stargazer_id=18), Bitmap(frame="language", language_id=1))'
+curl -XPOST 'localhost:10101/index/repository/query' -d 'Intersect(Bitmap(frame="stargazer", id=8), Bitmap(frame="stargazer", stargazer_id=18), Bitmap(frame="language", language_id=1))'
 ```
 
 Set user 99999 as a stargazer for repository 77777:
 ```
-curl -XPOST 'localhost:10101/query?db=repository' -d 'SetBit(frame="stargazer", repo_id=77777, stargazer_id=99999)'
+curl -XPOST 'localhost:10101/index/repository/query' -d 'SetBit(frame="stargazer", repo_id=77777, stargazer_id=99999)'
 ```
 
 #### What's Next?
 
-You can jump to [Query Language](query_language) for more details about **PQL**, the query language of Pilosa, or [Tutorials](tutorials) for in-depth tutorials about real world use cases of Pilosa. Check out our small but expanding set of official [Client Libraries](client_libraries).
+You can jump to [Query Language](../query-language) for more details about **PQL**, the query language of Pilosa, or [Tutorials](../tutorials) for in-depth tutorials about real world use cases of Pilosa. Check out our small but expanding set of official [Client Libraries](../client-libraries).
