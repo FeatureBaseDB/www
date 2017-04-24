@@ -1,1 +1,74 @@
-this is the 404 template
+{{ partial "header.html" . }}
+<div class="page-container">
+    <img width='100%' src="/img/{{ .Site.Params.splash_404 }}" alt="">
+    <div class="fourOhfour-message row">
+      <h4 class="h-4-blue">
+        Pi’s sleeping on the job, sorry you aren’t able to navigate to that page! Donec id elit non mi porta gravida at eget metus. Sed posuere consectetur est at lobortis.
+      </h4>
+    </div>
+    <div class="other-posts-container py-5">
+        <div class="container py-5">
+          <div class="row">
+            <div  class=" col-8">
+              <h2 class="h-2-blue">
+                Other sloths have enjoyed these posts
+              </h2>
+        </div>
+        </div>
+      </div>
+
+      <div class="blog-cards-container">
+        <div class="blog-card">
+          <div class="blog-card-container">
+
+            <div class="blog-card-img-container mb-4">
+              <div class="blog-card-overlay blog-card-blue"></div>
+              <div class="blog-card-img">
+                <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
+              </div>
+            </div>
+
+            <div class="blog-card-content">
+              <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
+              <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
+              <p class="mb-5">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
+              </p>
+              <div class="blog-card-author-content">
+                  <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
+                  <div class="body-bold">Rob Sonic</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="blog-card">
+          <div class="blog-card-container">
+
+            <div class="blog-card-img-container mb-4">
+              <div class="blog-card-overlay blog-card-blue"></div>
+              <div class="blog-card-img">
+                <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
+              </div>
+            </div>
+
+            <div class="blog-card-content">
+              <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
+              <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
+              <p class="mb-5">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
+              </p>
+              <div class="blog-card-author-content">
+                  <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
+                  <div class="body-bold">Rob Sonic</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      </div>
+</div>
+{{ partial "footer.html" . }}

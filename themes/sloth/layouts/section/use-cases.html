@@ -1,10 +1,135 @@
 {{ partial "header.html" . }}
 
-<div class="container">
-   <h1 id="title">Use Cases</h1>
-   {{ range first 5 .Data.Pages }}
-     {{ .Render "summary"}}
-   {{ end }}
+<div class="page-container">
+
+
+  <div class="uc-hero">
+    <div class="uc-hero-overlay"></div>
+    <div class="uc-hero-header">
+      <p class="resonsive-text-white mb-4">In action</p>
+      <p class="uc-hero-text">
+        Pilosa is an ongoing process. We challenge our  engineers to apply Pilosa to existing problems so that we can better understand the needs community and build better solutions.
+      </p>
+    </div>
+    <div class="uc-hero-overlay"></div>
+  </div>
+
+  <div class="use-cases-container ">
+    <div  class=" py-5 ">
+
+      <div class="use-cases-cards">
+        <div  class="use-cases-card">
+
+          <div class="use-cases-card-img">
+            <div class="use-cases-icon-container">
+              <img src="/img/{{ .Site.Params.info_security }}" alt="abstract logo" >
+            </div>
+          </div>
+
+            <h3 class="h-3-bold-green">
+              Chemical Similarity & <br>Tanimoro Algorithms
+            </h3>
+
+
+          <h6 class="h-6-caps">Bioinformatics</h6>
+
+          <p >
+            Chemical similarity is essential to pharmaceutical development. Running Tanimoto algorithms over Pilosa clusters allows researchers to conduct exhaustive searches of existing structures to identify target chemicals, accelerating drug development.
+          </p>
+          <div  class="use-cases-card-arrow ">
+            <a href="">&rarr;</a>
+          </div>
+
+        </div>
+        <div class="use-cases-card">
+
+          <div class="use-cases-card-img">
+            <div class="use-cases-icon-container">
+              <img src="/img/{{ .Site.Params.info_security }}" alt="abstract logo" >
+            </div>
+          </div>
+
+            <h3 class="h-3-bold-green">
+              Taming Transportation Data
+            </h3>
+
+          <h6 class="h-6-caps">Smart Cities</h6>
+          <p >
+            Transportation systems are vital to economic networks but produce massive amounts of data that are difficult to analyze. Using New York City taxi data, we harnessed Pilosa's ability to work across datastores while supporting granular attributes.
+          </p>
+          <div class="use-cases-card-arrow">
+            <a href="">&rarr;</a>
+          </div>
+
+        </div>
+        <div class="use-cases-card">
+          <div class="use-cases-card-img">
+            <div class="use-cases-icon-container">
+              <img src="/img/{{ .Site.Params.info_security }}" alt="abstract logo" >
+            </div>
+          </div>
+
+            <h3 class="h-3-bold-green">
+              Understanding Fans at Umbel
+            </h3>
+
+          <h6 class="h-6-caps">Audience Segmentation</h6>
+          <p >
+            Umbel is where Pilosa’s journey began. See how the Umbel platform uses Pilosa to create highly-specific customer segments, allowing clients to personalize their messaging and increase revenue with data-driven, targeted campaigns.
+          </p>
+          <div class="use-cases-card-arrow">
+            <a   href="">&rarr;</a>
+          </div>
+        </div>
+        <div class="use-cases-card">
+          <div class="use-cases-card-img">
+            <div class="use-cases-icon-container">
+              <img src="/img/{{ .Site.Params.info_security }}" alt="abstract logo" >
+            </div>
+          </div>
+
+            <h3 class="h-3-bold-green">
+              Monitoring Network Traffic
+            </h3>
+
+          <h6 class="h-6-caps">Network Security</h6>
+          <p >
+            Modern network attacks require an increasingly complex infrastructure of intrusion prevention, creating datastores which grow exponentially. Layering Pilosa atop existing security solutions allows us to analyze high-volume network data and even predict network intrusions.
+          </p>
+          <div class="use-cases-card-arrow">
+            <a href="">&rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="use-cases-button">
+
+
+      <div class="pagination-container">
+        <div class="page-icon">
+          <a href="">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="pagination-numbers">
+          <a href="">1</a>
+          <a href="">2</a>
+          <a href="">3</a>
+          <a href="">4</a>
+          <a href="">5</a>
+          <a href="">6</a>
+          <a href="">8</a>
+        </div>
+        <div class="page-icon">
+          <a href="">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+
 </div>
 
 {{ partial "footer.html" . }}

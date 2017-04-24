@@ -32,6 +32,8 @@ enableRobotsTXT = true
     linkedin = "linkedin.svg"
     author_06 = "author_06.svg"
     author_01 = "author_01.svg"
+    splash_404 = "splash_404.svg"
+    splash_use_cases = "splash_use_cases.png"
     title = "Pilosa"
     subtitle = "Beyond the cloud."
 
