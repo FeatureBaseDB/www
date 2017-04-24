@@ -9,7 +9,7 @@ title = "Client Libraries"
 
 You can find the Go client library for Pilosa at our [Go Pilosa Repository](https://github.com/pilosa/go-pilosa). Check out its [README](https://github.com/pilosa/go-pilosa/README.md) for more information and installation instructions.
 
-We are going to use the database you have created in the [Getting Started](getting_started) section. Before carrying on, make sure that example database is created and Pilosa server is running on the default address: `http://localhost:10101`.
+We are going to use the index you have created in the [Getting Started](getting_started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
 
 Note that, there are no error handling in the example below for brevity purpose.
 
@@ -23,10 +23,10 @@ import (
 )
 
 func main() {
-    // Let's create Database and Frame objects, which will contain the settings
-    // for the corresponding databases and frames.
-    repositoryOptions, _ := pilosa.ColumnLabelDatabaseOption("repo_id")
-    repository, _ := pilosa.NewDatabase("repository", repositoryOptions)
+    // Let's create Index and Frame objects, which will contain the settings
+    // for the corresponding indexes and frames.
+    repositoryOptions, _ := pilosa.ColumnLabelIndexOption("repo_id")
+    repository, _ := pilosa.NewIndex("repository", repositoryOptions)
 
     stargazerOptions, _ := pilosa.RowLabelFrameOption("stargazer_id")
     stargazer, _ := repository.Frame("stargazer", stargazerOptions)
@@ -88,16 +88,16 @@ func main() {
 
 You can find the Python client library for Pilosa at our [Python Pilosa Repository](https://github.com/pilosa/python-pilosa). Check out its [README](https://github.com/pilosa/python-pilosa/README.md) for more information and installation instructions.
 
-We are going to use the database you have created in the [Getting Started](getting_started) section. Before carrying on, make sure that example database is created and Pilosa server is running on the default address: `http://localhost:10101`.
+We are going to use the index you have created in the [Getting Started](getting_started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
 
 Note that, there are no error handling in the example below for brevity purpose.
 
 ```python
-from pilosa import Database, Frame, Client
+from pilosa import Index, Frame, Client
 
-# Let's create Database and Frame objects, which will contain the settings
-# for the corresponding databases and frames.
-repository = Database("repository", column_label="repo_id")
+# Let's create Index and Frame objects, which will contain the settings
+# for the corresponding indexes and frames.
+repository = Index("repository", column_label="repo_id")
 stargazer = repository.Frame("stargazer", row_label="stargazer_id")
 language = repository.Frame("language", row_label="language_id")
 
@@ -142,7 +142,7 @@ if not response.success:
 
 You can find the Java client library for Pilosa at our [Java Pilosa Repository](https://github.com/pilosa/java-pilosa). Check out its [README](https://github.com/pilosa/java-pilosa/README.md) for more information and installation instructions.
 
-We are going to use the database you have created in the [Getting Started](getting_started) section. Before carrying on, make sure that example database is created and Pilosa server is running on the default address: `http://localhost:10101`.
+We are going to use the index you have created in the [Getting Started](getting_started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
 
 Note that, there are no error handling in the example below for brevity purpose.
 
@@ -152,12 +152,12 @@ import com.pilosa.client.orm.*;
 
 public class StarTrace {
     public static void main(String[] args) {
-        // Let's create Database and Frame objects, which will contain the settings
-        // for the corresponding databases and frames.
-        DatabaseOptions repositoryOptions = DatabaseOptions.builder()
+        // Let's create Index and Frame objects, which will contain the settings
+        // for the corresponding indexes and frames.
+        IndexOptions repositoryOptions = IndexOptions.builder()
             .setColumnLabel("repo_id")
             .build();
-        Database repository = Database.withName("repository", repositoryOptions);
+        Index repository = Index.withName("repository", repositoryOptions);
 
         FrameOptions stargazerOptions = FrameOptions.builder()
             .setRowLabel("stargazer_id")

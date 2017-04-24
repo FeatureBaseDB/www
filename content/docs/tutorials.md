@@ -150,9 +150,9 @@ After designing this schema and mapping, we capture it in a JSON definition file
 
 ### Overview
 
-The notion of chemical similarity (or molecular similarity) plays an important role in predicting the properties of chemical compounds, designing chemicals with a predefined set of properties, and—especially—conducting drug design studies. All of these are accomplished by screening large databases containing structures of available or potentially available chemicals.
+The notion of chemical similarity (or molecular similarity) plays an important role in predicting the properties of chemical compounds, designing chemicals with a predefined set of properties, and—especially—conducting drug design studies. All of these are accomplished by screening large indexes containing structures of available or potentially available chemicals.
 
-We'd like to use Pilosa to search through millions of molecules and find those most similar to a given molecule. There are examples where --- tried to solve this chemical similarity search problem using other databases (MongoDB, PostgreSQL), so it will be interesting to compare those results to Pilosa using the same data set.
+We'd like to use Pilosa to search through millions of molecules and find those most similar to a given molecule. There are examples where --- tried to solve this chemical similarity search problem using other indexes (MongoDB, PostgreSQL), so it will be interesting to compare those results to Pilosa using the same data set.
 
 Calculation of the similarity of any two molecules is achieved by comparing their molecular fingerprints. These fingerprints are comprised of structural information about the molecule which has been encoded as a series of bits. The most commonly used algorithm to calculate the similarity is the Tanimoto coefficient.
 ```
@@ -179,7 +179,7 @@ return the set of molecules that have at least a 90% similarity with the given m
 
 To achieve this goal, there are two schemas that are provided:
 ```
-Database: inverse-mole
+Index: inverse-mole
     Col: chembl_id
         Frame: mole.n
             Row: “on” bit positions of a fingerprint
@@ -187,29 +187,29 @@ Database: inverse-mole
 
 Given a SMILES, RDKit can convert it to fingerprints. From there Pilosa can provide a list of chembl_ids that match the fingerprint. To choose the right chembl_id, we need to query all fingerprints for those ids, and choose the right chembl_id based on length of return fingerprint (more details in Query section)
 ```
-Database: mol
+Index: mol
     Col: “on” bit positions of a fingerprint
         Frame: mole.n
             Row: chembl_id
 ```
 
-After retrieving chembl_id from the `inverse-mole` database, we can use the Tanimoto coefficient to compare chembl_id with the entire data set of molecules. The result of this comparison is the list of `chembl_id`s that have a Tanimoto coefficient greater than the given threshold.
+After retrieving chembl_id from the `inverse-mole` index, we can use the Tanimoto coefficient to compare chembl_id with the entire data set of molecules. The result of this comparison is the list of `chembl_id`s that have a Tanimoto coefficient greater than the given threshold.
 
 ### Import process
 
 To import data into pilosa, we need to get chembl_id and SMILES from SD files, convert SMILES to Morgan fingerprints, and then write chembl_id and fingerprint to Pilosa. The fastest way is to extracted chembl_id and SMILES from SD file to csv file, then use the `pilosa import command to import the csv file into pilosa. Since chembl_id in the SD file is always paired with CHEMBL, e.g CHEMBL6329, and because Pilosa doesn't support string keys, we will ignore CHEMBL and instead use chembl_id as an integer key.
 
-For the `mol` database, each row in the csv file has the format ‘chembl_id, fingerprint_bit’ by running the following command from Chem-usecase:
+For the `mol` index, each row in the csv file has the format ‘chembl_id, fingerprint_bit’ by running the following command from Chem-usecase:
 ```
 python import_from_sdf -p <path_to_sdf_file> -file id_fingerprint.csv
 ```
 
-For `inverse-mol` database, each row in csv file has the format ‘fingerprint_bit, chembl_id’ by running the following command:
+For `inverse-mol` index, each row in csv file has the format ‘fingerprint_bit, chembl_id’ by running the following command:
 ```
 python import_from_sdf -p <path_to_sdf_file> -file fingerprint_id.csv -i True
 ```
 
-To import csv file to pilosa, follow the instruction of Getting Started to run the Pilosa server and create the database and frame as above schemas in Data Model section.
+To import csv file to pilosa, follow the instruction of Getting Started to run the Pilosa server and create the index and frame as above schemas in Data Model section.
 ```
 curl -XPOST localhost:10101/db -d '{"db": "mol", "options": {"columnLabel": "position_id"}}'
 
@@ -220,7 +220,7 @@ curl -XPOST localhost:10101/db -d '{"db": "inverse-mol", "options": {"columnLabe
 curl -XPOST localhost:10101/frame -d '{"db": "mol", "frame": "mole.n", "options": {"rowLabel": "position_id"}}'
 ```
 
-Run command to import to mol and inverse-mol database:
+Run command to import to mol and inverse-mol index:
 ```
 pilosactl import -d mol -f mole.n id_fingerprint.csv
 pilosactl import -d inverse-mol -f mole.n fingerprint_id.csv

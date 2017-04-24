@@ -33,16 +33,16 @@ Which should output: `[{"host":":10101"}]`
 
 In order to better understand Pilosa's capabilities, we will create a sample project called "Star Trace" containing information about the top 1,000 most recently updated Github repositories which have "Austin" in their name. The Star Trace index will include data points such as programming language, tags, and stargazers—people who have starred a project.
 
-Although Pilosa doesn't keep the data in a tabular format, we still use the terms "columns" and "rows" when describing the data model. We put the primary objects in columns, and the properties of those objects in rows. For example, the Star Trace project will contain a database called "repository" which contains columns representing Github repositories, and rows representing properties like programming languages and tags. We can better organize the rows by grouping them into sets called Frames. So our Star Trace project might have a "languages" frame as well as a "tags" frame. You can learn more about databases and frames in the [Data Model](data_model) section of the documentation.
+Although Pilosa doesn't keep the data in a tabular format, we still use the terms "columns" and "rows" when describing the data model. We put the primary objects in columns, and the properties of those objects in rows. For example, the Star Trace project will contain an index called "repository" which contains columns representing Github repositories, and rows representing properties like programming languages and tags. We can better organize the rows by grouping them into sets called Frames. So our Star Trace project might have a "languages" frame as well as a "tags" frame. You can learn more about indexes and frames in the [Data Model](data_model) section of the documentation.
 
 ##### Create the Schema
 
-Before we can import data or run queries, we need to create the schema for our databases. Let's create the repository database first:
+Before we can import data or run queries, we need to create the schema for our indexes. Let's create the repository index first:
 ```
 $ curl -XPOST localhost:10101/db -d '{"db": "repository", "options": {"columnLabel": "repo_id"}}'
 ```
 
-Repository IDs are the main focus of the `repository` database, so we chose `repo_id` as the column label.
+Repository IDs are the main focus of the `repository` index, so we chose `repo_id` as the column label.
 
 Let's create the `stargazer` frame which has user IDs of stargazers as its rows:
 ```

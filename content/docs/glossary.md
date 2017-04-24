@@ -23,7 +23,7 @@ title = "Glossary"
 
 **View:** Views separate the different data layouts within a Frame. The two primary views are Standard and Inverse which represent the typical row/column data and its inverse respectively. Time based Frame Views are automatically generated for each time quantum. Views are internally managed by Pilosa, and never exposed directly via the API. This simplifies the functional interface by separating it from the physical data representation.
 
-**Fragment:** A Fragment is the intersection of a frame and slice in a database.
+**Fragment:** A Fragment is the intersection of a frame and slice in an index.
 
 **Slice:** Columns are sharded on a preset width. Each shard is referred to as a Slice in Pilosa. Slices are operated on in parallel and are evenly distributed across the cluster via a consistent hash.
 
