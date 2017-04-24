@@ -20,11 +20,11 @@ The purpose of the Index is to represent a data namespace. You cannot perform cr
 
 ## Column
 
-Column ids are sequential increasing integers and are common to all Frames within a Index.
+Column ids are sequential increasing integers and are common to all Frames within an Index.
 
 ## Row
 
-Row ids are sequential increasing integers namespaced to each Frame within a Index.
+Row ids are sequential increasing integers namespaced to each Frame within an Index.
 
 ## Frame
 
