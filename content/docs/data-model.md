@@ -14,21 +14,21 @@ Pilosa lays out data first in rows, so queries which get all the set bits in one
 
 Similar to a Graph database Pilosa provides the ability to quickly calculate/compute/analyze/inspect the edge relationships between nodes.  Unlike a graph database the query time does not (some qualifying term) increase as edges cross machine boundaries in a cluster.  The underlying relationship data model is a distributed Roaring bitmap that can horizontally scale (bigly).  
 
-## Database
+## Index
 
-The purpose of the Database is to represent a data namespace. You cannot perform cross-database queries.  Column-level attributes are global to the Database.
+The purpose of the Index is to represent a data namespace. You cannot perform cross-index queries.  Column-level attributes are global to the Index.
 
 ## Column
 
-Column ids are sequential increasing integers and are common to all Frames within a Database.
+Column ids are sequential increasing integers and are common to all Frames within a Index.
 
 ## Row
 
-Row ids are sequential increasing integers namespaced to each Frame within a Database.
+Row ids are sequential increasing integers namespaced to each Frame within a Index.
 
 ## Frame
 
-Frames are used to segment and define different functional characteristics within your entire database.  You can think of a Frame as a table-like data partition within your Database.
+Frames are used to segment and define different functional characteristics within your entire index.  You can think of a Frame as a table-like data partition within your Index.
 
 Row-level attributes are namespaced at the Frame level.
 
@@ -50,7 +50,7 @@ Attributes are arbitrary key/value pairs that can be associated to both rows or 
 
 ## Slice
 
-Databases are sharded into groups of columns called Slices - each Slice contains a fixed number of columns which is the SliceWidth.
+Indexes are sharded into groups of columns called Slices - each Slice contains a fixed number of columns which is the SliceWidth.
 
 Columns are sharded on a preset width, and each shard is referred to as a Slice.  Slices are operated on in parallel, and they are evenly distributed across a cluster via a consistent hash algorithm.
 

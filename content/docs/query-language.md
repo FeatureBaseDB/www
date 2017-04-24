@@ -4,11 +4,11 @@ title = "Query Language"
 
 # Query Language
 
-Make sure a database and frame are created before running a query as discussed in [Getting Started](getting_started).
+Make sure an index and frame are created before running a query as discussed in [Getting Started](getting_started).
 
 Let’s use the following schemas for an example:
 ```
-Database: repository
+Index: repository
     col: repo_id
     frame: stargazer
         row: user_id
@@ -16,7 +16,7 @@ Database: repository
         row: language_id (C, Go, Java, Python)
 ```
 
-This database can serve queries like:
+This index can serve queries like:
 
 * How many repositories has user 1 contribute to?
 * How many repositories are written in the Go programming language?
@@ -26,7 +26,7 @@ This database can serve queries like:
 * How many repositories has user 1 worked on that user 2 has not?    
 
 ```
-Database: user
+Index: user
     col: user_id
     frame: repositories
         row: repo_id
@@ -34,7 +34,7 @@ Database: user
         row: country_id
 ```
 
-This database can serve queries like:
+This index can serve queries like:
 
 * How many users have contributed to repository 1?
 * How many users are from location 1?
@@ -51,7 +51,7 @@ SetBit(), as the name implies, assigns a value of 1 to a bit in the binary matri
 curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetBit(frame="stargazer", repo_id=10, user_id=1)'
 ```
 
-This query illustrates setting a bit in the stargazer frame of the repository database. User with id=1 has starred repository with id=10.
+This query illustrates setting a bit in the stargazer frame of the repository index. User with id=1 has starred repository with id=10.
 
 Setbit also supports providing a timestamp. To write the date that a user starred a repository.
 ```
@@ -95,7 +95,7 @@ SetProfileAttrs queries always return {"results":[null]} upon success.
 curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'ClearBit(frame="stargazer", repo_id=10, user_id=1)'
 ```
 
-Remove relationship between user_id=1 and repo_id=10  from the "stargazer" frame in the "repository" database.
+Remove relationship between user_id=1 and repo_id=10  from the "stargazer" frame in the "repository" index.
 
 A return value of {"results":[true]} indicates that the bit was toggled from 1 to 0.
 
