@@ -12,7 +12,7 @@
   }
   .hero-container{
     background:  #1db598;
-    display: flex;
+    display:`` flex;
     background-image: url("/img/splash_about.svg") ;
     background-size: auto 100%;
     background-repeat: no-repeat;

@@ -1,13 +1,22 @@
 .coc-hero{
    background: #1db598;
-   background-image: url("/img/splash_coc.svg") ;
-   background-size: auto 110%;
+   /*background-image: url("/img/splash_coc.svg") ;
+   background-size: auto 80%;
    background-repeat: no-repeat;
-   background-position: right;
+   background-position: top right;
    display: flex;
    align-items: flex-start;
    justify-content: center;
-   padding-top: 90px;
+   padding-top: 90px;*/
+    padding: 90px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
+   background-image: url("/img/splash_coc.svg") ;
+   background-size: auto 80%;
+   background-repeat: no-repeat;
+   background-position: bottom right;
 
 }
 .coc-hero-content{
