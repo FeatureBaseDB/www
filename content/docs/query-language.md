@@ -18,11 +18,11 @@ Index: repository
 
 This index can serve queries like:
 
-* How many repositories has user 1 contributed to?
+* To how many repositories has user 1 contributed?
 * How many repositories are written in the Go programming language?
 * What are the top five users who have contributed to the most repositories?
 * What are the top five users who have contributed to the most repositories that are written in Go?
-* How many repositories have user 1 and user 2 both contributed to?
+* To how many repositories have both user 1 and user 2 contributed?
 * How many repositories has user 1 worked on that user 2 has not?
 
 ```

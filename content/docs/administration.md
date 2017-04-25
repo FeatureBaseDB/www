@@ -8,7 +8,7 @@ title = "Administration Guide"
 
 ### Hardware
 
-Pilosa is a standalone, compiled Go application. So there is no need to worry about running and configuring a Java VM. Pilosa can run on very small machines and works well with even a medium sized dataset on a personal laptop. If you are reading this section, you are likely ready to deploy a cluster of Pilosa servers handling very large datasets or high velocity data. These are guidelines for running a cluster; specific needs may differ.
+Pilosa is a standalone, compiled Go application, so there is no need to worry about running and configuring a Java VM. Pilosa can run on very small machines and works well with even a medium sized dataset on a personal laptop. If you are reading this section, you are likely ready to deploy a cluster of Pilosa servers handling very large datasets or high velocity data. These are guidelines for running a cluster; specific needs may differ.
 
 ### Memory
 
@@ -20,7 +20,7 @@ Pilosa is a concurrent application written in Go and can take full advantage of 
 
 ### Disk
 
-Even though the main dataset is in memory Pilosa does back up to disk frequently.  We recommend SSDs -- especially if you have a write heavy application.
+Even though the main dataset is in memory Pilosa does back up to disk frequently.  We recommend SSDs--especially if you have a write heavy application.
 
 ### Network
 
@@ -63,7 +63,7 @@ The Pilosa server should support PQL versioning using HTTP headers. On each requ
 
 #### Headers
 
-The server should return the Content-Type header matching the client's Accept header, the Content-Type header should follow this template:
+The server should return the Content-Type header matching the client's Accept header; the Content-Type header should follow this template:
 
 `Content-Type: application/vnd.pilosa.pql.v<version>`
 

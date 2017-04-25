@@ -18,7 +18,7 @@ After initial setup, the PDK import tool does everything we need to define a Pil
 
 ### Data Model
 
-The NYC taxi data is comprised of a number of csv files listed here: http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml. These have around 20 columns and about half of them are relevant for the benchmark queries we're looking at: 
+The NYC taxi data is comprised of a number of csv files listed here: http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml. These data files have around 20 columns, about half of which are relevant to the benchmark queries we're looking at:
 
 * Distance: miles, floating point
 * Fare: dollars, floating point
@@ -140,7 +140,7 @@ durm := pdk.CustomMapper{
 
 ### Import process
 
-After designing this schema and mapping, we capture it in a JSON definition file that can be read by the PDK import tool. Running `pdk taxi` reads this, and runs the import based on it. See [PDK](../pdk) for more details on this process.
+After designing this schema and mapping, we capture it in a JSON definition file that can be read by the PDK import tool. Running `pdk taxi` runs the import based on the information in this file. See [PDK](../pdk) for more details on this process.
 
 ### Queries
 
