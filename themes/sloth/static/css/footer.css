@@ -98,6 +98,9 @@ footer a:hover{
   border: solid 1.5px #102445;
 
 }
+.footer-input::placeholder{
+  color: white; 
+}
 
 .footer-icons{
   display: flex;
