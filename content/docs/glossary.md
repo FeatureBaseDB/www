@@ -4,6 +4,9 @@ title = "Glossary"
 
 # Glossary
 
+
+<strong id="index">Index:</strong> Indexes are the top level container in Pilosa - similar to a database in an RDBMS. Queries cannot operate across multiple indexes.
+
 <strong id="column">Column:</strong> Columns are the fundamental horizontal data axis within Pilosa.  Columns are global to all Frames within a Index.
 
 <strong id="row">Row:</strong> Rows are the fundamental vertical data axis within Pilosa.  They are namespaced to each Frame within a Index.
