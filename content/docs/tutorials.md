@@ -10,7 +10,7 @@ title = "Tutorials"
 
 New York City released an extremely detailed data set of over 1 billion taxi rides taken in the city - this data has become a popular target for analysis by tech bloggers and has been very well studied. For this reason, we thought it would be interesting to import this data to Pilosa in order to compare with other data stores and techniques on the exact same data set.
 
-Transportation in general is a compelling use case for Pilosa as it often involves multiple disparate data sources, as well as high rate,real time, and extremely large amounts of data (particularly if one wants to draw reasonable conclusions).
+Transportation in general is a compelling use case for Pilosa as it often involves multiple disparate data sources, as well as high rate, real time, and extremely large amounts of data (particularly if one wants to draw reasonable conclusions).
 
 We've written a tool to help import the NYC taxi data into Pilosa - this tool is part of the PDK (Pilosa Development Kit), and takes advantage of a number of reusable modules that may help you import other data as well. Follow along and we'll explain the whole process step by step.
 
@@ -18,7 +18,7 @@ After initial setup, the PDK import tool does everything we need to define a Pil
 
 ### Data Model
 
-The NYC taxi data is comprised of a number of csv files listed here: http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml. These have about 20 columns; about half of them are relevant for the benchmark queries we're looking at: 
+The NYC taxi data is comprised of a number of csv files listed here: http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml. These data files have around 20 columns, about half of which are relevant to the benchmark queries we're looking at:
 
 * Distance: miles, floating point
 * Fare: dollars, floating point
@@ -140,7 +140,7 @@ durm := pdk.CustomMapper{
 
 ### Import process
 
-After designing this schema and mapping, we capture it in a JSON definition file that can be read by the PDK import tool. Running `pdk taxi` reads this, and runs the import based on it. See #PDK for more details on this process.
+After designing this schema and mapping, we capture it in a JSON definition file that can be read by the PDK import tool. Running `pdk taxi` runs the import based on the information in this file. See [PDK](../pdk) for more details on this process.
 
 ### Queries
 
