@@ -107,10 +107,9 @@ footer a:hover{
 
 .footer-row{
   display: flex;
+  display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-
+  align-self: center;
 }
 
 @media (max-width: 500px) {
@@ -121,26 +120,22 @@ footer a:hover{
 
 
 .brand{
-  flex: 1;
-  min-width: 290px;
+  width: 260px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .links{
-  flex:4;
-
-  min-width: 290px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+
 }
 
 .category{
-  min-width: 133px;
-  flex: 1;
+  flex-wrap: wrap;
+  width: 135px;
   margin: 5px;
   display: flex;
   flex-direction: column;
@@ -271,8 +266,6 @@ footer a:hover{
   position: relative;
 
   z-index: 1;
-
-  /*margin-left: 10%;*/
 }
 
 

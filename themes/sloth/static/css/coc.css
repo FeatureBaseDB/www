@@ -1,14 +1,6 @@
 .coc-hero{
    background: #1db598;
-   /*background-image: url("/img/splash_coc.svg") ;
-   background-size: auto 80%;
-   background-repeat: no-repeat;
-   background-position: top right;
-   display: flex;
-   align-items: flex-start;
-   justify-content: center;
-   padding-top: 90px;*/
-    padding: 90px;
+   padding: 90px;
    display: flex;
    align-items: center;
    justify-content: space-between;
