@@ -455,14 +455,14 @@ footer a:hover{
 }
 
 .get-more-col-1{
-  margin-left: 5%;
-  /*background: pink;*/
-  max-width: 400px;
+  /*margin-left: 5%;*/
+  background: pink;
+  width: 320px;
   flex:2;
 }
 
 .get-more-col-2{
-  min-width: 390px;
+  width: 390px;
   display: flex;
   flex: 3;
   align-items: center;
