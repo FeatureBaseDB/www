@@ -130,7 +130,6 @@ footer a:hover{
 .links{
   display: flex;
   flex-wrap: wrap;
-
 }
 
 .category{
@@ -145,25 +144,23 @@ footer a:hover{
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.2px;
+
 }
 .footer-btn-container{
   display: flex;
-  flex:1;
-
-
 }
 .footer-learn-more{
-  flex: 1;
-  min-width: 290px;
+  width: 290px;
   text-align: center;
   font-family: Montserrat;
 	font-size: 16px;
 	line-height: 1.5;
 	letter-spacing: 0.2px;
+  margin: auto;
 }
 .footer-form{
-  flex: 4;
-  min-width: 290px;
+
+  width: 880px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -171,13 +168,12 @@ footer a:hover{
 }
 
 .footer-input{
-  min-width: 290px;
+  width: 290px;
   background: #102445;
   outline: none;
   color: #f2f7f9;
   padding:24px;
   font-family: Montserrat;
-  flex: 4;
   height: 60px;
   border-radius: 3px;
   background-color: #1c314e;
