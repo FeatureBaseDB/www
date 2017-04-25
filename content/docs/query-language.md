@@ -18,12 +18,12 @@ Index: repository
 
 This index can serve queries like:
 
-* How many repositories has user 1 contribute to?
+* How many repositories has user 1 contributed to?
 * How many repositories are written in the Go programming language?
-* What are the top five users who contribute to the most repositories?
+* What are the top five users who have contributed to the most repositories?
 * What are the top five users who have contributed to the most repositories that are written in Go?
-* How many repositories do user 1 and user 2 both contribute to?
-* How many repositories has user 1 worked on that user 2 has not?    
+* How many repositories have user 1 and user 2 both contributed to?
+* How many repositories has user 1 worked on that user 2 has not?
 
 ```
 Index: user
@@ -60,12 +60,12 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetBit(frame="star
 
 You can set multiple bits:
 ```
-curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetBit(frame="stargazer", repo_id=10, user_id=1) SetBit( frame="stargazer", repo_id=10, user_id=2) SetBit(frame="stargazer", repo_id=20, user_id=1) SetBit(frame="stargazer", repo_id=30, user_id=2)`
+curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetBit(frame="stargazer", repo_id=10, user_id=1) SetBit(frame="stargazer", repo_id=10, user_id=2) SetBit(frame="stargazer", repo_id=20, user_id=1) SetBit(frame="stargazer", repo_id=30, user_id=2)`
 ```
 
 A return value of {"results":[true]} indicates that the bit was changed to 1.
 
-A return value of {"results":[false]} indicates that the bit was already set to 1, therefore nothing changed
+A return value of {"results":[false]} indicates that the bit was already set to 1, therefore nothing changed.
 
 ### SetBitmapAttrs
 
@@ -78,16 +78,16 @@ Set username value and active status for user = 10. These are arbitrary key/valu
 
 SetBitmapAttrs queries always return  {"results":[null]} upon success.
 
-### SetProfileAttrs
+### SetColumnAttrs
 
-SetProfileAttrs() supports writing attributes of the Column. 
+SetColumnAttrs() supports writing attributes of the Column. 
 ```
-curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetProfileAttrs(frame="stargazer", repo_id=10, stars=123, url="http://projects.pilosa.com/10", active=true)'
+curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetColumnAttrs(frame="stargazer", repo_id=10, stars=123, url="http://projects.pilosa.com/10", active=true)'
 ```
 
 Set url value and active status for project 10. These are arbitrary key/value pairs which have no meaning to Pilosa.
 
-SetProfileAttrs queries always return {"results":[null]} upon success.
+SetColumnAttrs queries always return {"results":[null]} upon success.
 
 ### ClearBit
 
