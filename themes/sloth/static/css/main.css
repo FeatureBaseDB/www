@@ -110,6 +110,7 @@ footer a:hover{
   display: flex;
   flex-wrap: wrap;
   align-self: center;
+  justify-content: center;
 }
 
 @media (max-width: 500px) {
@@ -130,6 +131,8 @@ footer a:hover{
 .links{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+
 }
 
 .category{
