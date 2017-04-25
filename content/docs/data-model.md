@@ -2,9 +2,9 @@
 title = "Data Model"
 +++
 
-# Data Model
+## Data Model
 
-## Overview
+#### Overview
 
 The central component of Pilosa's data model is a boolean matrix. Each cell in the matrix is a single bit - if the bit is set, it indicates that a relationship exists between that particular row and column.
 
@@ -12,59 +12,59 @@ rows and columns can represent anything (they could even represent the same set 
 
 Pilosa lays out data first in rows, so queries which get all the set bits in one or many rows, or compute a combining operation on multiple rows such as Intersect or Union are the fastest. Pilosa also has the ability to categorize rows into different "frames" and quickly retrieve the top rows in a frame sorted by the number of bits set in each row.
 
-## Index
+#### Index
 
 The purpose of the Index is to represent a data namespace. You cannot perform cross-index queries.  Column-level attributes are global to the Index.
 
-## Column
+#### Column
 
 Column ids are sequential increasing integers and are common to all Frames within an Index.
 
-## Row
+#### Row
 
 Row ids are sequential increasing integers namespaced to each Frame within an Index.
 
-## Frame
+#### Frame
 
 Frames are used to segment and define different functional characteristics within your entire index.  You can think of a Frame as a table-like data partition within your Index.
 
 Row-level attributes are namespaced at the Frame level.
 
-### Ranked
+##### Ranked
 
 Ranked Frames maintain a sorted cache of column counts by Row ID (yielding the top rows by columns with a bit set in each). This cache facilitates the TopN query.  The cache size defaults to 50,000 and can be set at Frame creation.
 
-### LRU
+##### LRU
 
 The LRU cache maintains the most recently accessed Rows.
 
-## Time Quantum
+#### Time Quantum
 
 The Time Quantum frame aggregates row data into specific time segments such as year, month, day, and hour.
 
-## Attribute
+#### Attribute
 
 Attributes are arbitrary key/value pairs that can be associated to both rows or columns.  This metadata is stored in a separate BoltDB data structure.
 
-## Slice
+#### Slice
 
 Indexes are sharded into groups of columns called Slices - each Slice contains a fixed number of columns which is the SliceWidth.
 
 Columns are sharded on a preset width, and each shard is referred to as a Slice.  Slices are operated on in parallel, and they are evenly distributed across a cluster via a consistent hash algorithm.
 
-## View
+#### View
 
 Views represent the various data layouts within a Frame. The primary View is called Standard, and it contains the typical Row and Column data. The Inverse View contains the same data with the axes inverted.Time-based Views are automatically generated for each time quantum. Views are internally managed by Pilosa, and never exposed directly via the API. This simplifies the functional interface from the physical data representation.
 
-### Standard
+##### Standard
 
 The standard View contains the same Row/Column format as the input data. 
 
-### Inverse
+##### Inverse
 
 The Inverse View contains the same data with the Row and Column swapped.
 
-### Time Quantums
+##### Time Quantums
 
 If a Frame has a time quantum, then Views are generated for each of the defined time segments. For example, a time quantum of YMDH for the date 2006-01-02T15:04:05 would create the following Views with data aggregating into each time segment as it is set:
 

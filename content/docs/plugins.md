@@ -2,4 +2,4 @@
 title = "Plugins"
 +++
 
-# Plugins
+## Plugins

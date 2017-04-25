@@ -2,10 +2,10 @@
 title = "Client Libraries"
 +++
 
-# Client Libraries
+## Client Libraries
 
 
-## Go
+#### Go
 
 You can find the Go client library for Pilosa at our [Go Pilosa Repository](https://github.com/pilosa/go-pilosa). Check out its [README](https://github.com/pilosa/go-pilosa/README.md) for more information and installation instructions.
 
@@ -84,7 +84,7 @@ func main() {
 }
 ```
 
-## Python
+#### Python
 
 You can find the Python client library for Pilosa at our [Python Pilosa Repository](https://github.com/pilosa/python-pilosa). Check out its [README](https://github.com/pilosa/python-pilosa/README.md) for more information and installation instructions.
 
@@ -138,7 +138,7 @@ if not response.success:
 
 ```
 
-## Java
+#### Java
 
 You can find the Java client library for Pilosa at our [Java Pilosa Repository](https://github.com/pilosa/java-pilosa). Check out its [README](https://github.com/pilosa/java-pilosa/README.md) for more information and installation instructions.
 

@@ -7,7 +7,7 @@ title = "Getting Started"
 Pilosa supports an HTTP interface which uses JSON by default.
 Any HTTP tool can be used to interact with the Pilosa server. The examples in this documentation will use [curl](https://curl.haxx.se/) which is available by default on many UNIX-like systems including Linux and MacOS. Windows users can download curl [here](https://curl.haxx.se/download.html).
 
-Note that Pilosa server requires a high limit for open files. Check the documentation of your system to see how to increase it in case you hit that limit.
+> Note that Pilosa server requires a high limit for open files. Check the documentation of your system to see how to increase it in case you hit that limit.
 
 #### Starting Pilosa
 
