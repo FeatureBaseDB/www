@@ -40,30 +40,30 @@ Although Pilosa doesn't keep the data in a tabular format, we still use the term
 Note:
 The queries in this section which are used to set up the indexes in Pilosa just the empty object on success: `{}` - if you would like to verify that a query worked as you expected, you can request the schema as follows:
 ```
-$ curl localhost:10101/schema
+curl localhost:10101/schema
 {"indexes":null}
 ```
 
 Before we can import data or run queries, we need to create our indexes and the frames within them. Let's create the repository index first:
 ```
-$ curl -XPOST localhost:10101/index/repository -d '{"options": {"columnLabel": "repo_id"}}'
+curl -XPOST localhost:10101/index/repository -d '{"options": {"columnLabel": "repo_id"}}'
 ```
 
 Repository IDs are the main focus of the `repository` index, so we chose `repo_id` as the column label.
 
 Let's create the `stargazer` frame which has user IDs of stargazers as its rows:
 ```
-$ curl -XPOST localhost:10101/index/repository/frame/stargazer -d '{"options": {"rowLabel": "stargazer_id"}}'
+curl -XPOST localhost:10101/index/repository/frame/stargazer -d '{"options": {"rowLabel": "stargazer_id"}}'
 ```
 
 Since our data contains time stamps for the time users starred repos, we will change the *time quantum* for the `stargazer` frame. Time quantum is the resolution of the time we want to use. We will set it to `YMD` (year, month, day) for `stargazer`:
 ```
-$ curl -XPATCH localhost:10101/index/repository/frame/stargazer/time-quantum -d '{"time_quantum": "YMD"}'
+curl -XPATCH localhost:10101/index/repository/frame/stargazer/time-quantum -d '{"timeQuantum": "YMD"}'
 ```
 
 Next up is the `language` frame, which will contain IDs for programming languages:
 ```
-$ curl -XPOST localhost:10101/index/repository/frame/language -d '{"options": {"rowLabel": "language_id"}}'
+curl -XPOST localhost:10101/index/repository/frame/language -d '{"options": {"rowLabel": "language_id"}}'
 ```
 ##### Import Some Data
 
@@ -89,7 +89,7 @@ Note that, both the user IDs and the repository IDs were remapped to sequential 
 
 Which repositories did user 8 star:
 ```
-curl -XPOST localhost:10101/index/repository/query -d 'Bitmap(frame="stargazer", stargazer_id=8)'
+curl -XPOST localhost:10101/index/repository/query -d 'Bitmap(frame="stargazer", stargazer_id=27)'
 ```
 
 What are the top 5 languages in the sample data:
