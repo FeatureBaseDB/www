@@ -1,4 +1,4 @@
-baseurl = "http://localhost/"
+baseurl = "https://dc3kpxyuw05cb.cloudfront.net/"
 languageCode = "en-us"
 title = "Pilosa"
 theme = "sloth"
@@ -23,6 +23,7 @@ enableRobotsTXT = true
     pilosa_docs = "pilosa_docs.svg"
     splash_blog = "splash_blog.svg"
     slack = "slack.svg"
+    mail = "mail.svg"
     github = "github.svg"
     stack_overflow = "stack_overflow.png"
     ce = "ce.svg"

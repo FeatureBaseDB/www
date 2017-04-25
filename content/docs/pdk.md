@@ -30,7 +30,7 @@ This definition file can quickly get long, and defining it manually would be qui
 
 With this definition available, the PDK tool can run the import, which consists of these steps:
 
-- create the database
+- create the index
 - create all frames
 - for each CSV file, read all rows
 - for each CSV record: 
