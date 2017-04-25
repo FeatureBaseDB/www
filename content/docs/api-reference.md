@@ -5,18 +5,223 @@ title = "API Reference"
 
 # API Reference
 
-`/db`
+## `/index`
 
-`/db/<dbname>`
+### `GET`
 
-`/db/<dbname>/query`
+Returns the schema of all indexes in JSON.
 
-`/db/<dbname>/time-quantum`
+Request:
+```
+curl -XGET localhost:10101/index
+```
 
-`/db/<dbname>/frame/<frame-name>`
+Response:
+```
+{"indexes":[{"name":"user","frames":[{"name":"collab"}]}]}
+```
 
-`/db/<dbname>/frame/<frame-name>/time-quantum`
+## `/index/<index-name>`
 
-`/hosts`
+### `GET`
 
-`/version`
+Returns the schema of the specified index in JSON.
+
+Request:
+```
+curl -XGET localhost:10101/index/user
+```
+
+Response:
+```
+{"index":{"name":"user"}, "frames":[{"name":"collab"}]}]}
+```
+
+### `POST`
+
+Creates an index with the given name.
+
+The request payload is in JSON, and may contain the `options` field. The `options` field is a JSON object which may contain the following fields:
+
+* `columnLabel` (string): column label of the index.
+
+Request:
+```
+curl -XPOST localhost:10101/index/user -d '{"options": {"columnLabel": "user_id"}}'
+```
+
+Response:
+```
+{}
+```
+
+### `DELETE`
+
+Removes the given index.
+
+Request:
+```
+curl -XDELETE localhost:10101/index/user
+```
+
+Response:
+```
+{}
+```
+
+## `/index/<index-name>/query`
+
+### `POST`
+
+Sends a query to the Pilosa server with the given index. The request body is UTF-8 encoded text and response body is in JSON by default.
+
+Request:
+```
+curl -XPOST localhost:10101/index/user/query -d 'Bitmap(frame="language", id=5)'
+```
+
+Response:
+```
+{"results":[{"attrs":{},"bits":[100]}]}
+```
+
+In order to send protobuf binaries in the request and response, set `Content-Type` and `Accept` headers to: `application/x-protobuf`.
+
+The response doesn't include column attributes by default. To return them, set `columnAttrs` query argument to `true`.
+
+Request:
+```
+curl -XPOST 'localhost:10101/index/user/query?columnAttrs=true' -d 'Bitmap(frame="language", id=5)'
+```
+Response:
+```
+{"results":[{"attrs":{},"bits":[100]}],"columnAttrs":[{"id":100,"attrs":{"name":"Klingon"}}]}
+```
+
+## `/index/<index-name>/time-quantum`
+
+### `PATCH`
+
+Changes the time quantum for the given index. This endpoint should be called at most once right after creating a database.
+
+The payload is in JSON with the format: `{"timeQuantum": "${TIME_QUANTUM}"}`. Valid time quantum values are:
+
+* (Empty string)
+* Y: year
+* M: month
+* D: day
+* H: hour
+* YM: year and month
+* MD: month and day
+* DH: day and hour
+* YMD: year, month and day
+* MDH: month, day and hour
+* YMDH: year, month, day and hour
+
+Request:
+```
+curl -XPOST 'localhost:10101/index/user/time-quantum' -d '{"timeQuantum": "YM"}'
+```
+
+Response:
+```
+{}
+```
+
+## `/index/<index-name>/frame/<frame-name>`
+
+### `POST`
+
+Creates a frame in the given index with the given name.
+
+The request payload is in JSON, and may contain the `options` field. The `options` field is a JSON object which may contain the following fields:
+
+* `rowLabel` (string): row label of the index.
+* `inverseEnabled` (boolean): Enables inverted frames for this frame if `true`.
+
+Request:
+```
+curl -XPOST localhost:10101/index/user/frame/language -d '{"options": {"rowLabel": "language_id"}}'
+```
+
+Response:
+```
+{}
+```
+
+### `DELETE`
+
+Removes the given frame.
+
+Request:
+```
+curl -XDELETE localhost:10101/index/user/frame/language
+```
+
+Response:
+```
+{}
+```
+
+## `/index/<index-name>/frame/<frame-name>/time-quantum`
+
+### `PATCH`
+
+Changes the time quantum for the given frame. This endpoint should be called at most once right after creating a frame.
+
+The payload is in JSON with the format: `{"timeQuantum": "${TIME_QUANTUM}"}`. Valid time quantum values are:
+
+* (Empty string)
+* Y: year
+* M: month
+* D: day
+* H: hour
+* YM: year and month
+* MD: month and day
+* DH: day and hour
+* YMD: year, month and day
+* MDH: month, day and hour
+* YMDH: year, month, day and hour
+
+Request:
+```
+curl -XPOST 'localhost:10101/index/user/frame/language/time-quantum' -d '{"timeQuantum": "YM"}'
+```
+
+Response:
+```
+{}
+```
+
+## `/hosts`
+
+### `GET`
+
+Returns the hosts in the cluster.
+
+Request:
+```
+curl -XGET localhost:10101/hosts
+```
+
+Response:
+```
+[{"host":":10101","internalHost":""}]
+```
+
+## `/version`
+
+### `GET`
+
+Returns the version of the Pilosa server.
+
+Request:
+```
+curl -XGET localhost:10101/version
+```
+
+Response:
+```
+{"version":"v0.3.0-353-ge633247"}
+```
+
