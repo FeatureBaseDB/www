@@ -1,5 +1,4 @@
 
-/* superhero 💪🏿 */
 @media (min-width: 1199px) {
   .home-hero-header{
     font-size: 80px;
@@ -10,6 +9,10 @@
   .home-hero-content{
       padding: 90px 0px;
       width: 50%;
+  }
+  .home-hero-text{
+    margin-right: 40%;
+    font-size: 18px;
   }
 }
 
@@ -26,9 +29,12 @@
     max-width: 80%;
   }
   .home-hero-content{
-
+    text-align: left;
     padding-bottom: 20px;
     width: 100%;
+  }
+  .home-hero-text{
+    margin-right: 0%;
   }
 }
 
@@ -38,7 +44,8 @@
 
 .home-hero-img-container{
   position: relative;
-  top: 70px;
+  bottom: -80px;
+  /*top: 70px;*/
 
 }
 
@@ -55,15 +62,12 @@
 
   z-index: 1;
 
-  margin-left: 10%;
+  /*margin-left: 10%;*/
 }
 
 
 
-.home-hero-text{
-  margin-right: 40%;
-  font-size: 18px;
-}
+
 
 /*call to action */
 

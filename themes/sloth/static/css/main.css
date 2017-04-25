@@ -55,8 +55,6 @@
   font-weight: 500;
   padding: 13px;
   font-family: Montserrat;
-  width: 300px;
-
 }
 .input-light::placeholder{
   color: #3c5f8d;

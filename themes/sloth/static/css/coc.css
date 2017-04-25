@@ -1,6 +1,9 @@
 .coc-hero{
    background: #1db598;
-
+   background-image: url("/img/splash_coc.svg") ;
+   background-size: auto 110%;
+   background-repeat: no-repeat;
+   background-position: right;
    display: flex;
    align-items: flex-start;
    justify-content: center;

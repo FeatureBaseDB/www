@@ -8,6 +8,7 @@ footer a{
   line-height: 1.71;
   letter-spacing: 0.2px;
   font-weight: 300;
+
 }
 
 footer a:hover{
@@ -99,7 +100,7 @@ footer a:hover{
 
 }
 .footer-input::placeholder{
-  color: white; 
+  color: white;
 }
 
 .footer-icons{
