@@ -1,9 +1,6 @@
 
 /* superhero 💪🏿 */
 @media (min-width: 1199px) {
-  .home-hero-header{
-    font-size: 80px;
-  }
   .home-hero-img-responsive{
     display: none;
   }
@@ -21,9 +18,7 @@
     display: flex;
   }
   .home-hero-header{
-    /*font-size: 65px;*/
-    font-size: 50px;
-    max-width: 80%;
+    font-size: 65px;
   }
   .home-hero-content{
 

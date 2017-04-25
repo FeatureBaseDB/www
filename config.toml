@@ -1,4 +1,4 @@
-baseurl = "http://localhost/"
+baseurl = "https://dc3kpxyuw05cb.cloudfront.net/"
 languageCode = "en-us"
 title = "Pilosa"
 theme = "sloth"
