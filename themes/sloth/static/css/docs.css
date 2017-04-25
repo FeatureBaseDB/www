@@ -8,8 +8,9 @@
   flex-direction: column;
   margin-top: 10px;
   padding: 10px;
-  position: sticky;
-  top: 10px;
+  /*this makes the nav stick -JOE*/
+  /*position: sticky;*/
+  /*top: 10px;*/
 }
 .docs-nav ul{
   list-style-type: none;
