@@ -1,5 +1,6 @@
 @import 'typography.css';
 @import "home.css";
+@import "footer.css";
 @import "about.css";
 @import "enterprise.css";
 @import "community.css";
@@ -67,13 +68,7 @@
   box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.1);
 }
 
-footer{
-  background-color: #2a4871;
-  color:white;
-}
-.footer-icon > a{
-  color: white;
-}
+
 
 
 .btn-pilosa{
@@ -84,12 +79,6 @@ footer{
 }
 
 
-.footer-col-header{
-  font-family: Montserrat;
-  font-weight:500;
-  color: white;
-  margin-bottom: 4px;
-}
 
 .header-control{
   display: flex;
@@ -99,83 +88,3 @@ footer{
 .nav-control{
   width: 1300px;
 }
-
-.footer-col-link{
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight:200;
-  color: white;
-  text-decoration: none;
-  margin-bottom: 4px;
-}
-
-.footer-col-header:hover{
-  color: #b1dbde;
-  text-decoration: none;
-}
-
-
-.footer-col-link:hover{
-  color: #b1dbde;
-  text-decoration: none;
-}
-
-.footer-cta-a {
-  font-family: Montserrat;
-  color: white;
-  display: inline-flex;
-  /*width: 50%;*/
-}
-
-.footer-cta-a:hover{color: white}
-.footer-cta-a:link{color: white}
-.footer-cta-a:active{color: white}
-
-.footer-container-input{
-    width: 75%;
-}
-.footer-input{
-
-  background: #102445;
-  outline: none;
-  border: transparent;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  color: #f2f7f9;
-  padding:24px;
-  font-family: Montserrat;
-  width: 50%;
-
-}
-
-.footer-input::placeholder{
-  color: #e4eff4;
-}
-
-.footer-input-btn-container{
-  width: 50%;
-  background-color: #102445;
-  padding:12px;
-  display: flex;
-  justify-content: flex-end;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-
-.footer-legal{
-  color:#e4eff4;
-  font-family: Montserrat;
-  font-size: 12px;
-}
-.footer-icon{
-  font-size: 24px;
-  color:white;
-}
-.footer-legal-link{
-  color: #e4eff4;
-  text-decoration: underline;
-}
-
-.footer-legal-link:hover{color:white;}
-.footer-legal-link:link{color:white;}
-.footer-legal-link:active{color:white;}
