@@ -1,85 +1,67 @@
 <footer   >
-  <div  class='container pt-5' >
-    <div class="pt-5 d-flex ">
-
-      <div class=''>
+  <div  class='container p-5' >
+    <div class="footer-row">
+      <div  class='brand mb-4'>
         <img width='150px' src="/img/{{ .Site.Params.logo_white }}" alt="{{ .Site.Params.subtitle }}">
-
-
+        <div class="footer-install-container">
           <button  type="button" class="btn-pilosa btn btn-info mt-4 col">Install</button>
-
+        </div>
       </div>
-
-      <div class=' ml-5 pl-5 container justify-content-between d-flex flex-wrap '>
-
-        <div class="mr-5 mb-3 d-flex flex-column ">
-          <a class="footer-col-header" href="/about/"> Company</a>
-          <a class="footer-col-link" href="/about/">About</a>
-          <a class='footer-col-link' href="/careers/">Careers</a>
-          <a class='footer-col-link' href="/press/kit/">Press Kit</a>
-          <a class='footer-col-link' href="/contact/">Contact</a>
+      <div class='links mb-4'>
+        <div class="category">
+          <a class="category-header" href="/about/"> Company</a>
+          <a  href="/about/">About</a>
+          <a  href="/careers/">Careers</a>
+          <a  href="/press/kit/">Press Kit</a>
+          <a  href="/contact/">Contact</a>
         </div>
-
-        <div class="mr-5 mb-3 d-flex flex-column ">
-          <a class='footer-col-header' href="/docs/getting-started/">Get Started</a>
-          <a class='footer-col-link' href="/docs/install/">Install</a>
-          <a class='footer-col-link' href="/docs/getting-started/">Quickstart</a>
-          <a class='footer-col-link' href="/faq/">FAQ</a>
-          <a class='footer-col-link' href="/contact/">Support</a>
+        <div class="category">
+          <a class='category-header' href="/docs/getting-started/">Get Started</a>
+          <a href="/docs/install/">Install</a>
+          <a href="/docs/getting-started/">Quickstart</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/contact/">Support</a>
         </div>
-
-        <div class="mr-5 mb-3 d-flex flex-column">
-          <a class="footer-col-header" href="/about/"> Company</a>
-          <a class="footer-col-link" href="/about/">About</a>
-          <a class='footer-col-link' href="/careers/">Careers</a>
-          <a class='footer-col-link' href="/press/kit/">Press Kit</a>
-          <a class='footer-col-link' href="/contact/">Contact</a>
+        <div class="category">
+          <a class="category-header" href="/about/"> Company</a>
+          <a href="/about/">About</a>
+          <a href="/careers/">Careers</a>
+          <a href="/press/kit/">Press Kit</a>
+          <a href="/contact/">Contact</a>
         </div>
-
-        <div class="mr-5 mb-3 d-flex flex-column">
-          <a class='footer-col-header' href="/docs/">Documentation</a>
+        <div class="category">
+          <a class='category-header' href="/docs/">Documentation</a>
           <a class='footer-col-link' href="/docs/">Architecture</a>
           <a class='footer-col-link' href="/docs/">API</a>
           <a class='footer-col-link' href="/docs/">Deployment</a>
           <a class='footer-col-link' href="/docs/">Integration</a>
         </div>
-
-      </div>
-
-
-    </div>
-
-
-    <div  class="pt-5 d-flex   align-items-center flex-wrap justify-content-between">
-
-      <a  class='footer-cta-a mb-4' href="/about/">Learn More about Pilosa</a>
-
-
-      <div   class="d-flex justify-content-between footer-container-input">
-        <input class='footer-input d-flex'  placeholder="Your email" type="text">
-        <div class='footer-input-btn-container  d-flex'>
-          <button  type="button" class="footer-btn-signup btn-pilosa btn btn-info">Sign up</button>
-        </div>
       </div>
     </div>
-  </div>
-
-  <div class="d-flex pt-4 justify-content-center flex-column align-items-center">
-    <div class="pt-3">
-      <a  href="//facebook.com"><i class="footer-icon fa fa-facebook-square mr-4" aria-hidden="true"></i></a>
-      <a href="//twitter.com"><i class="footer-icon fa fa-twitter mr-4" aria-hidden="true"></i></a>
-      <a href="//linkedin.com"><i class="footer-icon fa fa-linkedin-square mr-4" aria-hidden="true"></i></a>
+    <div class="footer-row">
+      <a href='' class="footer-learn-more mt-2 mb-1">Learn more about Pilosa</a>
+      <form class="footer-form">
+        <input class='footer-input m-2' type="text">
+        <button  type="submit" class=" btn-pilosa btn btn-success m-2">Sign up</button>
+      </form>
     </div>
-    <div class="pt-4  mt-3 pb-4 footer-legal">
+    <div class="footer-icons mt-3">
+      <a  href="//facebook.com"><i class="fa fa-facebook-square mr-4" aria-hidden="true"></i></a>
+      <a href="//twitter.com"><i class="fa fa-twitter mr-4" aria-hidden="true"></i></a>
+      <a href="//linkedin.com"><i class="fa fa-linkedin-square mr-4" aria-hidden="true"></i></a>
+    </div>
+    <div class="footer-row legal mt-3">
       &copy;
-      <a class="footer-legal-link"  href="/legal/ip/">Pilosa 2017 All right Reserved.</a>
+      <a  href="/legal/ip/">Pilosa 2017 All right Reserved.</a>
       &nbsp;
-      <a class="footer-legal-link"  href="/legal/privacy/">Privacy</a>
-      and
-      <a class="footer-legal-link"  href="/legal/terms-of-service/">Terms of Service</a>
+      <a href="/legal/privacy/">Privacy</a>
+      &nbsp;and&nbsp;
+      <a href="/legal/terms-of-service/">Terms of Service</a>
       .
     </div>
   </div>
+
+
 </footer>
 {{ partial "_scripts.html" . }}
 </body>
