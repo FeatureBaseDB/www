@@ -3,11 +3,11 @@ title = "API Reference"
 +++
 
 
-# API Reference
+## API Reference
 
-## `/index`
+#### `/index`
 
-### `GET`
+##### `GET`
 
 Returns the schema of all indexes in JSON.
 
@@ -21,9 +21,9 @@ Response:
 {"indexes":[{"name":"user","frames":[{"name":"collab"}]}]}
 ```
 
-## `/index/<index-name>`
+#### `/index/<index-name>`
 
-### `GET`
+##### `GET`
 
 Returns the schema of the specified index in JSON.
 
@@ -37,7 +37,7 @@ Response:
 {"index":{"name":"user"}, "frames":[{"name":"collab"}]}]}
 ```
 
-### `POST`
+##### `POST`
 
 Creates an index with the given name.
 
@@ -55,7 +55,7 @@ Response:
 {}
 ```
 
-### `DELETE`
+##### `DELETE`
 
 Removes the given index.
 
@@ -69,9 +69,9 @@ Response:
 {}
 ```
 
-## `/index/<index-name>/query`
+#### `/index/<index-name>/query`
 
-### `POST`
+##### `POST`
 
 Sends a query to the Pilosa server with the given index. The request body is UTF-8 encoded text and response body is in JSON by default.
 
@@ -98,9 +98,9 @@ Response:
 {"results":[{"attrs":{},"bits":[100]}],"columnAttrs":[{"id":100,"attrs":{"name":"Klingon"}}]}
 ```
 
-## `/index/<index-name>/time-quantum`
+#### `/index/<index-name>/time-quantum`
 
-### `PATCH`
+##### `PATCH`
 
 Changes the time quantum for the given index. This endpoint should be called at most once right after creating a database.
 
@@ -128,9 +128,9 @@ Response:
 {}
 ```
 
-## `/index/<index-name>/frame/<frame-name>`
+#### `/index/<index-name>/frame/<frame-name>`
 
-### `POST`
+##### `POST`
 
 Creates a frame in the given index with the given name.
 
@@ -149,7 +149,7 @@ Response:
 {}
 ```
 
-### `DELETE`
+##### `DELETE`
 
 Removes the given frame.
 
@@ -163,9 +163,9 @@ Response:
 {}
 ```
 
-## `/index/<index-name>/frame/<frame-name>/time-quantum`
+#### `/index/<index-name>/frame/<frame-name>/time-quantum`
 
-### `PATCH`
+##### `PATCH`
 
 Changes the time quantum for the given frame. This endpoint should be called at most once right after creating a frame.
 
@@ -193,9 +193,9 @@ Response:
 {}
 ```
 
-## `/hosts`
+#### `/hosts`
 
-### `GET`
+##### `GET`
 
 Returns the hosts in the cluster.
 
@@ -209,9 +209,9 @@ Response:
 [{"host":":10101","internalHost":""}]
 ```
 
-## `/version`
+#### `/version`
 
-### `GET`
+##### `GET`
 
 Returns the version of the Pilosa server.
 
