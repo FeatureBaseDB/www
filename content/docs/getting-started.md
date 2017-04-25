@@ -31,7 +31,7 @@ Which should output: `[{"host":":10101"}]`
 
 #### Sample Project
 
-In order to better understand Pilosa's capabilities, we will create a sample project called "Star Trace" containing information about the top 1,000 most recently updated Github repositories which have "Austin" in their name. The Star Trace index will include data points such as programming language, tags, and stargazers—people who have starred a project.
+In order to better understand Pilosa's capabilities, we will create a sample project called "Star Trace" containing information about the top 1,000 most recently updated Github repositories which have "go" in their name. The Star Trace index will include data points such as programming language, tags, and stargazers—people who have starred a project.
 
 Although Pilosa doesn't keep the data in a tabular format, we still use the terms "columns" and "rows" when describing the data model. We put the primary objects in columns, and the properties of those objects in rows. For example, the Star Trace project will contain an index called "repository" which contains columns representing Github repositories, and rows representing properties like programming languages and tags. We can better organize the rows by grouping them into sets called Frames. So the "repository" index might have a "languages" frame as well as a "tags" frame. You can learn more about indexes and frames in the [Data Model](data_model) section of the documentation.
 
@@ -67,12 +67,18 @@ curl -XPOST localhost:10101/index/repository/frame/language -d '{"options": {"ro
 ```
 ##### Import Some Data
 
-The sample data for the "Star Trace" project is at [Pilosa Getting Started repository](https://github.com/pilosa/getting-started). Download `*.csv` files in that repo and run the following commands to import the data into Pilosa.
+The sample data for the "Star Trace" project is at [Pilosa Getting Started repository](https://github.com/pilosa/getting-started). Download the `stargzer.csv` and `language.csv` files in that repo.
 
-If you are running the native compiled version of Pilosa, you can run:
 ```
-pilosa import -i repository -f stargazer project-stargazer.csv
-pilosa import -i repository -f language project-language.csv
+wget https://github.com/pilosa/getting-started/blob/master/stargazer.csv
+wget https://github.com/pilosa/getting-started/blob/master/language.csv
+```
+
+Run the following commands to import the data into Pilosa:
+
+```
+pilosa import -i repository -f stargazer stargazer.csv
+pilosa import -i repository -f language language.csv
 ```
 
 If you are using a Docker container for Pilosa (with name `pilosa`), you should instead copy the `*.csv` file into the container and then import them:
@@ -87,9 +93,9 @@ Note that, both the user IDs and the repository IDs were remapped to sequential 
 
 ##### Make Some Queries
 
-Which repositories did user 8 star:
+Which repositories did user 14 star:
 ```
-curl -XPOST localhost:10101/index/repository/query -d 'Bitmap(frame="stargazer", stargazer_id=27)'
+curl -XPOST localhost:10101/index/repository/query -d 'Bitmap(frame="stargazer", stargazer_id=14)'
 ```
 
 What are the top 5 languages in the sample data:
@@ -97,19 +103,19 @@ What are the top 5 languages in the sample data:
 curl -XPOST 'localhost:10101/index/repository/query' -d 'TopN(frame="language", n=5)'
 ```
 
-Which repositories were starred by user 8 and 18:
+Which repositories were starred by user 14 and 19:
 ```
-curl -XPOST 'localhost:10101/index/repository/query' -d 'Intersect(Bitmap(frame="stargazer", stargazer_id=8), Bitmap(frame="stargazer", stargazer_id=18))'
-```
-
-Which repositories were starred by user 8 or 18:
-```
-curl -XPOST 'localhost:10101/index/repository/query' -d 'Union(Bitmap(frame="stargazer", stargazer_id=8), Bitmap(frame="stargazer", stargazer_id=18))'
+curl -XPOST 'localhost:10101/index/repository/query' -d 'Intersect(Bitmap(frame="stargazer", stargazer_id=14), Bitmap(frame="stargazer", stargazer_id=19))'
 ```
 
-Which repositories were starred by user 8 and 18 and also were written in language 1:
+Which repositories were starred by user 14 or 19:
 ```
-curl -XPOST 'localhost:10101/index/repository/query' -d 'Intersect(Bitmap(frame="stargazer", id=8), Bitmap(frame="stargazer", stargazer_id=18), Bitmap(frame="language", language_id=1))'
+curl -XPOST 'localhost:10101/index/repository/query' -d 'Union(Bitmap(frame="stargazer", stargazer_id=14), Bitmap(frame="stargazer", stargazer_id=19))'
+```
+
+Which repositories were starred by user 14 and 19 and also were written in language 1:
+```
+curl -XPOST 'localhost:10101/index/repository/query' -d 'Intersect(Bitmap(frame="stargazer", stargazer_id=14), Bitmap(frame="stargazer", stargazer_id=19), Bitmap(frame="language", language_id=1))'
 ```
 
 Set user 99999 as a stargazer for repository 77777:
@@ -119,4 +125,4 @@ curl -XPOST 'localhost:10101/index/repository/query' -d 'SetBit(frame="stargazer
 
 #### What's Next?
 
-You can jump to [Query Language](../query-language) for more details about **PQL**, the query language of Pilosa, or [Tutorials](../tutorials) for in-depth tutorials about real world use cases of Pilosa. Check out our small but expanding set of official [Client Libraries](../client-libraries).
+You can jump to [Data Model](../data-model/) for an in-depth look at Pilosa's data model, or [Query Language](../query-language/) for more details about **PQL**, the query language of Pilosa. Check out the [Tutorials](../tutorials/) for example implementations of real world use cases for Pilosa. Ready to get going in your favorite language? Have a peek at our small but expanding set of official [Client Libraries](../client-libraries/).
