@@ -18,12 +18,12 @@ Index: repository
 
 This index can serve queries like:
 
-* How many repositories has user 1 contribute to?
+* To how many repositories has user 1 contributed?
 * How many repositories are written in the Go programming language?
-* What are the top five users who contribute to the most repositories?
+* What are the top five users who have contributed to the most repositories?
 * What are the top five users who have contributed to the most repositories that are written in Go?
-* How many repositories do user 1 and user 2 both contribute to?
-* How many repositories has user 1 worked on that user 2 has not?    
+* To how many repositories have both user 1 and user 2 contributed?
+* How many repositories has user 1 worked on that user 2 has not?
 
 ```
 Index: user
@@ -60,12 +60,12 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetBit(frame="star
 
 You can set multiple bits:
 ```
-curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetBit(frame="stargazer", repo_id=10, user_id=1) SetBit( frame="stargazer", repo_id=10, user_id=2) SetBit(frame="stargazer", repo_id=20, user_id=1) SetBit(frame="stargazer", repo_id=30, user_id=2)`
+curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetBit(frame="stargazer", repo_id=10, user_id=1) SetBit(frame="stargazer", repo_id=10, user_id=2) SetBit(frame="stargazer", repo_id=20, user_id=1) SetBit(frame="stargazer", repo_id=30, user_id=2)`
 ```
 
-A return value of {"results":[true]} indicates that the bit was changed to 1.
+A return value of `{"results":[true]}` indicates that the bit was changed to 1.
 
-A return value of {"results":[false]} indicates that the bit was already set to 1, therefore nothing changed
+A return value of `{"results":[false]}` indicates that the bit was already set to 1 and nothing changed.
 
 ### SetBitmapAttrs
 
@@ -78,16 +78,16 @@ Set username value and active status for user = 10. These are arbitrary key/valu
 
 SetBitmapAttrs queries always return  {"results":[null]} upon success.
 
-### SetProfileAttrs
+### SetColumnAttrs
 
-SetProfileAttrs() supports writing attributes of the Column. 
+SetColumnAttrs() supports writing attributes of the Column. 
 ```
-curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetProfileAttrs(frame="stargazer", repo_id=10, stars=123, url="http://projects.pilosa.com/10", active=true)'
+curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'SetColumnAttrs(frame="stargazer", repo_id=10, stars=123, url="http://projects.pilosa.com/10", active=true)'
 ```
 
 Set url value and active status for project 10. These are arbitrary key/value pairs which have no meaning to Pilosa.
 
-SetProfileAttrs queries always return {"results":[null]} upon success.
+SetColumnAttrs queries always return {"results":[null]} upon success.
 
 ### ClearBit
 
@@ -97,9 +97,9 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'ClearBit(frame="st
 
 Remove relationship between user_id=1 and repo_id=10  from the "stargazer" frame in the "repository" index.
 
-A return value of {"results":[true]} indicates that the bit was toggled from 1 to 0.
+A return value of `{"results":[true]}` indicates that the bit was toggled from 1 to 0.
 
-A return value of {"results":[false]} indicates that the bit was already set to 0 and therefore nothing changed.
+A return value of `{"results":[false]}` indicates that the bit was already set to 0 and nothing changed.
 
 ## Bitwise Operations
 
@@ -111,6 +111,7 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'Bitmap(frame="star
 ```
 
 Returns `{"results":[{"attrs":{"username":"mrpi","active":true},"bits":[10, 20]}]}`
+
 * attrs are the attributes for user 1 
 * bits are the repositories which user 1 has starred.
 
@@ -122,6 +123,7 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d  'Union(Bitmap(fram
 ```
 
 Returns `{"results":[{"attrs":{},"bits":[10, 20]}]}`.
+
 * bits are repositories that were starred by user 1 OR user 2
 
 ### Intersect
@@ -132,6 +134,7 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'Intersect(Bitmap(f
 ```
 
 Returns `{"results":[{"attrs":{},"bits":[10]}]}`.
+
 * bits are repositories that were starred by user 1 AND user 2
 
 ### Difference
@@ -142,6 +145,7 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d  'Difference(Bitmap
 ```
 
 Return `{"results":[{"attrs":{},"bits":[30]}]}`
+
 * bits are repositories that were starred by user 1 BUT NOT user 2
 
 ```
@@ -149,6 +153,7 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d  'Difference(Bitmap
 ```
 
 Return `{"results":[{"attrs":{},"bits":[30]}]}`
+
 * Bits are repositories that were starred by user 2 BUT NOT user 1
 
 ### Count
@@ -159,6 +164,7 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'Count(Bitmap(frame
 ```
 
 Return `{"results":[2]}`
+
 * Result is the number of repositories that user 1 has starred.
 
 ### TopN
@@ -169,6 +175,7 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d
 ```
 
 Returns `{results: [[{"key": 1, "count": 2}, {"key": 2, "count": 2}, {"key": 3, "count": 1}]]}`
+
 * key is a user
 * count is amount of repositories
 * Results are the number of repositories that each user starred in descending order for all users in the stargazer frame, for example user 1 starred two repositories, user 2 starred two repositories, user 3 starred one repository.
@@ -179,6 +186,7 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d
 ```
 
 Returns `{results: [[{"key": 1, "count": 2}, {"key": 2, "count": 2}]]}`
+
 * Results are the top two users sorted by number of repositories they've starred in descending order.
 
 ```
@@ -187,6 +195,7 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d
 ```
 
 Returns `{results: [[{"key": 1, "count": 2}, {"key": 2, "count": 1}]]}`
+
 * Results are the top two users sorted by the number of repositories that they've starred which are written in language 1.
 
 ### Range Queries
@@ -198,4 +207,5 @@ curl -X POST "http://127.0.0.1:10101/query?db=repository" -d
 ```
 
 Returns `{"results":[{"attrs":{},"bits":[10, 20]}]}`
+
 * bits are repositories which were starred by user 1 from 2017-01-01 to 2017-03-02

@@ -119,4 +119,4 @@ curl -XPOST 'localhost:10101/index/repository/query' -d 'SetBit(frame="stargazer
 
 #### What's Next?
 
-You can jump to [Query Language](../query-language) for more details about **PQL**, the query language of Pilosa, or [Tutorials](../tutorials) for in-depth tutorials about real world use cases of Pilosa. Check out our small but expanding set of official [Client Libraries](../client-libraries).
+You can jump to [Data Model](../data-model/) for an in-depth look at Pilosa's data model, or [Query Language](../query-language/) for more details about **PQL**, the query language of Pilosa. Check out the [Tutorials](../tutorials/) for example implementations of real world use cases for Pilosa. Ready to get going in your favorite language? Have a peek at our small but expanding set of official [Client Libraries](../client-libraries/).
