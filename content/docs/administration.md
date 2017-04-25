@@ -8,7 +8,7 @@ title = "Administration Guide"
 
 ### Hardware
 
-Pilosa is a standalone, compiled Go application. So there is no need to worry about running and configuring a Java VM. Pilosa can run and very small machines and works well with even medium sized dataset on a personal laptop. If you are reading this section, you are likely ready to deploy a cluster of Pilosa servers handling very large datasets or high velocity data. These are guidelines for running a cluster; specific needs may differ.
+Pilosa is a standalone, compiled Go application. So there is no need to worry about running and configuring a Java VM. Pilosa can run on very small machines and works well with even a medium sized dataset on a personal laptop. If you are reading this section, you are likely ready to deploy a cluster of Pilosa servers handling very large datasets or high velocity data. These are guidelines for running a cluster; specific needs may differ.
 
 ### Memory
 
@@ -16,11 +16,11 @@ Pilosa holds all row/column bitmap data in main memory. While this data is compr
 
 ### CPUs
 
-Pilosa is a concurrent application written in Go and can take full advantage of multicore machines.
+Pilosa is a concurrent application written in Go and can take full advantage of multicore machines. The main unit of parallelism is the slice, so a single query will only use a number of cores up to the number of slices stored on that host. Multiple queries can still take advantage of multiple cores as well though, so tuning in this area is dependent on the expected workload.
 
 ### Disk
 
-Even though the main dataset is in memory Pilosa does back up to disk frequently.  We recommend SSD drives especially if you have a write heavy application.
+Even though the main dataset is in memory Pilosa does back up to disk frequently.  We recommend SSDs -- especially if you have a write heavy application.
 
 ### Network
 
@@ -63,31 +63,38 @@ The Pilosa server should support PQL versioning using HTTP headers. On each requ
 
 #### Headers
 
-The server should return the Content-Type header matching the client's Accept header:
+The server should return the Content-Type header matching the client's Accept header, the Content-Type header should follow this template:
 
-The Content-Type header should follow this template:
-Content-Type: application/vnd.pilosa.pql.v<version>
+`Content-Type: application/vnd.pilosa.pql.v<version>`
 
 Version 1 of PQL should send the following request header:
-Content-Type: application/vnd.pilosa.pql.v1
+
+`Content-Type: application/vnd.pilosa.pql.v1`
 
 The Accept header should follow this template:
-Accept: application/vnd.pilosa.json.v<version>
+
+`Accept: application/vnd.pilosa.json.v<version>`
 
 Version 1 of PQL should send the following request header:
-Accept: application/vnd.pilosa.json.v1
+
+`Accept: application/vnd.pilosa.json.v1`
 
 #### Error handling
 
-Content-Type: application/vnd.pilosa.json.v1
+`Content-Type: application/vnd.pilosa.json.v1`
+
 If a PQL version is in a deprecation period, the server responds with a Warning header, as defined in RFC7234, Section 5.5.7. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Warning
 
 The Warning header should follow the following template:
 
-Warning: 299 pilosa/<pilosa-version> "<Deprecation message>" "<date (RFC7231, Section 7.1.1.1)>"
+`Warning: 299 pilosa/<pilosa-version> "<Deprecation message>" "<date (RFC7231, Section 7.1.1.1)>"`
+
 For example:
 
+```
 Warning: 299 pilosa/2.0 "Deprecated PQL version: PQL v2 will remove support for SetBit() in Pilosa 2.1. Please update your client to support Set() (See https://docs.pilosa.com/pql#versioning)." "Sat, 25 Aug 2017 23:34:45 GMT"
+```
+
 After the deprecation period, the server should reply with an HTTP 400 error, with the deprecation message in the response body.
 
 ### Upgrading
@@ -106,7 +113,7 @@ Depending on the size of your data you have two options.  For a small dataset yo
 
 For larger datasets and to make this process faster you could copy the relevant data files from the other nodes to the new one before startup.
 
-Note: This will only work when the replication factor is greater >= 2
+Note: This will only work when the replication factor is >= 2
 
 #### Using Auto Sync
 
@@ -122,7 +129,7 @@ Note: This will only work when the replication factor is greater >= 2
     1. list of all frames in your DB's
     1. Max slice per DB (api exists for this)
 
-2. With this information you can query the /fragment/nodes endpoint and iterate over each slice
+2. With this information you can query the `/fragment/nodes` endpoint and iterate over each slice
 3. Using the list of slices owned by this node you will then need to manually:
     1. setup a directory structure similar to the other nodes with a path for each DB/frame
     1. copy each owned slice for an existing node to this new node
