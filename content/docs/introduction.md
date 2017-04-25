@@ -3,7 +3,7 @@ title = "Introduction"
 +++
 
 
-# Introduction
+## Introduction
 
 
 Pilosa is an open source, distributed bitmap index.
