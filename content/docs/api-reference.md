@@ -5,7 +5,9 @@ title = "API Reference"
 
 # API Reference
 
-## `GET /index`
+## `/index`
+
+### `GET`
 
 Returns the schema of all indexes in JSON.
 
@@ -215,7 +217,7 @@ Returns the version of the Pilosa server.
 
 Request:
 ```
-curl -XGET localhost:10101/hosts
+curl -XGET localhost:10101/version
 ```
 
 Response:
