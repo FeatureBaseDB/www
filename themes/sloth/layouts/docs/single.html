@@ -8,42 +8,35 @@
       <div  class='docs-nav' id="doc-nav">
       <ul>
         <li>
-          <a href="/docs/introduction/">Introduction</a>
+          <a href="/docs/introduction/" {{ if eq $name "introduction" }} class="docs-active" {{ end }}>Introduction</a>
         </li>
         <li>
-          <a href="/docs/installation/">Installation</a>
+          <a href="/docs/installation/" {{ if eq $name "installation" }} class="docs-active" {{ end }}>Installation</a>
           <ul>
-            {{ if eq $name "installation" }}
-            <li><a class='docs-active' href="/docs/installation/#installing-on-macos">Installing on OS X</a></li>
+            <li><a href="/docs/installation/#installing-on-macos">Installing on OS X</a></li>
             <li><a href="/docs/installation/#installing-on-linux">Installing on Linux</a></li>
             <li><a href="/docs/installation/#windows">Windows</a></li>
             <li><a href="/docs/installation/#docker">Docker</a></li>
-            {{ end }}
           </ul>
         </li>
         <li>
-          <a href="/docs/getting-started/">Getting Started</a>
+          <a href="/docs/getting-started/" {{ if eq $name "getting-started" }} class="docs-active" {{ end }}>Getting Started</a>
           <ul>
-              {{ if eq $name "getting-started" }}
               <li><a href="/docs/getting-started/#starting-pilosa">Starting Pilosa</a></li>
               <li><a href="/docs/getting-started/#sample-project">Sample Project</a></li>
               <li><a href="/docs/getting-started/#what-s-next?">What's Next?</a></li>
-              {{ end }}
           </ul>
         </li>
         <li>
-          <a href="/docs/tutorials/">Tutorials</a>
+          <a href="/docs/tutorials/" {{ if eq $name "tutorials" }} class="docs-active" {{ end }}>Tutorials</a>
           <ul>
-              {{ if eq $name "tutorials" }}
               <li><a href="/docs/tutorials/#transportation">Transportation</a></li>
               <li><a href="/docs/tutorials/#chemical-similarity-search">Chemical similarity</a></li>
-              {{ end }}
           </ul>
         </li>
         <li>
-          <a href="/docs/data-model/">Data Model</a>
+          <a href="/docs/data-model/" {{ if eq $name "data-model" }} class="docs-active" {{ end }}>Data Model</a>
           <ul>
-              {{ if eq $name "data-model" }}
               <li><a href="/docs/data-model/#overview">Overview</a></li>
               <li><a href="/docs/data-model/#index">Index</a></li>
               <li><a href="/docs/data-model/#column">Column</a></li>
@@ -53,76 +46,65 @@
               <li><a href="/docs/data-model/#attribute">Attribute</a></li>
               <li><a href="/docs/data-model/#slice">Slice</a></li>
               <li><a href="/docs/data-model/#view">View</a></li>
-              {{ end }}
           </ul>
         </li>
         <li>
-          <a href="/docs/query-language/">Query Language</a>
+          <a href="/docs/query-language/" {{ if eq $name "query-language" }} class="docs-active" {{ end }}>Query Language</a>
           <ul>
-              {{ if eq $name "query-language" }}
               <li><a href="/docs/query-language/#setting-and-clearing-bits">Setting and Clearing Bits</a></li>
               <li><a href="/docs/query-language/#bitwise-operations">Bitwise Operations</a></li>
-              {{ end }}
           </ul>
         </li>
         <li>
-          <a href="/docs/configuration/">Configuration</a>
+          <a href="/docs/configuration/" {{ if eq $name "configuration" }} class="docs-active" {{ end }}>Configuration</a>
           <ul>
-              {{ if eq $name "configuration" }}
               <li><a href="/docs/configuration/#command-line-flags">Command line flags</a></li>
               <li><a href="/docs/configuration/#environment-variables">Environment variables</a></li>
               <li><a href="/docs/configuration/#config-file">Config file</a></li>
               <li><a href="/docs/configuration/#all-options">All Options</a></li>
-              {{ end }}
           </ul>
         </li>
         <li>
-            <a href="/docs/api-reference/">API Reference</a>
+          <a href="/docs/api-reference/" {{ if eq $name "api-reference" }} class="docs-active" {{ end }}>API Reference</a>
             <ul>
             </ul>
         </li>
         <li>
-          <a href="/docs/pdk/">PDK</a>
+          <a href="/docs/pdk/" {{ if eq $name "pdk" }} class="docs-active" {{ end }}>PDK</a>
           <ul>
-              {{ if eq $name "pdk" }}
               <li><a href="/docs/pdk/#library">Library</a></li>
               <li><a href="/docs/pdk/#examples">Examples</a></li>
-              {{ end }}
           </ul>
         </li>
         <li>
-          <a href="/docs/client-libraries/">Client Libraries</a>
+          <a href="/docs/client-libraries/" {{ if eq $name "client-libraries" }} class="docs-active" {{ end }}>Client Libraries</a>
           <ul>
-              {{ if eq $name "client-libraries" }}
               <li><a href="/docs/client-libraries/#go">Go</a></li>
               <li><a href="/docs/client-libraries/#python">Python</a></li>
               <li><a href="/docs/client-libraries/#java">Java</a></li>
-            {{ end }}
           </ul>
         </li>
         <li>
-            <a href="/docs/administration/">Administration Guide</a>
+          <a href="/docs/administration/" {{ if eq $name "administration" }} class="docs-active" {{ end }}>Administration Guide</a>
             <ul>
-                {{ if eq $name "administration" }}
                 <li><a href="/docs/administration/#installing-in-production">Installing in production</a></li>
                 <li><a href="/docs/administration/#importing-and-exporting-data">Imports and Exports</a></li>
                 <li><a href="/docs/administration/#versioning">Versioning</a></li>
                 <li><a href="/docs/administration/#backup/restore">Backup/restore</a></li>
-                {{ end }}
           </ul>
         </li>
         <li>
-          <a href="/docs/glossary/">Glossary</a>
+          <a href="/docs/glossary/" {{ if eq $name "glossary" }} class="docs-active" {{ end }}>Glossary</a>
           <ul>
           </ul>
         </li>
         <li>
-          <a href="/docs/contributing/">Contributing</a>
+          <a href="/docs/contributing/" {{ if eq $name "contributing" }} class="docs-active" {{ end }}>Contributing</a>
           <ul>
           </ul>
         </li>
         <li>
-          <a href="/docs/release-notes/">Release Notes</a>
+          <a href="/docs/release-notes/" {{ if eq $name "release-notes" }} class="docs-active" {{ end }}>Release Notes</a>
           <ul>
           </ul>
         </li>
