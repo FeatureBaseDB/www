@@ -28,6 +28,29 @@ h1 {
 	letter-spacing: -1px;
 	color: #102445;
 }
+
+@media (min-width: 1200px) {
+	.h-1-white-responsive{
+		font-size: 110px;
+		font-weight: 600;
+		line-height: 1.02;
+		letter-spacing: -1px;
+		color: white;
+		text-align: center;
+
+	}
+}
+@media (max-width: 1199px) {
+	.h-1-white-responsive{
+		font-size: 38px;
+		font-weight: 600;
+		line-height: 1.02;
+		letter-spacing: -1px;
+		color: white;
+
+	}
+}
+
 .p-center{
 	font-size: 16px;
 	line-height: 1.5;

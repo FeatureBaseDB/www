@@ -66,7 +66,7 @@
 
 }
 
-@media (max-width: 325px) {
+@media (max-width: 325px;) {
   .enterprise-product-card{
     width:310px;
   	color: white;
@@ -102,15 +102,17 @@
 	background: #2a4871;
 }
 .enterprise-features{
-  width: 100%;
-}
+  font-size: 14px;
+  width:100%
 
+}
+.enterprise-features span{
+  width:320px;
+}
 
 .enterprise-feature{
   padding: 0px 20px;
-	align-self: flex-start;
 	border-bottom: 2px solid rgba(254, 254, 254, 0.13);
-
 }
 
 .enterprise-feature i {
@@ -119,7 +121,7 @@
 
 .enterprise-nonfeature{
 	background-color: rgba(237, 253, 254, 0.10);
-  height:48px;
+  height:46px;
   border-bottom: 2px solid rgba(254, 254, 254, 0.13);
 
 }
