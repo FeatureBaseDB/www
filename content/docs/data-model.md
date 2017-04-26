@@ -12,6 +12,8 @@ rows and columns can represent anything (they could even represent the same set 
 
 Pilosa lays out data first in rows, so queries which get all the set bits in one or many rows, or compute a combining operation on multiple rows such as Intersect or Union are the fastest. Pilosa also has the ability to categorize rows into different "frames" and quickly retrieve the top rows in a frame sorted by the number of bits set in each row.
 
+![data model diagram](/img/docs/data-model.svg)
+
 #### Index
 
 The purpose of the Index is to represent a data namespace. You cannot perform cross-index queries.  Column-level attributes are global to the Index.
