@@ -4,11 +4,11 @@ title = "Glossary"
 
 # Glossary
 
-<strong id="column">Column:</strong> Columns are the fundamental horizontal data axis within Pilosa.  Columns are global to all Frames within a DB.
+<strong id="column">Column:</strong> Columns are the fundamental horizontal data axis within Pilosa.  Columns are global to all Frames within a Index.
 
-<strong id="row">Row:</strong> Rows are the fundamental vertical data axis within Pilosa.  They are namespaced to each Frame within a DB.
+<strong id="row">Row:</strong> Rows are the fundamental vertical data axis within Pilosa.  They are namespaced to each Frame within a Index.
 
-<strong id="bit">Bit:</strong> A bit is the intersection of a Row and Column
+<strong id="bit">Bit:</strong> A bit is the intersection of a Row and Column.
 
 <strong id="bitmap">Bitmap:</strong> The on-disk and in-memory representation of a Row.
 
@@ -18,6 +18,8 @@ title = "Glossary"
 <strong id="attribute">Attribute:</strong> Attributes can be associated to both rows and columns.  This metadata is kept separately from the core binary matrix in a BoltDB store.
 
 <strong id="pql">PQL:</strong> Pilosa Query Language
+
+<strong id="index">Index:</strong> The Index represents a data namespace.
 
 <strong id="frame">Frame:</strong> Frames are used to segment rows into different categories - row ids are namespaced by frame such that the same row id in a different frame refers to a different row. For Ranked frames, rows are kept in sorted order within the frame. 
 
