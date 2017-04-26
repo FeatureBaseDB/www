@@ -39,6 +39,15 @@
     line-height: 3.25;
     letter-spacing: 0.2px;
 }
+
+.docs-nav > ul > li ul {
+    display: none;
+}
+
+.docs-nav > ul > li > .docs-active + ul {
+    display: block;
+}
+
 .docs-active{
   border-left: 5px solid #1db598;
   font-weight: 500;
