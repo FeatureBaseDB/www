@@ -2,10 +2,10 @@
 title = "Client Libraries"
 +++
 
-# Client Libraries
+## Client Libraries
 
 
-## Go
+#### Go
 
 You can find the Go client library for Pilosa at our [Go Pilosa Repository](https://github.com/pilosa/go-pilosa). Check out its [README](https://github.com/pilosa/go-pilosa/README.md) for more information and installation instructions.
 
@@ -25,13 +25,13 @@ import (
 func main() {
     // Let's create Index and Frame objects, which will contain the settings
     // for the corresponding indexes and frames.
-    repositoryOptions, _ := pilosa.ColumnLabelIndexOption("repo_id")
+    repositoryOptions, := &pilosa.ColumnOptions{ColumnLabel: "repo_id"}
     repository, _ := pilosa.NewIndex("repository", repositoryOptions)
 
-    stargazerOptions, _ := pilosa.RowLabelFrameOption("stargazer_id")
+    stargazerOptions := &pilosa.RowOptions{RowLabel: "stargazer_id"}
     stargazer, _ := repository.Frame("stargazer", stargazerOptions)
 
-    languageOptions, _ := pilosa.RowLabelFrameOption("language_id")
+    languageOptions := &pilosa.RowOptions{RowLabel: "language_id"}
     language, _ := repository.Frame("language", languageOptions)
 
     // We will just use the default client which assumes the server is at http://localhost:10101
@@ -77,14 +77,14 @@ func main() {
     }
 
     // Set user 99999 as a stargazer for repository 77777:
-    response, _ = client.Query(stargazer.SetBit(99999, 77777), nil)
-    if !response.Success {
-        fmt.Println("Error setting bit: ", response.ErrorMessage)
+    _, err = client.Query(stargazer.SetBit(99999, 77777), nil)
+    if err != nil {
+        fmt.Println("Error setting bit: ", err)
     }
 }
 ```
 
-## Python
+#### Python
 
 You can find the Python client library for Pilosa at our [Python Pilosa Repository](https://github.com/pilosa/python-pilosa). Check out its [README](https://github.com/pilosa/python-pilosa/README.md) for more information and installation instructions.
 
@@ -93,13 +93,13 @@ We are going to use the index you have created in the [Getting Started](getting_
 Note that, there are no error handling in the example below for brevity purpose.
 
 ```python
-from pilosa import Index, Frame, Client
+from pilosa import Index, Client, PilosaError
 
 # Let's create Index and Frame objects, which will contain the settings
 # for the corresponding indexes and frames.
 repository = Index("repository", column_label="repo_id")
-stargazer = repository.Frame("stargazer", row_label="stargazer_id")
-language = repository.Frame("language", row_label="language_id")
+stargazer = repository.frame("stargazer", row_label="stargazer_id")
+language = repository.frame("language", row_label="language_id")
 
 # We will just use the default client which assumes the server is at http://localhost:10101
 client = Client()
@@ -132,13 +132,14 @@ if response.result:
     print("Repositories starred by both user 8 and 18 and are in language 1: ", result.bitmap.bits)
 
 # Set user 99999 as a stargazer for repository 77777
-response = client.query(stargazer.setbit(99999, 77777))
-if not response.success:
-    print("Error setting bit: ", response.error_message)
+try:
+    client.query(stargazer.setbit(99999, 77777))
+except PilosaError as ex:
+    print("Error setting bit: ", ex)
 
 ```
 
-## Java
+#### Java
 
 You can find the Java client library for Pilosa at our [Java Pilosa Repository](https://github.com/pilosa/java-pilosa). Check out its [README](https://github.com/pilosa/java-pilosa/README.md) for more information and installation instructions.
 
@@ -213,10 +214,13 @@ public class StarTrace {
         }
 
         // Set user 99999 as a stargazer for repository 77777:
-        response = client.query(stargazer.setBit(99999, 77777))
-        if (!response.isSuccess()) {
-            System.out.println("Error setting bit: " + response.getErrorMessage());
+        try {
+            client.query(stargazer.setBit(99999, 77777))
         }
+        catch (PilosaException ex) {
+            System.out.println("Error setting bit: " + ex)
+        }
+        
     }
 }
 ```

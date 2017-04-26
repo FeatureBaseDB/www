@@ -7,7 +7,7 @@ title = "Getting Started"
 Pilosa supports an HTTP interface which uses JSON by default.
 Any HTTP tool can be used to interact with the Pilosa server. The examples in this documentation will use [curl](https://curl.haxx.se/) which is available by default on many UNIX-like systems including Linux and MacOS. Windows users can download curl [here](https://curl.haxx.se/download.html).
 
-Note that Pilosa server requires a high limit for open files. Check the documentation of your system to see how to increase it in case you hit that limit.
+> Note that Pilosa server requires a high limit for open files. Check the documentation of your system to see how to increase it in case you hit that limit.
 
 #### Starting Pilosa
 
@@ -53,13 +53,10 @@ Repository IDs are the main focus of the `repository` index, so we chose `repo_i
 
 Let's create the `stargazer` frame which has user IDs of stargazers as its rows:
 ```
-curl -XPOST localhost:10101/index/repository/frame/stargazer -d '{"options": {"rowLabel": "stargazer_id"}}'
+curl -XPOST localhost:10101/index/repository/frame/stargazer -d '{"options": {"rowLabel": "stargazer_id", "timeQuantum": "YMD"}}'
 ```
 
-Since our data contains time stamps for the time users starred repos, we will change the *time quantum* for the `stargazer` frame. Time quantum is the resolution of the time we want to use. We will set it to `YMD` (year, month, day) for `stargazer`:
-```
-curl -XPATCH localhost:10101/index/repository/frame/stargazer/time-quantum -d '{"timeQuantum": "YMD"}'
-```
+Since our data contains time stamps for the time users starred repos, we set the *time quantum* for the `stargazer` frame in the options as well. Time quantum is the resolution of the time we want to use, and we set it to `YMD` (year, month, day) for `stargazer`.
 
 Next up is the `language` frame, which will contain IDs for programming languages:
 ```

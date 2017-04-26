@@ -2,7 +2,7 @@
 title = "Query Language"
 +++
 
-# Query Language
+## Query Language
 
 Make sure an index and frame are created before running a query as discussed in [Getting Started](getting_started).
 
@@ -42,9 +42,9 @@ This index can serve queries like:
 * How many users have contributed to project 1 but not project 2?
 * How many users have contribute to both project 1 and project 2?
 
-## Setting and Clearing Bits
+#### Setting and Clearing Bits
 
-### SetBit
+##### SetBit
 
 SetBit(), as the name implies, assigns a value of 1 to a bit in the binary matrix, thus associating the given row in the given frame with the given column.
 ```
@@ -67,7 +67,7 @@ A return value of `{"results":[true]}` indicates that the bit was changed to 1.
 
 A return value of `{"results":[false]}` indicates that the bit was already set to 1 and nothing changed.
 
-### SetBitmapAttrs
+##### SetBitmapAttrs
 
 SetBitmapAttrs() supports writing attributes of the Row. 
 ```
@@ -78,7 +78,7 @@ Set username value and active status for user = 10. These are arbitrary key/valu
 
 SetBitmapAttrs queries always return  {"results":[null]} upon success.
 
-### SetColumnAttrs
+##### SetColumnAttrs
 
 SetColumnAttrs() supports writing attributes of the Column. 
 ```
@@ -89,7 +89,7 @@ Set url value and active status for project 10. These are arbitrary key/value pa
 
 SetColumnAttrs queries always return {"results":[null]} upon success.
 
-### ClearBit
+##### ClearBit
 
 ```
 curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 'ClearBit(frame="stargazer", repo_id=10, user_id=1)'
@@ -101,9 +101,9 @@ A return value of `{"results":[true]}` indicates that the bit was toggled from 1
 
 A return value of `{"results":[false]}` indicates that the bit was already set to 0 and nothing changed.
 
-## Bitwise Operations
+#### Bitwise Operations
 
-### Bitmap
+##### Bitmap
 
 Query all repositories that user 1 has starred.
 ```
@@ -115,7 +115,7 @@ Returns `{"results":[{"attrs":{"username":"mrpi","active":true},"bits":[10, 20]}
 * attrs are the attributes for user 1 
 * bits are the repositories which user 1 has starred.
 
-### Union
+##### Union
 
 Query all repositories that are contributed by multiple users
 ```
@@ -126,7 +126,7 @@ Returns `{"results":[{"attrs":{},"bits":[10, 20]}]}`.
 
 * bits are repositories that were starred by user 1 OR user 2
 
-### Intersect
+##### Intersect
 
 Query repositories which have been starred by two users.
 ```
@@ -137,7 +137,7 @@ Returns `{"results":[{"attrs":{},"bits":[10]}]}`.
 
 * bits are repositories that were starred by user 1 AND user 2
 
-### Difference
+##### Difference
 
 Query repositories which have been starred by one user and not another.
 ```
@@ -156,7 +156,7 @@ Return `{"results":[{"attrs":{},"bits":[30]}]}`
 
 * Bits are repositories that were starred by user 2 BUT NOT user 1
 
-### Count
+##### Count
 
 Query amount repositories that a user contribute to.
 ```
@@ -167,7 +167,7 @@ Return `{"results":[2]}`
 
 * Result is the number of repositories that user 1 has starred.
 
-### TopN
+##### TopN
 
 ```
 curl -X POST "http://127.0.0.1:10101/query?db=repository" -d 
@@ -198,7 +198,7 @@ Returns `{results: [[{"key": 1, "count": 2}, {"key": 2, "count": 1}]]}`
 
 * Results are the top two users sorted by the number of repositories that they've starred which are written in language 1.
 
-### Range Queries
+##### Range Queries
 
 When you set timestamp using SetBit, you will able to query all repositories that a user has starred within a date range.
 ```
