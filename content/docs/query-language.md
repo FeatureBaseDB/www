@@ -39,6 +39,7 @@ curl -X POST "http://127.0.0.1:10101/index/repository/query" -d 'SetBit(frame="s
 * `ATTR_NAME` Must be a valid identifier `[A-Za-z][A-Za-z0-9._-]*`
 * `ATTR_VALUE` Can be a string, float, integer, or bool.
 * `BITMAP_CALL` Any query which returns a bitmap, such as `Bitmap`, `Union`, `Difference`, `Intersect`, `Range`
+* `[]ATTR_VALUE` Denotes an array of `ATTR_VALUE`s. (e.g. `["a", "b", "c"]`)
 
 #### Write Operations
 
@@ -311,14 +312,19 @@ Return `2`
 **Spec:**
 
 ```
-TopN(<frame=STRING>, [BITMAP_CALL], [n=UINT], 
-     [field=STRING], [filters=ARRAY], 
+TopN([BITMAP_CALL], <frame=STRING>, [n=UINT],
+     [<field=ATTR_NAME>, <filters=[]ATTR_VALUE>],
      [tanimotoThreshold=UINT])
 ```
 
 **Description:**
 
-TODO
+Return the id and count of the top `n` bitmaps (by count of bits) in the frame.
+The `field` and `filters` arguments work together to only return Bitmaps which
+have the attribute specified by `field` with one of the values specified in
+`filters`.
+
+TODO: describe how `tanimotoThreshold` works.
 
 **Result Type:** array of key/count objects
 
@@ -343,7 +349,7 @@ Returns `[{"key": 1, "count": 2}, {"key": 2, "count": 2}]`
 * Results are the top two users sorted by number of repositories they've starred in descending order.
 
 ```
-TopN(frame="stargazer", Bitmap(frame="language", id=1), n=2)
+TopN(Bitmap(frame="language", id=1), frame="stargazer", n=2)
 ```
 
 Returns `[{"key": 1, "count": 2}, {"key": 2, "count": 1}]`
