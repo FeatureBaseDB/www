@@ -50,7 +50,8 @@ curl --header "Accept: text/csv" "http://localhost:10101/export?db=repository&fr
 
 #### Versioning
 
-Pilosa follows Semantic Versioning.[http://semver.org/] 
+Pilosa follows [Semantic Versioning](http://semver.org/).
+
 MAJOR.MINOR.PATCH:
 
 * MAJOR version when you make incompatible API changes,
