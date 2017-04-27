@@ -198,9 +198,10 @@ footer a:hover{
 
 .legal a{
   font-size: 10px;
-  line-height: 2.4;
+  /*line-height: 2.4;*/
   letter-spacing: 0.2px;
   text-decoration: underline;
+
 }
 
 

@@ -114,9 +114,12 @@ footer a:hover{
   line-height: 2.4;
   letter-spacing: 0.2px;
   text-decoration: underline;
+  background: pink;
 }
 
 
 .footer-icons a{
   font-size: 18.6px;
+  display: flex;
+
 }
