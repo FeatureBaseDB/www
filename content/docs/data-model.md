@@ -36,9 +36,13 @@ Row-level attributes are namespaced at the Frame level.
 
 Ranked Frames maintain a sorted cache of column counts by Row ID (yielding the top rows by columns with a bit set in each). This cache facilitates the TopN query.  The cache size defaults to 50,000 and can be set at Frame creation.
 
+![ranked frame diagram](/img/docs/frame-ranked.svg)
+
 ##### LRU
 
 The LRU cache maintains the most recently accessed Rows.
+
+![lru frame diagram](/img/docs/frame-lru.svg)
 
 #### Time Quantum
 
