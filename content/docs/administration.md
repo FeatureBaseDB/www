@@ -103,7 +103,7 @@ When upgrading, upgrade clients first, followed by server for all Minor and Patc
 
 #### Backup/restore
 
-Pilosa continuously writes out the in-memory bitmap data to disk.  This data is organized by DB->Frame->views->Fragment->numbered slice files.  These data files can be routinely backed up to restore nodes in a cluster.
+Pilosa continuously writes out the in-memory bitmap data to disk.  This data is organized by Index->Frame->Views->Fragment->numbered slice files.  These data files can be routinely backed up to restore nodes in a cluster.
 
 Depending on the size of your data you have two options.  For a small dataset you can rely on the periodic anti-entropy sync process to replicate existing data back to this node.
 
@@ -111,24 +111,24 @@ For larger datasets and to make this process faster you could copy the relevant 
 
 Note: This will only work when the replication factor is >= 2
 
-##### Using Auto Sync
+##### Using Index Sync
 
 1. Shutdown the cluster.
 2. Modify config file to replace existing node address with new node.
-3. Restart all nodes in the cluster
-4. Wait for auto sync to replicate data from existing nodes to new node
+3. Restart all nodes in the cluster.
+4. Wait for auto Index sync to replicate data from existing nodes to new node.
 
-##### Copying data files
+##### Copying data files manually
 
 1. To accomplish this goal you will 1st need:
-    1. list of all DB on your cluster
-    1. list of all frames in your DB's
-    1. Max slice per DB (api exists for this)
+    a. List of all Indexes on your cluster
+    b. List of all frames in your Indexes
+    c. Max slice per Index, listed in the /status endpoint
 
 2. With this information you can query the `/fragment/nodes` endpoint and iterate over each slice
 3. Using the list of slices owned by this node you will then need to manually:
-    1. setup a directory structure similar to the other nodes with a path for each DB/frame
-    1. copy each owned slice for an existing node to this new node
+    a. setup a directory structure similar to the other nodes with a path for each Index/Frame
+    b. copy each owned slice for an existing node to this new node
 4. Modify the cluster config file to replace the previous node address with the new node address.
 5. Restart the cluster
-6. Wait for the 1st sync (10 minutes) to validate db connections
+6. Wait for the 1st sync (10 minutes) to validate Index connections
