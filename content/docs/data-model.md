@@ -8,7 +8,7 @@ title = "Data Model"
 
 The central component of Pilosa's data model is a boolean matrix. Each cell in the matrix is a single bit - if the bit is set, it indicates that a relationship exists between that particular row and column.
 
-rows and columns can represent anything (they could even represent the same set of things).Pilosa can associate arbitrary key/value pairs (referred to as attributes) to rows and columns, but queries and storage are optimized around the core matrix.
+Rows and columns can represent anything (they could even represent the same set of things). Pilosa can associate arbitrary key/value pairs (referred to as attributes) to rows and columns, but queries and storage are optimized around the core matrix.
 
 Pilosa lays out data first in rows, so queries which get all the set bits in one or many rows, or compute a combining operation on multiple rows such as Intersect or Union are the fastest. Pilosa also has the ability to categorize rows into different "frames" and quickly retrieve the top rows in a frame sorted by the number of bits set in each row.
 
