@@ -46,7 +46,9 @@
           {{ end }}
 
           <div class="blog-card-img">
-            <img style='object-fit: cover;' width='100%' height='100%' src="{{ .Params.image }}" alt="{{ .Title }}">
+            <a href="/blog/hello-world/">
+              <img style='object-fit: cover;' width='100%' height='100%' src="{{ .Params.image }}" alt="{{ .Title }}">
+            </a>
           </div>
         </div>
         <div class="blog-card-featured-content mr-5">
@@ -70,13 +72,15 @@
         <div class="blog-card-container">
 
           {{ if .Params.image }}
+          <a  href="{{ .URL }}">
           <div class="blog-card-img-container mb-4">
-            <div class="blog-card-overlay blog-card-blue"></div>
+              <div class="blog-card-overlay blog-card-blue"></div>
             <div class="blog-card-img">
-              <a class="unstyled-a" href="{{ .URL }}">
+
                 <img style='object-fit: cover;' width='100%' height='100%' src="{{ .Params.image }}" alt="{{ .Title }}">
-              </a>
+
             </div>
+          </a>
           </div>
           {{ end }}
 
