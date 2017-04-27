@@ -27,7 +27,7 @@ Let's make sure Pilosa is running:
 curl localhost:10101/hosts
 ```
 
-Which should output: `[{"host":":10101"}]`
+Which should output: `[{"host":":10101","internalHost":""}]`
 
 #### Sample Project
 
