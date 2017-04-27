@@ -15,11 +15,21 @@ a{
 	text-decoration: none;
 	color: #3c5e8c;
 }
+
+
 a:hover{
   color: #1db598;
 	text-decoration: none;
 }
 
+.unstyled-a{
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	letter-spacing: inherit;
+	text-decoration: inherit;
+	color: inherit;
+}
 
 h1 {
 	font-size: 110px;
@@ -47,6 +57,11 @@ h1 {
 		color: white;
 
 	}
+	.h-2-blue-responsive{
+		font-size: 65px;
+		font-weight: 700;
+		letter-spacing: 0.2px;
+	}
 }
 @media (max-width: 1199px) {
 	.h-2-white-responsive,
@@ -57,6 +72,11 @@ h1 {
 		letter-spacing: -1px;
 		color: white;
 
+	}
+	.h-2-blue-responsive{
+		font-size: 38px;
+		font-weight: 700;
+		letter-spacing: 0.2px;
 	}
 }
 
@@ -100,6 +120,8 @@ h1 {
 	letter-spacing: 0.2px;
 	color: #102445;
 }
+
+
 
 .h-2-blue-center {
 	font-size: 65px;

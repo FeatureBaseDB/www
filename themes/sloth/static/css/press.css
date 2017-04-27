@@ -1,0 +1,77 @@
+.press-hero{
+
+  height: 500px;
+  color: white;
+  display: flex;
+  background-image: url("/img/splash_press.svg") ;
+  background-color:  #2a4871;
+  background-blend-mode: multiply;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: right;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (min-width: 1200px){
+  .careers-hero-content{
+    width:726px;
+    margin: auto;
+  }
+
+}
+@media (max-width: 1199px){
+  .careers-hero-content{
+    width:90%;
+    margin: auto;
+  }
+
+}
+.press-cards{
+  background: #f8fafb;
+}
+.press-cards-header{
+
+}
+
+@media (min-width: 800px){
+  .press-cards-header{
+    margin-left: 12%;
+    margin-right: 40%;
+  }
+
+}
+@media (max-width: 799px){
+  .press-cards-header{
+    width: 90%;
+    margin: auto;
+  }
+}
+.press-cards{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.press-card{
+    width: 555px;
+    height: 443px;
+    background: white;
+    margin: 15px;
+    padding: 30px;
+  }
+.press-cta{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.press-cta-content{
+  width: 653px;
+}
+.press-cta-btn-container{
+  display: flex;
+  justify-content: center;
+}

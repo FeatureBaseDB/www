@@ -1,10 +1,121 @@
 {{ partial "header.html" . }}
 
-<div class="container">
-   <h1 id="title">Press</h1>
-   {{ range first 5 .Data.Pages }}
-     {{ .Render "summary"}}
-   {{ end }}
+<div class="page-container">
+
+  <div class="press-hero">
+    <div class="careers-hero-content">
+      <h3 class="h-2-white-responsive mb-5">
+        Press releases. Lorem ipsum si dolor sit amet, consectetur adipiscing.
+      </h3>
+    </div>
+  </div>
+
+  <div class="press-cards py-5 ">
+    <div class="press-cards-header">
+      <h2 class="h-2-blue">
+        Press releases
+      </h2>
+      <p>
+        One paragraph description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum eit. Adipiscing elit. Condimentum porttitor. Dolor sit amet, consectetur adipiscing.
+      </p>
+    </div>
+    <div class="press-cards mb-4">
+      <div class="press-card">
+        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
+        <h3 class="h-3-blue mb-3">
+          Press Release Title
+        </h3>
+        <p>
+          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
+        </p>
+      </div>
+      <div class="press-card">
+        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
+        <h3 class="h-3-blue mb-3">
+          Press Release Title
+        </h3>
+        <p>
+          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
+        </p>
+      </div>
+      <div class="press-card">
+        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
+        <h3 class="h-3-blue mb-3">
+          Press Release Title
+        </h3>
+        <p>
+          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
+        </p>
+      </div>
+      <div class="press-card">
+        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
+
+          <h3 class="h-3-blue mb-3">
+            <a class='unstyled-a' href="/">
+
+            Press Release Title
+          </a>
+          </h3>
+        <p>
+          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
+        </p>
+      </div>
+      <div class="press-card">
+        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
+        <h3 class="h-3-blue mb-3">
+          Press Release Title
+        </h3>
+        <p>
+          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
+        </p>
+      </div>
+      <div class="press-card">
+        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
+        <h3 class="h-3-blue mb-3">
+          Press Release Title
+        </h3>
+        <p>
+          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
+        </p>
+      </div>
+
+    </div>
+    <div class="pagination-container">
+      <div class="page-icon ml-3">
+        <a href="">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="pagination-numbers">
+        <a href="">1</a>
+        <a href="">2</a>
+        <a href="">3</a>
+        <a href="">4</a>
+        <a href="">5</a>
+        <a href="">6</a>
+      </div>
+      <div class="page-icon mr-3">
+        <a href="">
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="press-cta py-5">
+    <div class="press-cta-content">
+      <h2 class="h-2-blue-center mb-4 ">Contact us</h2>
+      <p class="p-center">
+        One paragraph description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie.
+      </p>
+      <div class='press-cta-btn-container'>
+        <button class="btn-pilosa btn btn-success">Download out presskit</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="btn-pilosa btn btn-success">press@pilosa.com</button>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
 {{ partial "footer.html" . }}
