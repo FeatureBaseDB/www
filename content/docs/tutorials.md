@@ -229,13 +229,13 @@ python import_from_sdf -p <path_to_sdf_file> -file fingerprint_id.csv -i True
 
 To import csv file to pilosa, follow the instruction of Getting Started to run the Pilosa server and create the index and frame as above schemas in Data Model section.
 ```
-curl -XPOST localhost:10101/db -d '{"db": "mol", "options": {"columnLabel": "position_id"}}'
+curl -XPOST localhost:10101/index/mol -d '{"options": {"columnLabel": "position_id"}}'
 
-curl -XPOST localhost:10101/frame -d '{"db": "mol", "frame": "mole.n", "options": {"rowLabel": "chembl_id"}}'
+curl -XPOST localhost:10101/index/mol/frame/mole.n -d '{"options": {"rowLabel": "chembl_id"}}'
 
-curl -XPOST localhost:10101/db -d '{"db": "inverse-mol", "options": {"columnLabel": "chembl_id"}}'
+curl -XPOST localhost:10101/index/inverse-mol -d '{"options": {"columnLabel": "chembl_id"}}'
 
-curl -XPOST localhost:10101/frame -d '{"db": "mol", "frame": "mole.n", "options": {"rowLabel": "position_id"}}'
+curl -XPOST localhost:10101/index/inverse-mol/frame/mole.n -d '{"options": {"rowLabel": "position_id"}}'
 ```
 
 Run command to import to mol and inverse-mol index:
@@ -262,7 +262,7 @@ Return chembl_id = 6223. This script uses Pilosa’s Intersection query to get a
     fp = list(AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=4096).GetOnBits())
     ```
         
-* Query all chembl_id that has all “on” positions from inverse-mol db, return list of chembl_id
+* Query all chembl_id that has all “on” positions from inverse-mol index, return list of chembl_id
 
     ```python
     cluster = Client(hosts=[127.0.0.1:10101])
@@ -270,7 +270,7 @@ Return chembl_id = 6223. This script uses Pilosa’s Intersection query to get a
     mole_ids=cluster.query(“inverse-mol”,Intersect(*bit_maps)).values()[0]["bits"]
     ```
 
-* From list of chembl_id, query all “on” position from mol db, if the length of array of “on” position is matched to len(fp) then return that chembl_id, otherwise the given SMILES does not exist.
+* From list of chembl_id, query all “on” position from mol index, if the length of array of “on” position is matched to len(fp) then return that chembl_id, otherwise the given SMILES does not exist.
 
     ```python    
     for m in mole_ids:
@@ -293,7 +293,7 @@ Return chembl_id = [6223, 269758, 6206, 6228]. This script uses Pilosa’s TopN 
 * Query Pilosa’s TopN to get list of similarity chembl_id
     ```python
     query_string = 'TopN(Bitmap(id=6223, frame="mole.n"), frame="mole.n", n=2000000, tanimotoThreshold=70)'
-    topn = requests.post("http://127.0.0.1:10101/query?db=mol" , data=query_string)
+    topn = requests.post("http://127.0.0.1:10101/index/mol/query" , data=query_string)
     ```
 
 ##### Benchmark

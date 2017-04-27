@@ -45,7 +45,7 @@ pilosa import  -d project -f stargazer project-stargazer.csv
 
 Exporting Data to csv can be performed on a live instance of pilosa. You need to specify the Index, Frame, and View(default is standard). The API also expects the slice number, but the `pilosa export` sub command will export all slices within a Frame. The data will be in csv format RowID,ColumnID and sorted by column ID.
 ```
-curl --header "Accept: text/csv" "http://localhost:10101/export?db=repository&frame=stargazer&slice=0&view=standard"
+curl --header "Accept: text/csv" "http://localhost:10101/export?index=repository&frame=stargazer&slice=0&view=standard"
 ```
 
 #### Versioning
