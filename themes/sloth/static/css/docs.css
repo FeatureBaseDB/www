@@ -54,6 +54,7 @@
 .docs-active{
   border-left: 5px solid #1db598;
   font-weight: 500;
+  margin-left: -10px;
 }
 .docs-nav-btn-container{
   width: 100%;
@@ -91,4 +92,9 @@
   justify-content: space-between;
   padding-bottom: 10px;
 
+}
+
+.dropdown-menu-nav{
+  width: 90%;
+  margin-left: 30px;
 }
