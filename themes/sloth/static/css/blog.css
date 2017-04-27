@@ -51,7 +51,7 @@
 .blog-cards-container{
   display: flex;
   align-items: center;
-  justify-content: center;
+  /*justify-content: center;*/
   flex-wrap: wrap;
 }
 
@@ -132,6 +132,9 @@ background: rgba(29,181, 152, 0.68);
 }
 .no-img-green{
   border-top: 4px solid #1db598;
+}
+.no-img-blue{
+  border-top: 4px solid #3c5f8d;
 }
 
 
