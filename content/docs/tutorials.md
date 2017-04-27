@@ -30,11 +30,29 @@ The NYC taxi data is comprised of a number of csv files listed here: http://www.
 
 We import these fields, creating one or more Pilosa frames from each of them:
 
-*(table 1 from notebook)*
+frame	|mapping
+------------|---------------------
+cab_type	|direct map of enum int → row ID
+dist_miles	|round(dist) → row ID
+total_amount_dollars	|round(dist) → row ID
+passenger_count	|direct map of integer value → row ID
+drop_grid_id	|(lat, lon) → 100x100 rectangular grid → cell ID
+drop_year	|year(timestamp) → row ID
+drop_month	|month(timestamp) → row ID
+drop_day	|day(timestamp) → row ID
+drop_time	|time of day mapped to one of 48 half-hour buckets
+pickup_grid_id	|(lat, lon) → 100x100 rectangular grid → cell ID
+pickup_year	|year(timestamp) → row ID
+pickup_month	|month(timestamp) → row ID
+pickup_day	|day(timestamp) → row ID
+pickup_time	|time of day mapped to one of 48 half-hour buckets → row ID
 
 We also created two extra frames that represent the duration and average speed of each ride:
 
-*(table 2 from notebook)*
+frame	|mapping
+--------------------|-------------
+duration_minutes	|round(drop_timestamp - pickup_timestamp) → row ID
+speed_mph	|round(dist_miles / (drop_timestamp - pickup_timestamp)) → row ID
 
 ##### Mapping
 
