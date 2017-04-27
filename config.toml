@@ -51,3 +51,6 @@ enableRobotsTXT = true
     subtitle = "Beyond the cloud."
 
     tagline = "it's fast."
+
+[taxonomies]
+    featured = "featured"

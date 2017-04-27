@@ -2,47 +2,44 @@
   <div  class='container py-5' >
     <div class="footer-row ">
       <div  class='brand mb-4'>
-        <img width='150px' src="/img/{{ .Site.Params.logo_white }}" alt="{{ .Site.Params.subtitle }}">
+        <a href="/"><img width='150px' src="/img/{{ .Site.Params.logo_white }}" alt="{{ .Site.Params.subtitle }}"></a>
         <div class="footer-install-container">
-          <button  type="button" class="btn-pilosa btn btn-info mt-4 col">Install</button>
+          <a href="/docs/installation/" class="btn-pilosa btn btn-info mt-4 col">Install</a>
         </div>
       </div>
       <div class='links mb-4'>
         <div class="category">
-          <a class="category-header" href="/about/"> Company</a>
+          <a class='category-header' href="/docs/getting-started/">Get Started</a>
+          <a href="/docs/installation/">Install</a>
+          <a href="/docs/getting-started/">Getting Started</a>
+          <a href="/docs/faq/">FAQ</a>
+          <a href="/community/#support">Support</a>
+        </div>
+        <div class="category">
+          <a class='category-header' href="/docs/">Community</a>
+          <a href="/community/code-of-conduct/">Code of Conduct</a>
+          <a href="/blog/">Blog</a>
+          <a href="https://github.com/pilosa/pilosa/">Github</a>
+          <a href="https://twitter.com/pilosa/">Twitter</a>
+        </div>
+        <div class="category">
+          <a class="category-header" href="/enterprise/">Product</a>
+          <a href="/enterprise/">Community Edition</a>
+          <a href="/enterprise/">Enterprise Edition</a>
+          <a href="/use-cases/">Use Cases</a>
+          <a href="/legal/ip/">Legal</a>
+        </div>
+        <div class="category">
+          <a class="category-header" href="/about/">Company</a>
           <a  href="/about/">About</a>
           <a  href="/careers/">Careers</a>
           <a  href="/press/">Press</a>
-          <a  href="/about#contact">Contact</a>
+          <a  href="/about/#contact">Contact</a>
         </div>
-        <div class="category">
-          <a class='category-header' href="/docs/getting-started/">Get Started</a>
-          <a href="/docs/install/">Install</a>
-          <a href="/docs/getting-started/">Quickstart</a>
-          <a href="/faq/">FAQ</a>
-          <a href="/contact/">Support</a>
-        </div>
-
-        <div class="category">
-          <a class='category-header' href="/docs/">Documentation</a>
-          <a href="/docs/">Architecture</a>
-          <a href="/docs/">API</a>
-          <a href="/docs/">Deployment</a>
-          <a href="/docs/">Integration</a>
-        </div>
-
-        <div class="category">
-          <a class="category-header" href="/community/">Community</a>
-          <a href="/community/code-of-conduct/">Blog</a>
-          <a href="/blog/">Community Code</a>
-          <a href="">Github</a>
-          <a href="">Slack</a>
-        </div>
-
       </div>
     </div>
     <div  class="footer-row">
-      <a href='/about/' class="footer-learn-more mt-2 mb-1">Learn more about Pilosa</a>
+      <p class="footer-learn-more mt-2 mb-1">Learn more about Pilosa</p>
       <form class="footer-form" action="//pilosa.us15.list-manage.com/subscribe/post?u=804d9b2d65c9213cfa08eb7c3&amp;id=12e90aaa9a" method="post">
         <input class='footer-input m-2' placeholder="Your email" name="EMAIL" type="text">
         <button  type="submit" class=" btn-pilosa btn btn-success m-2">Sign up</button>

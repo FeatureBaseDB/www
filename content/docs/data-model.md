@@ -12,6 +12,8 @@ rows and columns can represent anything (they could even represent the same set 
 
 Pilosa lays out data first in rows, so queries which get all the set bits in one or many rows, or compute a combining operation on multiple rows such as Intersect or Union are the fastest. Pilosa also has the ability to categorize rows into different "frames" and quickly retrieve the top rows in a frame sorted by the number of bits set in each row.
 
+![data model diagram](/img/docs/data-model.svg)
+
 #### Index
 
 The purpose of the Index is to represent a data namespace. You cannot perform cross-index queries.  Column-level attributes are global to the Index.
@@ -34,9 +36,13 @@ Row-level attributes are namespaced at the Frame level.
 
 Ranked Frames maintain a sorted cache of column counts by Row ID (yielding the top rows by columns with a bit set in each). This cache facilitates the TopN query.  The cache size defaults to 50,000 and can be set at Frame creation.
 
+![ranked frame diagram](/img/docs/frame-ranked.svg)
+
 ##### LRU
 
 The LRU cache maintains the most recently accessed Rows.
+
+![lru frame diagram](/img/docs/frame-lru.svg)
 
 #### Time Quantum
 
