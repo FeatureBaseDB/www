@@ -24,7 +24,7 @@ docker run -it --rm --name pilosa -p 10101:10101 pilosa:latest
 
 Let's make sure Pilosa is running:
 ```
-curl localhost:10101/nodes
+curl localhost:10101/hosts
 ```
 
 Which should output: `[{"host":":10101"}]`
