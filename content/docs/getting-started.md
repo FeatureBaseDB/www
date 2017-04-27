@@ -90,6 +90,8 @@ Note that, both the user IDs and the repository IDs were remapped to sequential 
 
 ##### Make Some Queries
 
+> Note The Pilosa server comes with a [WebUI](../webui/) for constructing queries in a browser.  [localhost:10101](http://localhost:10101)
+
 Which repositories did user 14 star:
 ```
 curl -XPOST localhost:10101/index/repository/query -d 'Bitmap(frame="stargazer", stargazer_id=14)'
