@@ -58,11 +58,11 @@ speed_mph	|round(dist_miles / (drop_timestamp - pickup_timestamp)) → row ID
 
 Each column that we want to use must be mapped to a combination of frames and row IDs according to some rule. There are many ways to approach this mapping, and the taxi dataset gives us a good overview of possibilities.
 
-###### 0 columns -> 1 frame
+###### 0 columns → 1 frame
 
 cab_type: contains one row for each type of cab. Each column, representing one ride, has a bit set in exactly one row of this frame. The mapping is a simple enumeration, for example yellow=0, green=1, etc. The values of the bits in this frame are determined by the source of the data. That is, we're importing data from several disparate sources: NYC yellow taxi cabs, NYC green taxi cabs, and Uber cars. For each source, the single row to be set in the cab_type frame is constant.
 
-###### 1 column -> 1 frame
+###### 1 column → 1 frame
 
 The following three frames are mapped in a simple direct way from single columns of the original data.
 
@@ -124,7 +124,7 @@ Here, we define a list of Mappers, each including a name, which we use to refer 
 
 **passenger_count:** This column contains small integers, so we use one of the simplest possible mappings: the column value is the row ID.
 
-###### 1 column -> multiple frames
+###### 1 column → multiple frames
 
 When working with a composite data type like a timestamp, there are plenty of mapping options. In this case, we expect to see interesting periodic trends, so we want to encode the cyclic components of time in a way that allows us to look at them independently during analysis.
 
@@ -134,7 +134,7 @@ We might continue this pattern with hours, minutes, and seconds, but we don't ha
 
 We do all of this for each timestamp of interest, one for pickup time and one for dropoff time. That gives us eight total frames for two timestamps: pickup_year, pickup_month, pickup_day, pickup_time, drop_year, drop_month, drop_day, drop_time.
 
-###### Multiple columns -> 1 frame
+###### Multiple columns → 1 frame
 
 The ride data also contains geolocation data: latitude and longitude for both pickup and dropoff. We just want to be able to produce a rough overview heatmap of ride locations, so we use a grid mapping. We divide the area of interest into a 100x100 grid in latitude-longitude space, label each cell in this grid with a single integer, and use that integer as the row ID.
 
