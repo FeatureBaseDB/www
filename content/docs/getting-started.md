@@ -24,7 +24,7 @@ docker run -it --rm --name pilosa -p 10101:10101 pilosa:latest
 
 Let's make sure Pilosa is running:
 ```
-curl localhost:10101/hosts
+curl localhost:10101/nodes
 ```
 
 Which should output: `[{"host":":10101","internalHost":""}]`
@@ -33,7 +33,7 @@ Which should output: `[{"host":":10101","internalHost":""}]`
 
 In order to better understand Pilosa's capabilities, we will create a sample project called "Star Trace" containing information about the top 1,000 most recently updated Github repositories which have "go" in their name. The Star Trace index will include data points such as programming language, tags, and stargazers—people who have starred a project.
 
-Although Pilosa doesn't keep the data in a tabular format, we still use the terms "columns" and "rows" when describing the data model. We put the primary objects in columns, and the properties of those objects in rows. For example, the Star Trace project will contain an index called "repository" which contains columns representing Github repositories, and rows representing properties like programming languages and tags. We can better organize the rows by grouping them into sets called Frames. So the "repository" index might have a "languages" frame as well as a "tags" frame. You can learn more about indexes and frames in the [Data Model](data_model) section of the documentation.
+Although Pilosa doesn't keep the data in a tabular format, we still use the terms "columns" and "rows" when describing the data model. We put the primary objects in columns, and the properties of those objects in rows. For example, the Star Trace project will contain an index called "repository" which contains columns representing Github repositories, and rows representing properties like programming languages and tags. We can better organize the rows by grouping them into sets called Frames. So the "repository" index might have a "languages" frame as well as a "tags" frame. You can learn more about indexes and frames in the [Data Model](../data-model) section of the documentation.
 
 ##### Create the Schema
 

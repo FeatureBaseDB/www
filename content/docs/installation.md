@@ -201,7 +201,7 @@ Head over to the Getting Started guide to create your first Pilosa index.
 
 #### Windows
 
-Windows is currently not supported as a target deployment platform for Pilosa, but developing and running Pilosa is made possible by Windows Subsystem for Linux and Docker. See the [Docker](docker) documentation for using Docker for Windows and Docker Toolbox. You can find documentation about installing Windows Subsystem for Linux at https://msdn.microsoft.com/en-us/commandline/wsl/install_guide. From there, use the instructions in the [Linux Install](linux_install) section in the this document.
+Windows is currently not supported as a target deployment platform for Pilosa, but developing and running Pilosa is made possible by Windows Subsystem for Linux and Docker. See the [Docker](#docker) documentation for using Docker for Windows and Docker Toolbox. You can find documentation about installing Windows Subsystem for Linux at https://msdn.microsoft.com/en-us/commandline/wsl/install_guide. From there, use the instructions in the [Linux Install](#installing-on-linux) section in the this document.
 
 #### Docker
 

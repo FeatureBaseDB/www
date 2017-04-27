@@ -7,9 +7,9 @@ title = "Client Libraries"
 
 #### Go
 
-You can find the Go client library for Pilosa at our [Go Pilosa Repository](https://github.com/pilosa/go-pilosa). Check out its [README](https://github.com/pilosa/go-pilosa/README.md) for more information and installation instructions.
+You can find the Go client library for Pilosa at our [Go Pilosa Repository](https://github.com/pilosa/go-client-pilosa). Check out its [README](https://github.com/pilosa/go-client-pilosa/blob/master/README.md) for more information and installation instructions.
 
-We are going to use the index you have created in the [Getting Started](getting_started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
+We are going to use the index you have created in the [Getting Started](../getting-started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
 
 Note that, there are no error handling in the example below for brevity purpose.
 
@@ -86,9 +86,9 @@ func main() {
 
 #### Python
 
-You can find the Python client library for Pilosa at our [Python Pilosa Repository](https://github.com/pilosa/python-pilosa). Check out its [README](https://github.com/pilosa/python-pilosa/README.md) for more information and installation instructions.
+You can find the Python client library for Pilosa at our [Python Pilosa Repository](https://github.com/pilosa/python-pilosa). Check out its [README](https://github.com/pilosa/python-pilosa/blob/master/README.rst) for more information and installation instructions.
 
-We are going to use the index you have created in the [Getting Started](getting_started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
+We are going to use the index you have created in the [Getting Started](../getting-started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
 
 Note that, there are no error handling in the example below for brevity purpose.
 
@@ -141,9 +141,9 @@ except PilosaError as ex:
 
 #### Java
 
-You can find the Java client library for Pilosa at our [Java Pilosa Repository](https://github.com/pilosa/java-pilosa). Check out its [README](https://github.com/pilosa/java-pilosa/README.md) for more information and installation instructions.
+You can find the Java client library for Pilosa at our [Java Pilosa Repository](https://github.com/pilosa/java-pilosa). Check out its [README](https://github.com/pilosa/java-pilosa/blob/master/README.md) for more information and installation instructions.
 
-We are going to use the index you have created in the [Getting Started](getting_started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
+We are going to use the index you have created in the [Getting Started](../getting-started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
 
 Note that, there are no error handling in the example below for brevity purpose.
 
