@@ -18,10 +18,11 @@
   </div>
 
   <div class="blog-list-container py-5">
-    <div class="container">
 
+    <div class="container">
+      <!--
       <div class="blog-list-dropdown-container py-4">
-        <div class="blog-list-show">Show: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </div>
+        <div class="blog-list-show">Show: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
         <div class="dropdown">
           <button class="dropdown-btn btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class='inner-dropdown'>
@@ -33,177 +34,82 @@
             <a class="dropdown-item" href="#">Action</a>
           </div>
         </div>
+      </div>
 
 
-    </div>
 
-
+      -->
 
 
     <div class="blog-cards-container">
 
+      {{ range $key, $taxonomy := .Site.Taxonomies.featured }}{{ range $taxonomy.Pages }}
       <div class="blog-card-featured">
-
         <div class="blog-card-featured-img-container">
+          {{ if not .Params.disable_overlay }}
+            <div class="blog-card-overlay blog-card-{{ .Params.overlay_color }}"></div>
+          {{ end }}
 
-          <div class="blog-card-overlay blog-card-blue"></div>
           <div class="blog-card-img">
-            <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
+            <img style='object-fit: cover;' width='100%' height='100%' src="{{ .Params.image }}" alt="{{ .Title }}">
           </div>
-
         </div>
-
         <div class="blog-card-featured-content mr-5">
-          <h2 class="h-2-blue mb-4">Hello, World.</h2>
-          <h6 class="h-6-caps mb-3">Featured • 10/27/2017 • 4 min read</h6>
+          <h2 class="h-2-blue mb-4">
+            <a class="unstyled-a" href="{{ .URL }}">{{ .Title }}</a>
+          </h2>
+
+          <h6 class="h-6-caps mb-3">Featured • {{ .Date.Format "1/2/2006" }} • {{ .ReadingTime }} min read</h6>
           <p class='mb-4'>
-            Lorem ipsum dolor sit amet.
+            {{ .Summary }}
           <div class="blog-card-author-content">
               <img class='mr-3' src="/img/{{ .Site.Params.author_06}}" alt="">
-              <div class="body-bold">Ryan Partelow</div>
+              <div class="body-bold">{{ .Params.author }}</div>
           </div>
         </div>
-
-
       </div>
+      {{ end }}{{ end }}
 
-      <div class="blog-card">
+      {{ range where .Data.Pages "Params.featured" "!=" "true" }}
+      <div class="blog-card {{ if not .Params.image }}no-img-light{{ end }}">
         <div class="blog-card-container">
 
+          {{ if .Params.image }}
           <div class="blog-card-img-container mb-4">
             <div class="blog-card-overlay blog-card-blue"></div>
             <div class="blog-card-img">
-              <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
+              <img style='object-fit: cover;' width='100%' height='100%' src="{{ .Params.image }}" alt="{{ .Title }}">
             </div>
           </div>
+          {{ end }}
 
           <div class="blog-card-content">
-            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
-            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
-            <p class="mb-5">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
-            </p>
+            <h3 class="h-3-blue mb-4">
+              <a class="unstyled-a" href="{{ .URL }}">{{ .Title }}</a>
+            </h3>
+            <h6 class="h-6-caps ">{{ .Date.Format "1/2/2006" }} • {{ .ReadingTime }} min read</h6>
+            {{ if .Params.image }}
+                {{ .Summary | truncate 150 " ..." }}
+            {{ else }}
+                {{ .Summary | truncate 500 " ..." }}
+            {{ end }}
             <div class="blog-card-author-content">
                 <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
-                <div class="body-bold">Rob Sonic</div>
+                <div class="body-bold">{{ .Params.author }}</div>
             </div>
           </div>
 
         </div>
       </div>
-
-      <div class="blog-card no-img-light">
-        <div class="blog-card-container">
-          <div class="blog-card-content">
-            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
-            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
-            <p class="mb-5">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <div class="blog-card-author-content">
-                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
-                <div class="body-bold">Rob Sonic</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-container">
-
-          <div class="blog-card-img-container mb-4">
-            <div class="blog-card-overlay blog-card-green"></div>
-            <div class="blog-card-img">
-              <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
-            </div>
-          </div>
-
-          <div class="blog-card-content">
-            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
-            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
-            <p class="mb-5">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
-            </p>
-            <div class="blog-card-author-content">
-                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
-                <div class="body-bold">Rob Sonic</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-card-container">
-
-          <div class="blog-card-img-container mb-4">
-            <div class="blog-card-overlay blog-card-light"></div>
-            <div class="blog-card-img">
-              <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
-            </div>
-          </div>
-
-          <div class="blog-card-content">
-            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
-            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
-            <p class="mb-5">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
-            </p>
-            <div class="blog-card-author-content">
-                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
-                <div class="body-bold">Rob Sonic</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="blog-card no-img-green">
-        <div class="blog-card-container ">
-
-          <div class="blog-card-content">
-            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
-            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
-            <p class="mb-5">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
-            </p>
-            <div class="blog-card-author-content">
-                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
-                <div class="body-bold">Rob Sonic</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="blog-card">
-        <div class="blog-card-container">
-
-          <div class="blog-card-img-container mb-4">
-            <div class="blog-card-overlay blog-card-blue"></div>
-            <div class="blog-card-img">
-              <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
-            </div>
-          </div>
-
-          <div class="blog-card-content">
-            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
-            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
-            <p class="mb-5">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
-            </p>
-            <div class="blog-card-author-content">
-                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
-                <div class="body-bold">Rob Sonic</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-
-      <button  type="button" class="btn-pilosa btn btn-primary  mt-4">View 10 more</button>
-
+      {{ end }}
     </div>
+
+    <!--
+    <center>
+      <button type="button" class="btn-pilosa btn btn-primary  mt-4">View 10 more</button>
+    </center>
+    -->
+
     </div>
   </div>
 
