@@ -2,6 +2,7 @@
 date = "2017-04-25T18:52:36-06:00"
 title = "Hola"
 author = "HO Maycotte"
+overlay_color = "light"
 +++
 
 WHATS UP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

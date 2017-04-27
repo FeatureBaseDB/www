@@ -20,66 +20,19 @@
       </p>
     </div>
     <div class="press-cards mb-4">
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
-        <h3 class="h-3-blue mb-3">
-          Press Release Title
-        </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
-        <h3 class="h-3-blue mb-3">
-          Press Release Title
-        </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
-        <h3 class="h-3-blue mb-3">
-          Press Release Title
-        </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
 
-          <h3 class="h-3-blue mb-3">
-            <a class='unstyled-a' href="/">
-
-            Press Release Title
-          </a>
-          </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
+      {{ range where .Data.Pages "Params.featured" "!=" "true" }}
       <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
+        <h6 class="h-6-caps pt-5 pb-3">news • {{ .Date.Format "1/2/2006" }}</h6>
         <h3 class="h-3-blue mb-3">
-          Press Release Title
+          <a class="unstyled-a" href="{{ .URL }}">{{ .Title }}</a>
         </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
+        {{ .Summary | truncate 300 " ..." }}
       </div>
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
-        <h3 class="h-3-blue mb-3">
-          Press Release Title
-        </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
+      {{ end }}
 
     </div>
+    <!--
     <div class="pagination-container">
       <div class="page-icon ml-3">
         <a href="">
@@ -100,6 +53,7 @@
         </a>
       </div>
     </div>
+    -->
   </div>
   <div class="press-cta py-5">
     <div class="press-cta-content">
