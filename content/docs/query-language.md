@@ -71,7 +71,7 @@ SetBit(frame="stargazer", repo_id=10, user_id=1)
 
 This query illustrates setting a bit in the stargazer frame of the repository index. User with id=1 has starred repository with id=10.
 
-Setbit also supports providing a timestamp. To write the date that a user starred a repository.
+SetBit also supports providing a timestamp. To write the date that a user starred a repository.
 ```
 SetBit(frame="stargazer", repo_id=10, user_id=1, timestamp="2016-01-01T00:00")
 ```
