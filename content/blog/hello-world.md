@@ -1,5 +1,5 @@
 +++
-date = "2017-02-07T18:52:36-06:00"
+date = "2017-04-28T12:52:36-06:00"
 title = "Hello, World"
 author = "Travis Turner"
 featured = "true"
@@ -8,73 +8,18 @@ disable_overlay = true
 overlay_color = "blue" # blue, green, or light
 +++
 
-Lorem ipsum dolor sit amet, [I'm an inline-style link](https://www.google.com) consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-This is the abstract of this 3rd blog post.  It will show up in the summary.
+We are Pilosa, order of the sloth. Some of us have two fingers, and some three (we all have three toes no matter what you might have heard).  We make slothware.
 
 <!--more-->
 
-## Section 3
+Our slumber, which is what some call a group of sloths, has created a distributed bitmap index that sits on top of data stores and dramatically accelerates query speed across multiple, massive data sets. 
 
-Some info about section 3
+Today we are open sourcing the project under the Apache License, version 2.0, and we hope that you will join us on this journey.
 
+Why did we create Pilosa? Whereas both compute capacity and data volume are growing exponentially, the rate at which information can be read has not kept pace.
 
-```
-func foo(s string) string, error {
-    x := s
-    return x, nil
-}
-``` 
+The Pilosa index helps big data act much smaller by representing everything as a 1 or 0. It is independent of storage, a first class citizen. 
 
+We optimized it for high cardinality data at scale so that scientists can ask questions of all their data in real-time, no matter how large the job.
 
-##### Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-Lorem ipsum dolor sit amet, [I'm an inline-style link](https://www.google.com) consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-
-![Example image](//placehold.it/655x361)
-
-
-### "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad."
-
-
-Emphasis, aka italics, with *asterisks* or _underscores_.
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
-Combined emphasis with **asterisks and _underscores_**.
-Strikethrough uses two tildes. ~~Scratch this.~~
-
-#### Placeret pharetra
-
-1. First ordered list item
-
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-2. Another item
-
-    * Unordered sub-list.
-1. Actual numbers don't matter, just that it's a number
-    1. Ordered sub-list
-4. And another item.
-    * Unordered list can use asterisks
-    - Or minuses
-    + Or pluses
-
----
-
-```
-func foo(s string) string, error {
-    x := s
-    return x, nil
-}
-```
-
-
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
-
-> **Attention block**  
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in.
+While sloths and our superorder Xenartha began evolving 60 million years ago in South America, Pilosa the company was founded in 2017 with a commitment to building community-driven, open source software that unlocks the full power of data science. 

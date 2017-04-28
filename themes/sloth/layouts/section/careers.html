@@ -2,8 +2,8 @@
 <div class="page-container">
   <div class="career-hero">
     <div class="careers-hero-content">
-      <h2 class="h-2-white-responsive mb-4">Crazy Smart. Stupid fast. Have you got what it takes?</h2>
-      <button class='btn-pilosa btn btn-success'>See curent openings</button>
+      <h2 class="h-2-white-responsive mb-4">Crazy smart. Stupid fast. Have you got what it takes?</h2>
+      <a href="#openings" class='btn-pilosa btn btn-success'>See current openings</a>
     </div>
   </div>
   <div class="careers-values py-5">
@@ -12,7 +12,7 @@
         Core values
       </h2>
       <p>
-        One paragraph description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum eit. Adipiscing elit. Condimentum porttitor. Dolor sit amet, consectetur adipiscing.
+        There's a reason we do what we do, and a way we've committed to doing it. These make up our core values. We expect them to change and grow as we do, but for now, we think they're pretty accurate.
       </p>
     </div>
     <div class="careers-values-cards">
@@ -125,9 +125,9 @@
 
     </div>
   </div>
-  <div class="careers-positions py-5">
+  <div class="careers-positions py-5" id="openings">
     <div class="careers-positions-header mt-5">
-      <h2 class="h-2-blue-center mb-4">Available postions</h2>
+      <h2 class="h-2-blue-center mb-4">Available positions</h2>
       <div class="careers-positions-categories">
         <div class="career-categories-container">
           <div class="careers-positions-category p-blue category-active">All</div>
@@ -185,26 +185,28 @@
 
   <div class="careers-cta">
     <div class="careers-cta-container">
-      <h3 class="h-3-blue-center">Dont' see your position?</h3>
+      <h3 class="h-3-blue-center">Don't see your position?</h3>
       <p class="careers-cta-text mb-4">
-        One paragraph description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie.
+        We're always looking for talented applicants. Slothware enthusiasts welcome.
       </p>
-      <button type="button"  name="button" class='btn-pilosa btn btn-success'>
+      <a href="/about/#contact" class='btn-pilosa btn btn-success'>
         Get in touch
-      </button>
+      </a>
     </div>
   </div>
   <div class="careers-community ">
     <div class="careers-community-header ">
       <h2 class="h-2-blue-responsive mb-4 ">Community</h2>
       <p >
-        Pilosa was born and bred in Austin, TX. We’re committed to giving back to our hometown, and always looking for service projects that focus on promoting diversity in the Austin  tech community.
+        Pilosa was born and bred in Austin, TX. We’re committed to giving back to our hometown, and always looking for service projects that focus on promoting diversity in the Austin tech community.
       </p>
     </div>
+    <!--
     <div class="careers-community-orgs">
         <img src="//placehold.it/264x57" alt="">
         <img src="//placehold.it/166x67" alt="">
     </div>
+    -->
   </div>
 </div>
 {{ partial "footer.html" . }}
