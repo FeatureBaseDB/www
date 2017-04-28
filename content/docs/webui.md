@@ -11,7 +11,9 @@ This can be used for constructing queries and viewing the cluster status.
 
 The Console view allows you to enter PQL queries and run them against your locally running server.  First you must select an Index with the Select index dropdown.  
 
-Each queries results will be displayed in the Output window.  
+Each query's results will be displayed in the Output section along with the query time. 
+
+The Console will keep a record of each query and its result with the latest query on top.
 
 ### Cluster Admin
 
