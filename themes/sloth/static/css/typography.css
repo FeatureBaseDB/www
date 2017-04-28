@@ -46,10 +46,16 @@ h1 {
 		line-height: 1.02;
 		letter-spacing: -1px;
 		color: white;
-
 		text-align: center;
-
 	}
+	.h-1-blue-responsive{
+		font-size: 110px;
+		font-weight: bold;
+		line-height: 1.02;
+		letter-spacing: -1px;
+		color: #102445;
+	}
+
 	.h-2-white-responsive{
 		font-size: 65px;
 		font-weight: 600;
@@ -74,6 +80,14 @@ h1 {
 		color: white;
 
 	}
+	.h-1-blue-responsive{
+		font-size: 75px;
+		font-weight: bold;
+		line-height: 1.02;
+		letter-spacing: -1px;
+		color: #102445;
+	}
+
 	.h-2-blue-responsive{
 		font-size: 38px;
 		font-weight: 700;
