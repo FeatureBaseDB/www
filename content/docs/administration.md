@@ -114,22 +114,76 @@ Note: This will only work when the replication factor is >= 2
 
 ##### Using Index Sync
 
-1. Shutdown the cluster.
-2. Modify config file to replace existing node address with new node.
-3. Restart all nodes in the cluster.
-4. Wait for auto Index sync to replicate data from existing nodes to new node.
+- Shutdown the cluster.
+- Modify config file to replace existing node address with new node.
+- Restart all nodes in the cluster.
+- Wait for auto Index sync to replicate data from existing nodes to new node.
 
 ##### Copying data files manually
 
-1. To accomplish this goal you will 1st need:
-    a. List of all Indexes on your cluster
-    b. List of all frames in your Indexes
-    c. Max slice per Index, listed in the /status endpoint
+- To accomplish this goal you will 1st need:
+  - List of all Indexes on your cluster
+  - List of all frames in your Indexes
+  - Max slice per Index, listed in the /status endpoint
+- With this information you can query the `/fragment/nodes` endpoint and iterate over each slice
+- Using the list of slices owned by this node you will then need to manually:
+  - setup a directory structure similar to the other nodes with a path for each Index/Frame
+  - copy each owned slice for an existing node to this new node
+- Modify the cluster config file to replace the previous node address with the new node address.
+- Restart the cluster
+- Wait for the 1st sync (10 minutes) to validate Index connections
 
-2. With this information you can query the `/fragment/nodes` endpoint and iterate over each slice
-3. Using the list of slices owned by this node you will then need to manually:
-    a. setup a directory structure similar to the other nodes with a path for each Index/Frame
-    b. copy each owned slice for an existing node to this new node
-4. Modify the cluster config file to replace the previous node address with the new node address.
-5. Restart the cluster
-6. Wait for the 1st sync (10 minutes) to validate Index connections
+#### Metrics
+
+Pilosa can be configured to emit metrics on its internal processes in 2 formats, Expvar or StatsD.  Metric recording is disabled by default and enabled through the configuration file.  
+Through the configuration file choose the metric type, host to receive events, and polling interval for runtime metrics.
+
+##### Tags
+StatsD Tags are in DataDog format (key:value), and we tag the following:
+
+- NodeID
+- Index
+- Frame
+- View
+- Slice
+
+##### Events
+We currently track the following events
+
+<strong id="index">Index:</strong> The creation of a new Index.
+
+<strong id="frame">Frame:</strong> The creation of a new Frame.
+
+<strong id="maxSlice">MaxSlice:</strong> The Creation of a new Slice.
+
+<strong id="setbit">SetBit:</strong> Count of set bits on a row and column.
+
+<strong id="clearbit">ClearBit:</strong> Count of cleared bits a previously set bit on a row and column.
+
+<strong id="importbit">ImportBit:</strong> During a bulk data import this records the count of bits created.
+
+<strong id="setrowattrs">SetRowAttrs:</strong> Count of Attributes set per row
+
+<strong id="setcollumnattrs">SetColumnAttrs:</strong> Count of Attributes set per collumn.
+
+<strong id="bitmap">Bitmap:</strong> Count of Bitmap queries run.
+
+<strong id="topn">TopN:</strong> Count of TopN queries run.
+
+<strong id="union">Union:</strong> Count of Union queries.
+
+<strong id="intersection">Intersection:</strong> Count of Intersection queries.
+
+<strong id="difference">Difference:</strong> Count of Difference queries.
+
+<strong id="count">Count:</strong> Count of Count queries.
+
+<strong id="range">Range:</strong> Count of Range queries.
+
+<strong id="snapshot">Snapshot:</strong> Event count when the snapshot process is triggered.
+
+<strong id="blockrepair">BlockRepair:</strong> Count of data blocks that were out of sync and repaired.
+
+<strong id="garbage_collection">Garbage Collection:</strong> Event count when Garbage Collection occurs, 
+
+<strong id="goroutines">Goroutines:</strong> Number of Goroutines running.
