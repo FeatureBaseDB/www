@@ -6,7 +6,7 @@ We are an open source project and want to keep this as simple as possible for th
 
 #### License
 
-The Pilosa Community Edition is licensed under the Apache License, Version 2.0, which allows you a lot of room to mod and / or ship something based off of Pilosa Community Edition. Pilosa Enterprise Edition is licensed separately; [contact us](/about/#contact) for more details. We have developed this [license FAQ](/legal/license-faq/) in case you want to dive deeper.
+The Pilosa Community Edition is licensed under the Apache License, Version 2.0, which allows you a lot of room to mod and / or ship something based off of Pilosa Community Edition. Pilosa Enterprise Edition is licensed separately; [contact us](/about/#contact) for more details.
 
 #### Contributor License Agreement
 
