@@ -15,8 +15,7 @@ title = "Glossary"
 
 <strong id="bitmap">Bitmap:</strong> The on-disk and in-memory representation of a Row.
 
-<strong id="roaring-bitmap">Roaring Bitmap:</strong> This is the compressed bitmap format which Pilosa uses.
- http://roaringbitmap.org
+<strong id="roaring-bitmap">Roaring Bitmap:</strong> [Roaring Bitmap](http://roaringbitmap.org) is the compressed bitmap format which Pilosa uses.
 
 <strong id="attribute">Attribute:</strong> Attributes can be associated to both rows and columns.  This metadata is kept separately from the core binary matrix in a BoltDB store.
 
@@ -48,7 +47,7 @@ title = "Glossary"
 
 <strong id="protobuf">Protobuf:</strong>: [Protocol Buffers](https://developers.google.com/protocol-buffers/) is a binary serialization format which Pilosa uses for internal messages, and can be used by clients as an alternative to JSON.
 
-<strong id="toml">TOML:</strong> We use TOML for our configuration file format. https://github.com/toml-lang/toml
+<strong id="toml">TOML:</strong> We use [TOML](https://github.com/toml-lang/toml) for our configuration file format.
 
 <strong id="jump-consistent-hash">Jump Consistent Hash:</strong> A fast, minimal memory, consistent hash algorithm that evenly distributes the workload even when the number of buckets changes.
 https://arxiv.org/pdf/1406.2294v1.pdf

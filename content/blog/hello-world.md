@@ -1,12 +1,16 @@
 +++
 date = "2017-02-07T18:52:36-06:00"
-title = "My Third Blog Post"
-tags = ["bitmap","pql"]
+title = "Hello, World"
 author = "Travis Turner"
+featured = "true"
+image = "/img/blog/hello-world.png"
+disable_overlay = true
+overlay_color = "blue" # blue, green, or light
 +++
 
-<!-- This is the abstract of this 3rd blog post.
-It will show up in the summary.
+Lorem ipsum dolor sit amet, [I'm an inline-style link](https://www.google.com) consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+This is the abstract of this 3rd blog post.  It will show up in the summary.
 
 <!--more-->
 
@@ -15,15 +19,12 @@ It will show up in the summary.
 Some info about section 3
 
 
-
-
-
 ```
 func foo(s string) string, error {
     x := s
     return x, nil
 }
-``` -->
+``` 
 
 
 ##### Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

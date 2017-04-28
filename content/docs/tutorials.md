@@ -30,21 +30,39 @@ The NYC taxi data is comprised of a number of csv files listed here: http://www.
 
 We import these fields, creating one or more Pilosa frames from each of them:
 
-*(table 1 from notebook)*
+frame	|mapping
+------------|---------------------
+cab_type	|direct map of enum int → row ID
+dist_miles	|round(dist) → row ID
+total_amount_dollars	|round(dist) → row ID
+passenger_count	|direct map of integer value → row ID
+drop_grid_id	|(lat, lon) → 100x100 rectangular grid → cell ID
+drop_year	|year(timestamp) → row ID
+drop_month	|month(timestamp) → row ID
+drop_day	|day(timestamp) → row ID
+drop_time	|time of day mapped to one of 48 half-hour buckets
+pickup_grid_id	|(lat, lon) → 100x100 rectangular grid → cell ID
+pickup_year	|year(timestamp) → row ID
+pickup_month	|month(timestamp) → row ID
+pickup_day	|day(timestamp) → row ID
+pickup_time	|time of day mapped to one of 48 half-hour buckets → row ID
 
 We also created two extra frames that represent the duration and average speed of each ride:
 
-*(table 2 from notebook)*
+frame	|mapping
+--------------------|-------------
+duration_minutes	|round(drop_timestamp - pickup_timestamp) → row ID
+speed_mph	|round(dist_miles / (drop_timestamp - pickup_timestamp)) → row ID
 
 ##### Mapping
 
 Each column that we want to use must be mapped to a combination of frames and row IDs according to some rule. There are many ways to approach this mapping, and the taxi dataset gives us a good overview of possibilities.
 
-###### 0 columns -> 1 frame
+###### 0 columns → 1 frame
 
 cab_type: contains one row for each type of cab. Each column, representing one ride, has a bit set in exactly one row of this frame. The mapping is a simple enumeration, for example yellow=0, green=1, etc. The values of the bits in this frame are determined by the source of the data. That is, we're importing data from several disparate sources: NYC yellow taxi cabs, NYC green taxi cabs, and Uber cars. For each source, the single row to be set in the cab_type frame is constant.
 
-###### 1 column -> 1 frame
+###### 1 column → 1 frame
 
 The following three frames are mapped in a simple direct way from single columns of the original data.
 
@@ -106,7 +124,7 @@ Here, we define a list of Mappers, each including a name, which we use to refer 
 
 **passenger_count:** This column contains small integers, so we use one of the simplest possible mappings: the column value is the row ID.
 
-###### 1 column -> multiple frames
+###### 1 column → multiple frames
 
 When working with a composite data type like a timestamp, there are plenty of mapping options. In this case, we expect to see interesting periodic trends, so we want to encode the cyclic components of time in a way that allows us to look at them independently during analysis.
 
@@ -116,7 +134,7 @@ We might continue this pattern with hours, minutes, and seconds, but we don't ha
 
 We do all of this for each timestamp of interest, one for pickup time and one for dropoff time. That gives us eight total frames for two timestamps: pickup_year, pickup_month, pickup_day, pickup_time, drop_year, drop_month, drop_day, drop_time.
 
-###### Multiple columns -> 1 frame
+###### Multiple columns → 1 frame
 
 The ride data also contains geolocation data: latitude and longitude for both pickup and dropoff. We just want to be able to produce a rough overview heatmap of ride locations, so we use a grid mapping. We divide the area of interest into a 100x100 grid in latitude-longitude space, label each cell in this grid with a single integer, and use that integer as the row ID.
 
@@ -211,13 +229,13 @@ python import_from_sdf -p <path_to_sdf_file> -file fingerprint_id.csv -i True
 
 To import csv file to pilosa, follow the instruction of Getting Started to run the Pilosa server and create the index and frame as above schemas in Data Model section.
 ```
-curl -XPOST localhost:10101/db -d '{"db": "mol", "options": {"columnLabel": "position_id"}}'
+curl -XPOST localhost:10101/index/mol -d '{"options": {"columnLabel": "position_id"}}'
 
-curl -XPOST localhost:10101/frame -d '{"db": "mol", "frame": "mole.n", "options": {"rowLabel": "chembl_id"}}'
+curl -XPOST localhost:10101/index/mol/frame/mole.n -d '{"options": {"rowLabel": "chembl_id"}}'
 
-curl -XPOST localhost:10101/db -d '{"db": "inverse-mol", "options": {"columnLabel": "chembl_id"}}'
+curl -XPOST localhost:10101/index/inverse-mol -d '{"options": {"columnLabel": "chembl_id"}}'
 
-curl -XPOST localhost:10101/frame -d '{"db": "mol", "frame": "mole.n", "options": {"rowLabel": "position_id"}}'
+curl -XPOST localhost:10101/index/inverse-mol/frame/mole.n -d '{"options": {"rowLabel": "position_id"}}'
 ```
 
 Run command to import to mol and inverse-mol index:
@@ -244,7 +262,7 @@ Return chembl_id = 6223. This script uses Pilosa’s Intersection query to get a
     fp = list(AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=4096).GetOnBits())
     ```
         
-* Query all chembl_id that has all “on” positions from inverse-mol db, return list of chembl_id
+* Query all chembl_id that has all “on” positions from inverse-mol index, return list of chembl_id
 
     ```python
     cluster = Client(hosts=[127.0.0.1:10101])
@@ -252,7 +270,7 @@ Return chembl_id = 6223. This script uses Pilosa’s Intersection query to get a
     mole_ids=cluster.query(“inverse-mol”,Intersect(*bit_maps)).values()[0]["bits"]
     ```
 
-* From list of chembl_id, query all “on” position from mol db, if the length of array of “on” position is matched to len(fp) then return that chembl_id, otherwise the given SMILES does not exist.
+* From list of chembl_id, query all “on” position from mol index, if the length of array of “on” position is matched to len(fp) then return that chembl_id, otherwise the given SMILES does not exist.
 
     ```python    
     for m in mole_ids:
@@ -275,7 +293,7 @@ Return chembl_id = [6223, 269758, 6206, 6228]. This script uses Pilosa’s TopN 
 * Query Pilosa’s TopN to get list of similarity chembl_id
     ```python
     query_string = 'TopN(Bitmap(id=6223, frame="mole.n"), frame="mole.n", n=2000000, tanimotoThreshold=70)'
-    topn = requests.post("http://127.0.0.1:10101/query?db=mol" , data=query_string)
+    topn = requests.post("http://127.0.0.1:10101/index/mol/query" , data=query_string)
     ```
 
 ##### Benchmark

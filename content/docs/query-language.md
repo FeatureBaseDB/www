@@ -22,7 +22,7 @@ Row and Column labels are set and frame and index creation time respectively. Wh
 
 ##### Examples
 
-Before running any of the example queries below, follow the instructions in the [Getting Started](getting_started) section to set up an index, frames, and populate them with some data.
+Before running any of the example queries below, follow the instructions in the [Getting Started](../getting-started) section to set up an index, frames, and populate them with some data.
 
 The examples just show the PQL quer(ies) needed - to run the query `SetBit(frame="stargazer", repo_id=10, user_id=1)` against a server using curl, you would:
 ```
@@ -31,7 +31,7 @@ curl -X POST "http://127.0.0.1:10101/index/repository/query" -d 'SetBit(frame="s
 
 #### Arguments and Types
 
-* `frame` The frame specifies on which Pilosa [frame]({{< ref "glossary.md#frames" >}}) the query will operate. Valid frame names are lower case strings; they start with an alphanumeric character, and contain only alphanumeric characters and `._-`. They must be 64 characters or less in length.
+* `frame` The frame specifies on which Pilosa [frame]({{< ref "glossary.md#frame" >}}) the query will operate. Valid frame names are lower case strings; they start with an alphanumeric character, and contain only alphanumeric characters and `._-`. They must be 64 characters or less in length.
 * `ROW_LABEL` Pilosa allows users to set different row labels for each frame at frame creation time. The default row label is `id`, but one may set a more descriptive row label for their data (such as `user_id`).
 * `COL_LABEL` Pilosa allows users to set a different column label for each index at index creation time. The default column label is `columnID`.
 * `TIMESTAMP` This is a timestamp in quotes with the following format `"YYYY-MM-DDTHH:MM"` (e.g. "2006-01-02T15:04")
@@ -71,7 +71,7 @@ SetBit(frame="stargazer", repo_id=10, user_id=1)
 
 This query illustrates setting a bit in the stargazer frame of the repository index. User with id=1 has starred repository with id=10.
 
-Setbit also supports providing a timestamp. To write the date that a user starred a repository.
+SetBit also supports providing a timestamp. To write the date that a user starred a repository.
 ```
 SetBit(frame="stargazer", repo_id=10, user_id=1, timestamp="2016-01-01T00:00")
 ```
