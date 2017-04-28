@@ -9,7 +9,7 @@ This can be used for constructing queries and viewing the cluster status.
 
 #### Console
 
-The Console view allows you to enter PQL queries and run them against your locally running server.  First you must select an Index with the Select index dropdown.  
+The [Console view](http://localhost:10101/#console) allows you to enter PQL queries and run them against your locally running server.  First you must select an Index with the Select index dropdown.  
 
 Each query's results will be displayed in the Output section along with the query time. 
 
@@ -17,4 +17,4 @@ The Console will keep a record of each query and its result with the latest quer
 
 #### Cluster Admin
 
-Use the Cluster Admin tab to view the current status of your cluster.  This contains information on each node in the cluster, plus the list of Indexes and Frames.
+Use the [Cluster Admin tab](http://localhost:10101/#admin) to view the current status of your cluster.  This contains information on each node in the cluster, plus the list of Indexes and Frames.
