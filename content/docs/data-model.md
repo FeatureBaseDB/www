@@ -8,7 +8,7 @@ title = "Data Model"
 
 The central component of Pilosa's data model is a boolean matrix. Each cell in the matrix is a single bit - if the bit is set, it indicates that a relationship exists between that particular row and column.
 
-rows and columns can represent anything (they could even represent the same set of things).Pilosa can associate arbitrary key/value pairs (referred to as attributes) to rows and columns, but queries and storage are optimized around the core matrix.
+Rows and columns can represent anything (they could even represent the same set of things). Pilosa can associate arbitrary key/value pairs (referred to as attributes) to rows and columns, but queries and storage are optimized around the core matrix.
 
 Pilosa lays out data first in rows, so queries which get all the set bits in one or many rows, or compute a combining operation on multiple rows such as Intersect or Union are the fastest. Pilosa also has the ability to categorize rows into different "frames" and quickly retrieve the top rows in a frame sorted by the number of bits set in each row.
 
@@ -70,11 +70,22 @@ The standard View contains the same Row/Column format as the input data.
 
 The Inverse View contains the same data with the Row and Column swapped.
 
+For example, the following `SetBit()` queries will result in the data described in the illustration below:
+```
+SetBit(frame="A", rowID=8, columnID=3)
+SetBit(frame="A", rowID=11, columnID=3)
+SetBit(frame="A", rowID=19, columnID=5)
+```
+
+![inverse frame diagram](/img/docs/frame-inverse.svg)
+
 ##### Time Quantums
 
-If a Frame has a time quantum, then Views are generated for each of the defined time segments. For example, a time quantum of YMDH for the date 2006-01-02T15:04:05 would create the following Views with data aggregating into each time segment as it is set:
+If a Frame has a time quantum, then Views are generated for each of the defined time segments. For example, for a frame with a time quantum of `YMD`, the following `SetBit()` queries will result in the data described in the illustration below:
 
-* standard_2006
-* standard_200601
-* standard_20060102
-* standard_2006010215
+```
+SetBit(frame="A", rowID=8, columnID=3, timestamp="2017-05-18T00:00")
+SetBit(frame="A", rowID=8, columnID=3, timestamp="2017-05-19T00:00")
+```
+
+![time quantum frame diagram](/img/docs/frame-time-quantum.svg)

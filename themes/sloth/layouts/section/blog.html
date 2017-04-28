@@ -53,7 +53,7 @@
       {{ end }}{{ end }}
 
       {{ range where .Data.Pages "Params.featured" "!=" "true" }}
-      <div class="blog-card {{ if not .Params.image }}no-img-light{{ end }}">
+      <div class="blog-card {{ if not .Params.image }}no-img-{{ .Params.overlay_color }}{{ end }}">
         <div class="blog-card-container">
 
           {{ if .Params.image }}

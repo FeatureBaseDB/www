@@ -5,7 +5,7 @@
   <div class="press-hero">
     <div class="careers-hero-content">
       <h3 class="h-2-white-responsive mb-5">
-        Press releases. Lorem ipsum si dolor sit amet, consectetur adipiscing.
+        Sloth News
       </h3>
     </div>
   </div>
@@ -16,70 +16,23 @@
         Press releases
       </h2>
       <p>
-        One paragraph description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum eit. Adipiscing elit. Condimentum porttitor. Dolor sit amet, consectetur adipiscing.
+        Founded in 2017, Pilosa is an open source, distributed bitmap index. We dramatically accelerate query speed across multiple, massive data sets. Our 12-person team of slothware engineers and enthusiasts is based in Austin, TX.
       </p>
     </div>
     <div class="press-cards mb-4">
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
-        <h3 class="h-3-blue mb-3">
-          Press Release Title
-        </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
-        <h3 class="h-3-blue mb-3">
-          Press Release Title
-        </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
-        <h3 class="h-3-blue mb-3">
-          Press Release Title
-        </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
 
-          <h3 class="h-3-blue mb-3">
-            <a class='unstyled-a' href="/">
-
-            Press Release Title
-          </a>
-          </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
+      {{ range where .Data.Pages "Params.featured" "!=" "true" }}
       <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
+        <h6 class="h-6-caps pt-5 pb-3">news • {{ .Date.Format "1/2/2006" }}</h6>
         <h3 class="h-3-blue mb-3">
-          Press Release Title
+          <a class="unstyled-a" href="{{ .URL }}">{{ .Title }}</a>
         </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
+        {{ .Summary | truncate 300 " ..." }}
       </div>
-      <div class="press-card">
-        <h6 class="h-6-caps pt-5 pb-3">news • 09/16/2017</h6>
-        <h3 class="h-3-blue mb-3">
-          Press Release Title
-        </h3>
-        <p>
-          Press release snippet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie. Aliquam vehicula elit si.
-        </p>
-      </div>
+      {{ end }}
 
     </div>
+    <!--
     <div class="pagination-container">
       <div class="page-icon ml-3">
         <a href="">
@@ -100,6 +53,7 @@
         </a>
       </div>
     </div>
+    -->
   </div>
   <div class="press-cta py-5">
     <div class="press-cta-content">
@@ -108,9 +62,11 @@
         One paragraph description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie.
       </p>
       <div class='press-cta-btn-container'>
+          <!--
         <button class="btn-pilosa btn btn-success">Download out presskit</button>
+          -->
         &nbsp;&nbsp;&nbsp;
-        <button class="btn-pilosa btn btn-success">press@pilosa.com</button>
+        <a class="btn-pilosa btn btn-success" href="mailto:press@pilosa.com">press@pilosa.com</a>
       </div>
 
     </div>

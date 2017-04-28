@@ -1,0 +1,140 @@
+{{ partial "header.html" . }}
+
+<div class="page-container">
+
+  <div class="single-hero-container">
+
+
+    <div class="single-hero-img">
+        <img style='object-fit: cover;'  height='500px'  width='100%'  src="{{ .Params.image }}" alt=""/>
+    </div>
+
+    <div class="single-hero-overlay blue-overlay"></div>
+    <div class="single-hero-header">
+      <h1 class="h-1-white mb-4">{{ .Title }}</h1>
+      <h6 class="h-6-caps-white">{{ .Date.Format "1/2/2006" }} • {{ .ReadingTime }} min read</h6>
+    </div>
+  </div>
+
+  <div class="single-body-container py-5  row justify-content-center">
+    <div class="sticky-social pt-5">
+      <div class="sticky-social-icons">
+        <div class="sticky-social-icon twitter-color">
+          <a href="">
+            <i class="fa fa-twitter white" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="sticky-social-icon linkedin-color">
+          <a href="">
+            <i class="fa fa-linkedin white" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="sticky-social-icon fb-color">
+          <a href="">
+            <i class="fa fa-facebook white" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="single-body-content col-md-6 mx-3">
+
+      {{ .Content }}
+
+      <div class="blog-card-author-content mt-5">
+        <img class='mr-3' src="/img/{{ .Site.Params.author_06}}" alt="">
+        <div class="body-bold">{{ .Params.author }}</div>
+      </div>
+  </div>
+</div>
+
+  <div class="get-more-container ">
+    <div class="container py-5">
+      <div class="get-more-content align-items-center">
+        <div class="col-lg">
+          <h2 class="h-2-blue">
+            Get even more from Pilosa
+          </h2>
+          <p class="get-more-text">
+            Stay updated on our progress and upcoming events.
+        </div>
+
+          <form class="col-lg" action='//pilosa.us15.list-manage.com/subscribe/post?u=804d9b2d65c9213cfa08eb7c3&amp;id=12e90aaa9a' method='POST'>
+            <input class='input-light' type="email" name='EMAIL' placeholder="Your email">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button  type="submit" class="btn-pilosa btn btn-success ">Sign up</button>
+          </form>
+
+      </div>
+    </div>
+  </div>
+
+<!--
+  <div class="other-posts-container py-5">
+      <div class="container py-5">
+        <div class="row">
+          <div  class=" col-8">
+            <h2 class="h-2-blue">
+              Other sloths have enjoyed these posts
+            </h2>
+      </div>
+      </div>
+    </div>
+
+    <div class="blog-cards-container">
+      <div class="blog-card">
+        <div class="blog-card-container">
+
+          <div class="blog-card-img-container mb-4">
+            <div class="blog-card-overlay blog-card-blue"></div>
+            <div class="blog-card-img">
+              <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
+            </div>
+          </div>
+
+          <div class="blog-card-content">
+            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
+            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
+            <p class="mb-5">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
+            </p>
+            <div class="blog-card-author-content">
+                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
+                <div class="body-bold">Rob Sonic</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="blog-card">
+        <div class="blog-card-container">
+
+          <div class="blog-card-img-container mb-4">
+            <div class="blog-card-overlay blog-card-blue"></div>
+            <div class="blog-card-img">
+              <img style='object-fit: cover;' width='100%' height='100%' src="//placehold.it/494x385" alt="">
+            </div>
+          </div>
+
+          <div class="blog-card-content">
+            <h3 class="h-3-blue mb-4">Ultrices Aneans</h3>
+            <h6 class="h-6-caps ">Featured • 10/27/2017 • 4 min read</h6>
+            <p class="mb-5">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
+            </p>
+            <div class="blog-card-author-content">
+                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
+                <div class="body-bold">Rob Sonic</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+-->
+    </div>
+
+
+</div>
+{{ partial "footer.html" . }}
