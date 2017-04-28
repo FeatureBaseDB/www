@@ -20,22 +20,7 @@
   <div class="blog-list-container py-5">
 
     <div class="container">
-      <!--
-      <div class="blog-list-dropdown-container py-4">
-        <div class="blog-list-show">Show: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
-        <div class="dropdown">
-          <button class="dropdown-btn btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class='inner-dropdown'>
-              All
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </div>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-          </div>
-        </div>
-      </div>
-      -->
+
 
     <div  class="blog-cards-container">
       {{ range $key, $taxonomy := .Site.Taxonomies.featured }}{{ range $taxonomy.Pages }}
