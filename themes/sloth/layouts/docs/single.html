@@ -177,6 +177,13 @@
           </ul>
         </li>
         <li>
+            <a href="/docs/webui/" {{ if eq $name "webui" }} class="docs-active" {{ end }}>WebUI</a>
+            <ul>
+                <li><a href="/docs/configuration/#console">Console</a></li>
+                <li><a href="/docs/configuration/#cluster-admin">Cluster Admin</a></li>
+            </ul>
+        </li>
+        <li>
           <a href="/docs/configuration/" {{ if eq $name "configuration" }} class="docs-active" {{ end }}>Configuration</a>
           <ul>
               <li><a href="/docs/configuration/#command-line-flags">Command line flags</a></li>
