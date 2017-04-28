@@ -383,9 +383,11 @@ footer a:hover{
   justify-content: space-between;
 }
 
+/*
 .use-cases-card:hover{
   background: #eaf2f6;
 }
+*/
 .use-cases-card-img{
   display: flex;
   justify-content: flex-end;
@@ -404,6 +406,7 @@ footer a:hover{
 
 
 .use-cases-card-arrow{
+  display: none;
   font-size: 30px;
   color: #2a4871;
 }

@@ -4,6 +4,7 @@ title = "Pilosa"
 theme = "sloth"
 
 enableRobotsTXT = true
+ignoreFiles = ["/use-cases/"]
 
 [params]
     company = "Pilosa"

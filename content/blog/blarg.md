@@ -3,6 +3,7 @@ date = "2017-03-07T18:52:36-06:00"
 title = "Beyond the Cloud"
 author = "Troy Lanier"
 image = "/img/community_sloth.svg"
+draft = true
 +++
 
 The Cloud is crazy.
