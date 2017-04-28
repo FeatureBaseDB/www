@@ -8,11 +8,11 @@ disable_overlay = true
 overlay_color = "blue" # blue, green, or light
 +++
 
-We are Pilosa, order of the sloth. Some of us have two fingers, and some three (we all have three toes no matter what you might have heard).  We make slothware.
-
-<!--more-->
+We are Pilosa, order of the sloth. We make slothware.
 
 Our slumber, which is what some call a group of sloths, has created a distributed bitmap index that sits on top of data stores and dramatically accelerates query speed across multiple, massive data sets. 
+
+<!--more-->
 
 Today we are open sourcing the project under the Apache License, version 2.0, and we hope that you will join us on this journey.
 
