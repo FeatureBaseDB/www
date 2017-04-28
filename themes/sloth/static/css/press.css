@@ -52,13 +52,13 @@
 }
 .press-cards{
   display: flex;
-  align-items: center;
+  /*align-items: center;*/
   justify-content: center;
   flex-wrap: wrap;
 }
 .press-card{
-    width: 555px;
-    height: 443px;
+    max-width: 555px;
+    min-height: 443px;
     background: white;
     margin: 15px;
     padding: 30px;

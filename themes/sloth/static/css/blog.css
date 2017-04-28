@@ -56,15 +56,16 @@
 }
 
 .blog-card-featured{
-  width: 93%;
+  width: 90%;
 
   margin: 15px;
   background: white;
   display: flex;
   flex-wrap: wrap;
   justify-content:  center;
-
+  align-items: center;
 }
+
 
 .blog-card:hover,
 .blog-card-featured:hover{
