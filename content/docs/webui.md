@@ -4,7 +4,7 @@ title = "WebUI"
 
 ## WebUI
 
-The Pilosa server comes packaged with in browser WebUI.  [localhost:10101](http://localhost:10101)
+The Pilosa server comes packaged with in-browser WebUI.  When you run a local Pilosa server on the default host, you can access it at [localhost:10101](http://localhost:10101)
 This can be used for constructing queries and viewing the cluster status.
 
 #### Console
