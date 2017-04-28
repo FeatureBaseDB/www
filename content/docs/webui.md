@@ -11,9 +11,11 @@ This can be used for constructing queries and viewing the cluster status.
 
 The [Console view](http://localhost:10101/#console) allows you to enter PQL queries and run them against your locally running server.  First you must select an Index with the Select index dropdown.  
 
-Each query's results will be displayed in the Output section along with the query time. 
+Each query's result will be displayed in the Output section along with the query time. 
 
 The Console will keep a record of each query and its result with the latest query on top.
+
+![console](/img/docs/webui-console.png)
 
 #### Cluster Admin
 
