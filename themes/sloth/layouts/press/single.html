@@ -20,17 +20,17 @@
     <div class="sticky-social pt-5">
       <div class="sticky-social-icons">
         <div class="sticky-social-icon twitter-color">
-          <a href="">
+            <a href="https://twitter.com/home?status={{ .Title | urlquery }}%20{{ .Permalink | urlquery }}">
             <i class="fa fa-twitter white" aria-hidden="true"></i>
           </a>
         </div>
         <div class="sticky-social-icon linkedin-color">
-          <a href="">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink | urlquery }}&title={{ .Title | urlquery }}&summary={{ .Summary | plainify | urlquery }}&source=">
             <i class="fa fa-linkedin white" aria-hidden="true"></i>
           </a>
         </div>
         <div class="sticky-social-icon fb-color">
-          <a href="">
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | urlquery }}">
             <i class="fa fa-facebook white" aria-hidden="true"></i>
           </a>
         </div>
