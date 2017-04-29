@@ -1,5 +1,6 @@
 +++
-date = "2017-04-28T12:52:36-06:00"
+date = "2017-04-29"
+publishdate = "2017-04-29"
 title = "Hello, World"
 author = "Travis Turner"
 featured = "true"
