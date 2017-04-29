@@ -50,6 +50,9 @@ ignoreFiles = ["/use-cases/"]
     learning_and_growing = "learning_and_growing.svg"
     title = "Pilosa"
     subtitle = "Beyond the cloud."
+    twitter_url = "https://twitter.com/slothware"
+    facebook_url = "https://www.facebook.com/pilosaco"
+    linkedin_url = "https://linkedin.com/company/pilosa"
 
     tagline = "it's fast."
 
