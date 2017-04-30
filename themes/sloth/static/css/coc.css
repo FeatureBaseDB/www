@@ -11,12 +11,14 @@
 
 
 @media (min-width: 900px){
+    /*
   .coc-hero{
     background-image: url("/img/splash_coc.svg") ;
     background-size: 40% 80%;
     background-repeat: no-repeat;
     background-position: bottom right;
   }
+      */
   .coc-hero-content{
     /*font-size: 38px;*/
       /*width: 45%;*/
