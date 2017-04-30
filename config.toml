@@ -4,7 +4,8 @@ title = "Pilosa"
 theme = "sloth"
 
 enableRobotsTXT = true
-ignoreFiles = ["/use-cases/"]
+googleAnalytics = "UA-96186501-1"
+ignoreFiles = ["/use-cases/", "/press/"]
 
 [params]
     company = "Pilosa"
