@@ -11,7 +11,7 @@ You can find the Go client library for Pilosa at our [Go Pilosa Repository](http
 
 We are going to use the index you have created in the [Getting Started](../getting-started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
 
-Note that, there are no error handling in the example below for brevity purpose.
+Error handling has been omitted in the example below for brevity.
 
 ```go
 package startrace
@@ -90,7 +90,7 @@ You can find the Python client library for Pilosa at our [Python Pilosa Reposito
 
 We are going to use the index you have created in the [Getting Started](../getting-started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
 
-Note that, there are no error handling in the example below for brevity purpose.
+Error handling has been omitted in the example below for brevity.
 
 ```python
 from pilosa import Index, Client, PilosaError
@@ -145,7 +145,7 @@ You can find the Java client library for Pilosa at our [Java Pilosa Repository](
 
 We are going to use the index you have created in the [Getting Started](../getting-started) section. Before carrying on, make sure that example index is created and Pilosa server is running on the default address: `http://localhost:10101`.
 
-Note that, there are no error handling in the example below for brevity purpose.
+Error handling has been omitted in the example below for brevity.
 
 ```java
 import com.pilosa.client.*;
