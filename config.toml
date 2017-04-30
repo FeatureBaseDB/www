@@ -54,8 +54,7 @@ ignoreFiles = ["/use-cases/", "/press/"]
     twitter_url = "https://twitter.com/slothware"
     facebook_url = "https://www.facebook.com/pilosaco"
     linkedin_url = "https://linkedin.com/company/pilosa"
-
-    tagline = "it's fast."
+    description = "Pilosa is an open source, distributed bitmap index that dramatically accelerates queries across multiple, massive data sets."
 
 [taxonomies]
     featured = "featured"

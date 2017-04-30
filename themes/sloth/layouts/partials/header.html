@@ -6,9 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="title" content="{{ .Site.Params.title }}">
-
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+    <meta name="keywords" content="Pilosa,index,bitmap index,database,distributed database,distributed index,distributed bitmap index,queries,big data">
     <meta property="og:title" content="{{ .Title }}"/>
-  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
     <meta property="og:url" content="{{ .Permalink }}"/>
     <meta property="og:image" content="{{ if .Params.image }}{{ .Params.image | absURL}}{{ else }}{{ .Site.Params.logo | absURL }}{{ end }}"/>
     <meta property="og:site_name" content="{{ .Site.Params.title }}">
