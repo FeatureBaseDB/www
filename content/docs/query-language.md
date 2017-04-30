@@ -26,7 +26,9 @@ Before running any of the example queries below, follow the instructions in the 
 
 The examples just show the PQL quer(ies) needed - to run the query `SetBit(frame="stargazer", repo_id=10, user_id=1)` against a server using curl, you would:
 ```
-curl -X POST "http://127.0.0.1:10101/index/repository/query" -d 'SetBit(frame="stargazer", repo_id=10, user_id=1)'
+curl localhost:10101/index/repository/query \
+     -X POST \
+     -d 'SetBit(frame="stargazer", repo_id=10, user_id=1)'
 ```
 
 #### Arguments and Types

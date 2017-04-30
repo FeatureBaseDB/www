@@ -47,7 +47,9 @@ The request payload is in JSON, and may contain the `options` field. The `option
 
 Request:
 ```
-curl -XPOST localhost:10101/index/user -d '{"options": {"columnLabel": "user_id"}}'
+curl localhost:10101/index/user \
+     -X POST \
+     -d '{"options": {"columnLabel": "user_id"}}'
 ```
 
 Response:
@@ -77,7 +79,9 @@ Sends a query to the Pilosa server with the given index. The request body is UTF
 
 Request:
 ```
-curl -XPOST localhost:10101/index/user/query -d 'Bitmap(frame="language", id=5)'
+curl localhost:10101/index/user/query \
+     -X POST \
+     -d 'Bitmap(frame="language", id=5)'
 ```
 
 Response:
@@ -91,11 +95,16 @@ The response doesn't include column attributes by default. To return them, set `
 
 Request:
 ```
-curl -XPOST 'localhost:10101/index/user/query?columnAttrs=true' -d 'Bitmap(frame="language", id=5)'
+curl localhost:10101/index/user/query?columnAttrs=true \
+     -X POST \
+     -d 'Bitmap(frame="language", id=5)'
 ```
 Response:
 ```
-{"results":[{"attrs":{},"bits":[100]}],"columnAttrs":[{"id":100,"attrs":{"name":"Klingon"}}]}
+{
+  "results":[{"attrs":{},"bits":[100]}],
+  "columnAttrs":[{"id":100,"attrs":{"name":"Klingon"}}]
+}
 ```
 
 #### `/index/<index-name>/time-quantum`
@@ -120,7 +129,9 @@ The payload is in JSON with the format: `{"timeQuantum": "${TIME_QUANTUM}"}`. Va
 
 Request:
 ```
-curl -XPOST 'localhost:10101/index/user/time-quantum' -d '{"timeQuantum": "YM"}'
+curl localhost:10101/index/user/time-quantum \
+     -X POST \
+     -d '{"timeQuantum": "YM"}'
 ```
 
 Response:
@@ -141,7 +152,9 @@ The request payload is in JSON, and may contain the `options` field. The `option
 
 Request:
 ```
-curl -XPOST localhost:10101/index/user/frame/language -d '{"options": {"rowLabel": "language_id"}}'
+curl localhost:10101/index/user/frame/language \
+     -X POST \
+     -d '{"options": {"rowLabel": "language_id"}}'
 ```
 
 Response:
@@ -185,7 +198,9 @@ The payload is in JSON with the format: `{"timeQuantum": "${TIME_QUANTUM}"}`. Va
 
 Request:
 ```
-curl -XPOST 'localhost:10101/index/user/frame/language/time-quantum' -d '{"timeQuantum": "YM"}'
+curl localhost:10101/index/user/frame/language/time-quantum \
+     -X POST \
+     -d '{"timeQuantum": "YM"}'
 ```
 
 Response:

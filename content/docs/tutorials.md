@@ -227,18 +227,26 @@ For `inverse-mol` index, each row in csv file has the format ‘fingerprint_bit,
 python import_from_sdf -p <path_to_sdf_file> -file fingerprint_id.csv -i True
 ```
 
-To import csv file to pilosa, follow the instruction of Getting Started to run the Pilosa server and create the index and frame as above schemas in Data Model section.
+First, follow the instruction in the [getting started]({{< ref "getting-started.md" >}}) guide to run a Pilosa server. Then create the indexes and frames according to the schemas outlined in the Data Model section above.
 ```
-curl -XPOST localhost:10101/index/mol -d '{"options": {"columnLabel": "position_id"}}'
+curl localhost:10101/index/mol \
+     -X POST \
+     -d '{"options": {"columnLabel": "position_id"}}'
 
-curl -XPOST localhost:10101/index/mol/frame/mole.n -d '{"options": {"rowLabel": "chembl_id"}}'
+curl localhost:10101/index/mol/frame/mole.n \
+     -X POST \
+     -d '{"options": {"rowLabel": "chembl_id"}}'
 
-curl -XPOST localhost:10101/index/inverse-mol -d '{"options": {"columnLabel": "chembl_id"}}'
+curl localhost:10101/index/inverse-mol \
+     -X POST \
+     -d '{"options": {"columnLabel": "chembl_id"}}'
 
-curl -XPOST localhost:10101/index/inverse-mol/frame/mole.n -d '{"options": {"rowLabel": "position_id"}}'
+curl localhost:10101/index/inverse-mol/frame/mole.n \
+     -X POST \
+     -d '{"options": {"rowLabel": "position_id"}}'
 ```
 
-Run command to import to mol and inverse-mol index:
+Run the following commands to import the csv data into the `mol` and `inverse-mol` indexes:
 ```
 pilosactl import -d mol -f mole.n id_fingerprint.csv
 pilosactl import -d inverse-mol -f mole.n fingerprint_id.csv
