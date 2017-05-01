@@ -46,21 +46,27 @@ curl localhost:10101/schema
 
 Before we can import data or run queries, we need to create our indexes and the frames within them. Let's create the repository index first:
 ```
-curl -XPOST localhost:10101/index/repository -d '{"options": {"columnLabel": "repo_id"}}'
+curl localhost:10101/index/repository \
+     -X POST \
+     -d '{"options": {"columnLabel": "repo_id"}}'
 ```
 
 Repository IDs are the main focus of the `repository` index, so we chose `repo_id` as the column label.
 
 Let's create the `stargazer` frame which has user IDs of stargazers as its rows:
 ```
-curl -XPOST localhost:10101/index/repository/frame/stargazer -d '{"options": {"rowLabel": "stargazer_id", "timeQuantum": "YMD"}}'
+curl localhost:10101/index/repository/frame/stargazer \
+     -X POST \
+     -d '{"options": {"rowLabel": "stargazer_id", "timeQuantum": "YMD"}}'
 ```
 
 Since our data contains time stamps for the time users starred repos, we set the *time quantum* for the `stargazer` frame in the options as well. Time quantum is the resolution of the time we want to use, and we set it to `YMD` (year, month, day) for `stargazer`.
 
 Next up is the `language` frame, which will contain IDs for programming languages:
 ```
-curl -XPOST localhost:10101/index/repository/frame/language -d '{"options": {"rowLabel": "language_id"}}'
+curl localhost:10101/index/repository/frame/language \
+     -X POST \
+     -d '{"options": {"rowLabel": "language_id"}}'
 ```
 ##### Import Some Data
 
@@ -94,32 +100,44 @@ Note that, both the user IDs and the repository IDs were remapped to sequential 
 
 Which repositories did user 14 star:
 ```
-curl -XPOST localhost:10101/index/repository/query -d 'Bitmap(frame="stargazer", stargazer_id=14)'
+curl localhost:10101/index/repository/query \
+     -X POST \
+     -d 'Bitmap(frame="stargazer", stargazer_id=14)'
 ```
 
 What are the top 5 languages in the sample data:
 ```
-curl -XPOST 'localhost:10101/index/repository/query' -d 'TopN(frame="language", n=5)'
+curl localhost:10101/index/repository/query \
+     -X POST \
+     -d 'TopN(frame="language", n=5)'
 ```
 
 Which repositories were starred by user 14 and 19:
 ```
-curl -XPOST 'localhost:10101/index/repository/query' -d 'Intersect(Bitmap(frame="stargazer", stargazer_id=14), Bitmap(frame="stargazer", stargazer_id=19))'
+curl localhost:10101/index/repository/query \
+     -X POST \
+     -d 'Intersect(Bitmap(frame="stargazer", stargazer_id=14), Bitmap(frame="stargazer", stargazer_id=19))'
 ```
 
 Which repositories were starred by user 14 or 19:
 ```
-curl -XPOST 'localhost:10101/index/repository/query' -d 'Union(Bitmap(frame="stargazer", stargazer_id=14), Bitmap(frame="stargazer", stargazer_id=19))'
+curl localhost:10101/index/repository/query \
+     -X POST \
+     -d 'Union(Bitmap(frame="stargazer", stargazer_id=14), Bitmap(frame="stargazer", stargazer_id=19))'
 ```
 
 Which repositories were starred by user 14 and 19 and also were written in language 1:
 ```
-curl -XPOST 'localhost:10101/index/repository/query' -d 'Intersect(Bitmap(frame="stargazer", stargazer_id=14), Bitmap(frame="stargazer", stargazer_id=19), Bitmap(frame="language", language_id=1))'
+curl localhost:10101/index/repository/query \
+     -X POST \
+     -d 'Intersect(Bitmap(frame="stargazer", stargazer_id=14), Bitmap(frame="stargazer", stargazer_id=19), Bitmap(frame="language", language_id=1))'
 ```
 
 Set user 99999 as a stargazer for repository 77777:
 ```
-curl -XPOST 'localhost:10101/index/repository/query' -d 'SetBit(frame="stargazer", repo_id=77777, stargazer_id=99999)'
+curl localhost:10101/index/repository/query \
+     -X POST \
+     -d 'SetBit(frame="stargazer", repo_id=77777, stargazer_id=99999)'
 ```
 
 #### What's Next?
