@@ -162,7 +162,37 @@ After designing this schema and mapping, we capture it in a JSON definition file
 
 ##### Queries
 
-(code and explanation from notebook)
+Now we can run some example queries.
+
+Count per cab type can be retrieved, sorted, with a single PQL call.
+
+```
+TopN(frame=cab_type)
+```
+
+High traffic location ids can be retrieved with a similar call. These 
+
+```
+TopN(frame=pickup_grid_id)
+```
+
+Average of total_amount per passenger_count can be computed with some postprocessing. We use a small number of `TopN` calls to retrieve counts of rides by passenger_count, then use those counts to compute an average.
+
+```python
+queries = ''
+pcounts = range(10)
+for i in pcounts:
+    queries += "TopN(Bitmap(id=%d, frame='passenger_count.n'), frame=total_amount_dollars.n)" % i
+resp = requests.post(qurl, data=queries)
+
+average_amounts = []
+for pcount, topn in zip(pcounts, resp.json()['results']):
+    wsum = sum([r['count'] * r['key'] for r in topn])
+    count = sum([r['count'] for r in topn])
+    average_amounts.append(float(wsum)/count)
+```
+
+For more examples and details, see this [ipython notebook](https://github.com/alanbernstein/pilosa-notebooks/blob/master/taxi-use-case.ipynb).
 
 #### Chemical similarity search
 
