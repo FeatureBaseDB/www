@@ -222,7 +222,7 @@ After retrieving chembl_id from the Inverse View, we can use the Tanimoto coeffi
 
 To import data into pilosa, we need to get chembl_id and SMILES from SD files, convert SMILES to Morgan fingerprints, and then write chembl_id and fingerprint to Pilosa. The fastest way is to extracted chembl_id and SMILES from SD file to csv file, then use the `pilosa import command to import the csv file into pilosa. Since chembl_id in the SD file is always paired with CHEMBL, e.g CHEMBL6329, and because Pilosa doesn't support string keys, we will ignore CHEMBL and instead use chembl_id as an integer key.
 
-For the `mole` index, each row in the csv file has the format ‘chembl_id, fingerprint_bit’ by running the following command from Chem-usecase:
+For the `mole` index, each row in the csv file has the format ‘chembl_id, position_id’ by running the following command from Chem-usecase:
 ```
 python import_from_sdf.py -p <path_to_sdf_file> -file id_fingerprint.csv
 ```
