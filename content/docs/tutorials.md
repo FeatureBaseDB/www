@@ -69,7 +69,7 @@ The following three frames are mapped in a simple direct way from single columns
 dist_miles: each row represents rides of a certain distance. The mapping is simple: as an example, row 1 represents rides with a distance in the interval [0.5, 1.5]. That is, we round the floating point value of distance to an integer, and use that as the row ID directly. Generally, the mapping from a floating point value to a row ID could be arbitrary. The rounding mapping is concise to implement, which simplifies importing and analysis. As an added bonus, it's human-readable. We'll see this pattern used several times.
 
 In PDK parlance, we define a Mapper, which is simply a function that returns integer row IDs. PDK has a number of predefined mappers that can be described with a few parameters. One of these is LinearFloatMapper, which applies a linear function to the input, and casts it to an integer, so the rounding is handled implicitly. In code:
-```
+```go
 lfm := pdk.LinearFloatMapper{
     Min: -0.5,
     Max: 3600.5,
@@ -80,7 +80,7 @@ lfm := pdk.LinearFloatMapper{
 `Min` and `Max` define the linear function, and `Res` determines the maximum allowed value for the output row ID - we chose these values to produce a “round to nearest integer” behavior. Other predefined mappers have their own specific parameters, usually two or three.
 
 This mapper function is the core operation, but we need a few other pieces to define the overall process, which is encapsulated in the BitMapper object. This object defines which field(s) of the input data source to use (`Fields`), how to parse them (`Parsers`), what mapping to use (`Mapper`), and the name of the frame to use (`Frame`).
-```
+```go
 pdk.BitMapper{
     Frame:   "dist_miles",
     Mapper:  lfm,
@@ -90,7 +90,7 @@ pdk.BitMapper{
 ```
 
 These same objects are represented in the JSON definition file:
-```
+```go
 {
     "Fields": [
         "Trip_distance": 10,
@@ -145,7 +145,7 @@ Again, there are many mapping options for location data. For example, we might c
 ###### Complex mappings
 
 We also anticipate looking for trends in ride duration and speed, so we want to capture this information during the import process. For the frame `duration_minutes`, we compute a row ID as `round((drop_timestamp - pickup_timestamp).minutes)`. For the frame `speed_mph`, we compute row ID as `round(dist_miles / (drop_timestamp - pickup_timestamp).minutes)`. These mapping calculations are straightforward, but because they require arithmetic operations on multiple columns, they are a bit too complex to capture in the basic mappers available in PDK. Instead, we define custom mappers to do the work:
-```
+```go
 durm := pdk.CustomMapper{
     Func: func(fields ...interface{}) interface{} {
         start := fields[0].(time.Time)
