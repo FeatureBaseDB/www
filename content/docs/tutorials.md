@@ -12,7 +12,7 @@ New York City released an extremely detailed data set of over 1 billion taxi rid
 
 Transportation in general is a compelling use case for Pilosa as it often involves multiple disparate data sources, as well as high rate, real time, and extremely large amounts of data (particularly if one wants to draw reasonable conclusions).
 
-We've written a tool to help import the NYC taxi data into Pilosa - this tool is part of the PDK (Pilosa Development Kit), and takes advantage of a number of reusable modules that may help you import other data as well. Follow along and we'll explain the whole process step by step.
+We've written a tool to help import the NYC taxi data into Pilosa - this tool is part of the [PDK](../pdk) (Pilosa Development Kit), and takes advantage of a number of reusable modules that may help you import other data as well. Follow along and we'll explain the whole process step by step.
 
 After initial setup, the PDK import tool does everything we need to define a Pilosa schema, map data to bitmaps accordingly, and import it into Pilosa.
 
