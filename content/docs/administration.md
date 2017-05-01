@@ -63,42 +63,6 @@ MAJOR.MINOR.PATCH:
 
 The Pilosa server should support PQL versioning using HTTP headers. On each request, the client should send a Content-Type header and an Accept header. The server should respond with a Content-Type header that matches the client Accept header. The server should also optionally respond with a Warning header if a PQL version is in a deprecation period, or an HTTP 400 error if a PQL version is no longer supported.
 
-##### Headers
-
-The server should return the Content-Type header matching the client's Accept header; the Content-Type header should follow this template:
-
-`Content-Type: application/vnd.pilosa.pql.v<version>`
-
-Version 1 of PQL should send the following request header:
-
-`Content-Type: application/vnd.pilosa.pql.v1`
-
-The Accept header should follow this template:
-
-`Accept: application/vnd.pilosa.json.v<version>`
-
-Version 1 of PQL should send the following request header:
-
-`Accept: application/vnd.pilosa.json.v1`
-
-##### Error handling
-
-`Content-Type: application/vnd.pilosa.json.v1`
-
-If a PQL version is in a deprecation period, the server responds with a Warning header, as defined in RFC7234, Section 5.5.7. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Warning
-
-The Warning header should follow the following template:
-
-`Warning: 299 pilosa/<pilosa-version> "<Deprecation message>" "<date (RFC7231, Section 7.1.1.1)>"`
-
-For example:
-
-```
-Warning: 299 pilosa/2.0 "Deprecated PQL version: PQL v2 will remove support for SetBit() in Pilosa 2.1. Please update your client to support Set() (See https://docs.pilosa.com/pql#versioning)." "Sat, 25 Aug 2017 23:34:45 GMT"
-```
-
-After the deprecation period, the server should reply with an HTTP 400 error, with the deprecation message in the response body.
-
 ##### Upgrading
 
 When upgrading, upgrade clients first, followed by server for all Minor and Patch level changes.
