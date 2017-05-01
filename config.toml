@@ -5,7 +5,7 @@ theme = "sloth"
 
 enableRobotsTXT = true
 googleAnalytics = "UA-96186501-1"
-ignoreFiles = ["/use-cases/", "/press/"]
+ignoreFiles = ["/press/"]
 
 [params]
     company = "Pilosa"
