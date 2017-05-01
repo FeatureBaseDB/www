@@ -30,7 +30,7 @@ Row ids are sequential increasing integers namespaced to each Frame within an In
 
 Frames are used to segment and define different functional characteristics within your entire index.  You can think of a Frame as a table-like data partition within your Index.
 
-Row-level attributes are namespaced at the Frame level.
+Row attributes are namespaced at the Frame level.
 
 ##### Ranked
 
@@ -46,11 +46,11 @@ The LRU cache maintains the most recently accessed Rows.
 
 #### Time Quantum
 
-The Time Quantum frame aggregates row data into specific time segments such as year, month, day, and hour.
+Setting a time quantum on a frame creates extra indices which allow Range queries down to the interval specified. For example - if the time quantum is set to `YMD`, Range queries down to the granularity of a day are supported. 
 
 #### Attribute
 
-Attributes are arbitrary key/value pairs that can be associated to both rows or columns.  This metadata is stored in a separate BoltDB data structure.
+Attributes are arbitrary key/value pairs that can be associated to both rows or columns.  This metadata is stored in a separate BoltDB data structure. 
 
 #### Slice
 

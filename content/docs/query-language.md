@@ -380,7 +380,7 @@ label instead of a row label is not supported for Range queries.
 
 When you set timestamp using SetBit, you will able to query all repositories that a user has starred within a date range.
 ```
-Range(frame="stargazer", user_id=1, start="2017-01-01T00:00", end="2017-03-02T03:04")
+Range(frame="stargazer", user_id=1, start="2017-01-01T00:00", end="2017-03-02T03:00")
 ```
 
 Returns `{{"attrs":{},"bits":[10, 20]}`
