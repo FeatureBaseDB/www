@@ -147,8 +147,11 @@ Creates a frame in the given index with the given name.
 
 The request payload is in JSON, and may contain the `options` field. The `options` field is a JSON object which may contain the following fields:
 
-* `rowLabel` (string): row label of the index.
-* `inverseEnabled` (boolean): Enables inverted frames for this frame if `true`.
+* `rowLabel` (string): Row label of the frame.
+* `timeQuantum` (string): [Time Quantum]({{< ref "data-model.md#time-quantum" >}}) for this frame.
+* `inverseEnabled` (boolean): Enables [the inverted view]({{< ref "data-model.md#inverse" >}}) for this frame if `true`.
+* `cacheType` (string): [ranked]({{< ref "data-model.md#ranked" >}}) or [LRU]({{< ref "data-model.md#lru" >}}) caching on this frame. Default is `lru`.
+* `cacheSize` (int): Number of rows to keep in the cache. Default 50,000.
 
 Request:
 ```
