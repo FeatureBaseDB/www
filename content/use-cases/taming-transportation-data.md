@@ -127,8 +127,8 @@ With a minor extension to the scalar bucketing described above, we can use Pilos
 
 ![alt](/img/smart-cities-grid.png)
 
-[Data](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml)
-[PQL](https://www.pilosa.com/docs/query-language/)
+<a href="http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml" class="btn-pilosa btn btn-primary m-2">Data</a>
+<a href="https://www.pilosa.com/docs/query-language/" class="btn-pilosa btn btn-primary m-2">TopN</a>
 
 References:  Oracle. Improving Logistics & Transportation Performance with Big Data: Architect’s Guide and Reference Architecture Introduction. February 2015.
 
