@@ -54,6 +54,8 @@ Some of the simple mapper functions available with PDK include:
 
 Run `make install` to build and install the `pdk` binary which contains all the examples. Just running `pdk` will bring up a list of all the examples, with a brief description of each. `pdk help <example>` will bring up a more detailed description of that example along with all arguments that it accepts to configure its functionality.
 
+<!--
 ##### Net
 
 A detailed discussion of using Pilosa to index network traffic data is available [here - TODO]link blog post). This will discuss the implementation of `pdk net` as it relates to the use of the PDK library tools.
+-->
