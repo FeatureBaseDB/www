@@ -1,6 +1,6 @@
 +++
 date = "2017-05-01"
-title = "Smart Cities"
+title = "Taming Transportation Data"
 +++
 
 ## The Problem
@@ -127,13 +127,14 @@ With a minor extension to the scalar bucketing described above, we can use Pilos
 
 ![alt](/img/smart-cities-grid.png)
 
-Button:  Sample Data.   
-Button: TopN Function.
-
+[Data](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml)
+[PQL](https://www.pilosa.com/docs/query-language/)
 
 References:  Oracle. Improving Logistics & Transportation Performance with Big Data: Architect’s Guide and Reference Architecture Introduction. February 2015.
 
 Paul A, Saravanan V, Thangaiah PRJ. “Data Mining Analytics to Minimize Logistics Cost.” International Journal of Advances in Science and Technology. 2(3). 2011. p89-107. 
 
  New York City Taxi & Limousine Commission. TLC Trip Record Data. Updated March 13, 2017.
+
+
 

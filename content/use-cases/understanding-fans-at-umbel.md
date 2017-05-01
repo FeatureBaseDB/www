@@ -1,6 +1,6 @@
 +++
 date = "2017-05-01"
-title = "High Cardinality Segmentation"
+title = "Understanding Fans at Umbel"
 +++
 
 Umbel enables Sports and Entertainment companies to sell more tickets, drive sponsorships, and understand its fans by connecting massive and disparate data sources such as ticket data, social network affinity data, geographic databases, and demographic databases to name a few. 

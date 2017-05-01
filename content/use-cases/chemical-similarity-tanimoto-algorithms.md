@@ -1,6 +1,6 @@
 +++
 date = "2017-05-01"
-title = "Chemical Similarity"
+title = "Chemical Similarity & Tanimoto Algorithms"
 +++
 
 ## Overview
@@ -53,9 +53,5 @@ topn = requests.post("http://127.0.0.1:10101/index/mol/query" , data=query_strin
 
 For a deeper dive on how to use implement Chemical Similarity in Pilosa and how to use the Tanimoto Algorithm check out the links below. 
 
-Button: Tutorial
-
-Button: Tanimoto
-
-
-
+[Data](https://www.ebi.ac.uk/chembl/downloads)
+[Tutorial](https://www.pilosa.com/docs/tutorials/#chemical-similarity-search)

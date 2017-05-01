@@ -1,6 +1,6 @@
 +++
 date = "2017-05-01"
-title = "Network Data"
+title = "Monitoring Network Traffic"
 +++
 
 Pilosa enables humans and machines correlate, filter, query, and otherwise make sense of massive volumes of network packet data.
@@ -92,7 +92,5 @@ Handling the mappings from row id to ip address, hostname, user agent, and other
 
 In a large network, there will likely be many points of capture all writing to Pilosa. Some form of coordination will be necessary to ensure that column ids are not used by more than one packet and row ids map to one and only one value (such as an IP address or hostname). Although the feasibility of actually storing all the raw pcap data is questionable in large networks, it looks slightly less daunting if each point of capture stores the data locally rather than moving it across the network again. If you know which capture point is responsible for a given range of packet ids, you may still be able to quickly retrieve full pcap data after having narrowed down which packets you are looking for in Pilosa. This capability would undoubtedly be extremely valuable.
 
-
-Button Data set  
-Button TopN function 
-
+[Data](https://stratosphereips.org/category/dataset.html)
+[PQL](https://www.pilosa.com/docs/query-language/)
