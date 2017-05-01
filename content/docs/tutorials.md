@@ -82,7 +82,7 @@ lfm := pdk.LinearFloatMapper{
 This mapper function is the core operation, but we need a few other pieces to define the overall process, which is encapsulated in the BitMapper object. This object defines which field(s) of the input data source to use (`Fields`), how to parse them (`Parsers`), what mapping to use (`Mapper`), and the name of the frame to use (`Frame`).
 ```
 pdk.BitMapper{
-    Frame:   "dist_miles.n",
+    Frame:   "dist_miles",
     Mapper:  lfm,
     Parsers: []pdk.Parser{pdk.FloatParser{}},
     Fields:  []int{fields["trip_distance"]},
@@ -105,7 +105,7 @@ These same objects are represented in the JSON definition file:
     ],
     "BitMappers": [
         {
-            "Frame": "dist_miles.n",
+            "Frame": "dist_miles",
             "Mapper": {
                 "Name": "lfm0"
          },
