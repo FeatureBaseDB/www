@@ -170,7 +170,7 @@ Count per cab type can be retrieved, sorted, with a single PQL call.
 TopN(frame=cab_type)
 ```
 
-High traffic location ids can be retrieved with a similar call. These 
+High traffic location IDs can be retrieved with a similar call. These IDs correspond to latitude, longitude pairs, which can be recovered from the mapping that generates the IDs.
 
 ```
 TopN(frame=pickup_grid_id)
