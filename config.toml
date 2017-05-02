@@ -10,6 +10,8 @@ ignoreFiles = []
 [params]
     company = "Pilosa"
     logo = "logo.svg"
+    logo_png = "logo.png"
+    logo_stacked_png = "logo_stacked.png"
     logo_white = "logo_white.svg"
     concepts = "concepts.svg"
     splash_home = "splash_home.svg"

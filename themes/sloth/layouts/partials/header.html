@@ -11,7 +11,7 @@
     <meta property="og:title" content="{{ .Title }}"/>
     <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
     <meta property="og:url" content="{{ .Permalink }}"/>
-    <meta property="og:image" content="{{ if .Params.image }}{{ .Params.image | absURL}}{{ else }}{{ (print "/img/" .Site.Params.logo) | absURL }}{{ end }}"/>
+    <meta property="og:image" content="{{ if .Params.image }}{{ .Params.image | absURL}}{{ else }}{{ (print "/img/" .Site.Params.logo_stacked_png) | absURL }}{{ end }}"/>
     <meta property="og:site_name" content="{{ .Site.Params.title }}">
     <meta property="og:updated_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}"/>
     <link rel="stylesheet" href="/css/bootstrap-pilosa.css" >
