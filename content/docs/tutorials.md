@@ -203,7 +203,7 @@ Index: mole
     View: Standard
         Col: chembl_id
             Frame: fingerprint
-                Row: position_id (“on” bit positions of a fingerprint)
+                Row: position_id ("on" bit positions of a fingerprint)
 ```
 
 Inverse View is used for finding chembl_id based on given SMILES. 
