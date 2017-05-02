@@ -13,7 +13,7 @@ server:
 	hugo server --buildDrafts
 
 public:
-	hugo
+	HUGO_ENV=$(HUGO_ENV) hugo
 
 upload:
 	aws s3 sync --delete --acl public-read public s3://$(HOST)

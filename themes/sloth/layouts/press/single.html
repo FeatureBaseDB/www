@@ -11,8 +11,8 @@
 
     <div class="single-hero-overlay blue-overlay"></div>
     <div class="single-hero-header">
-      <h1 class="h-1-white mb-4">{{ .Title }}</h1>
-      <h6 class="h-6-caps-white">{{ .Date.Format "1/2/2006" }} • {{ .ReadingTime }} min read</h6>
+      <h1 class="h-2-white mb-4">{{ .Title }}</h1>
+      <h6 class="h-6-caps-white">{{ .Date.Format "1/2/2006" }} • Press Release</h6>
     </div>
   </div>
 
@@ -40,10 +40,6 @@
 
       {{ .Content }}
 
-      <div class="blog-card-author-content mt-5">
-        <img class='mr-3' src="/img/{{ .Site.Params.author_06}}" alt="">
-        <div class="body-bold">{{ .Params.author }}</div>
-      </div>
   </div>
 </div>
 

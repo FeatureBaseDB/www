@@ -7,6 +7,7 @@
       <h1 class="h-1-white-responsive mb-5">
         Sloth News
       </h1>
+      <a class="btn-pilosa btn btn-success" href="/static/Pilosa%20Press%20Kit.zip">Download our presskit</a>
     </div>
   </div>
 
@@ -16,7 +17,7 @@
         Press releases
       </h2>
       <p>
-        Founded in 2017, Pilosa is an open source, distributed bitmap index. We dramatically accelerate query speed across multiple, massive data sets. Our 12-person team of slothware engineers and enthusiasts is based in Austin, TX.
+          Founded in 2017, Pilosa is an open source, distributed bitmap index. We dramatically accelerate query speed across multiple, massive data sets. Our 13 person team of slothware engineers and enthusiasts is based in Austin, Texas.
       </p>
     </div>
     <div class="press-cards mb-4">
@@ -25,9 +26,9 @@
       <div class="press-card">
         <h6 class="h-6-caps pt-5 pb-3">news • {{ .Date.Format "1/2/2006" }}</h6>
         <h3 class="h-3-blue mb-3">
-          <a class="unstyled-a" href="{{ .URL }}">{{ .Title }}</a>
+            <a class="unstyled-a" href="{{ .URL }}">{{ with .Params.short_title }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
         </h3>
-        {{ .Summary | truncate 300 " ..." }}
+        {{ .Description }}
       </div>
       {{ end }}
 
@@ -59,14 +60,14 @@
     <div class="press-cta-content">
       <h2 class="h-2-blue-center mb-4 ">Contact us</h2>
       <p class="p-center">
-        One paragraph description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum porttitor molestie.
+      We're all about fast and easy queries. Have a question? Want to set up an interview? We're game. Just ask. You can use our contact form below or contact us at <a href="mailto:press@pilosa.com">press@pilosa.com</a>.
       </p>
       <div class='press-cta-btn-container'>
           <!--
         <button class="btn-pilosa btn btn-success">Download out presskit</button>
           -->
+        <a class="btn-pilosa btn btn-primary" href="/about/#contact" role="button">Contact Us</a>
         &nbsp;&nbsp;&nbsp;
-        <a class="btn-pilosa btn btn-success" href="mailto:press@pilosa.com">press@pilosa.com</a>
       </div>
 
     </div>
