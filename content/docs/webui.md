@@ -17,6 +17,16 @@ The Console will keep a record of each query and its result with the latest quer
 
 ![console](/img/docs/webui-console.png)
 
+In addition to standard PQL, the console supports a few special commands, prefixed with `:`.
+
+- `:create index <indexname>`
+- `:delete index <indexname>`
+- `:use <indexname>`
+- `:create frame <framename>`
+- `:delete frame <framename>`
+
+Index and frame creation do not yet support options like `rowLabel` or `inverseEnabled`.
+
 #### Cluster Admin
 
 Use the [Cluster Admin tab](http://localhost:10101/#admin) to view the current status of your cluster.  This contains information on each node in the cluster, plus the list of Indexes and Frames.
