@@ -21,12 +21,12 @@ To model fan data in Pilosa, one must choose what the columns represent, what th
    
 We could decide that all geographic attributes would be in a frame together, which would enable queries like “Show and rank the top 5 favorite energy drinks of fans at tonight’s game from Indiana“. 
 
-| Row Name                             | Person 1| Person 2| ... | Frame Description     |
-|--------------------------------------|---------|---------|-----|-----------------------|
-| Alabama<br>Arkansas<br>...           |         |         |     | Geography             |
-| 2017<br>2016<br>...                  |         |         |     | Season Ticket Holder  |
-| Main Stage<br>Auxillary Stage<br>... |         |         |     | Stage Attended 2017   |
-| Beer Brand 1<br>Beer Brand 2<br>...  |         |         |     | Favorite Beers        |
+| Frame Description    | Row Name                             | Person 1      | Person 2      | ... |
+|----------------------|--------------------------------------|---------------|---------------|-----|
+| Geography            | Alabama<br>Arkansas<br>...           | 1<br>0<br>... | 0<br>1<br>... | ... |
+| Season Ticket Holder | 2017<br>2016<br>...                  | 1<br>1<br>... | 1<br>0<br>... | ... |
+| Stage Attended 2017  | Main Stage<br>Auxillary Stage<br>... | 1<br>1<br>... | 1<br>0<br>... | ... |
+| Favorite Beers       | Beer Brand 1<br>Beer Brand 2<br>...  | 0<br>1<br>... | 0<br>1<br>... | ... |
 
 ## Querying
 
