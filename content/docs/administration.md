@@ -79,22 +79,21 @@ Note: This will only work when the replication factor is >= 2
 
 ##### Using Index Sync
 
-1. Shutdown the cluster.
-2. Modify config file to replace existing node address with new node.
-3. Restart all nodes in the cluster.
-4. Wait for auto Index sync to replicate data from existing nodes to new node.
+- Shutdown the cluster.
+- Modify config file to replace existing node address with new node.
+- Restart all nodes in the cluster.
+- Wait for auto Index sync to replicate data from existing nodes to new node.
 
 ##### Copying data files manually
 
-1. To accomplish this goal you will 1st need:
-    a. List of all Indexes on your cluster
-    b. List of all frames in your Indexes
-    c. Max slice per Index, listed in the /status endpoint
-
-2. With this information you can query the `/fragment/nodes` endpoint and iterate over each slice
-3. Using the list of slices owned by this node you will then need to manually:
-    a. setup a directory structure similar to the other nodes with a path for each Index/Frame
-    b. copy each owned slice for an existing node to this new node
-4. Modify the cluster config file to replace the previous node address with the new node address.
-5. Restart the cluster
-6. Wait for the 1st sync (10 minutes) to validate Index connections
+- To accomplish this goal you will 1st need:
+  - List of all Indexes on your cluster
+  - List of all frames in your Indexes
+  - Max slice per Index, listed in the /status endpoint
+- With this information you can query the `/fragment/nodes` endpoint and iterate over each slice
+- Using the list of slices owned by this node you will then need to manually:
+  - setup a directory structure similar to the other nodes with a path for each Index/Frame
+  - copy each owned slice for an existing node to this new node
+- Modify the cluster config file to replace the previous node address with the new node address.
+- Restart the cluster
+- Wait for the 1st sync (10 minutes) to validate Index connections
