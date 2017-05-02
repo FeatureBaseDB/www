@@ -14,7 +14,7 @@ crystal@jones-dilworth.com
 857.654.6723
 
 [View on PRWeb](http://www.prweb.com/releases/2017/05/prweb14296784.htm)<br>
-[Download presskit](#)
+[Download presskit](/static/Pilosa%20Press%20Kit.zip)
 
 <h5 style="margin: 20px 0px; font-weight: 700;">
 Pilosa Launches Breakthrough Open Source Software to Dramatically Accelerate Data Queries</h5>
