@@ -25,8 +25,8 @@ We could decide that all geographic attributes would be in a frame together, whi
 |----------------------|--------------------------------------|---------------|---------------|-----|
 | Geography            | Alabama<br>Arkansas<br>...           | 1<br>0<br>... | 0<br>1<br>... | ... |
 | Season Ticket Holder | 2017<br>2016<br>...                  | 1<br>1<br>... | 1<br>0<br>... | ... |
-| Stage Attended 2017  | Main Stage<br>Auxillary Stage<br>... | 1<br>1<br>... | 1<br>0<br>... | ... |
-| Favorite Beers       | Beer Brand 1<br>Beer Brand 2<br>...  | 0<br>1<br>... | 0<br>1<br>... | ... |
+| Stage Attended 2017  | Main<br>Auxillary<br>...             | 1<br>1<br>... | 1<br>0<br>... | ... |
+| Favorite Beers       | Beer 1<br>Beer 2<br>...              | 0<br>1<br>... | 0<br>1<br>... | ... |
 
 ## Querying
 
