@@ -14,7 +14,7 @@ Logistics optimization currently represents the largest cost reduction opportuni
 
 #### The Data
 
-As an example data set, and following a lead from Todd Schneider’s research in this area, the Pilosa team examined data collected by the New York City Taxi & Limousine Commission collected from January 2009 to June 2015. This data set includes detailed information on 1.3 billion individual taxi trips in New York City. Pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts are all captured to create an impressive illustration of the city’s transportation needs. At the end of this article we link to the sample data set so that you can play with it in Pilosa.
+As an example data set, and following a lead from Todd Schneider’s [research](http://toddwschneider.com/posts/analyzing-1-1-billion-nyc-taxi-and-uber-trips-with-a-vengeance/) in this area, the Pilosa team examined data collected by the New York City Taxi & Limousine Commission collected from January 2009 to June 2015. This data set includes detailed information on 1.3 billion individual taxi trips in New York City. Pick-up and drop-off dates/times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts are all captured to create an impressive illustration of the city’s transportation needs. At the end of this article we link to the sample data set so that you can play with it in Pilosa.
 
 In the table below, we list the fields of the trip dataset (they are provided as-is):
 
