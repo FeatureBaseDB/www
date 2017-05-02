@@ -204,7 +204,7 @@ We'd like to use Pilosa to search through millions of molecules and find those m
 
 Calculation of the similarity of any two molecules is achieved by comparing their molecular fingerprints. These fingerprints are comprised of structural information about the molecule which has been encoded as a series of bits. The most commonly used algorithm to calculate the similarity is the Tanimoto coefficient.
 ```
-T(A,B)=AB AB -AB
+T(A,B)= Intersect(A,B) / (Count(A) + Count(B) - Intersect(A,B))
 ```
 
 A and B are sets of fingerprint bits on in the fingerprints of molecule A and molecule B. AB is the set of common bits of fingerprints of both molecule A and B. The Tanimoto coefficient ranges from 0 when the fingerprints have no bits in common, to 1 when the fingerprints are identical.
@@ -225,61 +225,55 @@ threshold = 90
 
 return the set of molecules that have at least a 90% similarity with the given molecule.
 
-To achieve this goal, there are two schemas that are provided:
+The Inverse view swaps the rows and columns automatically to enable queries over either the chembl_id or fingerprint.
+
+Standard View is used to calculate similarity
 ```
-Index: inverse-mole
-    Col: chembl_id
-        Frame: mole.n
-            Row: “on” bit positions of a fingerprint
+Index: mole
+    View: Standard
+        Col: chembl_id
+            Frame: fingerprint
+                Row: position_id ("on" bit positions of a fingerprint)
 ```
 
-Given a SMILES, RDKit can convert it to fingerprints. From there Pilosa can provide a list of chembl_ids that match the fingerprint. To choose the right chembl_id, we need to query all fingerprints for those ids, and choose the right chembl_id based on length of return fingerprint (more details in Query section)
+Inverse View is used for finding chembl_id based on given SMILES. 
+From a given SMILES, we use RDKit to convert it to fingerprints with "on" bit position. From "on" bit positions,  we can search a list of chembl_ids that match the bit positions. To choose the right chembl_id, we need another query to Standard View then choose the right chembl_id which has the length that matches the given fingerprint's length after using RDKit to convert SMILES to fingerprint.
 ```
-Index: mol
-    Col: “on” bit positions of a fingerprint
-        Frame: mole.n
-            Row: chembl_id
+Index: mole
+    View: Inverse
+        Col: position_id ("on" bit positions of a fingerprint)
+            Frame: fingerprint
+                Row: chembl_id
 ```
 
-After retrieving chembl_id from the `inverse-mole` index, we can use the Tanimoto coefficient to compare chembl_id with the entire data set of molecules. The result of this comparison is the list of `chembl_id`s that have a Tanimoto coefficient greater than the given threshold.
+After retrieving chembl_id from the Inverse View, we can use the Tanimoto coefficient to compare chembl_id with the entire data set of molecules. The result of this comparison is the list of `chembl_id`s that have a Tanimoto coefficient greater than the given threshold.
 
 ##### Import process
 
 To import data into pilosa, we need to get chembl_id and SMILES from SD files, convert SMILES to Morgan fingerprints, and then write chembl_id and fingerprint to Pilosa. The fastest way is to extracted chembl_id and SMILES from SD file to csv file, then use the `pilosa import command to import the csv file into pilosa. Since chembl_id in the SD file is always paired with CHEMBL, e.g CHEMBL6329, and because Pilosa doesn't support string keys, we will ignore CHEMBL and instead use chembl_id as an integer key.
 
-For the `mol` index, each row in the csv file has the format ‘chembl_id, fingerprint_bit’ by running the following command from Chem-usecase:
+For the `mole` index, each row in the csv file has the format 'chembl_id, position_id' by running the following command from Chem-usecase:
 ```
-python import_from_sdf -p <path_to_sdf_file> -file id_fingerprint.csv
+python import_from_sdf.py -p <path_to_sdf_file> -file id_fingerprint.csv
 ```
 
-For `inverse-mol` index, each row in csv file has the format ‘fingerprint_bit, chembl_id’ by running the following command:
-```
-python import_from_sdf -p <path_to_sdf_file> -file fingerprint_id.csv -i True
-```
 
 First, follow the instruction in the [getting started]({{< ref "getting-started.md" >}}) guide to run a Pilosa server. Then create the indexes and frames according to the schemas outlined in the Data Model section above.
+The option cacheSize should be set as amount of chembl_id to calculate effectively for the whole data set, so we need to calculate amount of chembl_id. We have total 1678393 chembl_id (it will displayed after import_from_sdf.py script running), then the cacheSize should be >= 1678393
 ```
-curl localhost:10101/index/mol \
+curl localhost:10101/index/mole \
      -X POST \
      -d '{"options": {"columnLabel": "position_id"}}'
 
-curl localhost:10101/index/mol/frame/mole.n \
+curl localhost:10101/index/mole/frame/fingerprint \
      -X POST \
-     -d '{"options": {"rowLabel": "chembl_id"}}'
+     -d '{"options": {"rowLabel": "chembl_id", "inverseEnabled": true, "cacheSize": 2000000, "cacheType": "ranked"}}'
 
-curl localhost:10101/index/inverse-mol \
-     -X POST \
-     -d '{"options": {"columnLabel": "chembl_id"}}'
-
-curl localhost:10101/index/inverse-mol/frame/mole.n \
-     -X POST \
-     -d '{"options": {"rowLabel": "position_id"}}'
 ```
 
-Run the following commands to import the csv data into the `mol` and `inverse-mol` indexes:
+Run the following commands to import the csv data into the `mole` index:
 ```
-pilosactl import -d mol -f mole.n id_fingerprint.csv
-pilosactl import -d inverse-mol -f mole.n fingerprint_id.csv
+pilosa import -d mole -f fingerprint id_fingerprint.csv
 ```
 
 ##### Queries
@@ -291,7 +285,7 @@ python get_mol_fr_smile.py -s "I\C=C/1\CCC(C(=O)O1)c2cccc3ccccc23"
 
 Return chembl_id = 6223. This script uses Pilosa’s Intersection query to get all chemlb_id that have positions are on, which following these steps:
 
-* Convert SMILES to fingerprint bit “on” positions
+* Convert SMILES to fingerprint bit "on" positions
 
     ```python
     from rdkit import Chem
@@ -300,23 +294,25 @@ Return chembl_id = 6223. This script uses Pilosa’s Intersection query to get a
     fp = list(AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=4096).GetOnBits())
     ```
         
-* Query all chembl_id that has all “on” positions from inverse-mol index, return list of chembl_id
+* Query all chembl_id that have all "on" positions from the inverse view, return list of chembl_id
 
     ```python
-    cluster = Client(hosts=[127.0.0.1:10101])
-    bit_maps = [Bitmap(f, “mole.n”) for f in fp]
-    mole_ids=cluster.query(“inverse-mol”,Intersect(*bit_maps)).values()[0]["bits"]
+    bit_maps = ["Bitmap(position_id=%s, frame=%s, inversed=%s)" % (f, frame, True) for f in fp]
+    bitmap_string = ', '.join(bit_maps)
+    intersection = "Intersect(%s)" % bitmap_string
+    mole_ids = requests.post("http://%s/index/%s/query" % (host, db), data=intersection).json()["results"][0]["bits"]
     ```
 
-* From list of chembl_id, query all “on” position from mol index, if the length of array of “on” position is matched to len(fp) then return that chembl_id, otherwise the given SMILES does not exist.
+* From list of chembl_id, query all "on" position from mol index, if the length of array of "on" position is matched to len(fp) then return that chembl_id, otherwise the given SMILES does not exist.
 
     ```python    
     for m in mole_ids:
-    mol=cluster.query(“mol”,Bitmap(m,“mole.n”)).values()[0]["bits"]
-    if len(mol) == len(fp):
-        found = m
-    existed_mol = True
-    break
+        mol = requests.post("http://%s/index/%s/query" % (host, db), data="Bitmap(chembl_id=%s, frame=%s)" % (m, frame)).json()["results"][0]["bits"]
+        existed_mol = False
+        if len(mol) == len(fp):
+            found = m
+            existed_mol = True
+            break
     ```
 
 Retrieve molecule_ids that have similarity with SMILES="I\C=C/1\CCC(C(=O)O1)c2cccc3ccccc23" and similarity threshold = 70%
@@ -330,7 +326,7 @@ Return chembl_id = [6223, 269758, 6206, 6228]. This script uses Pilosa’s TopN 
 
 * Query Pilosa’s TopN to get list of similarity chembl_id
     ```python
-    query_string = 'TopN(Bitmap(id=6223, frame="mole.n"), frame="mole.n", n=2000000, tanimotoThreshold=70)'
+    query_string = 'TopN(Bitmap(chembl_id=6223, frame="fingerprint"), frame="fingerprint", n=2000000, tanimotoThreshold=70)'
     topn = requests.post("http://127.0.0.1:10101/index/mol/query" , data=query_string)
     ```
 
@@ -338,7 +334,7 @@ Return chembl_id = [6223, 269758, 6206, 6228]. This script uses Pilosa’s TopN 
 
 To run benchmark for specific chembl_id for different similarity threshold at percentage of [50, 70, 75, 80, 85, 90], run following command:
 ```
-python benchmarks -id 6223
+python benchmarks.py -id 6223
 ```
 
 As Matt Swain’s blog post also did a great job using mongoDB for chemical similarity search, we compared benchmark on 500000 molecules between mongoDB aggregation framework with pilosa.
