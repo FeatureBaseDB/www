@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="126" height="126" viewBox="0 0 126 126">
+    <defs>
+        <ellipse id="a" cx="53.027" cy="30.457" rx="6.8" ry="6.821"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="translate(10 31)">
+        <g stroke="#3C5F8D" stroke-width="2.4">
+            <path d="M4.947 31.719s11.881-6.855 24.15-6.834c12.27.02 25.697 6.918 25.697 6.918"/>
+            <path d="M31.795 7.541s8.146 2.968 13.121 8.917c4.975 5.95 7.09 15.253 7.09 15.253M75.721 7.541s-8.146 2.968-13.12 8.917c-4.975 5.95-7.09 15.253-7.09 15.253M31.754 57.758s1.508-8.538 6.503-14.47c4.995-5.933 13.79-9.631 13.79-9.631M75.762 57.758s-1.508-8.538-6.503-14.47c-4.995-5.933-13.79-9.631-13.79-9.631M55.65 31.719s11.88-6.855 24.15-6.834c12.27.02 25.696 6.918 25.696 6.918"/>
+        </g>
+        <ellipse cx="100.8" cy="29.821" fill="#1DB598" rx="6.8" ry="6.821"/>
+        <ellipse cx="6.8" cy="29.821" fill="#1DB598" rx="6.8" ry="6.821"/>
+        <ellipse cx="78.582" cy="6.821" fill="#1DB598" rx="6.8" ry="6.821"/>
+        <ellipse cx="30.333" cy="6.821" fill="#1DB598" rx="6.8" ry="6.821"/>
+        <ellipse cx="78.582" cy="58.169" fill="#1DB598" rx="6.8" ry="6.821" transform="matrix(1 0 0 -1 0 116.337)"/>
+        <ellipse cx="30.333" cy="58.169" fill="#1DB598" rx="6.8" ry="6.821" transform="matrix(1 0 0 -1 0 116.337)"/>
+        <use fill="#FAFAFA" xlink:href="#a"/>
+        <ellipse cx="53.027" cy="30.457" stroke="#3C5F8D" stroke-width="2.4" rx="5.6" ry="5.621"/>
+    </g>
+</svg>
