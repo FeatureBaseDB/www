@@ -4,7 +4,7 @@ title = "PDK"
 
 ## PDK
 
-The Pilosa Dev Kit contains Go libraries to help you use Pilosa effectively. From importing data quickly, to managing the mappings from contiguous integer ids to values of other types, the PDK should help you get off the ground quickly.
+The [Pilosa Dev Kit](https://github.com/pilosa/pdk) contains Go libraries to help you use Pilosa effectively. From importing data quickly, to managing the mappings from contiguous integer ids to values of other types, the PDK should help you get off the ground quickly.
 
 The PDK also contains some fully worked examples which make use of its tools. These are available in the `usecase` subdirectory and can be run as subcommands of the `pdk` binary.
 
