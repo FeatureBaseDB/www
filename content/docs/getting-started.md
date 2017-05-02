@@ -16,11 +16,12 @@ Execute the following in a terminal to run Pilosa with the default configuration
 ```
 pilosa server
 ```
-
+<!--
 If you are using the Docker image, you can run an ephemeral Pilosa container on the default address using the following command:
 ```
 docker run -it --rm --name pilosa -p 10101:10101 pilosa:latest
 ```
+-->
 
 Let's make sure Pilosa is running:
 ```
@@ -84,6 +85,7 @@ pilosa import -i repository -f stargazer stargazer.csv
 pilosa import -i repository -f language language.csv
 ```
 
+<!--
 If you are using a Docker container for Pilosa (with name `pilosa`), you should instead copy the `*.csv` file into the container and then import them:
 ```
 docker cp repository-stargazer.csv pilosa:/repository-stargazer.csv
@@ -91,7 +93,7 @@ docker exec -it pilosa pilosa import -d repository -f stargazer /repository-star
 docker cp repository-language.csv pilosa:/repository-language.csv
 docker exec -it pilosa pilosa import -d repository -f language /repository-language.csv
 ```
-
+-->
 Note that, both the user IDs and the repository IDs were remapped to sequential integers in the data files, they don't correspond to actual Github IDs anymore. You can check out `language.txt` to see the mapping for languages.
 
 ##### Make Some Queries
