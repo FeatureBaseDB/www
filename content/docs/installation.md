@@ -5,7 +5,7 @@ title = "Installation"
 
 ## Installation
 
-Pilosa is currently available for MacOS and Linux.
+Pilosa is currently available for [MacOS](#installing-on-macos) and [Linux](#installing-on-linux).
 
 #### Installing on MacOS
 
