@@ -46,49 +46,42 @@ In the table below, we list the fields of the trip dataset (they are provided as
 
 Pilosa is a distributed bitmap index that sits on top of a data store. The key to understanding and then using Pilosa is converting data such that it is represented in ones and zeros.  This dramatically reduces the size as well as accelerates query times. 
 
-For example, timestamps are important information, but we tend to be interested in individual components of a timestamp, especially when analyzing data with cyclic trends. Timestamp components are stored as groups of bitmaps, known as "frames". We create one frame for the day of the week, as illustrated in table X. Along with similar frames for year, month, and time of day, this accelerates queries that ask questions about rides belonging to any logical combination of these time groups.
+For example, timestamps are important information, but we tend to be interested in individual components of a timestamp, especially when analyzing data with cyclic trends. Timestamp components are stored as groups of bitmaps, known as "frames". We create one frame for the day of the week, as illustrated in the following table. Along with similar frames for year, month, and time of day, this accelerates queries that ask questions about rides belonging to any logical combination of these time groups.
 
-|       | Ride 1 | Ride 2 | .... |
+| Pickup Day  | Ride 1 | Ride 2 | ...  |
 |------------------|---------|------|--------------------------|
 | Monday |  1 | 0 | |
-| Tuesday |  1 | 0 | |
-| Wednesday |  1 | 0 | |
-| Thursday |  1 | 0 | |
-| Friday |  1 | 0 | |
-| Saturday |  1 | 0 | |
-| Sunday |  1 | 0 | |
+| Tuesday |  0 | 0 | |
+| Wednesday |  0 | 0 | |
+| Thursday |  0 | 1 | |
+| Friday |  0 | 0 | |
+| Saturday |  0 | 0 | |
+| Sunday |  0 | 0 | |
 
 
 
 #### This is the ultimate data model: 
 
-|       | Ride 1 | Ride 2 | .... |
+| Frame  | Ride 1 | Ride 2 | ...  |
 |------------------|---------|------|--------------------------|
-| cab_type Yellow|||
-| cab_type Green|||
-| cab_type Uber|||
-|dist_miles 0|||
-|dist_miles 1|||
-|dist_miles 2|||
-|dist_miles ...|||
-|total_amount_dollars 0|||
-|total_amount_dollars 1|||
-|total_amount_dollar 2|||
-|total_amount_dollars ....|||
-|passenger_count||||
-|drop_grid_id||||
-|drop_year||||
-|drop_month||||
-|drop_day||||
-|drop_time||||
-|pickup_grid_id||||
-|pickup_year||||
-|pickup_month||||
-|pickup_day||||
-|pickup_time||||
-|average_speed||||
-|duration||||
+| cab_type       |0 (Yellow)| 2 (Uber) |
+|dist_miles  |4|22 |
+|total_amount_dollars  |18|27 |
+|passenger_count|1|2||
+|drop_grid_id|9424|8893||
+|drop_year|2013|2013||
+|drop_month|8|9||
+|drop_day|5|19 ||
+|drop_time|14|15||
+|pickup_grid_id|9366|7136 ||
+|pickup_year|2013|2013||
+|pickup_month|8|9||
+|pickup_day|5|19 ||
+|pickup_time|13|13 ||
+|average_speed|30 |17||
+|duration|14|44 ||
 
+In this table, the integers are IDs that indicate which single bit is set in the corresponding frame for a given ride.
 
 ## Importing the data into Pilosa
 After deciding on a data model we created the index and its associated frames using the Pilosa API. The API enables you to do bulk uploads, or to write streaming data into an index, as in this case. Check out the Pilosa Development Kit for in-depth examples of data imports.
@@ -100,26 +93,24 @@ Because each data point includes pickup/dropoff times and total distance travell
 
 In order to answer questions about congestion, we needed to first determine what speeds constitute slow traffic. One of the basic queries in Pilosa is the TopN function, and we used that to get a list of all the different average speeds. By performing a count on each we built a histogram of how many rides fall into each speed bucket, and decided from there which buckets deviate enough from the norm to constitute congestion.
 
-Here are a few examples of typical requests in the Pilosa Query Language that ships with the Pilosa Community Edition.  Some of it is pseudocode and will need modification.
+Here are a few examples of typical requests in the Pilosa Query Language that ships with the Pilosa Community Edition. For brevity, `<slow speeds>` for example represents a list of bitmaps in the speed frame.
 
 
-```
-'TopN(Union(<slow speeds>), frame="pickup_loc")
-```
+1. ```TopN(Union(<slow speeds>), frame="pickup_loc"```
 
-This gives us all the pickup locations with the most slow rides. As with all TopN calls, the results are ordered by count, which means the number of slow rides here.
+    This gives us all the pickup locations with the most slow rides. As with all TopN calls, the results are ordered by count, which means the number of slow rides here.
 
-```TopN(Intersect(Union(<slow speeds>), <pickup location A>)), frame=”dropoff_loc”)```
+2. ```TopN(Intersect(Union(<slow speeds>), <pickup location A>)), frame=”dropoff_loc”)```
 
-This gives us all the dropoff locations associated with slow rides originating at a specific pickup location, which might be as specific as a city block, or as broad as a borough.
+    This gives us all the dropoff locations associated with slow rides originating at a specific pickup location, which might be as specific as a city block, or as broad as a borough.
 
-```TopN(Intersect(Union(<slow speeds>), Union(<pickup locations>)), frame=”dropoff_loc”)```
+3. ```TopN(Intersect(Union(<slow speeds>), Union(<pickup locations>)), frame=”dropoff_loc”)```
 
-This gives us all the dropoff locations associated with slow rides originating at any one of a group of pickup locations.
+    This gives us all the dropoff locations associated with slow rides originating at any one of a group of pickup locations.
 
-```TopN(Intersect(Union(<slow speeds>), Union(<pickup locations>), Intersect(<rush hour times>)), frame=”dropoff_loc”)```
+4. ```TopN(Intersect(Union(<slow speeds>), Union(<pickup locations>), Intersect(<rush hour times>)), frame=”dropoff_loc”)```
 
-This gives us all the dropoff locations associated with slow rides that occurred during rush hour, originating at any one of a group of pickup locations.
+    This gives us all the dropoff locations associated with slow rides that occurred during rush hour, originating at any one of a group of pickup locations.
 
 What is remarkable is that Pilosa is able to perform logical operations by querying over 1 billion data points, in under a second. The core data model, while extremely simple, is flexible enough to support interesting queries with simple techniques like scalar bucketing, and minimal preprocessing.
 
