@@ -174,7 +174,7 @@ We'd like to use Pilosa to search through millions of molecules and find those m
 
 Calculation of the similarity of any two molecules is achieved by comparing their molecular fingerprints. These fingerprints are comprised of structural information about the molecule which has been encoded as a series of bits. The most commonly used algorithm to calculate the similarity is the Tanimoto coefficient.
 ```
-T(A,B)= Intersect(A,B) / Count(A) + Count(B) - Intersect(A,B)
+T(A,B)= Intersect(A,B) / (Count(A) + Count(B) - Intersect(A,B))
 ```
 
 A and B are sets of fingerprint bits on in the fingerprints of molecule A and molecule B. AB is the set of common bits of fingerprints of both molecule A and B. The Tanimoto coefficient ranges from 0 when the fingerprints have no bits in common, to 1 when the fingerprints are identical.
@@ -195,9 +195,9 @@ threshold = 90
 
 return the set of molecules that have at least a 90% similarity with the given molecule.
 
-To achieve this goal, the Standard and Inverse View are required, which chembl_id and fingerprint are swapped
+The Inverse view swaps the rows and columns automatically to enable queries over either the chembl_id or fingerprint.
 
-Standard View is used for calculate similarity
+Standard View is used to calculate similarity
 ```
 Index: mole
     View: Standard
@@ -207,11 +207,11 @@ Index: mole
 ```
 
 Inverse View is used for finding chembl_id based on given SMILES. 
-From a given SMILES, we use RDKit to convert it to fingerprints with "on" bit position. From "on" bit positions,  we can search a list of chembl_ids that match the bit positions. To choose the right chembl_id, we need another query to Standard View then choose the right chembl_id which has the lenght that matches the given fingerprint's length after using RDKit to convert SMILES to fingerprint.
+From a given SMILES, we use RDKit to convert it to fingerprints with "on" bit position. From "on" bit positions,  we can search a list of chembl_ids that match the bit positions. To choose the right chembl_id, we need another query to Standard View then choose the right chembl_id which has the length that matches the given fingerprint's length after using RDKit to convert SMILES to fingerprint.
 ```
 Index: mole
     View: Inverse
-        Col: position_id (“on” bit positions of a fingerprint)
+        Col: position_id ("on" bit positions of a fingerprint)
             Frame: fingerprint
                 Row: chembl_id
 ```
@@ -222,14 +222,14 @@ After retrieving chembl_id from the Inverse View, we can use the Tanimoto coeffi
 
 To import data into pilosa, we need to get chembl_id and SMILES from SD files, convert SMILES to Morgan fingerprints, and then write chembl_id and fingerprint to Pilosa. The fastest way is to extracted chembl_id and SMILES from SD file to csv file, then use the `pilosa import command to import the csv file into pilosa. Since chembl_id in the SD file is always paired with CHEMBL, e.g CHEMBL6329, and because Pilosa doesn't support string keys, we will ignore CHEMBL and instead use chembl_id as an integer key.
 
-For the `mole` index, each row in the csv file has the format ‘chembl_id, position_id’ by running the following command from Chem-usecase:
+For the `mole` index, each row in the csv file has the format 'chembl_id, position_id' by running the following command from Chem-usecase:
 ```
 python import_from_sdf.py -p <path_to_sdf_file> -file id_fingerprint.csv
 ```
 
 
 First, follow the instruction in the [getting started]({{< ref "getting-started.md" >}}) guide to run a Pilosa server. Then create the indexes and frames according to the schemas outlined in the Data Model section above.
-The option cacheSize should be set as amount of chembl_id to calculate effectively for the whole data set. We have total 1678393 chembl_id, then the cacheSize should be >= 1678393
+The option cacheSize should be set as amount of chembl_id to calculate effectively for the whole data set, so we need to calculate amount of chembl_id. We have total 1678393 chembl_id (it will displayed after import_from_sdf.py script running), then the cacheSize should be >= 1678393
 ```
 curl localhost:10101/index/mole \
      -X POST \
@@ -255,7 +255,7 @@ python get_mol_fr_smile.py -s "I\C=C/1\CCC(C(=O)O1)c2cccc3ccccc23"
 
 Return chembl_id = 6223. This script uses Pilosa’s Intersection query to get all chemlb_id that have positions are on, which following these steps:
 
-* Convert SMILES to fingerprint bit “on” positions
+* Convert SMILES to fingerprint bit "on" positions
 
     ```python
     from rdkit import Chem
@@ -264,7 +264,7 @@ Return chembl_id = 6223. This script uses Pilosa’s Intersection query to get a
     fp = list(AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=4096).GetOnBits())
     ```
         
-* Query all chembl_id that has all “on” positions from inverse view, return list of chembl_id
+* Query all chembl_id that have all "on" positions from the inverse view, return list of chembl_id
 
     ```python
     bit_maps = ["Bitmap(position_id=%s, frame=%s, inversed=%s)" % (f, frame, True) for f in fp]
@@ -273,7 +273,7 @@ Return chembl_id = 6223. This script uses Pilosa’s Intersection query to get a
     mole_ids = requests.post("http://%s/index/%s/query" % (host, db), data=intersection).json()["results"][0]["bits"]
     ```
 
-* From list of chembl_id, query all “on” position from mol index, if the length of array of “on” position is matched to len(fp) then return that chembl_id, otherwise the given SMILES does not exist.
+* From list of chembl_id, query all "on" position from mol index, if the length of array of "on" position is matched to len(fp) then return that chembl_id, otherwise the given SMILES does not exist.
 
     ```python    
     for m in mole_ids:
