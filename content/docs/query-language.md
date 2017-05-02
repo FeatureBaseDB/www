@@ -315,8 +315,7 @@ Return `2`
 
 ```
 TopN([BITMAP_CALL], <frame=STRING>, [n=UINT],
-     [<field=ATTR_NAME>, <filters=[]ATTR_VALUE>],
-     [tanimotoThreshold=UINT])
+     [<field=ATTR_NAME>, <filters=[]ATTR_VALUE>])
 ```
 
 **Description:**
@@ -325,8 +324,6 @@ Return the id and count of the top `n` bitmaps (by count of bits) in the frame.
 The `field` and `filters` arguments work together to only return Bitmaps which
 have the attribute specified by `field` with one of the values specified in
 `filters`.
-
-TODO: describe how `tanimotoThreshold` works.
 
 **Result Type:** array of key/count objects
 
