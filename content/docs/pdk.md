@@ -19,10 +19,6 @@ Importing data into Pilosa is dependent on mapping it to integer IDs. PDK provid
 * a list of commonly used, named, mapper functions
 * a list of ParserMappers - objects that encapsulate all of the work related to a single frame. 
 
-The mapping process is summarized in this flowchart:
-
-![Bitmapper flowchart](/img/docs/pdk-bitmapper-flowchart.svg)
-
 This definition file can quickly get long, and defining it manually would be quite tedious. That's why we have a tool to generate a definition file by looking at a data set. This will handle most of the legwork, but since it can only guess at the application, it uses the simplest mappings - each column gets mapped to one frame in an appropriate way. This is intended as a starting point, to be updated to suit your use of the PDK.
 
 With this definition available, the PDK tool can run the import, which consists of these steps:
@@ -34,6 +30,11 @@ With this definition available, the PDK tool can run the import, which consists 
   - generate a columnID
   - apply all ParserMappers, generating a list of (frame, ID) pairs
   - set the appropriate bit. schematically: SetBit(id=rowID, frame=frame, profileID=columnID)
+
+The process is summarized in this flowchart:
+
+![Bitmapper flowchart](/img/docs/pdk-bitmapper-flowchart.svg)
+
 
 Some of the simple mapper functions available with PDK include:
 
