@@ -25,21 +25,21 @@ To model network data in Pilosa, one must choose what the columns represent, wha
    
 One could decide that all destination IP addresses would be in a frame together, which would enable queries like “What are the top destinations of traffic in my network?“. One can extrapolate this model to other features of packets and see what we come up with:
 
-| Row Name                                    | Packet1            | Packet2            | ... | Frame Description        |
-|---------------------------------------------|--------------------|--------------------|-----|--------------------------|
-| 10.3.2.1<br>8.8.8.8<br>...                  | 0<br>1<br>...      | 1<br>0<br>...      |     | Source IP Address        |
-| 5.4.3.2<br>192.168.1.3<br>...               | 1<br>0<br>...      | 0<br>1<br>...      |     | Destination IP Address   |
-| 34567<br>45388<br>...                       | 0<br>1<br>...      | 1<br>0<br>...      |     | Source Port              |
-| 80<br>443<br>...                            | 0<br>1<br>...      | 1<br>0<br>...      |     | Destination Port         |
-| IPv4<br>IPv6<br>ICMP<br>...                 | 0<br>1<br>0<br>... | 1<br>0<br>0<br>... |     | Network Layer Protocol   |
-| TCP<br>UDP<br>SCTP                          | 0<br>0<br>1<br>... | 1<br>0<br>0<br>... |     | Transport Layer Protocol |
-| HTTP<br>DHCP<br>DNS<br>...                  | 1<br>0<br>0<br>... | 1<br>0<br>0<br>... |     | App Layer Protocol       |
-| google.com<br>espn.com<br>...               | 1<br>0<br>...      | 0<br>1<br>...      |     | Hostname                 |
-| POST<br>PUT<br>...                          | 1<br>0<br>...      | 1<br>0<br>...      |     | HTTP method              |
-| application/html<br>application/json<br>... | 0<br>1<br>...      | 0<br>1<br>...      |     | Content-Type             |
-| Firefox/Windows<br>Chrome/Linux<br>...      | 1<br>0<br>...      | 0<br>1<br>...      |     | User Agent               |
-| 1500<br>64<br>...                           | 0<br>1<br>...      | 1<br>0<br>...      |     | Packet Size (bytes)      |
-| ACK<br>SYN<br>...                           | 1<br>0<br>...      | 0<br>1<br>...      |     | TCP Flags                |
+| Frame Description        | Row Name                                    | Packet1            | Packet2            | ... |
+|--------------------------|---------------------------------------------|--------------------|--------------------|-----|
+| Source IP Address        | 10.3.2.1<br>8.8.8.8<br>...                  | 0<br>1<br>...      | 1<br>0<br>...      | ... |
+| Destination IP Address   | 5.4.3.2<br>192.168.1.3<br>...               | 1<br>0<br>...      | 0<br>1<br>...      | ... |
+| Source Port              | 34567<br>45388<br>...                       | 0<br>1<br>...      | 1<br>0<br>...      | ... |
+| Destination Port         | 80<br>443<br>...                            | 0<br>1<br>...      | 1<br>0<br>...      | ... |
+| Network Layer Protocol   | IPv4<br>IPv6<br>ICMP<br>...                 | 0<br>1<br>0<br>... | 1<br>0<br>0<br>... | ... |
+| Transport Layer Protocol | TCP<br>UDP<br>SCTP                          | 0<br>0<br>1<br>... | 1<br>0<br>0<br>... | ... |
+| App Layer Protocol       | HTTP<br>DHCP<br>DNS<br>...                  | 1<br>0<br>0<br>... | 1<br>0<br>0<br>... | ... |
+| Hostname                 | google.com<br>espn.com<br>...               | 1<br>0<br>...      | 0<br>1<br>...      | ... |
+| HTTP method              | POST<br>PUT<br>...                          | 1<br>0<br>...      | 1<br>0<br>...      | ... |
+| Content-Type             | application/html<br>application/json<br>... | 0<br>1<br>...      | 0<br>1<br>...      | ... |
+| User Agent               | Firefox/Windows<br>Chrome/Linux<br>...      | 1<br>0<br>...      | 0<br>1<br>...      | ... |
+| Packet Size (bytes)      | 1500<br>64<br>...                           | 0<br>1<br>...      | 1<br>0<br>...      | ... |
+| TCP Flags                | ACK<br>SYN<br>...                           | 1<br>0<br>...      | 0<br>1<br>...      | ... |
 
 ## Querying
 
