@@ -58,16 +58,21 @@ Let's create the `stargazer` frame which has user IDs of stargazers as its rows:
 ```
 curl localhost:10101/index/repository/frame/stargazer \
      -X POST \
-     -d '{"options": {"rowLabel": "stargazer_id", "timeQuantum": "YMD"}}'
+     -d '{"options": {"rowLabel": "stargazer_id", 
+                      "timeQuantum": "YMD",
+                      "inverseEnabled": true}}'
 ```
 
 Since our data contains time stamps for the time users starred repos, we set the *time quantum* for the `stargazer` frame in the options as well. Time quantum is the resolution of the time we want to use, and we set it to `YMD` (year, month, day) for `stargazer`.
+
+We set `inverseEnabled` to `true` in order to allow queries over columns as well as rows.
 
 Next up is the `language` frame, which will contain IDs for programming languages:
 ```
 curl localhost:10101/index/repository/frame/language \
      -X POST \
-     -d '{"options": {"rowLabel": "language_id"}}'
+     -d '{"options": {"rowLabel": "language_id",
+                      "inverseEnabled": true}}'
 ```
 ##### Import Some Data
 
