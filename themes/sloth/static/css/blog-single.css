@@ -38,7 +38,20 @@
     }
 }
 
+.single-body-content {
+    font-weight: 300;
+}
 
+.single-body-content b {
+    font-weight: 600;
+}
+
+.single-body-content a {
+    font-weight: 500;
+}
+.single-body-content a:hover {
+    text-decoration: underline;
+}
 
 .single-body-content h5{
   font-size: 26px;
@@ -104,9 +117,9 @@
   -webkit-padding-start: 0px;
   font-family: Montserrat;
   margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 .single-body-content li{
-  font-weight: 400;
   padding-left: 10px;
 }
 
