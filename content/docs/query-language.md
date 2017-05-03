@@ -33,8 +33,8 @@ curl localhost:10101/index/repository/query \
 
 #### Arguments and Types
 
-* `frame` The frame specifies on which Pilosa [frame]({{< ref "glossary.md#frame" >}}) the query will operate. Valid frame names are lower case strings; they start with an alphanumeric character, and contain only alphanumeric characters and `._-`. They must be 64 characters or less in length.
-* `ROW_LABEL` Pilosa allows users to set different row labels for each frame at frame creation time. The default row label is `id`, but one may set a more descriptive row label for their data (such as `stargazer_id`).
+* `frame` The frame specifies on which Pilosa [frame]({{< ref "glossary.md#frame" >}}) the query will operate. Valid frame names are lower case strings; they start with an alphanumeric character, and contain only alphanumeric characters and `_-`. They must be 64 characters or less in length.
+* `ROW_LABEL` Pilosa allows users to set different row labels for each frame at frame creation time. The default row label is `rowID`, but one may set a more descriptive row label for their data (such as `stargazer_id`).
 * `COL_LABEL` Pilosa allows users to set a different column label for each index at index creation time. The default column label is `columnID`.
 * `TIMESTAMP` This is a timestamp in quotes with the following format `"YYYY-MM-DDTHH:MM"` (e.g. "2006-01-02T15:04")
 * `UINT` An unsigned integer (e.g. 42839)
@@ -71,7 +71,7 @@ A return value of `false` indicates that the bit was already set to 1 and nothin
 SetBit(frame="stargazer", repo_id=10, stargazer_id=1)
 ```
 
-This query illustrates setting a bit in the stargazer frame of the repository index. User with id=1 has starred repository with id=10.
+This query illustrates setting a bit in the stargazer frame. User with id=1 has starred repository with id=10.
 
 SetBit also supports providing a timestamp. To write the date that a user starred a repository.
 ```
@@ -106,7 +106,7 @@ SetRowAttrs queries always return `null` upon success.
 SetRowAttrs(frame="stargazer", stargazer_id=10, username="mrpi", active=true)
 ```
 
-Set username value and active status for user = 10. These are arbitrary key/value pairs which have no meaning to Pilosa. You can see the attributes you've set on a row with a [Bitmap]({{< ref "query-language.md#bitmap" >}}) query like so `Bitmap(frame="stargazer", stargazer_id=10)`.
+Set username value and active status for user 10. These are arbitrary key/value pairs which have no meaning to Pilosa. You can see the attributes you've set on a row with a [Bitmap]({{< ref "query-language.md#bitmap" >}}) query like so `Bitmap(frame="stargazer", stargazer_id=10)`.
 
 
 ##### SetColumnAttrs
@@ -161,7 +161,7 @@ A return value of `false` indicates that the bit was already set to 0 and nothin
 ClearBit(frame="stargazer", repo_id=10, stargazer_id=1)
 ```
 
-Remove relationship between stargazer_id=1 and repo_id=10  from the "stargazer" frame in the "repository" index.
+Remove relationship between stargazer_id 1 and repo_id 10  from the stargazer frame.
 
 
 #### Read Operations
