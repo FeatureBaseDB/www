@@ -47,7 +47,7 @@ Now that one has a data model, what sorts of queries can we easily (and quickly)
 
 Get the top websites accessed by a given person. 
 
-`TopN(Intersect(Row(srcIP=X.X.X.X), Row(user-agent=“Mozilla/5.0 (Windows; rv:40.0) Gecko Firefox/40.1”)), frame=hostname)`
+`TopN(Intersect(Row(srcIP=X.X.X.X), Row(user-agent="Mozilla/5.0 (Windows; rv:40.0) Gecko Firefox/40.1")), frame=hostname)`
 
 Analyze packet sizes for a given time range (could be useful in identifying DDoS attacks).
 `TopN(frame="packet_size::timestampHH")`

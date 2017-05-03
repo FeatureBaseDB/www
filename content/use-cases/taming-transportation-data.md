@@ -100,15 +100,15 @@ Here are a few examples of typical requests in the Pilosa Query Language that sh
 
     This gives us all the pickup locations with the most slow rides. As with all TopN calls, the results are ordered by count, which means the number of slow rides here.
 
-2. ```TopN(Intersect(Union(<slow speeds>), <pickup location A>)), frame=”dropoff_loc”)```
+2. ```TopN(Intersect(Union(<slow speeds>), <pickup location A>)), frame="dropoff_loc")```
 
     This gives us all the dropoff locations associated with slow rides originating at a specific pickup location, which might be as specific as a city block, or as broad as a borough.
 
-3. ```TopN(Intersect(Union(<slow speeds>), Union(<pickup locations>)), frame=”dropoff_loc”)```
+3. ```TopN(Intersect(Union(<slow speeds>), Union(<pickup locations>)), frame="dropoff_loc")```
 
     This gives us all the dropoff locations associated with slow rides originating at any one of a group of pickup locations.
 
-4. ```TopN(Intersect(Union(<slow speeds>), Union(<pickup locations>), Intersect(<rush hour times>)), frame=”dropoff_loc”)```
+4. ```TopN(Intersect(Union(<slow speeds>), Union(<pickup locations>), Intersect(<rush hour times>)), frame="dropoff_loc")```
 
     This gives us all the dropoff locations associated with slow rides that occurred during rush hour, originating at any one of a group of pickup locations.
 
@@ -123,7 +123,7 @@ With a minor extension to the scalar bucketing described above, we can use Pilos
 
 References:  Oracle. Improving Logistics & Transportation Performance with Big Data: Architect’s Guide and Reference Architecture Introduction. February 2015.
 
-Paul A, Saravanan V, Thangaiah PRJ. “Data Mining Analytics to Minimize Logistics Cost.” International Journal of Advances in Science and Technology. 2(3). 2011. p89-107. 
+Paul A, Saravanan V, Thangaiah PRJ. "Data Mining Analytics to Minimize Logistics Cost." International Journal of Advances in Science and Technology. 2(3). 2011. p89-107. 
 
  New York City Taxi & Limousine Commission. TLC Trip Record Data. Updated March 13, 2017.
 
