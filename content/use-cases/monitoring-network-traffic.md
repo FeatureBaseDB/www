@@ -8,10 +8,12 @@ Pilosa enables humans and machines correlate, filter, query, and otherwise make 
 There are myriad reasons to study the data that traverses computer networks. Maybe a researcher wants to understand how traffic patterns change over time, or an operator wants to know what types of traffic happen most frequently so that she can optimize the network for the particular load it sees. Perhaps most importantly, those who defend our computer systems from threats both internal and external require a deep understanding of the traffic which traverses their networks. One cannot detect abnormal traffic without a good understanding of normal traffic.
   
 Even moderately sized networks move a staggering amount of information on a day to day basis - so much that getting even basic statistics about it is a daunting task. Any solution to this problem must:
+
 * be horizontally scalable
 * represent the data as compactly as possible
 * support high speed streaming ingest
 * be queryable in real time (in order to help respond to anomalies quickly)
+   
   
 Pilosa is a distributed, sparse, bitmap index - not only can it represent each feature of a packet as a single bit, it intelligently compresses each bitmap, or in some cases doesn’t store them at all (e.g. if no bits are set), resulting in a massive reduction in the size of the index. Additionally,Pilosa will spread itself over a large number of hosts, increasing both the amount of space and processing power available to run queries.
   
