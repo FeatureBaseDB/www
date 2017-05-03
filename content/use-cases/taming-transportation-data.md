@@ -58,7 +58,7 @@ For example, timestamps are important information, but we tend to be interested 
 | Saturday |  0 | 0 | |
 | Sunday |  0 | 0 | |
 
-
+This table represents a small portion of one frame, showing whether individual bits are set.
 
 #### This is the ultimate data model: 
 
@@ -71,12 +71,12 @@ For example, timestamps are important information, but we tend to be interested 
 |drop_grid_id|9424|8893||
 |drop_year|2013|2013||
 |drop_month|8|9||
-|drop_day|5|19 ||
+|drop_day|0 (Monday)|3  (Thursday)||
 |drop_time|14|15||
 |pickup_grid_id|9366|7136 ||
 |pickup_year|2013|2013||
 |pickup_month|8|9||
-|pickup_day|5|19 ||
+|pickup_day|0 |3  ||
 |pickup_time|13|13 ||
 |average_speed|30 |17||
 |duration|14|44 ||
