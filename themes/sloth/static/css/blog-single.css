@@ -166,6 +166,9 @@
   padding: 26px;
 
 }
+.single-body-content blockquote :last-child{
+    margin-bottom: 0;
+}
 
 
 .sticky-social{
