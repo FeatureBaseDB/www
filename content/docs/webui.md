@@ -25,7 +25,11 @@ In addition to standard PQL, the console supports a few special commands, prefix
 - `:create frame <framename>`
 - `:delete frame <framename>`
 
-Index and frame creation do not yet support options like `rowLabel` or `inverseEnabled`.
+Index and frame creation also supports options like `columnLabel` or`rowLabel` or `inverseEnabled`. When creating new index or new frame, add options by using the keys documented in [API reference](../api-reference)
+
+- `:create index <indexname> columnLabel=col_id`
+- `:create frame <framename> rowLabel=row_id inverseEnabled=true cacheSize=10000`
+
 
 #### Cluster Admin
 
