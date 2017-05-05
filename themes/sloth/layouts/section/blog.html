@@ -25,17 +25,19 @@
     <div  class="blog-cards-container">
       {{ range $key, $taxonomy := .Site.Taxonomies.featured }}{{ range $taxonomy.Pages }}
       <div class="blog-card-featured">
-        <div class="blog-card-featured-img-container">
-          {{ if not .Params.disable_overlay }}
-            <div class="blog-card-overlay blog-card-{{ .Params.overlay_color }}"></div>
-          {{ end }}
+        <a href="{{ .URL }}">
+          <div class="blog-card-featured-img-container">
+            {{ if not .Params.disable_overlay }}
+              <div class="blog-card-overlay blog-card-{{ .Params.overlay_color }}"></div>
+            {{ end }}
 
-          <div class="blog-card-img">
-            <a href="/blog/hello-world/">
-              <img style='object-fit: cover;' width='100%' height='100%' src="{{ .Params.image }}" alt="{{ .Title }}">
-            </a>
+            <div class="blog-card-img">
+                <a href="{{ .URL }}">
+                <img style='object-fit: cover;' width='100%' height='100%' src="{{ .Params.image }}" alt="{{ .Title }}">
+              </a>
+            </div>
           </div>
-        </div>
+        </a>
         <div class="blog-card-featured-content mr-5">
           <h2 class="h-2-blue mb-4">
             <a class="unstyled-a" href="{{ .URL }}">{{ .Title }}</a>
@@ -45,7 +47,7 @@
           <p class='mb-4'>
             {{ .Summary }}
           <div class="blog-card-author-content">
-              <img class='mr-3' src="/img/{{ .Site.Params.author_06}}" alt="">
+              <img class='mr-3' src="/img/author_0{{ .Params.author_img }}.svg" alt="">
               <div class="body-bold">{{ .Params.author }}</div>
           </div>
         </div>
@@ -59,7 +61,9 @@
           {{ if .Params.image }}
           <a  href="{{ .URL }}">
           <div class="blog-card-img-container mb-4">
-              <div class="blog-card-overlay blog-card-blue"></div>
+              {{ if not .Params.disable_overlay }}
+              <div class="blog-card-overlay blog-card-{{ .Params.overlay_color }}"></div>
+              {{ end }}
             <div class="blog-card-img">
 
                 <img style='object-fit: cover;' width='100%' height='100%' src="{{ .Params.image }}" alt="{{ .Title }}">
@@ -75,12 +79,12 @@
             </h3>
             <h6 class="h-6-caps ">{{ .Date.Format "1/2/2006" }} • {{ .ReadingTime }} min read</h6>
             {{ if .Params.image }}
-                {{ .Summary | truncate 150 " ..." }}
+                {{ .Summary | truncate 130 " ..." }}
             {{ else }}
                 {{ .Summary | truncate 500 " ..." }}
             {{ end }}
             <div class="blog-card-author-content">
-                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
+                <img class='mr-3' src="/img/author_0{{ .Params.author_img }}.svg" alt="">
                 <div class="body-bold">{{ .Params.author }}</div>
             </div>
           </div>
