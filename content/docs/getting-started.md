@@ -76,7 +76,7 @@ curl localhost:10101/index/repository/frame/language \
 ```
 ##### Import Some Data
 
-The sample data for the "Star Trace" project is at [Pilosa Getting Started repository](https://github.com/pilosa/getting-started). Download the `stargzer.csv` and `language.csv` files in that repo.
+The sample data for the "Star Trace" project is at [Pilosa Getting Started repository](https://github.com/pilosa/getting-started). Download the `stargazer.csv` and `language.csv` files in that repo.
 
 ```
 wget https://raw.githubusercontent.com/pilosa/getting-started/master/stargazer.csv
