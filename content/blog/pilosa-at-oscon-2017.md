@@ -25,4 +25,4 @@ If you can’t make Jaffee’s talk but are curious about Pilosa’s application
 
 #### Pilosa Launch Party
 
-Last, and certainly not least, swing by our official Launch Party at [Sellers Underground](http://sellersaustin.com/) ([213 West 4th St.](https://www.google.com/maps/place/Sellers/@30.2664729,-97.747739,17z/))! Members of our team will be handing out tickets (good for two free drinks) all day Wednesday, so be sure to stop by our booth or flag down anyone wearing a Pilosa t-shirt!
+Last, and certainly not least, swing by our official Launch Party at [Sellers Underground](http://sellersaustin.com/) ([213 West 4th St.](https://www.google.com/maps/place/Sellers/@30.2664729,-97.747739,17z/)) at 7:00pm on Wednesday! Members of our team will be handing out tickets (good for two free drinks) all day Wednesday, so be sure to stop by our booth or flag down anyone wearing a Pilosa t-shirt!
