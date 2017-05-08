@@ -93,7 +93,7 @@ toc:
        title: Python
      - slug: java
        title: Java
- - title: Administration
+ - title: Administration Guide
    slug: administration
    subsections:
      - slug: installing-in-production
