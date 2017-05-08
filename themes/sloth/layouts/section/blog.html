@@ -47,7 +47,7 @@
           <p class='mb-4'>
             {{ .Summary }}
           <div class="blog-card-author-content">
-              <img class='mr-3' src="/img/author_0{{ .Params.author_img }}.svg" alt="">
+              <img class='mr-3' src="/img/author_0{{ .Params.author_img }}.svg" alt="Avatar for {{ .Params.author }}">
               <div class="body-bold">{{ .Params.author }}</div>
           </div>
         </div>
@@ -84,7 +84,7 @@
                 {{ .Summary | truncate 500 " ..." }}
             {{ end }}
             <div class="blog-card-author-content">
-                <img class='mr-3' src="/img/author_0{{ .Params.author_img }}.svg" alt="">
+                <img class='mr-3' src="/img/author_0{{ .Params.author_img }}.svg" alt="Avatar for {{ .Params.author }}">
                 <div class="body-bold">{{ .Params.author }}</div>
             </div>
           </div>
