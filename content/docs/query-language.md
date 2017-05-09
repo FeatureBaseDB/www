@@ -367,8 +367,7 @@ Range(<frame=STRING>, <ROW_LABEL=UINT>,
 **Description:**
 
 Similar to `Bitmap`, but only returns bits which were set with timestamps
-between the given `start` and `end` timestamps. Currently, specifying a column
-label instead of a row label is not supported for Range queries.
+between the given `start` and `end` timestamps. 
 
 **Result Type:** object with attrs and bits
 
