@@ -88,7 +88,6 @@ pilosa import -i repository -f stargazer stargazer.csv
 pilosa import -i repository -f language language.csv
 ```
 
-<!--
 If you are using a Docker container for Pilosa (with name `pilosa`), you should instead copy the `*.csv` file into the container and then import them:
 ```
 docker cp stargazer.csv pilosa:/stargazer.csv
@@ -96,7 +95,7 @@ docker exec -it pilosa /pilosa import -i repository -f stargazer /stargazer.csv
 docker cp language.csv pilosa:/language.csv
 docker exec -it pilosa /pilosa import -i repository -f language /language.csv
 ```
--->
+
 Note that, both the user IDs and the repository IDs were remapped to sequential integers in the data files, they don't correspond to actual Github IDs anymore. You can check out `language.txt` to see the mapping for languages.
 
 ##### Make Some Queries
