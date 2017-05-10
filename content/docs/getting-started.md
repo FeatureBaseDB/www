@@ -74,7 +74,7 @@ curl localhost:10101/index/repository/frame/language \
 ```
 ##### Import Some Data
 
-The sample data for the "Star Trace" project is at [Pilosa Getting Started repository](https://github.com/pilosa/getting-started). Download the `stargzer.csv` and `language.csv` files in that repo.
+The sample data for the "Star Trace" project is at [Pilosa Getting Started repository](https://github.com/pilosa/getting-started). Download the `stargazer.csv` and `language.csv` files in that repo.
 
 ```
 curl -O https://raw.githubusercontent.com/pilosa/getting-started/master/stargazer.csv
@@ -88,15 +88,14 @@ pilosa import -i repository -f stargazer stargazer.csv
 pilosa import -i repository -f language language.csv
 ```
 
-<!--
 If you are using a Docker container for Pilosa (with name `pilosa`), you should instead copy the `*.csv` file into the container and then import them:
 ```
-docker cp repository-stargazer.csv pilosa:/repository-stargazer.csv
-docker exec -it pilosa pilosa import -d repository -f stargazer /repository-stargazer.csv
-docker cp repository-language.csv pilosa:/repository-language.csv
-docker exec -it pilosa pilosa import -d repository -f language /repository-language.csv
+docker cp stargazer.csv pilosa:/stargazer.csv
+docker exec -it pilosa /pilosa import -i repository -f stargazer /stargazer.csv
+docker cp language.csv pilosa:/language.csv
+docker exec -it pilosa /pilosa import -i repository -f language /language.csv
 ```
--->
+
 Note that, both the user IDs and the repository IDs were remapped to sequential integers in the data files, they don't correspond to actual Github IDs anymore. You can check out `language.txt` to see the mapping for languages.
 
 ##### Make Some Queries
