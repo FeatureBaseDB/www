@@ -217,6 +217,12 @@
 .blue-overlay{
   background: rgba(60, 95, 141, 0.68);
 }
+.green-overlay{
+  background: rgba(29,181, 152, 0.68);
+}
+.light-overlay{
+  background: rgba(177, 219, 222, 0.68);
+}
 
 .other-posts-container{
   background: #f2f7f9;

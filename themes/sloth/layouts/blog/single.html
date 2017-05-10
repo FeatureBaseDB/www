@@ -6,10 +6,10 @@
 
 
     <div class="single-hero-img">
-        <img style='object-fit: cover;'  height='500px'  width='100%'  src="{{ .Params.image }}" alt=""/>
+        <img style='object-fit: cover;'  height='500px'  width='100%'  src="{{ .Params.image }}" alt="{{ .Title }}"/>
     </div>
 
-    <div class="single-hero-overlay blue-overlay"></div>
+    <div class="single-hero-overlay {{ .Params.overlay_color }}-overlay"></div>
     <div class="single-hero-header">
       <h1 class="h-1-white mb-4">{{ .Title }}</h1>
       <h6 class="h-6-caps-white">{{ .Date.Format "1/2/2006" }} • {{ .ReadingTime }} min read</h6>
@@ -41,7 +41,7 @@
       {{ .Content }}
 
       <div class="blog-card-author-content mt-5">
-        <img class='mr-3' src="/img/{{ .Site.Params.author_06}}" alt="">
+        <img class='mr-3' src="/img/author_0{{ .Params.author_img }}.svg" alt="Avatar for {{ .Params.author }}">
         <div class="body-bold">{{ .Params.author }}</div>
       </div>
   </div>
@@ -98,7 +98,6 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
             </p>
             <div class="blog-card-author-content">
-                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
                 <div class="body-bold">Rob Sonic</div>
             </div>
           </div>
@@ -124,7 +123,7 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.
             </p>
             <div class="blog-card-author-content">
-                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="">
+                <img class='mr-3' src="/img/{{ .Site.Params.author_01}}" alt="Avatar for {{ .Params.author }}">
                 <div class="body-bold">Rob Sonic</div>
             </div>
           </div>

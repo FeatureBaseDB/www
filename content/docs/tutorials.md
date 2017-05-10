@@ -250,7 +250,7 @@ After retrieving chembl_id from the Inverse View, we can use the Tanimoto coeffi
 
 ##### Import process
 
-To import data into pilosa, we need to get chembl_id and SMILES from SD files, convert SMILES to Morgan fingerprints, and then write chembl_id and fingerprint to Pilosa. The fastest way is to extracted chembl_id and SMILES from SD file to csv file, then use the `pilosa import command to import the csv file into pilosa. Since chembl_id in the SD file is always paired with CHEMBL, e.g CHEMBL6329, and because Pilosa doesn't support string keys, we will ignore CHEMBL and instead use chembl_id as an integer key.
+To import data into Pilosa, we need to get chembl_id and SMILES from SD files, convert SMILES to Morgan fingerprints, and then write chembl_id and fingerprint to Pilosa. The fastest way is to extracted chembl_id and SMILES from SD file to csv file, then use the `pilosa import` command to import the csv file into Pilosa. Since chembl_id in the SD file is always paired with CHEMBL, e.g CHEMBL6329, and because Pilosa doesn't support string keys, we will ignore CHEMBL and instead use chembl_id as an integer key.
 
 For the `mole` index, each row in the csv file has the format 'chembl_id, position_id' by running the following command from Chem-usecase:
 ```
@@ -337,6 +337,6 @@ To run benchmark for specific chembl_id for different similarity threshold at pe
 python benchmarks.py -id 6223
 ```
 
-As Matt Swain’s blog post also did a great job using mongoDB for chemical similarity search, we compared benchmark on 500000 molecules between mongoDB aggregation framework with pilosa.
+As Matt Swain’s blog post also did a great job using mongoDB for chemical similarity search, we compared benchmark on 500000 molecules between mongoDB aggregation framework with Pilosa.
 
 Both using the same molecule, Morgan fingerprint folded to fixed lengths of 4096 bits and were run on a MacBook Pro with a 2.8 GHz 2-core Intel Core i7 processor, memory of 16 GB 1600 MHz DDR3, single host cluster

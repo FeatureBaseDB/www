@@ -49,7 +49,7 @@ Any flag that has a value that is a comma separated list on the command line bec
 
 ##### Bind
 
-* Description: host:port on which the pilosa server will listen for requests. Host defaults to localhost and port to 10101.
+* Description: host:port on which the Pilosa server will listen for requests. Host defaults to localhost and port to 10101.
 * Flag: `--bind="localhost:10101"`
 * Env: `PILOSA_BIND="localhost:10101"`
 * Config:
@@ -84,7 +84,7 @@ Any flag that has a value that is a comma separated list on the command line bec
 
 ##### Cluster Internal Port
 
-* Description: Port to which pilosa should bind for internal communication.
+* Description: Port to which Pilosa should bind for internal communication.
 * Flag: `--cluster.internal-port=11101`
 * Env: `PILOSA_CLUSTER.INTERNAL_PORT=11101`
 * Config:
@@ -135,7 +135,7 @@ Any flag that has a value that is a comma separated list on the command line bec
 
 ##### Data Dir
 
-* Description: Directory to store pilosa data files.
+* Description: Directory to store Pilosa data files.
 * Flag: `--data-dir="~/.pilosa"`
 * Env: `PILOSA_DATA_DIR="~/.pilosa"`
 * Config:

@@ -9,7 +9,7 @@ This can be used for constructing queries and viewing the cluster status.
 
 #### Console
 
-The [Console view](http://localhost:10101/#console) allows you to enter PQL queries and run them against your locally running server.  First you must select an Index with the Select index dropdown.  
+The [Console view](http://localhost:10101/#console) allows you to enter [PQL](../query-language) queries and run them against your locally running server.  First you must select an Index with the Select index dropdown.
 
 Each query's result will be displayed in the Output section along with the query time. 
 
@@ -25,7 +25,7 @@ In addition to standard PQL, the console supports a few special commands, prefix
 - `:create frame <framename>`
 - `:delete frame <framename>`
 
-Index and frame creation also supports options like `columnLabel` or`rowLabel` or `inverseEnabled`. When creating new index or new frame, add options by using the keys documented in [API reference](../api-reference)
+Index and frame creation also supports options like `columnLabel`,`rowLabel` or `inverseEnabled`. When creating new index or new frame, add options by using the keys documented in [API reference](../api-reference).
 
 - `:create index <indexname> columnLabel=col_id`
 - `:create frame <framename> rowLabel=row_id inverseEnabled=true cacheSize=10000`

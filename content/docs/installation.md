@@ -9,7 +9,7 @@ Pilosa is currently available for [MacOS](#installing-on-macos) and [Linux](#ins
 
 #### Installing on MacOS
 
-There are two ways to install Pilosa on MacOS: download the binary (recommended), or build from source.
+There are three ways to install Pilosa on MacOS: download the binary (recommended), build from source, or use Docker.
 
 ##### Download the Binary
 
@@ -131,7 +131,6 @@ There are two ways to install Pilosa on MacOS: download the binary (recommended)
 
     You're good to go!
 
-<!--
 ##### Use Docker
 
 1. Install Docker for Mac.
@@ -150,9 +149,8 @@ If you don't see the server listed, start the Docker application.
 
 4. Make sure Pilosa is installed successfully:
     ```
-    docker run --rm pilosa/pilosa:latest version
+    docker run --rm pilosa/pilosa:latest help
     ```
--->
 
 ##### What's next?
 
@@ -161,7 +159,7 @@ Head over to the [Getting Started](../getting-started/) guide to create your fir
 
 #### Installing on Linux
 
-There are two ways to install Pilosa on Linux: download the binary (recommended), or build from source.
+There are three ways to install Pilosa on Linux: download the binary (recommended), build from source, or use Docker.
 
 ##### Download the Binary
 
@@ -284,7 +282,6 @@ There are two ways to install Pilosa on Linux: download the binary (recommended)
     You're good to go!
 
 
-<!--
 ##### Use Docker
 
 1. Install Docker.
@@ -303,9 +300,8 @@ There are two ways to install Pilosa on Linux: download the binary (recommended)
 
 4. Make sure Pilosa is installed successfully:
     ```
-    docker run --rm pilosa/pilosa:latest version
+    docker run --rm pilosa/pilosa:latest help
     ```
--->
 
 ##### What's next?
 

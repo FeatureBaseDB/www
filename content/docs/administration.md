@@ -28,7 +28,7 @@ Pilosa is designed to be a distributed application, with data replication shared
 
 ##### Overview
 
-While pilosa does have some high system requirements it is not a best practice to set up a cluster with the fewest, largest machines available.  You want an evenly distributed load across several nodes in a cluster to easily recover from a single node failure, and have the resource capacity to handle a missing node until it's repaired or replaced.   Nor is it advisable to have many small machines.  The internode network traffic will become a bottleneck.  You can always add nodes later, but that does require some down time.
+While Pilosa does have some high system requirements it is not a best practice to set up a cluster with the fewest, largest machines available.  You want an evenly distributed load across several nodes in a cluster to easily recover from a single node failure, and have the resource capacity to handle a missing node until it's repaired or replaced.   Nor is it advisable to have many small machines.  The internode network traffic will become a bottleneck.  You can always add nodes later, but that does require some down time.
 
 #### Importing and Exporting Data
 
@@ -36,14 +36,14 @@ While pilosa does have some high system requirements it is not a best practice t
 
 The import API expects a csv of RowID,ColumnID's.
 
-When importing large datasets remember it is much faster to pre sort the data by RowID and then by ColumnID in ascending order. Also, avoid querying pilosa until the import is complete, otherwise you will experience inconsistent results.
+When importing large datasets remember it is much faster to pre sort the data by RowID and then by ColumnID in ascending order. You can use `pilosa sort CSV_FILE` to do that. Also, avoid querying Pilosa until the import is complete, otherwise you will experience inconsistent results.
 ```
 pilosa import  -d project -f stargazer project-stargazer.csv
 ```
 
 ##### Exporting
 
-Exporting Data to csv can be performed on a live instance of pilosa. You need to specify the Index, Frame, and View(default is standard). The API also expects the slice number, but the `pilosa export` sub command will export all slices within a Frame. The data will be in csv format RowID,ColumnID and sorted by column ID.
+Exporting Data to csv can be performed on a live instance of Pilosa. You need to specify the Index, Frame, and View(default is standard). The API also expects the slice number, but the `pilosa export` sub command will export all slices within a Frame. The data will be in csv format RowID,ColumnID and sorted by column ID.
 ```
 curl "http://localhost:10101/export?index=repository&frame=stargazer&slice=0&view=standard" \
      --header "Accept: text/csv"
