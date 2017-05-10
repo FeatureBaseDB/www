@@ -16,12 +16,10 @@ Execute the following in a terminal to run Pilosa with the default configuration
 ```
 pilosa server
 ```
-<!--
 If you are using the Docker image, you can run an ephemeral Pilosa container on the default address using the following command:
 ```
-docker run -it --rm --name pilosa -p 10101:10101 pilosa:latest
+docker run -it --rm --name pilosa -p 10101:10101 pilosa/pilosa:latest
 ```
--->
 
 Let's make sure Pilosa is running:
 ```
