@@ -94,7 +94,7 @@ SetRowAttrs(<frame=STRING>, <ROW_LABEL=UINT>,
 
 **Description:**
 
-`SetRowAttrs` associates arbitrary key/value pairs with a row in a frame.
+`SetRowAttrs` associates arbitrary key/value pairs with a row in a frame. Setting a value of `null`, without quotes, deletes an attribute.
 
 **Result Type:** null
 
@@ -108,6 +108,11 @@ SetRowAttrs(frame="stargazer", stargazer_id=10, username="mrpi", active=true)
 
 Set username value and active status for user 10. These are arbitrary key/value pairs which have no meaning to Pilosa. You can see the attributes you've set on a row with a [Bitmap]({{< ref "query-language.md#bitmap" >}}) query like so `Bitmap(frame="stargazer", stargazer_id=10)`.
 
+```
+SetRowAttrs(frame="stargazer", stargazer_id=10, username=null)
+```
+
+Delete username value for user 10.
 
 ##### SetColumnAttrs
 
@@ -125,7 +130,7 @@ SetColumnAttrs(<frame=STRING>, <ROW_LABEL=UINT>,
 
 **Result Type:** null
 
-SetColumnAttrs queries always return `null` upon success.
+SetColumnAttrs queries always return `null` upon success. Setting a value of `null`, without quotes, deletes an attribute.
 
 **Examples:**
 
@@ -134,6 +139,12 @@ SetColumnAttrs(frame="stargazer", repo_id=10, stars=123, url="http://projects.pi
 ```
 
 Set url value and active status for project 10. These are arbitrary key/value pairs which have no meaning to Pilosa. You can see the attributes you've set on a column with a [Bitmap]({{< ref "query-language.md#bitmap" >}}) query like so `Bitmap(frame="stargazer", repo_id=10)`.
+
+```
+SetColumnAttrs(frame="stargazer", repo_id=10, url=null)
+```
+
+Delete url value for repo 10.
 
 
 ##### ClearBit
