@@ -8,4 +8,13 @@ before_script:
   - pip install awscli --user `whoami`
   - aws configure set preview.cloudfront true
 script:
-  - make staging deploy
+  - make public
+deploy:
+  - provider: script
+    script: make staging deploy
+    on:
+      branch: staging
+  - provider: script
+    script: make production deploy
+    on:
+      branch: master
