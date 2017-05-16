@@ -10,12 +10,12 @@ toc:
        title: Installing on Linux
  - title: Getting Started
    slug: getting-started
-   subections:
+   subsections:
      - slug: starting-pilosa
        title: Starting Pilosa
      - slug: sample-project
        title: Sample Project
-     - slug: what-s-next?
+     - slug: what-s-next
        title: What's Next?
  - title: Tutorials
    slug: tutorials
