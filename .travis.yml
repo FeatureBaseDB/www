@@ -5,6 +5,6 @@ env:
   - secure: p7A6QQ7YH6LobzK/v5yUe15VVqM/rQ0p9xNx4/gn6oEetg2GGb1F56CwUSSWMhBXnguSrktZGCFG7m2Pl5FImyGyxlneP85yVaVAJhepB+gCkAWkzhLWhCLeBAmtW8dCpmhWq5rc1291D0BlSdYuGRIx1PNEUSz7/SOjPgriFpbHugj5sE/tIyW5+5UjyFXK48byRF4vDHJ2jorTINnKMqD42Dure5l9RJb2PNV2H6p0/k0LlkNFG2E0q7zAoqxtYfGjJR0CfqKV5x2Adia4mp1gHI7YBCC9fwJROn7GkydkmWF8+gtDXikxV7rVc2YHtMyzkGmAd+eFlAPhT+sHyA31djs9Wb7TwXCqPOTUr5gDklFnz9SA5nr8faO2rLTNJy1qbTiA7ysmLso65OXg1+iOIVmiQ2x/O6TGfAKgXNJCk2hl8/KF5zTsQ0J4g1v7XatvNeLq3cboeCbpm56xIJ0LaTgwVlpnkuXPQnfAAXY30wTwZ6g5Hq9J/BlOYSQQKi6EbpAa6BjpbNMsz9OxgRDl6cY+tw9BagM8iK/fuewykQsRaOWRmq0CNGLyqlYVxqa703THhCRUT5JpgLvoO/ffXoGGDHGxe5tY8GZCw55Fp3YC9dwH0BLUnp6fjk8Woip0ccftiWjaYANsYCzDN/dtJ6xjEqeC73Qz1SRMFnU=
 before_script:
   - go get -u -v github.com/spf13/hugo
-  - pip install awscli
+  - pip install awscli --user `whoami`
 script:
   - make staging deploy
