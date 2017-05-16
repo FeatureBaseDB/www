@@ -12,9 +12,11 @@ script:
 deploy:
   - provider: script
     script: make staging deploy
+    skip_cleanup: true
     on:
       branch: staging
   - provider: script
     script: make production deploy
+    skip_cleanup: true
     on:
       branch: master
