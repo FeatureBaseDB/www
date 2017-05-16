@@ -1,7 +1,7 @@
 User-agent: *
 Sitemap: {{ "/sitemap.xml" | absURL }}
-{{ if eq (getenv "HUGO_ENV") "staging"}}
+{{ if eq (getenv "HUGO_ENV") "staging" -}}
 Disallow: /
-{{ else }}
+{{ else -}}
 Disallow:
 {{ end }}
