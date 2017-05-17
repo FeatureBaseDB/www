@@ -30,4 +30,4 @@ reset-cache:
 deploy: public upload reset-cache
 
 clean:
-	rm -r content/docs
+	rm -rf content/docs
