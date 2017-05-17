@@ -1,4 +1,4 @@
-.PHONY: public server upload reset-cache staging deploy
+.PHONY: public server upload reset-cache staging deploy clean
 
 production:
 	$(eval HUGO_ENV := production)
@@ -28,3 +28,6 @@ reset-cache:
 	aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_ID) --paths "/*"
 
 deploy: public upload reset-cache
+
+clean:
+	rm -r content/docs
