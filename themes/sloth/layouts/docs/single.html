@@ -1,5 +1,4 @@
 {{ partial "header.html" . }}
-{{ $name := .File.BaseFileName }}
 <div  class="page-container">
 
   <div class="docs-nav-mobile py-2">
@@ -13,21 +12,7 @@
           </div>
         </button>
         <div  class="dropdown-menu-nav dropdown-menu " aria-labelledby="dropdownMenuButton">
-          <ul>
-          {{ range $.Site.Data.docs.toc }}
-            {{ $outerScope := . }}
-            <li>
-              <a href="/docs/{{ .slug }}" {{ if eq $name .slug }} class="docs-active" {{ end }}>{{ .title }}</a>
-              <ul>
-                {{ range .subsections }}
-                  <li>
-                    <a href="/docs/{{ $outerScope.slug }}/#{{ .subslug }}">{{ .title }}</a>
-                  </li>
-                {{ end}} 
-              </ul>
-            </li>
-          {{ end }}
-          </ul>
+        {{ partial "docs-nav.html" . }}
         </div>
       </div>
     </center>
@@ -38,21 +23,7 @@
   <div class="row container ">
     <div s class="docs-nav-container  col-4">
       <div  class='docs-nav' id="doc-nav">
-        <ul>
-        {{ range $.Site.Data.docs.toc }}
-          {{ $outerScope := . }}
-          <li>
-            <a href="/docs/{{ .slug }}" {{ if eq $name .slug }} class="docs-active" {{ end }}>{{ .title }}</a>
-            <ul>
-              {{ range .subsections }}
-                <li>
-                  <a href="/docs/{{ $outerScope.slug }}/#{{ .slug }}">{{ .title }}</a>
-                </li>
-              {{ end}} 
-            </ul>
-          </li>
-        {{ end }}
-        </ul>
+        {{ partial "docs-nav.html" . }}
         <div class="docs-nav-btn-container">
           <a href="/community/#support" class="btn-pilosa btn btn-success">Get support</a>
         </div>

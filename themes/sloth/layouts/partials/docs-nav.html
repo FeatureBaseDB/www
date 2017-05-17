@@ -1,0 +1,17 @@
+{{ $name := .File.BaseFileName }}
+<ul>
+{{ range $.Site.Data.docs.toc }}
+
+  {{ $outerSlug := .title | urlize }}
+  <li>
+    <a href="/docs/{{ $outerSlug }}" {{ if eq $name $outerSlug }} class="docs-active" {{ end }}>{{ .title }}</a>
+    <ul>
+      {{ range .subsections }} 
+        <li>
+          <a href="/docs/{{ $outerSlug }}/#{{ if .slug }}{{ .slug }}{{ else }}{{ .title | urlize }}{{ end }}">{{ .title }}</a>
+        </li>
+      {{ end}} 
+    </ul>
+  </li>
+{{ end }}
+</ul>
