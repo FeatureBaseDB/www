@@ -1,4 +1,4 @@
-.PHONY: public server upload reset-cache staging deploy
+.PHONY: public server upload reset-cache staging deploy clean
 
 production:
 	$(eval HUGO_ENV := production)
@@ -9,10 +9,16 @@ staging:
 	$(eval HOST := www-staging.pilosa.com)
 	$(eval CLOUDFRONT_ID := E3NZYVJQ5Z41XP)
 
-server:
+content/docs:
+	$(eval PILOSA_CLONE := $(shell mktemp -d))
+	git clone git://github.com/pilosa/pilosa.git $(PILOSA_CLONE)
+	git -C $(PILOSA_CLONE) --git-dir $(PILOSA_CLONE)/.git checkout docs
+	cp -r $(PILOSA_CLONE)/docs content/docs
+
+server: content/docs
 	hugo server --buildDrafts
 
-public:
+public: content/docs
 	HUGO_ENV=$(HUGO_ENV) hugo
 
 upload:
@@ -22,3 +28,6 @@ reset-cache:
 	aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_ID) --paths "/*"
 
 deploy: public upload reset-cache
+
+clean:
+	rm -rf content/docs
