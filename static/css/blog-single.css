@@ -158,15 +158,23 @@
 .single-body-content td{
     padding: 21px  30px;
 }
-.single-body-content blockquote{
+.single-body-content blockquote>p {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.33;
+    letter-spacing: 0.2px;
+    color: #1db598;
+    margin: 30px;
+}
+
+.single-body-content .note{
   border-radius: 2px;
   background-color: #f8fafb;
   border: solid 0.5px #d8d8d8;
   border-left: solid 4px #3c5e8c;
   padding: 26px;
-
 }
-.single-body-content blockquote :last-child{
+.single-body-content .note :last-child{
     margin-bottom: 0;
 }
 
