@@ -4,7 +4,7 @@
 
   {{ $outerSlug := .title | urlize }}
   <li>
-    <a href="/docs/{{ $outerSlug }}" {{ if eq $name $outerSlug }} class="docs-active" {{ end }}>{{ .title }}</a>
+    <a href="/docs/{{ $outerSlug }}/" {{ if eq $name $outerSlug }} class="docs-active" {{ end }}>{{ .title }}</a>
     <ul>
       {{ range .subsections }} 
         <li>

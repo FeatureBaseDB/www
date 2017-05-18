@@ -53,7 +53,7 @@ toc:
      - title: Go
      - title: Python
      - title: Java
- - title: Administration Guide
+ - title: Administration
    subsections:
      - title: Installing in production
      - title: Imports and Exports

@@ -16,6 +16,7 @@
   list-style-type: none;
   padding: 0;
   padding-left: 10px;
+  min-width: 240px;
 }
 .docs-nav li>a{
   list-style-type: none;

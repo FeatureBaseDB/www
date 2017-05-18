@@ -18,7 +18,7 @@ We want to encourage and facilitate the use of our trademarks by the community, 
 
 ## Trademarks subject to the guidelines
 
-#### Our trademarks
+### Our trademarks
 
 This Policy covers:
 
@@ -77,17 +77,17 @@ You agree that you will not acquire any rights in the Marks and that any goodwil
 
 See Universal considerations for all uses, above, which also apply.
 
-#### Uses we consider non-infringing
+### Uses we consider non-infringing
 
-##### Distribution of unmodified source code or unmodified executable code we have compiled
+#### Distribution of unmodified source code or unmodified executable code we have compiled
 When you redistribute an unmodified copy of our software, you are not changing the quality or nature of it. Therefore, you may retain the Word Marks and the Logos we have placed on the software to identify your redistribution -- whether that redistribution is made by optical media, memory stick or download of unmodified source and executable code. This kind of use only applied if you are redistributing an official distribution from this Project that has not been changed in any way. You can find files for the Logos and approved designs for packaging on our [Press](/press/) page.
 
-##### Distribution of executable code that you have compiled, or modified code
+#### Distribution of executable code that you have compiled, or modified code
 You may use the Word Marks, but not the Logos, to truthfully describe the origin of the software that you are providing, that is, that the code you are distributing is a modification of our software. You may say, for example, that "this software is derived from the source code for Pilosa software."
 
 Of course, you can place your own trademarks or logos on versions of the software to which you have made substantive modifications, because by modifying the software you have become the origin of that exact version. In that case, you should not use our Logos. Our source code version therefore does not contain our Logo data files.
 
-##### Statements about compatibility, interoperability or derivation
+#### Statements about compatibility, interoperability or derivation
 
 You may use the Word Marks, but not the Logos, to truthfully describe the relationship between your software and ours. Our Mark should be used after a verb or preposition that describes the relationship between your software and ours. So you may say, for example, "Bob's software for the Pilosa platform" but may not say "Bob's Pilosa software." Some other examples that may work for you are:
 
@@ -105,25 +105,25 @@ You may use the Word Marks, but not the Logos, to truthfully describe the relati
 
 [Your software] for Pilosa software
 
-##### Use of trademarks to show community affiliation
+#### Use of trademarks to show community affiliation
 
 This section discusses the use of our Marks for software such an application themes, skins and personas. The use of our Marks on websites is discussed below.
 You may use the Word Marks and the Logos in themes, personas, or skins for applications to show your support for the Project, provided that the use is non-commercial and the use is clearly decorative, as contrasted with a use that appears to be the branding for a website or application.
 
-#### Uses for which we are granting a license
-##### Distribution of modified software
+### Uses for which we are granting a license
+#### Distribution of modified software
 
 Example #1: You may use the Word Marks and the Logos for the distribution of code (source or executable) on the condition that any executable is built from the official Project source code and that any modifications are limited to switching on or off features already included in the software, translations into other languages, and incorporating bug-fix patches.
 
 Example #2: You may use the Word Marks and the Logos for the distribution of executable code on the condition that it is made from official Project source code using the procedure documented for creating an executable found at <<location of build instructions.>>>>
 
-##### Distribution of software preloaded on hardware
+#### Distribution of software preloaded on hardware
 
 Example #1: You may use the Word Marks and the Logos in association with hardware devices on the condition that the executable installed on the device is the official source executable for the Project, and that you do not suggest that the Project is the source of the hardware device itself but rather than the Marks are for the software incorporated into the device.
 
 Example #2: You may use use the Word Marks and the Logos in association with hardware devices on the condition that the software installed on the device is modified only so far as necessary to operate on the hardware platforms and the essential functions of the software are unchanged, and that you do not suggest that the Project is the source of the hardware device itself but rather than the Marks are for the software incorporated into the device.
 
-#### Uses we consider infringing without seeking further permission from us
+### Uses we consider infringing without seeking further permission from us
 
 We will likely consider using the Marks in a software distribution that combines our software with any other software program an infringement of our Marks. We would consider your software "combined" with ours if you create a single executable for both software programs, as well as if by installing our software it automatically installs yours. We would not consider your software "combined" with ours if it is on the same media but requires separate, independent action to install it.
 
@@ -131,9 +131,9 @@ We will likely consider using the Marks in a software distribution that combines
 
 See Universal considerations for all uses, above, which also apply.
 
-#### Uses we consider non-infringing
+### Uses we consider non-infringing
 
-##### Websites
+#### Websites
 
 You may use the Word Marks and Logos, but not the Trade Dress, on your webpage to show your support for the Project as long as:
 
@@ -143,15 +143,15 @@ You may use the Word Marks and Logos, but not the Trade Dress, on your webpage t
 * The site does not mislead customers into thinking that either your website, service, or product is our website, service, or product; and
 * The site clearly states that you are not affiliated with or endorsed by the Project.
 
-##### Publications and presentations
+#### Publications and presentations
 
 You can use the Word Marks in book and article titles, and the Logo in illustrations within the document, as long as the use does not suggest that we have published, endorse, or agree with your work.
 
-##### Events
+#### Events
 You can use the signage to promote the software and Project at events.
 
-#### Uses for which we are granting a license
-##### User groups
+### Uses for which we are granting a license
+#### User groups
 
 You can use the Word Marks as part of your user group name provided that:
 * The main focus of the group is the software;
@@ -161,43 +161,43 @@ You can use the Word Marks as part of your user group name provided that:
 
 Note that the Universal considerations for all uses, above, still apply, specifically, that you may not use or register the Marks as part of your own trademark, service mark, domain name, company name, trade name, product name or service name.
 
-##### Promotional goods
+#### Promotional goods
 
 "Promotional goods" are non-software goods that use the Marks and that are intended to advertise the Project, promote the Project, or show membership in the Project community.
 
 You may make promotional goods for free giveaway at open source conferences and events using only the designs found in our brand standards. 
  
-#### Uses we consider infringing without seeking further permission from us
+### Uses we consider infringing without seeking further permission from us
 We will likely consider using the Marks as part of a domain name or subdomain an infringement of our Marks.
 
 We would likely consider using the Marks on promotional goods for sale an infringement of our Marks.
 
 ## General Information
 
-#### Trademark marking and legends
+### Trademark marking and legends
 The first or most prominent mention of a Mark on a webpage, document, packaging, or documentation should be accompanied by a trademark ("™"). 
 
 Also, if you are using our Marks in a way described in the sections "Uses for which we are granting a license," please put following notice at the foot of the page where you have used the Mark (or, if in a book, on the credits page), on any packaging or labeling, and on advertising or marketing materials: "Pilosa is a trademark of Pilosa Corp", registered in the United States and other countries". Used with permission from the Pilosa Corp."
 
-#### What to do when you see abuse
+### What to do when you see abuse
 If you are aware of any confusing use or misuse of the Marks in any way, we would appreciate you bringing this to our attention. Please contact us so that we can investigate it further.
 
-##### Where to get further information
+#### Where to get further information
 If you have any questions about this Policy, would like to speak with us about the use of our Marks in ways not described in the Policy, or see any abuse of our Marks, please contact us.
 
 ## General considerations about trademarks and their use
-#### What trademark law is about
-##### What is a trademark?
+### What trademark law is about
+#### What is a trademark?
 
 A trademark is a word, phrase, symbol or design, or a combination of words, phrases, symbols or designs, that identifies and distinguishes the source of the goods of one party from those of others. A service mark is the same as a trademark, except that it identifies and distinguishes the source of a service rather than a product. "Trade dress" or "get up" refers to the look and feel of the packaging, which in this context can include the layout, colors, images, and design choices in a web page. Throughout this Policy, the terms "trademark" and "mark" refer to both trademarks, service marks and trade dress.
 
 However, the use of a word is "not as a trademark" when it is used functionally as part of the software program, for example, in a file, folder, directory, or path name. Use in this way is not a trademark infringement.
 
-##### What is "likelihood of confusion"?
+#### What is "likelihood of confusion"?
 
 There is trademark infringement if your use of a trademark has created a "likelihood of confusion." This means using a trademark in a way that will likely confuse or deceive the relevant consuming public about the source of a product or service using the mark in question. For example, if the "Foo" software extension removes all double spaces after periods, but someone else later creates "Foo" software that adds a third space after periods, consumers would be confused between the two and the newcomer will likely be a trademark infringer. As another example, if a company makes "Foobar" software and a third party offers training called "Foobar Certification," a person is likely to believe, wrongly, that the certification is being offered by the makers of Foobar software. The third party has likely misled consumers about the source of its training and is a trademark infringer.
 
-##### What is "nominative" use?
+#### What is "nominative" use?
 
 So-called "nominative use" (or "nominative fair use"), which is the name of the doctrine under U.S. trademark law, allows the use of another's trademark where it is necessary for understanding. Other countries' trademark laws also have similar provisions. For example, a car repair shop that specializes in a particular brand of automobile, VW for example, must be allowed to say that they repair VW cars. Here is what you should consider when deciding whether your use of a trademark is a nominative fair use:
 
@@ -209,11 +209,11 @@ With our "Foobar Certification" example above, the person offering the certifica
 
 It is almost never the case that using a Logo will be a nominative fair use since it will be a rare case where the logo is needed for strictly informational purposes.
 
-##### Proper trademark use
+#### Proper trademark use
 
 These rules hold true for all trademarks, not just ours, so you should follow them for our Marks as well as anyone else's.
 
-##### Use of trademarks in text
+#### Use of trademarks in text
 
 Always distinguish trademarks from surrounding text with at least initial capital letters or in all capital letters.
 Unacceptable: pilosa
@@ -243,7 +243,7 @@ Don't use a trademark as a possessive. Instead, the following noun should be use
 Unacceptable: Pilosa’s desktop interface is very clean.
 Acceptable: The Pilosa desktop's interface is very clean.
 
-##### Use of Logos
+#### Use of Logos
 
 You may not change any Logo except to scale it. This means you may not add decorative elements, change the colors, change the proportions, distort it, add elements, or combine it with other logos.
 
