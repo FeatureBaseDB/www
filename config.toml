@@ -1,7 +1,6 @@
 baseurl = "https://www.pilosa.com/"
 languageCode = "en-us"
 title = "Pilosa"
-theme = "sloth"
 
 enableRobotsTXT = true
 googleAnalytics = "UA-96186501-1"
