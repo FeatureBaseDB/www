@@ -7,6 +7,9 @@
             window.location.href = "{{ "/docs/faq/" | absURL }}"
         </script>
         <title>Page Redirection</title>
+        {{ with .Site.Params.inc.analytics.googleid }}
+          {{ partial "_google-analytics.html" . }}
+        {{ end }}
     </head>
     <body>
         If you are not redirected automatically, follow <a href='{{ "/docs/faq/" | absURL }}'>this link</a>.
