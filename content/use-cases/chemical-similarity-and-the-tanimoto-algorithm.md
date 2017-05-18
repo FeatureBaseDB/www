@@ -10,8 +10,10 @@ The notion of chemical similarity (or molecular similarity) plays an important r
 Calculation of the similarity of any two molecules is achieved by comparing their molecular fingerprints. These fingerprints are comprised of structural information about the molecule which has been encoded as a series of bits.  But the research suffers from one of the classic 3Vs of big data: volume. The sheer number of possible molecules, petabytes of data, and solutions that grow O(N^2) make the research difficult and costly. 
 
 
->"Similarity measures based on the comparison of dense bit vectors of two-dimensional chemical features are a dominant method in chemical informatics. For large-scale problems, including compound selection and machine learning, computing the intersection between two dense bit vectors is the overwhelming bottleneck." Imran S. Haque†, Vijay S. Pande†‡, and W. Patrick Walters*§
-†Department of Computer Science and ‡Department of Chemistry, Stanford University [1](https://www.ncbi.nlm.nih.gov/pubmed/21854053)
+<div class="note">
+    <p>"Similarity measures based on the comparison of dense bit vectors of two-dimensional chemical features are a dominant method in chemical informatics. For large-scale problems, including compound selection and machine learning, computing the intersection between two dense bit vectors is the overwhelming bottleneck." Imran S. Haque†, Vijay S. Pande†‡, and W. Patrick Walters*§
+†Department of Computer Science and ‡Department of Chemistry, Stanford University <a href="https://www.ncbi.nlm.nih.gov/pubmed/21854053">1</a></p>
+</div>
 
 
 Since Pilosa is a bitmap index, it is particularly suited to answering questions based on logical operations against massive data sets.  It can search through millions of molecules and find those most similar to a given molecule. 

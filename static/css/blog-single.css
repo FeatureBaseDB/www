@@ -54,40 +54,50 @@
     text-decoration: underline;
 }
 
-.single-body-content h5{
-  font-size: 26px;
-  margin: 40px 0px;
 
-}
-.single-body-content h4{
-  font-size: 36px;
-  margin: 30px 0px;
-  font-weight: bold;
-}
-
-
-.single-body-content h3{
-  font-size: 36px;
-	font-weight: 600;
-	line-height: 1.33;
-	letter-spacing: 0.2px;
-	color: #1db598;
-  margin: 30px;
-}
 .single-body-content h1{
-	font-size: 110px;
+  font-size: 110px;
   font-weight: bold;
-	line-height: 1.05;
-	letter-spacing: 0.2px;
-	color: #102445;
+  line-height: 1.05;
+  letter-spacing: 0.2px;
+  color: #102445;
   margin-bottom: 30px;
 }
 .single-body-content h2{
   font-size: 65px;
   font-weight: bold;
+  line-height: 1.05;
+  letter-spacing: 0.2px;
+  color: #102445;
+  margin-bottom: 20px;
+}
+.single-body-content h3{
+  font-size: 36px;
+  font-weight: bold;
   line-height: 1.17;
   letter-spacing: 0.2px;
   color: #102445;
+  margin-bottom: 20px;
+}
+.single-body-content h4{
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 1.23;
+  letter-spacing: 0.2px;
+  color: #102445;
+  margin-bottom: 20px;
+}
+.single-body-content h5{
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.22;
+  letter-spacing: 0.2px;
+  color: #102445;
+  margin-bottom: 20px;
+}
+
+.single-body-content b,strong {
+    font-weight: 500;
 }
 
 .single-body-content img{
@@ -158,15 +168,24 @@
 .single-body-content td{
     padding: 21px  30px;
 }
-.single-body-content blockquote{
+.single-body-content blockquote>p {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.33;
+    letter-spacing: 0.2px;
+    color: #1db598;
+    margin: 30px;
+}
+
+.single-body-content .note{
   border-radius: 2px;
   background-color: #f8fafb;
   border: solid 0.5px #d8d8d8;
   border-left: solid 4px #3c5e8c;
   padding: 26px;
-
+  margin-bottom: 20px;
 }
-.single-body-content blockquote :last-child{
+.single-body-content .note :last-child{
     margin-bottom: 0;
 }
 
