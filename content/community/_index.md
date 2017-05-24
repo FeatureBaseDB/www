@@ -1,5 +1,6 @@
 +++
 title = "Community"
+description = "Access our Support Channels, a list of upcoming events, and our Community Code of Conduct."
 +++
 
 # Community

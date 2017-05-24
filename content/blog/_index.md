@@ -1,8 +1,4 @@
 +++
 title = "Blog"
+description = "See what's up in the Pilosa Slumber."
 +++
-
-
-# Blog 1
-
-blog 1
