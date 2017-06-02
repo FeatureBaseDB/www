@@ -16,13 +16,12 @@ test its efficacy on other types of problems.
 
 <!--more-->
 
-While the user segmentation use
-case has a very high number of attributes, the data is extremely sparse—most
-attributes are only associated with a handful of people, and most individuals
-only have a few hundred or a few thousand attributes. Pilosa handles this type
-of data gracefully; in just milliseconds, one can choose any boolean combination
-of the millions of attributes and find the segment of users which satisfies that
-combination.
+While the user segmentation use case has a very high number of attributes,
+the data is extremely sparse—most attributes are only associated with a handful
+of people, and most individuals only have a few hundred or a few thousand attributes.
+Pilosa handles this type of data gracefully; in just milliseconds, one can choose any
+boolean combination of the millions of attributes and find the segment of users which
+satisfies that combination.
 
 ![Segmentation in Umbel](/img/blog/billion-taxi-umbel.png)
 
