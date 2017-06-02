@@ -44,7 +44,7 @@ various technologies; here are just a few:
 
 Of particular usefulness to us are the series of posts by Mark Litwintschik and the [performance comparison](http://tech.marksblogg.com/benchmarks.html) table he compiled. Here is the table for reference:
 
-![Benchmarks](/img/blog/billion-taxi-table1.png)
+![Mark's benchmarks](/img/blog/billion-taxi-table1.png)
 
 We implemented the same four queries against Pilosa so that we could get some comparison of performance against other solutions.
  
@@ -81,7 +81,7 @@ files from S3, parsing them, and loading the data into Pilosa.
  
 If we were to add our results to Mark's table, it would look like the following:
 
-![Benchmarks](/img/blog/billion-taxi-table2.png)
+![Mark's benchmarks with Pilosa](/img/blog/billion-taxi-table2.png)
 
 *Note that the hardware and software are different for each setup, so direct comparisons are difficult.*
 
@@ -94,7 +94,7 @@ some cases beating out exotic hardware such as multi-GPU setups. The 0.177s time
 on query 3 was particularly startling—performance was along the lines of 8 Nvidia
 Pascal Titan Xs. It looks like kdb+/q is beating us pretty soundly,
 but keep in mind that those Xeon Phi 7210s have 256 hardware threads per chip,
-as well as 16GB of memory /on the package/. This gives them performance and
+as well as 16GB of memory _on the package_. This gives them performance and
 memory bandwidth closer to GPUs than CPUs. They're also about $2400 a piece.
  
 For us, these results are enough to validate spending more time optimizing
