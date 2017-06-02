@@ -9,7 +9,7 @@ image = "/img/blog/billion-taxi-banner.png"
 overlay_color = "blue" # blue, green, or light
 +++
 
-Pilosa was originally built for a very specific use case—arbitrary audience
+Pilosa was originally built for the very specific use case of arbitrary audience
 segmentation on hundreds of millions of people with tens of millions of attributes.
 As we've spun out a separate company around Pilosa, a natural first step was to
 test its efficacy on other types of problems.
