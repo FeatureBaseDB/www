@@ -10,7 +10,7 @@ overlay_color = "blue" # blue, green, or light
 +++
 
 Pilosa was originally built for a very specific use case - arbitrary audience
-segmentation on 100s of millions of people with 10s of millions of attributes.
+segmentation on hundreds of millions of people with tens of millions of attributes.
 As we've spun out a separate company around Pilosa, a natural first step was to
 test its efficacy on other types of problems.
 
@@ -22,21 +22,22 @@ attributes are only associated with a handful of people, and most individuals
 only have a few hundred or a few thousand attributes. Pilosa handles this type
 of data gracefully; one can choose any boolean combination of the millions of
 attributes, and find the segment of users which satisfies that combination in
-Milliseconds.
+milliseconds.
 
 ![Segmentation in Umbel](/img/blog/billion-taxi-umbel.png)
 
 _Image courtesy of Umbel_
  
 For audience segmentation, we'd happily pit Pilosa against anything out there on
-similar hardware, however, if we want Pilosa to be an index which serves as a
+similar hardware. However, if we want Pilosa to be an index which serves as a
 general purpose query acceleration layer over other data stores, it will have to
 be effective at more than just segmentation queries, and more than just sparse,
 high cardinality data. In order to test Pilosa, we needed a dataset which had
 dense, lower cardinality data, and ideally one which has been explored by other
 solutions so that we could get a feel for how we might fare against them. The
-billion taxi ride dataset fit the bill perfectly - there are myriad blog posts
-analyzing the dataset with various technologies; here are just a few:
+[billion taxi ride dataset](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml)
+fit the bill perfectly - there are myriad blog posts analyzing the dataset with
+various technologies; here are just a few:
  
 * __[Analyzing 1.1 Billion NYC Taxi and Uber Trips, with a Vengeance]( http://toddwschneider.com/posts/analyzing-1-1-billion-nyc-taxi-and-uber-trips-with-a-vengeance/)__
 * __[Kx 1.1 billion taxi ride benchmark highlights advantages of kdb+ architecture]( https://kx.com/2017/01/25/kx-1-1-billion-taxi-ride-benchmark-highlights-advantages-kdb-architecture/)__
@@ -46,7 +47,7 @@ Of particular usefulness to us are the series of posts by Mark Litwintschik and 
 
 ![Benchmarks](/img/blog/billion-taxi-table1.png)
 
-We implemented the same for queries against Pilosa so that we could get some comparison of performance against other solutions.
+We implemented the same four queries against Pilosa so that we could get some comparison of performance against other solutions.
  
 Here is the English description of each query:
  
