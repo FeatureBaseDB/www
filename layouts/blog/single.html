@@ -5,9 +5,11 @@
   <div class="single-hero-container">
 
 
+    {{ if .Params.image }}
     <div class="single-hero-img">
         <img style='object-fit: cover;'  height='500px'  width='100%'  src="{{ .Params.image }}" alt="{{ .Title }}"/>
     </div>
+    {{ end }}
 
     <div class="single-hero-overlay {{ .Params.overlay_color }}-overlay"></div>
     <div class="single-hero-header">
