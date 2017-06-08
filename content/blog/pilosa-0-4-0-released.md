@@ -9,9 +9,11 @@ overlay_color = "green" # blue, green, or light
 
 The Pilosa team is happy to announce the release of [Pilosa 0.4.0](https://github.com/pilosa/pilosa/releases/tag/v0.4.0), marking our second minor release since [open-sourcing on April 29](/blog/hello-world/).
 
-This version contains 53 contributions from 13 contributors, including four volunteer contributors. Special thanks to Alexander Guz, Damian Gryski, Gil Raphaelli, and Jason Novinger for your pull requests on [Github](https://github.com/pilosa/pilosa)! Also thanks to Brian Gyss for creating a [Homebrew package](https://github.com/Homebrew/homebrew-core/pull/13251) for Mac installation!
+This version contains 53 contributions from 13 contributors, including four volunteer contributors. Special thanks to [Alexander G.](https://github.com/kalimatas), [Damian G.](https://github.com/dgryski), [Gil R.](https://github.com/graphaelli), and [Jason N.](https://github.com/jnovinger) for your pull requests on [Github](https://github.com/pilosa/pilosa)! Also thanks to [Brian G.](https://github.com/bgyss) for creating a [Homebrew package](https://github.com/Homebrew/homebrew-core/pull/13251) for Mac installation!
 
 <!--more-->
+
+Some notable features include:
 
 ### StatsD metrics reporting
 
