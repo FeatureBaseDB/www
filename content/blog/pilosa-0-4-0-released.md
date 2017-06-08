@@ -4,7 +4,8 @@ publishdate = "2017-06-08"
 title = "Pilosa 0.4.0 Released"
 author = "Cody Soyland"
 author_img = "2"
-overlay_color = "green" # blue, green, or light
+image = "/img/blog/0.4.0-release-banner.png"
+overlay_color = "blue" # blue, green, or light
 +++
 
 The Pilosa team is happy to announce the release of [Pilosa 0.4.0](https://github.com/pilosa/pilosa/releases/tag/v0.4.0), marking our second minor release since [open-sourcing on April 29](/blog/hello-world/).
