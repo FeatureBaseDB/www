@@ -15,11 +15,11 @@ This version contains 53 contributions from 13 contributors, including four volu
 
 ### StatsD metrics reporting
 
-This release includes support for metrics reporting via the [StatsD](https://github.com/etsy/statsd) protocol. When enabled, this allows you to monitor several metrics in Pilosa like queries/second, GC stats, and snapshot events. Metrics also include Datadog-compatible tags. Learn more [about our metrics support](/docs/administration/#metrics) and [how to configure it](/docs/configuration/#metric-service) in our documentation.
+This release includes support for metrics reporting via the [StatsD](https://github.com/etsy/statsd) protocol. When enabled, this allows you to monitor several metrics in Pilosa like queries per second, garbage collection stats, and snapshot events. Metrics also include Datadog-compatible tags. Learn more [about our metrics support](/docs/administration/#metrics) and [how to configure it](/docs/configuration/#metric-service) in our documentation.
 
 ### WebUI Enhancements
 
-The WebUI is now more useful with the ability to create and delete indexes and frames, autocomplete queries, and view cluster metadata.
+The WebUI is now more useful with the addition of query input autocompletion, a cluster metadata viewer, and a syntax for frame and index creation. [Learn more about the WebUI](https://www.pilosa.com/docs/webui/) in our documentation.
 
 ### Docker multi-stage build
 
@@ -31,4 +31,6 @@ We hope to always stay focused on stability and performance, so Pilosa 0.4.0 inc
 
 ### Changelog
 
-For this release, we've adopted the [Keep a Changelog](http://keepachangelog.com/) guidelines for managing release notes. The [Pilosa 0.4.0 changelog](https://github.com/pilosa/pilosa/blob/master/CHANGELOG.md) contains more information about this release.
+For this release, we've adopted the [Keep a Changelog](http://keepachangelog.com/) guidelines for managing release notes.
+
+To see the complete list of new features, fixes, and performance improvements, check out [our changelog on Github](https://github.com/pilosa/pilosa/blob/master/CHANGELOG.md).
