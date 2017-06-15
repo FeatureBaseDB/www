@@ -134,26 +134,26 @@
     <div class=" container  ">
       <div class='row justify-content-center'>
 
-
-        <form  class=" contact-us-form col-11 my-5 " action="//pilosa.us15.list-manage.com/subscribe/post?u=804d9b2d65c9213cfa08eb7c3&amp;id=12e90aaa9a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate>
+        <form  class=" contact-us-form col-11 my-5 " action="https://formspree.io/xwvbzovm" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate>
+          <input type="text" name="_gotcha" style="display: none"> 
+          <input type="hidden" name="_next" value="https://www.pilosa.com/about/thanks/" />
           <div class="contact-us-header ">
             <h2 class="h-2-blue">Contact us</h2>
             <p >
               We're all about fast and easy queries. From community resources to enterprise solutions, we're happy to help. Just ask.
             </p>
           </div>
-          <input placeholder="First and Last Name" type="text" class="contact-us-input" name="NAME" value="">
+          <input placeholder="First and Last Name" type="text" class="contact-us-input" name="name" value="" maxlength="100">
           <div class="contact-us-row">
-            <input placeholder="email" required type="email" class="contact-us-input contact-us-col" name="EMAIL" value="">
-            <input placeholder="phone"  type="phone" class="contact-us-input contact-us-col" name="PHONE" value="">
+            <input placeholder="email" required type="email" class="contact-us-input contact-us-col" name="email" value="" maxlength="100">
+            <input placeholder="phone"  type="phone" class="contact-us-input contact-us-col" name="phone" value="" maxlength="100">
           </div>
 
-          <input placeholder="Company" type="text" class="contact-us-input" name="COMPANY" value="">
-          <input placeholder="Title" type="text" class="contact-us-input" name="TITLE" value="">
-          <textarea  rows='5' placeholder='Tell us more about how we can help. (Optional)'  class='contact-us-input' name="COMMENT" value=""></textarea>
+          <input placeholder="Company" type="text" class="contact-us-input" name="company" value="" maxlength="100">
+          <input placeholder="Title" type="text" class="contact-us-input" name="title" value="" maxlength="100">
+          <textarea  rows='5' placeholder='Tell us more about how we can help. (Optional)'  class='contact-us-input' name="comment" value="" maxlength="1000"></textarea>
           <div class='d-flex justify-content-center mt-4'>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_804d9b2d65c9213cfa08eb7c3_12e90aaa9a" tabindex="-1" value=""></div>
-            <button type="submit" name="subscribe" class="btn-pilosa btn btn-success ">Send</button>
+            <button type="submit" class="btn-pilosa btn btn-success">Send</button>
           </div>
         </form>
 
