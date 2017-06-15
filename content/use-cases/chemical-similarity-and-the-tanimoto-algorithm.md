@@ -26,7 +26,7 @@ T(A,B) = (A ^ B)/(A + B - A^B)
 
 ## Data model
 
-To model data in Pilosa, one must choose what the columns represent and what the rows represent. Let each column to represent a molecule id and each row represent a bit position within the digital fingerprint. 
+To model data in Pilosa, one must choose what the columns represent and what the rows represent. Let each column to represent a bit position within the digital fingerprint and each row represent a molecule id. 
  
 Pilosa stores information as a series of bits, and in this case one can use RDKit in Python to convert molecules from their SMILES encoding to Morgan fingerprints, which are arrays of “on” bit positions. 
 
@@ -47,7 +47,7 @@ Pilosa has a host of functions including TopN and Tanimoto Threshold. Using Pilo
 
     
 ```python
-query_string = 'TopN(Bitmap(id=6223, frame="mole.n"), frame="mole.n", n=2000000, tanimotoThreshold=70)'
+query_string = 'TopN(Bitmap(id=6223, frame="fingerprint"), frame="fingerprint", tanimotoThreshold=70)'
 topn = requests.post("http://127.0.0.1:10101/index/mol/query" , data=query_string)
 ```
 
