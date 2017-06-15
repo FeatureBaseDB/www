@@ -9,8 +9,6 @@ image = "/img/blog/tanimoto-and-chemical-similarity-with-pilosa/banner.png"
 overlay_color = "green" # blue, green, or light
 +++
 
-### Introduction
- 
 As we continue to test Pilosa against various types of data (e.g., the [Billion Taxi Ride Dataset](https://www.pilosa.com/blog/billion-taxi-ride-dataset-with-pilosa/)), we decided to turn our next endeavor into a dual-purpose test. Specifically, we decided to test Pilosa against the [Chemical Similarity for ChemBL dataset](https://www.ebi.ac.uk/chembl/downloads) while also testing Pilosa’s ability to run algorithms in its native core.
 
 <!--more-->
