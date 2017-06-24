@@ -4,7 +4,6 @@ publishdate = "2017-06-15"
 title = "Tanimoto & Chemical Similarity with Pilosa"
 author = "Linh Vo"
 author_img = "1"
-featured = "true"
 image = "/img/blog/tanimoto-and-chemical-similarity-with-pilosa/banner.png"
 overlay_color = "green" # blue, green, or light
 +++
