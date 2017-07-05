@@ -36,33 +36,29 @@
   align-items: center;
   justify-content: center;
 }
-.community-support-card1{
+.community-support-card{
   padding-left: 14px;
   width: 258px;
   height:230px;
-  border-bottom: 1px solid #f8fafb;
-  border-right: 1px solid #f8fafb;
+}
+.community-support-card1{
+  border-bottom: 2px solid #f8fafb;
+  border-right: 2px solid #f8fafb;
 }
 .community-support-card2{
-  padding-left: 14px;
-  width: 258px;
-  height:230px;
-  border-bottom: 1px solid #f8fafb;
-  border-left: 1px solid #f8fafb;
+  border-bottom: 2px solid #f8fafb;
+  border-right: 2px solid #f8fafb;
 }
 .community-support-card3{
-  padding-left: 14px;
-  width: 258px;
-  height:230px;
-  border-top: 1px solid #f8fafb;
-  border-right: 1px solid #f8fafb;
+  border-bottom: 2px solid #f8fafb;
 }
 .community-support-card4{
-  padding-left: 14px;
-  width: 258px;
-  height:230px;
-  border-top: 1px solid #f8fafb;
-  border-left: 1px solid #f8fafb;
+  border-right: 2px solid #f8fafb;
+}
+.community-support-card5{
+  border-right: 2px solid #f8fafb;
+}
+.community-support-card6{
 }
 
 .community-support-icon-container{
