@@ -1,11 +1,11 @@
 +++
-date = "2017-06-25"
-publishdate = "2017-06-25"
-title = "Adding Support for Run-length Encoding to Pilosa"
+date = "2017-07-07"
+publishdate = "2017-07-07"
+title = "Pilosa Now Supports Run-length Encoding"
 author = "Matt Jaffee and Alan Bernstein"
 author_img = "2"
 featured = "true"
-image = "/img/blog/rle-banner.png"
+image = "/img/blog/roaring_blog.png"
 overlay_color = "blue" # blue, green, or light
 +++
 

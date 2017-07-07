@@ -4,7 +4,6 @@ publishdate = "2017-06-24"
 title = "OSCON 2017 Recap: The Index As a First Class Citizen"
 author = "Ali Cooley"
 author_img = "1"
-featured = "true"
 image = "/img/blog/oscon-2017-recap-the-index-as-a-first-class-citizen/banner.png"
 overlay_color = "blue" # blue, green, or light
 +++
