@@ -56,7 +56,7 @@ And that's not all - Roaring needs to do a bunch of other things in addition to 
 * Iterating over a Bitmap which can contain a mixture of all three container types.
 * An internal `intersectionCount` function which speeds up certain queries.
 
-And of course, unit tests. Roaring is central to Pilosa, so we test it as thoroughly as possible. The RLE work consists of 1500+ new lines of feature code, plus 2500+ new lines of unit tests. Although our Roaring package is feature complete [TODO is this accurate?], we still have a few tasks on the todo list:
+And of course, unit tests. Roaring is central to Pilosa, so we test it as thoroughly as possible. The RLE work consists of 1500+ new lines of feature code, plus 2500+ new lines of unit tests. Although our Roaring package is feature complete, we still have a few tasks on the todo list:
 
 * Expand fuzz testing for roaring.
 * Examine inverted storage, for "sparse zeroes" data.
@@ -67,7 +67,7 @@ Just for the sake of posterity:
 
 * Operation support: early on, we only needed a subset of binary operations, notably missing were `XOR` and `NOT`.
 * Incompatible file spec differences:
-  * Our "cookie" is always bytes 0-3; our container count is always bytes 4-7, never bytes 2-3. This just simplifies the logic of writing and reading files. Our magic number matches the Roaring magic number (TODO which seems like an unfortunate oversight). 
+  * Our "cookie" is always bytes 0-3; our container count is always bytes 4-7, never bytes 2-3. This just simplifies the logic of writing and reading files. Our magic number matches the Roaring magic number.
   * Our cookie includes file format version in bytes 2-3 (equal to zero for this release).
   * Our offset header section is always included. In the spec it is left out for small bitmaps, which explains why it is not rolled into the offset/key section. This is unneccessary parsing complexity for us.
   * RLE runs are serialized as [start, last], not [start, length].
