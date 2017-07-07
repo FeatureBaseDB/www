@@ -58,9 +58,9 @@ And that's not all - Roaring needs to do a bunch of other things in addition to 
 
 And of course, unit tests. Roaring is central to Pilosa, so we test it as thoroughly as possible. The RLE work consists of 1500+ new lines of feature code, plus 2500+ new lines of unit tests. Although our Roaring package is feature complete, we still have a few tasks on the todo list:
 
-* Expand fuzz testing for roaring.
-* Examine inverted storage, for "sparse zeroes" data.
 * Thorough benchmarking and testing on large, real data.
+* Expand fuzz testing.
+* Examine inverted storage, for "sparse zeroes" data.
 
 ### Departures from the spec
 Just for the sake of posterity:
