@@ -19,11 +19,11 @@ Pilosa is built on our 64-bit implementation of [Roaring bitmaps](http://roaring
 
 Roaring Bitmaps is a technique for compressed bitmap indexes described by Daniel Lemire et al. Their work shows that using three different representations for bitmap data results in excellent performance (storage size and computation speed) for general data. These three "container types" are integer arrays, compressed bitsets, and RLE.
 
-Here is a small, concrete example of these container types, using this set of 16-bit integers: {0, 1, 2, 3, 6, 7, 9, 10, 14}.
+Here is a concrete example of these container types, using this set of 16-bit integers: {0, 1, 2, 3, 6, 7, 9, 10, 14}.
 
 ![RLE container example](/img/blog/adding-rle-support/rle-container-example.png)
 
-Array and run values are stored as 16-bit integers, while bits in the bitset are literal bits. Clearly, the bitset representation wins in size here, but each container type is appropriate for different patterns in the data. For example, if we wanted to store a set of 32 contiguous integers, the RLE representation would be smallest. As a side note, each container has an associated key, which stores the high bits that are common to all elements in the container.
+Array and run values are stored as 16-bit integers, whereas the entire bitset for this small example is only 16 bits. Clearly, the bitset representation wins in size here, but each container type is appropriate for different patterns in the data. For example, if we wanted to store a set of 32 contiguous integers, the RLE representation would be smallest. As a side note, each container has an associated key, which stores the high bits that are common to all elements in the container.
 
 When we decided to build a standalone bitmap index, Roaring was an obvious choice. Implementing it in Go, we used 64-bit keys to support high cardinality, rather than the 32-bit keys in the reference implementation. In our original use case, some features weren't crucial, including the run-length encoded container type, which is relatively unimportant for very sparse data. In addition to in-memory storage, Roaring includes a [full specification for file storage](https://github.com/RoaringBitmap/RoaringFormatSpec). Aside from some minor (but binary-incompatible) differences, we followed this closely.
 
