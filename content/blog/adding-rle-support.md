@@ -17,7 +17,7 @@ Pilosa is built on our 64-bit implementation of [Roaring bitmaps](http://roaring
 
 ### Roaring Basics
 
-Roaring Bitmaps is a technique for compressed bitmap indexes described by Daniel Lemire et al. Their work shows that using three different representations for bitmap data results in excellent performance (storage size and computation speed) for general data. These three "container types" are integer arrays, compressed bitsets, and RLE.
+Roaring Bitmaps is a technique for compressed bitmap indexes described by Daniel Lemire et al. Their work shows that using three different representations for bitmap data results in excellent performance (storage size and computation speed) for general data. These three "container types" are integer arrays, uncompressed bitsets, and RLE.
 
 Here is a concrete example of these container types, using this set of integers:
 
