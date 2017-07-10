@@ -7,6 +7,7 @@ author_img = "2"
 featured = "true"
 image = "/img/blog/roaring_blog.png"
 overlay_color = "" # blue, green, or light
+disable_overlay = true
 +++
 <!-- red overlay added directly to banner image -->
 
