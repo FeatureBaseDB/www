@@ -6,16 +6,17 @@ author = "Matt Jaffee and Alan Bernstein"
 author_img = "2"
 featured = "true"
 image = "/img/blog/roaring_blog.png"
-overlay_color = "blue" # blue, green, or light
+overlay_color = "" # blue, green, or light
 +++
+<!-- red overlay added directly to banner image -->
 
-Pilosa is built on our 64-bit implementation of [Roaring bitmaps](http://roaringbitmap.org/), generally accepted as the best approach to compressed storage+computation for arbitrary bitsets. Until recently, our Roaring package was missing one important feature - [run-length encoded](https://en.wikipedia.org/wiki/Run-length_encoding) (RLE) sets! With full RLE support added in the v0.5.0 release, we wanted to share some details about its implementation.
+Pilosa is built on our 64-bit implementation of [Roaring bitmaps](http://roaringbitmap.org/), generally accepted as the best approach to compressed storage+computation for arbitrary bitsets. Until recently, our Roaring package was missing one important feature - [run-length encoded](https://en.wikipedia.org/wiki/Run-length_encoding) (RLE) sets! With full RLE support added in the upcoming v0.5.0 release, we wanted to share some details about its implementation.
 
 <!--more-->
 
 ### Roaring Basics
 
-Roaring Bitmaps is a technique for compressed bitmap indexes described by Daniel Lemire et al. Their work shows that using three different representations for bitmap data results in excellent performance (storage size and computation speed) for general data. These three "container types" are integer arrays, compressed bitsets, and RLE. In addition to in-memory storage, Roaring includes a [full specification for file storage](https://github.com/RoaringBitmap/RoaringFormatSpec).
+Roaring Bitmaps is a technique for compressed bitmap indexes described by Daniel Lemire et al. Their work shows that using three different representations for bitmap data results in excellent performance (storage size and computation speed) for general data. These three "container types" are integer arrays, compressed bitsets, and RLE.
 
 Here is a small, concrete example of these container types, using this set of 16-bit integers:
 
@@ -27,7 +28,7 @@ Directly, as an array:
 
 As a bitset, where bit positions indicate presence:
 
-`0b1111001101100010 = 62306` (2 bytes).
+`0b1111001101100010` or `62306` (2 bytes).
 
 As a run-length encoded array of runs of ones (start, end):
 
@@ -35,17 +36,18 @@ As a run-length encoded array of runs of ones (start, end):
 
 Clearly the bitset representation wins in size here, but each container type is appropriate for different patterns in the data. As a side note, each container has an associated key, which stores the high bits that are common to all elements in the container.
 
-When we decided to build a standalone bitmap index, Roaring was an obvious choice. Implementing it in Go, we used 64-bit keys to support high cardinality, rather than the 32-bit keys in the reference implementation. In our original use case, some features weren't crucial, including the run-length encoded container type, which is relatively unimportant for very sparse data. Aside from some minor (but binary-incompatible) differences, we followed the Roaring spec closely.
+When we decided to build a standalone bitmap index, Roaring was an obvious choice. Implementing it in Go, we used 64-bit keys to support high cardinality, rather than the 32-bit keys in the reference implementation. In our original use case, some features weren't crucial, including the run-length encoded container type, which is relatively unimportant for very sparse data. In addition to in-memory storage, Roaring includes a [full specification for file storage](https://github.com/RoaringBitmap/RoaringFormatSpec). Aside from some minor (but binary-incompatible) differences, we followed this closely.
 
 ### Adding RLE
 
 If you're familiar with RLE, this might seem like an odd topic for a blog post. RLE is one of the simplest compression techniques around; functions for encoding and decoding can be written in a handful of lines of your favorite language. The key to Roaring's speed is that the computation of any operation on two containers is done on the raw containers, without modifying either one. Let's consider how the `AND` (intersect) operation works, when only the first two container types are implemented. For `A AND B`, there are three cases: `A` and `B` are arrays (array-array), `A` and `B` are bitsets (bitset-bitset), `A` is array and `B` is bitset or vice versa (array-bitset). Each of these must be implemented separately, so you start to see how Roaring operations are a bit more involved than the simple conceptual `AND` operation.
 
-After adding the new RLE container type, we need three new functions: RLE-RLE, array-RLE, bitset-RLE. This is just for the `AND` operation; we need three new functions for the `OR` operation as well. We also support the non-commutative difference operation `ANDNOT`, which previously required four functions (bitset-array in addition to the three above), and now requires nine (array-RLE, RLE-array, bitset-RLE, RLE-bitset, RLE-RLE). We were adding the `XOR` operation in a parallel branch, so we included the new RLE `XOR` functions, for another three. That's 14 new functions just to support RLE for these four operations, and many of these are nontrivial. 
+After adding the new RLE container type, we need three new functions: RLE-RLE, array-RLE, bitset-RLE. This is just for the `AND` operation; we need three new functions for the `OR` operation as well. We also support the non-commutative difference operation `ANDNOT`, which previously required four functions (bitset-array in addition to the three above), and now requires nine (array-RLE, RLE-array, bitset-RLE, RLE-bitset, RLE-RLE). We were adding the `XOR` operation in a parallel branch, so we included the new RLE `XOR` functions, for another six. That's 17 new functions just to support RLE for these four operations, and many of these are nontrivial. All of these operation functions are summarized in the tables below.
+
+![RLE operation functions](/img/blog/rle-function-tables.png)
+*RLE operation functions. "x" indicates a required function; new functions are green*
 
 Functions that operate on one RLE container tend to be more complicated, and functions that operate on two RLE containers even more so. For example, `intersectRunRun`, the function for computing `AND` for two RLE containers, simultaneously iterates over the runs in each container. For each pair of runs encountered, there are six distinct cases, one for each of ways that two intervals can overlap with each other. `differenceRunRun` might be the trickiest of all the operations. Again, several different overlap cases must be considered, but unlike the intersect algorithm, these cases are interleaved. 
-
-<!-- TODO summary table of operation interactions -->
 
 And that's not all - Roaring needs to do a bunch of other things in addition to the binary operations. All of these operations need to be supported, on or with the RLE containers:
 
@@ -74,6 +76,12 @@ Just for the sake of posterity:
 * After the container storage section is an operation log, of unspecified length. This maintains a record of updates to the bitmap, which is processed when a file is read. For more details on this, stay tuned for an upcoming post on Pilosa architecture.
 
 <!--
+link doesnt work yet
+Our file format is described in some detail in the [docs](../../docs/architecture/#roaring-bitmap-storage-format).
+
+-->
+
+<!--
 ### Benchmarks
 - memory
 - disk
@@ -81,3 +89,5 @@ Just for the sake of posterity:
 - different cardinalities
 - different bit distributions - optimal for each case, mixed, etc
 -->
+
+Cover image illustration credit: [Vecteezy.com](https://vecteezy.com)
