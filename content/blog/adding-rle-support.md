@@ -1,8 +1,8 @@
 +++
-date = "2017-07-07"
-publishdate = "2017-07-07"
-title = "Pilosa Now Supports Run-length Encoding"
-author = "Matt Jaffee and Alan Bernstein"
+date = "2017-07-10"
+publishdate = "2017-07-10"
+title = "Adding Run Length Encoding Support to Pilosa"
+author = "Alan Bernstein and Matt Jaffee"
 author_img = "2"
 featured = "true"
 image = "/img/blog/adding-rle-support/banner.png"
@@ -19,13 +19,16 @@ Pilosa is built on our 64-bit implementation of [Roaring bitmaps](http://roaring
 
 Roaring Bitmaps is a technique for compressed bitmap indexes described by Daniel Lemire et al. Their work shows that using three different representations for bitmap data results in excellent performance (storage size and computation speed) for general data. These three "container types" are integer arrays, compressed bitsets, and RLE.
 
-Here is a concrete example of these container types, using this set of 16-bit integers: {0, 1, 2, 3, 6, 7, 9, 10, 14}.
+Here is a concrete example of these container types, using this set of integers:
+
+{0, 1, 2, 3, 6, 7, 9, 10, 14}.
 
 ![RLE container example](/img/blog/adding-rle-support/rle-container-example.png)
+*RLE container types*
 
 Array and run values are stored as 16-bit integers, whereas the entire bitset for this small example is only 16 bits. Clearly, the bitset representation wins in size here, but each container type is appropriate for different patterns in the data. For example, if we wanted to store a set of 32 contiguous integers, the RLE representation would be smallest. As a side note, each container has an associated key, which stores the high bits that are common to all elements in the container.
 
-When we decided to build a standalone bitmap index, Roaring was an obvious choice. Implementing it in Go, we used 64-bit keys to support high cardinality, rather than the 32-bit keys in the reference implementation. In our original use case, some features weren't crucial, including the run-length encoded container type, which is relatively unimportant for very sparse data. In addition to in-memory storage, Roaring includes a [full specification for file storage](https://github.com/RoaringBitmap/RoaringFormatSpec). Aside from some minor (but binary-incompatible) differences, we followed this closely.
+When we decided to build a standalone bitmap index, Roaring rose to the top as an excellent choice. Implementing it in Go, we used 64-bit keys to support high cardinality, rather than the 32-bit keys in the reference implementation. The RLE container was added to Roaring as an extension after we began our implementation, but as a non-critical feature, it sat on our roadmap for a while. In addition to in-memory storage, Roaring includes a [full specification for file storage](https://github.com/RoaringBitmap/RoaringFormatSpec). Aside from some minor (but binary-incompatible) differences, we followed this closely.
 
 ### Adding RLE
 
@@ -36,7 +39,7 @@ After adding the new RLE container type, we need three new functions: RLE-RLE, a
 ![RLE operation functions](/img/blog/adding-rle-support/rle-function-tables.png)
 *RLE operation functions. "x" indicates a required function; new functions are green*
 
-Functions that operate on one RLE container tend to be more complicated, and functions that operate on two RLE containers even more so. For example, `intersectRunRun`, the function for computing `AND` for two RLE containers, simultaneously iterates over the runs in each container. For each pair of runs encountered, there are six distinct cases, one for each of ways that two intervals can overlap with each other. `differenceRunRun` might be the trickiest of all the operations. Again, several different overlap cases must be considered, but unlike the intersect algorithm, these cases are interleaved. 
+Functions that operate on one RLE container tend to be more complicated, and functions that operate on two RLE containers even more so. For example, `intersectRunRun`, the function for computing `AND` for two RLE containers, simultaneously iterates over the runs in each container. For each pair of runs encountered, there are six distinct cases, one for each of the ways that two intervals can overlap with each other. `differenceRunRun` might be the trickiest of all the operations. Again, several different overlap cases must be considered, but unlike the intersect algorithm, these cases are interleaved.
 
 And that's not all - Roaring needs to do a bunch of other things in addition to the binary operations. All of these operations need to be supported, on or with the RLE containers:
 
@@ -50,8 +53,10 @@ And that's not all - Roaring needs to do a bunch of other things in addition to 
 And of course, unit tests. Roaring is central to Pilosa, so we test it as thoroughly as possible. The RLE work consists of 1500+ new lines of feature code, plus 2500+ new lines of unit tests. Although our Roaring package is feature complete, we still have a few tasks on the todo list:
 
 * Thorough benchmarking and testing on large, real data.
-* Expand fuzz testing.
-* Examine inverted storage, for "sparse zeroes" data.
+* Expanding fuzz testing.
+* Examining inverted storage, for "sparse zeroes" data.
+
+The work is ongoing in this [branch](https://github.com/pilosa/pilosa/tree/334-rle-rebased), if you'd like to check out the gritty details. We would also love for you to help by forking [Pilosa](https://github.com/pilosa/pilosa) and trying it out!
 
 ### Departures from the spec
 Just for the sake of posterity:
