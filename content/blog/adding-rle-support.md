@@ -5,7 +5,7 @@ title = "Pilosa Now Supports Run-length Encoding"
 author = "Matt Jaffee and Alan Bernstein"
 author_img = "2"
 featured = "true"
-image = "/img/blog/roaring_blog.png"
+image = "/img/blog/adding-rle-support/banner.png"
 overlay_color = "" # blue, green, or light
 disable_overlay = true
 +++
@@ -45,7 +45,7 @@ If you're familiar with RLE, this might seem like an odd topic for a blog post. 
 
 After adding the new RLE container type, we need three new functions: RLE-RLE, array-RLE, bitset-RLE. This is just for the `AND` operation; we need three new functions for the `OR` operation as well. We also support the non-commutative difference operation `ANDNOT`, which previously required four functions (bitset-array in addition to the three above), and now requires nine (array-RLE, RLE-array, bitset-RLE, RLE-bitset, RLE-RLE). We were adding the `XOR` operation in a parallel branch, so we included the new RLE `XOR` functions, for another six. That's 17 new functions just to support RLE for these four operations, and many of these are nontrivial. All of these operation functions are summarized in the tables below.
 
-![RLE operation functions](/img/blog/rle-function-tables.png)
+![RLE operation functions](/img/blog/adding-rle-support/rle-function-tables.png)
 *RLE operation functions. "x" indicates a required function; new functions are green*
 
 Functions that operate on one RLE container tend to be more complicated, and functions that operate on two RLE containers even more so. For example, `intersectRunRun`, the function for computing `AND` for two RLE containers, simultaneously iterates over the runs in each container. For each pair of runs encountered, there are six distinct cases, one for each of ways that two intervals can overlap with each other. `differenceRunRun` might be the trickiest of all the operations. Again, several different overlap cases must be considered, but unlike the intersect algorithm, these cases are interleaved. 
