@@ -9,9 +9,11 @@ image = "/img/blog/gophercon-2017-technical-overview/banner.png"
 overlay_color = "blue" # blue, green, or light
 +++
 
-In addition to sponsoring Gophercon 2017, our team sent several of us engineers to Gophercon. Predictably, we all had a blast. As you may have guessed, Pilosa is written in Go, so this conference was particularly important to us. We felt that we should try to get the most from our time in Denver, so between us, we attended every. Single. Talk. Like all good Gophers, we used the time between sessions to compare notes and discuss takeaways from each. 
+In addition to sponsoring Gophercon 2017, our team sent several of us engineers to Gophercon. Predictably, we all had a blast.
 
 <!--more-->
+
+As you may have guessed, Pilosa is written in Go, so this conference was particularly important to us. We felt that we should try to get the most from our time in Denver, so between us, we attended every. Single. Talk. Like all good Gophers, we used the time between sessions to compare notes and discuss takeaways from each. 
 
 Three of us put together topline selection of our findings, although we will be writing more in the next few weeks and doing some deep dives about our favorite sessions.
 
