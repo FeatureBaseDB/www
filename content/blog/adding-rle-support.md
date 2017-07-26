@@ -4,7 +4,6 @@ publishdate = "2017-07-10"
 title = "Adding Run Length Encoding Support to Pilosa"
 author = "Alan Bernstein and Matt Jaffee"
 author_img = "2"
-featured = "true"
 image = "/img/blog/adding-rle-support/banner.png"
 overlay_color = "" # blue, green, or light
 disable_overlay = true
