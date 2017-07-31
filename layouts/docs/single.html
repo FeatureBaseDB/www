@@ -4,6 +4,9 @@
   <div class="docs-nav-mobile py-2">
     <center>
 
+      <input class="docsearch-input-mobile docsearch-input" type="text" placeholder="Search" />
+      <i class="docsearch-icon fa fa-search"></i>
+
       <div class="dropdown">
         <button class="dropdown-nav btn  dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <div class='inner-dropdown-nav'>
@@ -21,7 +24,13 @@
   </div>
   </div>
   <div class="row container ">
-    <div s class="docs-nav-container  col-4">
+    <div class="docs-nav-container  col-4">
+
+      <div class="docsearch-container">
+        <input class="docsearch-input-desktop docsearch-input" type="text" placeholder="Search" />
+        <i class="docsearch-icon fa fa-search"></i>
+      </div>
+
       <div  class='docs-nav' id="doc-nav">
         {{ partial "docs-nav.html" . }}
         <div class="docs-nav-btn-container">
