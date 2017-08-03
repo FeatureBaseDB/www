@@ -4,7 +4,7 @@ title = "Terms of Service"
 
 ### Legal Notices
 
-We, the Operators of this Website, provide it as a public service to our users.
+We, Pilosa Corp., the "Operators" of this Website, provide it as a public service to our users.
 
 Please carefully review the following basic rules that govern your use of the Website. Please note that your use of the Website constitutes your unconditional agreement to follow and be bound by these Terms and Conditions of Use. If you (the "User") do not agree to them, do not use the Website, provide any materials to the Website or download any materials from them.
 
