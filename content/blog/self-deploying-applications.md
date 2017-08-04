@@ -9,7 +9,7 @@ overlay_color = "" # blue, green, or light
 disable_overlay = true
 +++
 
-What if your apps handled their own ops? That's kind of like the devops' final form,
+What if your apps handled their own ops? That's kind of like devops' final form,
 right? Its ultimate evolution? The Charizard of devops, if you will. 
 
 Inspiration to write about this comes from Kelsey Hightower who had a good talk
@@ -23,7 +23,7 @@ myapp compiles itself statically for Linux, containerizes itself, and deploys to
 a Kubernetes cluster with 5 replicas. No config files needed.
 
 I thought this was extremely cool, and immediately went to check out Kubernetes
-to see if I could add something like this to Pilosa. Kubernetes' docs have a
+to see if I could add something like it to Pilosa. Kubernetes' docs have a
 page dedicated to "picking the right solution," which has 40+ different ways to
 get going with Kubernetes, none of which (as far as I could tell) were "run this
 binary". Bleeeeccchhh - I don't want to dig through pages of documentation just
