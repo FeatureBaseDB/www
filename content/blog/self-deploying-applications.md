@@ -5,8 +5,9 @@ title = "Self Deploying Applications Without Kubernetes"
 author = "Matt Jaffee"
 author_img = "2"
 image = "/img/blog/self-deploying/banner.jpg"
-overlay_color = "" # blue, green, or light
-disable_overlay = true
+featured = "true"
+overlay_color = "green"
+disable_overlay = false
 +++
 
 What if your apps handled their own ops? That's kind of like devops' final form,
@@ -146,7 +147,7 @@ So, there you have it. A self-deploying application *without* Kubernetes. All
 you need is a pile of hosts to which you have ssh access and you too can make
 complex fleets of self-deploying programs.
 
-Check out the source code for [Pi](github.com/pilosa/tools) (especially the
+Check out the source code for [Pi](https://github.com/pilosa/tools) (especially the
 `build` and `ssh` packages), and read the docs if you want to really know how to
 use it - I glossed over a bunch of details and made some stuff up to make it
 seem approachable 😉. Patches welcome!
