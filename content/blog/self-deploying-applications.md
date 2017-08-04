@@ -9,8 +9,13 @@ overlay_color = "" # blue, green, or light
 disable_overlay = true
 +++
 
-Kelsey Hightower had a good talk at Gophercon about [Self Deploying Kubernetes
-Applications](https://www.youtube.com/watch?v=XPC-hFL-4lU). Here's the TLDR;
+What if your apps handled their own ops? That's kind of like the devops' final form,
+right? Its ultimate evolution? The Charizard of devops, if you will. 
+
+Inspiration to write about this comes from Kelsey Hightower who had a good talk
+at Gophercon about
+[Self Deploying Kubernetes Applications](https://www.youtube.com/watch?v=XPC-hFL-4lU).
+Here's the TLDR;
 
 `myapp --kubernetes --replicas=5`
 
@@ -19,7 +24,7 @@ a Kubernetes cluster with 5 replicas. No config files needed.
 
 I thought this was extremely cool, and immediately went to check out Kubernetes
 to see if I could add something like this to Pilosa. Kubernetes' docs have a
-page dedicated to "picking the right solution" which has 40+ different ways to
+page dedicated to "picking the right solution," which has 40+ different ways to
 get going with Kubernetes, none of which (as far as I could tell) were "run this
 binary". Bleeeeccchhh - I don't want to dig through pages of documentation just
 for a quick experiment. I've heard great things about Kubernetes, and I'm sure
@@ -38,10 +43,10 @@ suite. The original idea was to build a tool which would, with a single command:
 - store all the data from each benchmark run in a consistent format
 - make and serve delicious iced beverages
 
-OK, now that I put it in a list like that it looks pretty ridiculous - I guess
-it makes sense that we've been working away at it on and off for something like
-8 months. In any case, we've actually achieved a few of those goals with a new
-tool called [Pi](https://github.com/pilosa/tools) which we are open sourcing *today*.
+Wow, once that I put it in a list like that it looks pretty ridiculous - now I
+understand why it has taken us something like 8 months. In any case, we've
+actually achieved a few of those goals with a new tool
+called [Pi](https://github.com/pilosa/tools) which we are open sourcing *today*.
 
 Right, but self deploying applications, that's why you're here. Let's set aside
 the cloud provisioning part of the equation for now, and say you have a set of
@@ -67,7 +72,7 @@ Linux images from AWS or GCP or whatever.
 
 How can we do that? Let's break this down: first of all, we need to be able to
 connect with remote hosts via ssh inside a Go program. Turns out Go has a pretty
-great ssh package (https://godoc.org/golang.org/x/crypto/ssh) which handles most
+great [ssh package](https://godoc.org/golang.org/x/crypto/ssh) which handles most
 of this for us. Once we're connected to remote hosts, we can execute commands at
 a shell just like we would from a terminal! We get standard `Reader` and
 `Writer` interfaces for getting data into and out of those commands, so
@@ -97,7 +102,7 @@ decided to use `os/exec` to run `go build` in a subprocess.
 
 `com := exec.Command("go", "build", "-o", "someTempFile", "https://github.com/pilosa/pilosa")`
 
-oh, and we need to set the environment to make sure we build for Linux:
+Oh, and we need to set the environment to make sure we build for Linux:
 
 `com.Env = append(os.Environ(), "GOOS=linux")`
 
