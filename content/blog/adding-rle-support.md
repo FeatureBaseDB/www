@@ -10,9 +10,11 @@ disable_overlay = true
 +++
 <!-- red overlay added directly to banner image -->
 
-Pilosa is built on our 64-bit implementation of [Roaring bitmaps](http://roaringbitmap.org/), generally accepted as the best approach to compressed storage+computation for arbitrary bitsets. Until recently, our Roaring package was missing one important feature - [run-length encoded](https://en.wikipedia.org/wiki/Run-length_encoding) (RLE) sets! With full RLE support added in the upcoming v0.5.0 release, we wanted to share some details about its implementation.
+Pilosa is built on our 64-bit implementation of [Roaring bitmaps](http://roaringbitmap.org/), generally accepted as the best approach to compressed storage+computation for arbitrary bitsets. Until recently, our Roaring package was missing one important feature - [run-length encoded](https://en.wikipedia.org/wiki/Run-length_encoding) (RLE) sets! With full RLE support added in an upcoming release, we wanted to share some details about its implementation.
 
 <!--more-->
+
+(Update 2017/08/04: We released v0.5.0, without RLE support. It's still coming soon, but we wanted to smoke out a few tricky bugs before merging it.)
 
 ### Roaring Basics
 
