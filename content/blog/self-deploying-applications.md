@@ -12,6 +12,8 @@ disable_overlay = true
 What if your apps handled their own ops? That's kind of like devops' final form,
 right? Its ultimate evolution? The Charizard of devops, if you will. 
 
+<!--more-->
+
 Inspiration to write about this comes from Kelsey Hightower who had a good talk
 at Gophercon about
 [Self Deploying Kubernetes Applications](https://www.youtube.com/watch?v=XPC-hFL-4lU).
