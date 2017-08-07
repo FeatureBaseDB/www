@@ -32,9 +32,9 @@ going with Kubernetes, none of which (as far as I could tell) were "run this
 binary". Bleeeeccchhh - I don't want to dig through pages of documentation just
 for a quick experiment! I know based on what I've seen of Kubernetes and its
 community that it's great software, and I'm willing to bet we'll be deploying
-Pilosa to our own Kubernetes cluster one day soon, but on this particular day, I
-was really smitten with the "self-deploying applications" idea, not the "on
-Kubernetes" part.
+Pilosa to our own Kubernetes cluster one day soon. On this particular day,
+however, I was really smitten with the "self-deploying applications" idea, not
+the "on Kubernetes" part.
 
 I realized, in fact, that I'd already done some work in this direction for
 Pilosa's benchmarking suite. The original idea was to build a tool which would,
