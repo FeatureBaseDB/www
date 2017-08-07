@@ -26,16 +26,19 @@ myapp compiles itself statically for Linux, containerizes itself, and deploys to
 a Kubernetes cluster with 5 replicas. No config files needed.
 
 I thought this was extremely cool, and immediately went to check out Kubernetes
-to see if I could add something like it to Pilosa. Kubernetes' docs have a
-page dedicated to "picking the right solution," which has 40+ different ways to
-get going with Kubernetes, none of which (as far as I could tell) were "run this
+to see if I could add something like it to Pilosa. Kubernetes' docs have a page
+dedicated to "picking the right solution," which has 40+ different ways to get
+going with Kubernetes, none of which (as far as I could tell) were "run this
 binary". Bleeeeccchhh - I don't want to dig through pages of documentation just
-for a quick experiment. I've heard great things about Kubernetes, and I'm sure
-it has good reason for such complexity, but I was really smitten with the
-"self-deploying applications" idea, not the "on Kubernetes" part.
+for a quick experiment! I know based on what I've seen of Kubernetes and its
+community that it's great software, and I'm willing to bet we'll be deploying
+Pilosa to our own Kubernetes cluster one day soon, but on this particular day, I
+was really smitten with the "self-deploying applications" idea, not the "on
+Kubernetes" part.
 
-In fact, I'd already done some work in this direction for Pilosa's benchmarking
-suite. The original idea was to build a tool which would, with a single command: 
+I realized, in fact, that I'd already done some work in this direction for
+Pilosa's benchmarking suite. The original idea was to build a tool which would,
+with a single command:
 
 - provision cloud infrastructure on various providers
 - install and start a Pilosa cluster on remote hosts
@@ -47,9 +50,14 @@ suite. The original idea was to build a tool which would, with a single command:
 - make and serve delicious iced beverages
 
 Wow, once that I put it in a list like that it looks pretty ridiculous - now I
-understand why it has taken us something like 8 months. In any case, we've
-actually achieved a few of those goals with a new tool
+understand why it has taken us something like 8 months (albeit while working
+on [Pilosa](https://github.com/pilosa/pilosa) itself as well). In any case,
+we've actually achieved a few of those goals with a new tool
 called [Pi](https://github.com/pilosa/tools) which we are open sourcing *today*.
+Pi is a tool specifically for benchmarking Pilosa, but I think it contains some
+reusable ideas and libraries that could be beneficial to the open source
+community at large (also we'd love to get some help improving it).
+
 
 Right, but self deploying applications, that's why you're here. Let's set aside
 the cloud provisioning part of the equation for now, and say you have a set of
@@ -83,7 +91,7 @@ everything is pretty hunky-dory. But what do we run? These hosts don't have
 Pilosa or Pi installed, both of which we'll need if we want to start a cluster
 and benchmark it.
 
-Well, let's just run `cat` - these hosts definitely have `cat` installed, right?
+Well, let's just run `cat` - these hosts definitely have that, right?
 I'm pretty sure it's the law (or at least specified by POSIX) that Linux hosts
 must have `cat`. Specifically, we'll run `cat > pilosa` - remember that
 `Writer`? It's actually an `io.WriteCloser`, and it goes straight to `cat`'s
