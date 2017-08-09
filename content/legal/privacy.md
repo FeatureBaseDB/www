@@ -2,7 +2,7 @@
 title = "Privacy Policy"
 +++
 
-We, the Operators of this Website, provide it as a public service to our users.
+We, Pilosa Corp., the "Operators" of this Website, provide it as a public service to our users.
 
 Your privacy is important to the us.  Our goal is to provide you with a personalized online experience that provides you with the information, resources, and services that are most relevant and helpful to you.  This Privacy Policy has been written to describe the conditions under which this web site is being made available to you. The Privacy Policy discusses, among other things, how data obtained during your visit to this web site may be collected and used.  We strongly recommend that you read the Privacy Policy carefully.  By using this web site, you agree to be bound by the terms of this Privacy Policy.  If you do not accept the terms of the Privacy Policy, you are directed to discontinue accessing or otherwise using the web site or any materials obtained from it.  If you are dissatisfied with the web site, by all means [contact](/about/#contact) us; otherwise, your only recourse is to disconnect from this site and refrain from visiting the site in the future.
 
