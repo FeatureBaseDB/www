@@ -160,4 +160,4 @@ Check out the source code for [Pi](https://github.com/pilosa/tools) (especially 
 use it - I glossed over a bunch of details and made some stuff up to make it
 seem approachable 😉. Patches welcome!
 
-[@mattjaffee](https://twitter.com/mattjaffee)
+_Jaffee is a lead software eng. at Pilosa. When he’s not building self-deploying applications in coffee shops, you can find him practicing jiu jitsu, woodworking, or building mechanical keyboards. Find him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
