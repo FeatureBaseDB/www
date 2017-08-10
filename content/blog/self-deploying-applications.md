@@ -159,3 +159,5 @@ Check out the source code for [Pi](https://github.com/pilosa/tools) (especially 
 `build` and `ssh` packages), and read the docs if you want to really know how to
 use it - I glossed over a bunch of details and made some stuff up to make it
 seem approachable 😉. Patches welcome!
+
+[@mattjaffee](https://twitter.com/mattjaffee)
