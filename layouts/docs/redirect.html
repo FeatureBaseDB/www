@@ -1,0 +1,3 @@
+{{ $doc_page := substr .RelPermalink 5 }}
+{{ $url := add "/docs/latest/" $doc_page | absURL }}
+{{ partial "redirect.html" (dict "context" . "url" $url  ) }}
