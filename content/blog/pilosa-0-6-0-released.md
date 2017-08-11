@@ -20,7 +20,7 @@ This release includes:
 
 ### Input Definition
 
-Technically, we shipped Input definition in Pilosa 0.5.0, but we didn't announce it until now as we were so close to the release of Run-length Encoding. Input Definition is the first in a series of features that enable real-time ETL (extract transform load) processing within Pilosa. Read more about it in [the docs](/docs/input-definition/).
+Input Definition is the first in a series of features that enable real-time Extract, Transform, and Load (ETL) processing within Pilosa. While we technically shipped Input Definition in Pilosa 0.5.0 a few days ago, we decided to combine the two announcements for simplicity's sake. Read more about it in [the docs](/docs/input-definition/).
 
 ### Changelog
 
