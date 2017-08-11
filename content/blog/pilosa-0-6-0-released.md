@@ -4,11 +4,11 @@ publishdate = "2017-08-11"
 title = "Pilosa 0.6.0 Released"
 author = "Cody Soyland"
 author_img = "2"
-image = "/img/blog/0.6.0-release-banner.png"
+image = "/img/blog/pilosa-0-6-0-released/banner.png"
 overlay_color = "blue" # blue, green, or light
 +++
 
-The Pilosa team is happy to announce the release of [Pilosa 0.6.0](https://github.com/pilosa/pilosa/releases/tag/v0.6.0), massively speeding up Pilosa with [Run-length Encoding](/blog/adding-rle-support/). This release comes just days after Pilosa 0.5.0, which introduced [Input Definition](/blog/input-definition/). The two releases combined represent 79 contributions from 9 contributors.
+The Pilosa team is happy to announce the release of [Pilosa 0.6.0](https://github.com/pilosa/pilosa/releases/tag/v0.6.0), massively speeding up Pilosa with [Run-length Encoding](/blog/adding-rle-support/). This release comes just days after Pilosa 0.5.0, which introduced [Input Definition](/docs/input-definition/). The two releases combined represent 79 contributions from 9 contributors.
 
 <!--more-->
 
@@ -20,7 +20,7 @@ This release includes:
 
 ### Input Definition
 
-Technically, we shipped Input definition in Pilosa 0.5.0, but we didn't announce it until now as we were so close to the release of Run-length Encoding. Input Definition is the first in a series of features that enable real-time ETL (extract transform load) processing within Pilosa. Read more about it in [Michael's blog post](/blog/input-definition/) and check it out in [the docs](/docs/input-definition/).
+Technically, we shipped Input definition in Pilosa 0.5.0, but we didn't announce it until now as we were so close to the release of Run-length Encoding. Input Definition is the first in a series of features that enable real-time ETL (extract transform load) processing within Pilosa. Read more about it in [the docs](/docs/input-definition/).
 
 ### Changelog
 
