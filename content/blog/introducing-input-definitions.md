@@ -50,4 +50,4 @@ There are several methods for mapping a `field` to a RowID within an `action`.
 - `RowID `: Uses a static SetBit RowID, and ignores the source value.
 
 
-To see more about using Input Definitions, check out the code examples in [Input Definition](https://www.pilosa.com/docs/input-definition/) within our [Getting Started](https://www.pilosa.com/docs/getting-started/) section.
+To see more about using Input Definitions, check out the code examples in the [Input Definition](https://www.pilosa.com/docs/input-definition/) section of our documentation.
