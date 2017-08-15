@@ -1,9 +1,9 @@
 +++
 date = "2017-08-07"
 publishdate = "2017-08-07"
-title = "Input Definition"
+title = "Introducing Input Definitions"
 author = "Michael Baird"
-author_img = "0"
+author_img = "3"
 image = ""
 overlay_color = "green" # blue, green, or light
 +++
@@ -50,4 +50,4 @@ There are several methods for mapping a `field` to a RowID within an `action`.
 - `RowID `: Uses a static SetBit RowID, and ignores the source value.
 
 
-Check out the source code in [Input Definition](https://www.pilosa.com/docs/input-definition/) within our [Getting Started](https://www.pilosa.com/docs/getting-started/) section for an example using this process.
+To see more about using Input Definitions, check out the code examples in [Input Definition](https://www.pilosa.com/docs/input-definition/) within our [Getting Started](https://www.pilosa.com/docs/getting-started/) section.
