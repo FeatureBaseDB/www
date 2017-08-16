@@ -1,10 +1,15 @@
 <!DOCTYPE HTML>
+{{ $.Scratch.Set "version" "latest" }}
+{{ if not (eq .URL "/docs/") }}
+    {{ $.Scratch.Set "version" (replaceRE "^/docs/([^/]+)/.*" "$1" .URL) }}
+{{ end }}
+{{ $url := (add (add "/docs/" ($.Scratch.Get "version")) "/introduction/") | absURL }}
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="0; url={{ "/docs/introduction/" | absURL }}">
+        <meta http-equiv="refresh" content="0; url={{ $url }}">
         <script type="text/javascript">
-            window.location.href = "{{ "/docs/introduction/" | absURL }}"
+          window.location.href = "{{ $url }}";
         </script>
         <title>Page Redirection</title>
         {{ with .Site.Params.inc.analytics.googleid }}
@@ -12,6 +17,6 @@
         {{ end }}
     </head>
     <body>
-        If you are not redirected automatically, follow <a href='{{ "/docs/introduction/" | absURL }}'>this link</a>.
+        If you are not redirected automatically, follow <a href='{{ $url }}'>this link</a>.
     </body>
 </html>

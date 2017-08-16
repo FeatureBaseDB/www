@@ -189,6 +189,18 @@
     margin-bottom: 0;
 }
 
+.single-body-content .warning{
+  border-radius: 2px;
+  background-color: rgba(255, 43, 43, 0.1);
+  border: solid 0.5px #d8d8d8;
+  border-left: solid 4px #ff2b2b;
+  padding: 26px;
+  margin-bottom: 20px;
+}
+.single-body-content .warning :last-child{
+    margin-bottom: 0;
+}
+
 
 .sticky-social{
   margin-right: 69px;

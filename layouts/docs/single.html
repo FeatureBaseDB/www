@@ -41,6 +41,12 @@
     </div>
 
     <div   class='single-body-content col-lg-8 pl-4 py-5' id="content">
+      {{ $version := replaceRE "^/docs/([^/]+)/.*" "$1" .URL }}
+      {{ if not (or (eq $version "latest") (eq $version .Site.Params.version)) }}
+          <div class="warning">
+              You are viewing the documentation for Pilosa {{ $version }}. View the <a href="/docs/latest/{{ .Title | urlize }}/">latest documentation for Pilosa {{ .Site.Params.version }}</a>.
+          </div>
+      {{ end }}
       {{ .Content }}
     </div>
   </div>

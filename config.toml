@@ -7,6 +7,7 @@ googleAnalytics = "UA-96186501-1"
 ignoreFiles = []
 
 [params]
+    version = "v0.6"
     company = "Pilosa"
     logo = "logo.svg"
     logo_png = "logo.png"

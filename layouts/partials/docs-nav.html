@@ -1,17 +1,23 @@
 {{ $name := .File.BaseFileName }}
+{{ $version := replaceRE "^/docs/([^/]+)/.*" "$1" .URL }}
 <ul>
-{{ range $.Site.Data.docs.toc }}
-
-  {{ $outerSlug := .title | urlize }}
-  <li>
-    <a href="/docs/{{ $outerSlug }}/" {{ if eq $name $outerSlug }} class="docs-active" {{ end }}>{{ .title }}</a>
-    <ul>
-      {{ range .subsections }} 
-        <li>
-          <a href="/docs/{{ $outerSlug }}/#{{ if .slug }}{{ .slug }}{{ else }}{{ .title | urlize }}{{ end }}">{{ .title }}</a>
-        </li>
-      {{ end}} 
-    </ul>
-  </li>
-{{ end }}
+  {{ range where .Site.Pages.ByWeight "Section" "docs" }}
+    {{ range .Pages}}
+      {{ $docVersion := replaceRE "^/docs/([^/]+)/.*" "$1" .URL }}
+      {{ if eq $docVersion $version }}
+          {{ $outerSlug := .Title | urlize }}
+          <li>
+            <a href="/docs/{{ $version }}/{{ $outerSlug }}/" {{ if eq $name $outerSlug }} class="docs-active" {{ end }}>{{ .Title }}</a>
+            <ul>
+            {{ range .Params.nav }}
+              {{ $slug := (replace . "'" "-") | urlize }}
+              <li>
+                <a href="/docs/{{ $version }}/{{ $outerSlug }}/#{{ $slug }}">{{ . }}</a>
+              </li>
+            {{ end }}
+            </ul>
+          </li>
+      {{ end }}
+    {{ end }}
+  {{ end }}
 </ul>
