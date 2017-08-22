@@ -9,15 +9,15 @@ overlay_color = "green" # blue, green, or light
 disable_overlay = false
 +++
 
-The universe of 65536-bit sets in Roaring, that is. This post is one part debugging postmortem, one part documentation, and three parts academic deep dive on the structure that underlies Roaring Bitmaps.
+... the universe of 65536-bit sets in Roaring, that is. This post is one part debugging postmortem, one part documentation, and three parts academic deep dive on the structure that underlies Roaring Bitmaps.
 
 <!--more-->
 
 ### Container Space
 
 Pilosa uses Roaring Bitmaps to store large sets of integers by breaking them up into
-"containers" that are 2<sup>16</sup> = 65536 bits long, and using a different
-"container type" for each one, depending on what's in it. For example, the
+"containers" that are 2<sup>16</sup> = 65536 bits long, and it uses a different
+"container type" for each container, depending on what's in it. For example, the
 set {0, 1, 2, 3, 6, 7, 9, 10, 14} has three equivalent representations in
 Roaring:
 
@@ -45,9 +45,9 @@ given container was trivial: compare the cardinality of
 the set (N) to a threshold, (M<sub>A</sub>), and only use an array if
 N ≤ M<sub>A</sub>. With the addition of RLE containers, this got more complicated, because
 now we have to check a new attribute of the set, the number of runs of ones
-N<sub>R</sub>.
+(N<sub>R</sub>).
 
-Previously, we only had to decide between two one-dimensional intervals, with a
+Previously, we only had to decide between two one-dimensional intervals with a
 single comparison. Now, with both N and N<sub>R</sub> defining a two-dimensional
 planar region that I have dubbed "container space", each container type
 corresponds to a subregion with linear boundaries. These regions are illustrated
@@ -61,7 +61,7 @@ Note that the figure is not to scale; M is actually much larger than
 M<sub>A</sub> and M<sub>R</sub>. The 2:1 ratio of M<sub>A</sub> and M<sub>R</sub> is
 accurate, however.
 
-There is an impossible region in there, why is that?
+There is an impossible region in there. Why is that?
 
 - The solid black line sloping up-right, the N = N<sub>R</sub> diagonal,
     represents sets where every set bit is isolated - all runs are length one.
@@ -99,19 +99,19 @@ condensed into a simple 2-D cartesian representation, even if it ignores
 important complexity. There is one problem: it's not symmetric enough!
 
 The above figure represents exactly what Pilosa does to decide a container type,
-but there is another container type that Pilosa doesn't use at all:
+but there's another container type that Pilosa doesn't use at all:
 *inverse arrays*. What if, for dense data, we store an array of the
 *clear bits* instead of the set bits? Then the diagram looks like this:
 
 ![Container type decision with inverse arrays](/img/blog/universe-map/container-type-decision-with-inverse.png)
 *Container type decision with inverse arrays*
 
-Beautiful! Now, the utility of this container type is questionable, because it's
-fundamentally  the same as the array type. You can even achieve the same
-behavior by storing the inverse of your set. Most of all, we don't expect to
-see a lot of dense data, but if we do, we can consider adding this new type.
-Anyway, I'm just glad to know that there is a sort of fundamental mirror
-symmetry to the diagram.
+Beautiful! The utility of the iarray container type is questionable, however, because it's
+fundamentally  the same as the array type. In other words, you can achieve the same
+behavior by simply storing the inverse of a set. Also, the iarray container type is really
+only useful for exremely dense data sets, which we don't see a lot of. But if we do, we'll
+consider adding support for this new type to Pilosa. Anyway, I'm just glad to know that there is
+a sort of fundamental mirror symmetry to the diagram.
 
 ### Bugs
 
@@ -123,7 +123,7 @@ diagnose the problem, and before long we figured it out: some of the container
 type decision logic was flawed.
 
 Implementing RLE was a big job, and at least four of our engineers contributed
-to the branch. Two of us updated the file-read/write functions to handle RLE
+to the branch. Two of us, working independently, updated the file-read/write functions to handle RLE
 containers, which is why we failed to notice that the logic for deciding
 container type on file read did not exactly match the logic on write (partly
 because it was hidden inside the innocuous-sounding `Bitmap.Optimize()`).
@@ -133,16 +133,16 @@ file? That's a great question, and it's answered in full by the
 [Roaring storage spec](https://github.com/RoaringBitmap/RoaringFormatSpec).
 
 TL;DR: back before RLE containers, it was trivial to infer container type from
-the cardinality, which had to be stored for arrays anyway, so there was no explicit type
+the cardinality, which had to be stored for arrays anyway, so there was no need to have explicit type
 information in the file. With the addition of RLE, it became necessary to add
-one extra bit per container, to indicate an RLE container, since the cardinality
+one extra bit per container to indicate an RLE container, since the cardinality
 doesn't tell you anything about that.
 
 Of course, if perfect backward compatibility isn't critical, there are other,
-more robust ways to store type information. We chose this route, including the
-container type explicitly in the "descriptive header" section to guard against
+more robust ways to store type information. We chose this route—including the
+container type explicitly in the "descriptive header" section—to guard against
 similar bugs in the future. We also fixed the bug, which is the reason these
-diagrams exist. Once we pinpointed the faulty decision logic, I drew these out
+diagrams exist. Once we pinpointed the faulty decision logic, I drew these diagrams
 to convince myself of the correct behavior. Getting some thorough documentation
 out of it was a nice bonus.
 
