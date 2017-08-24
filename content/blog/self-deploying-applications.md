@@ -1,7 +1,7 @@
 +++
 date = "2017-08-04"
 publishdate = "2017-08-04"
-title = "Self Deploying Applications Without Kubernetes"
+title = "Self Deploying Applications With Go"
 author = "Matt Jaffee"
 author_img = "2"
 image = "/img/blog/self-deploying/banner.jpg"
