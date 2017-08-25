@@ -5,7 +5,7 @@ title = "A Map of the Entire Universe"
 author = "Alan Bernstein"
 author_img = "2"
 image = "/img/blog/universe-map/banner.png"
-overlay_color = "light" # blue, green, or light
+overlay_color = "blue" # blue, green, or light
 disable_overlay = false
 +++
 
