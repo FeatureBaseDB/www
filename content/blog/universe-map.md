@@ -1,7 +1,7 @@
 +++
 date = "2017-08-25"
 publishdate = "2017-08-25"
-title = "A Complete Map of the Universe"
+title = "A Map of the Entire Universe"
 author = "Alan Bernstein"
 author_img = "2"
 image = "/img/blog/universe-map/banner.png"
