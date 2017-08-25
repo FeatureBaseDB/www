@@ -429,3 +429,5 @@ but it is a different sort of undertaking, for a different time.
 Figures were created with LaTeX or [plotly](https://plot.ly/), source available
 [here](https://github.com/alanbernstein/pilosa-figures/) and
 [here](https://github.com/alanbernstein/roaring-container-theory).
+
+_Alan is a software engineer at Pilosa. When he’s not mapping the universe, you can find him playing with laser cutters, building fidget spinners for his dog, or practicing his sick photography skills. Find him on Twitter [@gsnark](https://twitter.com/gsnark)._
