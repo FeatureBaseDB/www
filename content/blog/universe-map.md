@@ -17,10 +17,11 @@ structure that underlies Roaring Bitmaps.
 
 ### Container Space
 
-Note: feel free to skip to the last section for some pretty pictures - you might
-want to skim the first section first for context.
+Note: feel free to skip to the last section for some pretty pictures. For context,
+you might want to skim the first section, or read [my earlier post](/blog/adding-rle-support/).
 
-Pilosa uses Roaring Bitmaps to store large sets of integers by breaking them up into
+Pilosa uses [Roaring Bitmaps](http://roaringbitmap.org/) to store large sets of
+integers by breaking them up into
 **containers** that are 2<sup>16</sup> = 65536 bits long, and it uses a different
 **container type** for each container, depending on what's in it. For example, the
 set {0, 1, 2, 3, 6, 7, 9, 10, 14} has three equivalent representations in
