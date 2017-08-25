@@ -3,6 +3,7 @@ date = "2017-07-26"
 publishdate = "2017-07-26"
 title = "Gophercon 2017: Technical Overview"
 author = "Matt Jaffee, Linh Vo, and Travis Turner"
+author_twitter = "slothware"
 author_img = "3"
 image = "/img/blog/gophercon-2017-technical-overview/banner.png"
 overlay_color = "blue" # blue, green, or light

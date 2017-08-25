@@ -3,6 +3,7 @@ date = "2017-05-10"
 publishdate = "2017-05-10"
 title = "The OSCON 2017 Guide to Authentic Austin Tacos"
 author = "Ali Cooley"
+author_twitter = "slothware"
 author_img = "1"
 image = "/img/blog/taco-banner.png"
 # disable_overlay = true
