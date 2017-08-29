@@ -45,7 +45,7 @@ Before I get into it, let's summarize some notation:
 
 Roaring switches between these intelligently to minimize storage size. Which
 container type is smallest? In this example, the uncompressed bitmap is, but
-the answer depends on the set. Originally, with only two container types
+the answer depends on the set, and all three types are important in their own way. Originally, with only two container types
 (uncompressed bitmaps and arrays), deciding when to switch between the two for a
 given container was trivial: compare the **cardinality** of
 the set (N) to a threshold, (M<sub>A</sub>), and only use an array if
