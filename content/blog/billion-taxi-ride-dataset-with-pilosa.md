@@ -3,6 +3,7 @@ date = "2017-06-02"
 publishdate = "2017-06-02"
 title = "The Billion Taxi Ride Dataset with Pilosa"
 author = "Matt Jaffee and Alan Bernstein"
+author_twitter = "mattjaffee"
 author_img = "2"
 image = "/img/blog/billion-taxi-banner.png"
 overlay_color = "blue" # blue, green, or light

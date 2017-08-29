@@ -3,6 +3,7 @@ date = "2017-07-21"
 publishdate = "2017-07-21"
 title = "How Gophercon Changed Pilosa’s Approach to Community"
 author = "Ali Cooley"
+author_twitter = "slothware"
 author_img = "1"
 image = "/img/blog/how-gophercon-changed-pilosas-approach-to-community/banner.png"
 overlay_color = "blue" # blue, green, or light

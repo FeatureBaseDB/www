@@ -3,6 +3,7 @@ date = "2017-08-11"
 publishdate = "2017-08-11"
 title = "Pilosa 0.6.0 Released"
 author = "Cody Soyland"
+author_twitter = "codysoyland"
 author_img = "2"
 image = "/img/blog/pilosa-0-6-0-released/banner.png"
 overlay_color = "blue" # blue, green, or light

@@ -3,6 +3,7 @@ date = "2017-05-05"
 publishdate = "2017-05-05"
 title = "Pilosa at OSCON 2017"
 author = "Ali Cooley"
+author_twitter = "slothware"
 author_img = "1"
 image = "/img/blog/oscon-banner-image.png"
 overlay_color = "blue" # blue, green, or light

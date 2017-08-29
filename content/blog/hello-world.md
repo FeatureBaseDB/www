@@ -3,6 +3,7 @@ date = "2017-04-29"
 publishdate = "2017-04-29"
 title = "Hello, World"
 author = "Travis Turner"
+author_twitter = "travisturner"
 author_img = "5"
 image = "/img/blog/hello-world.png"
 disable_overlay = true

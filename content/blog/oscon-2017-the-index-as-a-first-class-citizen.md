@@ -3,6 +3,7 @@ date = "2017-05-05"
 publishdate = "2017-05-05"
 title = "OSCON 2017: The Index As a First Class Citizen"
 author = "Ali Cooley"
+author_twitter = "slothware"
 author_img = "1"
 image = "/img/blog/binary-banner.png"
 overlay_color = "green" # blue, green, or light

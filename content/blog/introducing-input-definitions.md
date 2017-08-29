@@ -3,6 +3,7 @@ date = "2017-08-07"
 publishdate = "2017-08-07"
 title = "Introducing Input Definitions"
 author = "Michael Baird"
+author_twitter = "slothware"
 author_img = "3"
 image = ""
 overlay_color = "green" # blue, green, or light
