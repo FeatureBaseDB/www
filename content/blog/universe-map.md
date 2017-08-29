@@ -417,9 +417,19 @@ reason for picking that distribution, it's just the simplest thing to look at. W
 if we used some distribution based on real-world data?
 
 Another great question, for another post. There are quite a few variables to consider
-here: the dataset, the mapping used to index it, and the order data is import into
-Pilosa, among others. We definitely want to understand the effects of these things,
-but it is a different sort of undertaking, for a different time.
+here: the dataset, the mapping used to index it, and the order data is imported into
+Pilosa, among others. Perhaps most importantly, I've left out any discussion of query
+speed, which is another area RLE shines. I started looking at the [Taxi dataset](use-cases/taming-transportation-data/),
+where I noticed a number of effects, with a strong dependence on the frame (and the
+structure of the data contained within). I do have a brief summary of some benchmarks,
+which demonstrate the value of adding RLE:
+
+![RLE Benchmarks](/img/blog/universe-map/rle-query-benchmarks-2017-08-10.png)
+*Preliminary RLE benchmarks*
+
+But there is more work to do, to understand these effects and dependencies fully.
+That is a different sort of undertaking, which we'll be exploring as part of
+several upcoming posts on benchmarks.
 
 
 Figures were created with LaTeX or [plotly](https://plot.ly/), source available
