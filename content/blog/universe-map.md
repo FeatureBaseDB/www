@@ -18,10 +18,11 @@ structure that underlies Roaring Bitmaps.
 
 ### Container Space
 
-Note: feel free to skip to the last section for some pretty pictures - you might
-want to skim the first section first for context.
+Note: feel free to skip to the last section for some pretty pictures. For context,
+you might want to skim the first section, or read [my earlier post](/blog/adding-rle-support/).
 
-Pilosa uses Roaring Bitmaps to store large sets of integers by breaking them up into
+Pilosa uses [Roaring Bitmaps](http://roaringbitmap.org/) to store large sets of
+integers by breaking them up into
 **containers** that are 2<sup>16</sup> = 65536 bits long, and it uses a different
 **container type** for each container, depending on what's in it. For example, the
 set {0, 1, 2, 3, 6, 7, 9, 10, 14} has three equivalent representations in
@@ -45,7 +46,7 @@ Before I get into it, let's summarize some notation:
 
 Roaring switches between these intelligently to minimize storage size. Which
 container type is smallest? In this example, the uncompressed bitmap is, but
-the answer depends on the set. Originally, with only two container types
+the answer depends on the set, and all three types are important in their own way. Originally, with only two container types
 (uncompressed bitmaps and arrays), deciding when to switch between the two for a
 given container was trivial: compare the **cardinality** of
 the set (N) to a threshold, (M<sub>A</sub>), and only use an array if
@@ -344,11 +345,7 @@ majority of them are right in the middle of container space, in that bright yell
 spot in the bitmap region. Let's pick just one point somewhere in the RLE region:
 sets with cardinality 2000, and 50 runs. There are
 
-22,804,597,069,819,532,660,583,786,045,040,199,183,501,681,133,949,571,581,574,
-471,961,117,843,442,200,685,595,655,998,013,092,009,833,438,122,379,583,096,060,
-202,845,820,303,817,291,107,720,111,436,184,863,073,472,606,535,284,594,365,552,
-424,064,915,160,680,894,381,243,744,335,585,294,233,016,322,391,171,137,099,962,
-713,316,168,185,225,940,347,493,675,590,676,480
+<div style="word-break:break-word">22,804,597,069,819,532,660,583,786,045,040,199,183,501,681,133,949,571,581,574,471,961,117,843,442,200,685,595,655,998,013,092,009,833,438,122,379,583,096,060,202,845,820,303,817,291,107,720,111,436,184,863,073,472,606,535,284,594,365,552,424,064,915,160,680,894,381,243,744,335,585,294,233,016,322,391,171,137,099,962,713,316,168,185,225,940,347,493,675,590,676,480</div><br />
 
 (2.28×10<sup>274</sup>) sets matching this criterion. But that number is
 inconceivably tiny compared to the number of bitmaps with cardinality 30000 and
@@ -421,11 +418,23 @@ reason for picking that distribution, it's just the simplest thing to look at. W
 if we used some distribution based on real-world data?
 
 Another great question, for another post. There are quite a few variables to consider
-here: the dataset, the mapping used to index it, and the order data is import into
-Pilosa, among others. We definitely want to understand the effects of these things,
-but it is a different sort of undertaking, for a different time.
+here: the dataset, the mapping used to index it, and the order data is imported into
+Pilosa, among others. Perhaps most importantly, I've left out any discussion of query
+speed, which is another area RLE shines. I started looking at the [Taxi dataset](use-cases/taming-transportation-data/),
+where I noticed a number of effects, with a strong dependence on the frame (and the
+structure of the data contained within). I do have a brief summary of some benchmarks,
+which demonstrate the value of adding RLE:
+
+![RLE Benchmarks](/img/blog/universe-map/rle-query-benchmarks-2017-08-10.png)
+*Preliminary RLE benchmarks*
+
+But there is more work to do, to understand these effects and dependencies fully.
+That is a different sort of undertaking, which we'll be exploring as part of
+several upcoming posts on benchmarks.
 
 
 Figures were created with LaTeX or [plotly](https://plot.ly/), source available
 [here](https://github.com/alanbernstein/pilosa-figures/) and
 [here](https://github.com/alanbernstein/roaring-container-theory).
+
+_Alan is a software engineer at Pilosa. When he’s not mapping the universe, you can find him playing with laser cutters, building fidget spinners for his dog, or practicing his sick photography skills. Find him on Twitter [@gsnark](https://twitter.com/gsnark)._
