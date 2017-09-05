@@ -10,19 +10,33 @@ overlay_color = "blue" # blue, green, or light
 disable_overlay = false
 +++
 
-... the universe of 65536-bit sets in Roaring, that is. This post is one part debugging
+... the universe of 65536-bit sets in Roaring, that is. This is one part debugging
 postmortem, one part documentation, and three parts academic deep dive on the
 structure that underlies Roaring Bitmaps.
 
 <!--more-->
+### Introduction
+Pilosa uses [Roaring Bitmaps](http://roaringbitmap.org/) for storage of and computation
+with bitmaps (integer sets) in its distributed bitmap index. Roaring is a core component
+of Pilosa, which makes it an easy place to look for optimization opportunities. One of
+those opportunities, adding a [new compression technique](/blog/adding-rle-support/),
+was a big undertaking, and it has raised interesting questions.
+
+In this post, I'll start with a brief explanation of Roaring and how it works.
+This is important background for understanding "container space", a two-dimensional
+plane which can be used to map all integer sets under a given size. Container space is a
+helpful framework for understanding some of the details of Roaring's implementation
+and performance.
+
+This came in handy in debugging and testing. At one point, we started asking more
+theoretical questions, and that's when I went down a rabbit hole, with the help of the
+container space framework. In the process of answering those questions, I produced some
+pretty pictures that I wanted to share. Feel free to skip to the last section to see those,
+but I suggest at least skimming the next section for context.
 
 ### Container Space
 
-Note: feel free to skip to the last section for some pretty pictures. For context,
-you might want to skim the first section, or read [my earlier post](/blog/adding-rle-support/).
-
-Pilosa uses [Roaring Bitmaps](http://roaringbitmap.org/) to store large sets of
-integers by breaking them up into
+Roaring stores large sets of integers by breaking them up into
 **containers** that are 2<sup>16</sup> = 65536 bits long, and it uses a different
 **container type** for each container, depending on what's in it. For example, the
 set {0, 1, 2, 3, 6, 7, 9, 10, 14} has three equivalent representations in
@@ -39,7 +53,7 @@ represents. Run-length encoding (**RLE**) stores the set as a list of runs, wher
 run contains two 16-bit numbers (the start and end of the run). For this set with four
 runs, we use (4 runs) × (2 numbers per run) × (2 bytes per number).
 
-Before I get into it, let's summarize some notation:
+Before I get into it, here is a summary of some notation. You can skip this, just refer back to it if you lose track of what the symbols mean.
 
 ![Container terminology table](/img/blog/universe-map/container-terminology-table.png)
 *Container terminology*
@@ -125,7 +139,7 @@ to know that there is a sort of fundamental mirror symmetry to the diagram.
 
 ### Bugs
 
-We made some fast progress with the [RLE work](https://github.com/pilosa/pilosa/releases/tag/v0.6.0),
+We made fast progress with the [RLE work](https://github.com/pilosa/pilosa/releases/tag/v0.6.0),
 but while stress testing it with large imports, we discovered some nasty bugs.
 For weeks we couldn't even reproduce them consistently, but eventually we were
 able to trim those big import jobs down to something more manageable. Only then
