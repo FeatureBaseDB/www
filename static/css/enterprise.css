@@ -85,7 +85,7 @@
 }
 .enterprise-img-offset-le{
   position: relative;
-  top:-70px;
+  top:-90px;
   height:0px;
   margin-bottom: 250px;
 }
@@ -147,6 +147,16 @@
   border-bottom: 2px solid rgba(254, 254, 254, 0.13);
 
 }
+
+@media (max-width: 1199px) {
+  .enterprise-nonfeature{
+      display: none;
+  }
+  .enterprise-product-header {
+      height: 200px;
+  }
+}
+
 
 .enterprise-btn-container{
   color: #2a4871;
