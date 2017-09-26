@@ -38,6 +38,7 @@ ignoreFiles = []
     stack_overflow = "stack_overflow.png"
     google_groups = "google-groups.png"
     ce = "ce.svg"
+    le = "le.svg"
     ee = "ee.svg"
     twitter = "twitter.svg"
     fb = "fb.svg"
