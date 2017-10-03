@@ -6,7 +6,6 @@ author = "Matt Jaffee"
 author_twitter = "mattjaffee"
 author_img = "2"
 image = "/img/blog/self-deploying/banner.jpg"
-featured = "true"
 overlay_color = "green"
 disable_overlay = false
 +++
