@@ -1,8 +1,8 @@
 .PHONY: public server upload reset-cache staging deploy clean
 
-DOC_TAGS = v0.4 v0.5 v0.6
+DOC_TAGS = v0.4 v0.5 v0.6 v0.7
 DOC_TAG_DIRS = $(addprefix content/docs/,$(DOC_TAGS))
-DOC_TAG_LATEST = v0.6
+DOC_TAG_LATEST = v0.7
 PILOSA_CLONE = $(PWD)/pilosa
 DOC_NAMES = $(shell find content/docs/* -type f -exec basename {} \; | sort | uniq)
 DOC_REDIRECTS = $(addprefix content/docs/,$(DOC_NAMES))
