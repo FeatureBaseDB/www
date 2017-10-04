@@ -165,8 +165,7 @@ curl localhost:10101/index/animals/query \
 
 ### Conclusion
 
-There are a variety of bitmap-encoding techniques, and each ha
-The example that I described in this post showed how we can use Bit-sliced indexes to significantly reduce the number of bitmaps we need to represent a range of integer values. And by applying range-encoding to our indexes, we are able to perform various range queries on our data. The chart below shows comparies the different approaches that we discussed.
+The examples that I described in this post showed how we can use Bit-sliced indexes to significantly reduce the number of bitmaps we need to represent a range of integer values. And by applying range-encoding to our indexes, we are able to perform various range queries on our data. The chart below compares the different approaches that we discussed.
 
 ![Comparison Chart](/img/blog/range-encoded-bitmaps/example-comparison.svg)
 *Comparison Charg*
