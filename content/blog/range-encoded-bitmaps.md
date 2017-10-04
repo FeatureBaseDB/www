@@ -40,14 +40,14 @@ The next diagram shows how we find all animals that are air-breathing invertebra
 *Bitwise Intersection of two traits*
 
 
-You can get pretty far with equality-encoded bitmaps, but what about cases where a boolean value doesn't best represent the original data? What if we want to add a trait called `Captivity` which represents the total number of specimen that are currently held in captivity, and we want to perform queries filtered by those values? (As you probably suspect, the values that we use for `Captivity` in the examples below are completely made up, but they help demonstrate the concepts.)
+You can get pretty far with equality-encoded bitmaps, but what about cases where a boolean value doesn't best represent the original data? What if we want to add a trait called `Captivity` which represents the total number of specimens that are currently held in captivity, and we want to perform queries filtered by those values? (As you probably suspect, the values that we use for `Captivity` in the examples below are completely made up, but they help demonstrate the concepts.)
 
 Given what we know about equality-encoded bitmaps, there are a couple of (admittedly naive) approaches that we could take. One approach would be to create a trait (bitmap) for every possible `Captivity` value, like this:
 
 ![Captivity Counts as individual bitmaps](/img/blog/range-encoded-bitmaps/captive-rows.svg)
 *Captivity Counts represented as individual bitmaps*
 
-This approach is ok, but it has a couple of limitations. First, it's not very efficient. Depending on the cardinality, you may need to create a lot of bitmaps to represent all possible values. Second, if you want to filter your query by a range of `Captivity` values, you'll have to perform an `OR` operations against every possible value in your range. In order to know which animals have fewer than 100 specimen in captivity, your query needs to perform something like (Captivity=99 OR Captivity=98 OR Captivity=97 OR ...). You get the idea.
+This approach is ok, but it has a couple of limitations. First, it's not very efficient. Depending on the cardinality, you may need to create a lot of bitmaps to represent all possible values. Second, if you want to filter your query by a range of `Captivity` values, you'll have to perform an `OR` operation against every possible value in your range. In order to know which animals have fewer than 100 specimens in captivity, your query needs to perform something like (Captivity=99 OR Captivity=98 OR Captivity=97 OR ...). You get the idea.
 
 Instead of representing every possible value as a unique bitmap, another approach is to create buckets of `Captivity` ranges. In that case, you might have something like this:
 
@@ -66,7 +66,7 @@ First, let's take our example above and see what it looks like if we use range-e
 
 Representing a value with range-encoded bitmaps is similar to what we did with equality-encoding, but instead of just setting the bit that corresponds to a specific value, we also set a bit for every value greater than the actual value. For example, because there are 14 Koala Bears in capitivity, we set the bit in bitmap 14 as well as bitmaps 15, 16, 17, etc. Instead of a bitmap representing all the animals with a specific captivity count, a bitmap now represents all of the animals with a captivity count up to and including that amount.
 
-This encoding method lets us perform those range queries that we did before, but instead of performing an `OR` operation on many different bitmaps, we can get what we want from just one or two bitmaps. For example, if we want to know which animals have fewer than 15 specimen in captivity, we just pull the 14 bitmap and we're done. If we want to know which animals have more than 15 specimen in captivity, it's a little more complicated, but not much. For that, we pull the bitmap representing the maximum count (in our case that's the 956 bitmap), and then we subtract the 15 bitmap.
+This encoding method lets us perform those range queries that we did before, but instead of performing an `OR` operation on many different bitmaps, we can get what we want from just one or two bitmaps. For example, if we want to know which animals have fewer than 15 specimens in captivity, we just pull the 14 bitmap and we're done. If we want to know which animals have more than 15 specimens in captivity, it's a little more complicated, but not much. For that, we pull the bitmap representing the maximum count (in our case that's the 956 bitmap), and then we subtract the 15 bitmap.
 
 Those operations are much simpler—and much more efficient—than our previous approach. We have addressed the problem that had us `OR`'ing together dozens of bitmaps in order to find our range, and we aren't losing any information like we did in the bucketing approach. But we still have a couple of issues that make this approach less than ideal. First, we still have to keep a bitmap representing every specific captivity count. And on top of that, we have added the complexity and overhead of having to set a bit not just for the value we're interested in, but also for every value greater than that one. This would very likely introduce performance problems in a write-heavy use-case.
 
@@ -151,7 +151,7 @@ curl localhost:10101/index/animals/query \
       SetFieldValue(frame=traits, col=12, captivity=318)
   '
 
-# Query for all animals with more than 100 specimen
+# Query for all animals with more than 100 specimens
 # in captivity.
 curl localhost:10101/index/animals/query \
   -X POST \
@@ -168,7 +168,7 @@ curl localhost:10101/index/animals/query \
 The examples that I described in this post showed how we can use Bit-sliced indexes to significantly reduce the number of bitmaps we need to represent a range of integer values. And by applying range-encoding to our indexes, we are able to perform various range queries on our data. The chart below compares the different approaches that we discussed.
 
 ![Comparison Chart](/img/blog/range-encoded-bitmaps/example-comparison.svg)
-*Comparison Charg*
+*Comparison Chart*
 
 We added Range-Encoding support to [Release 0.7.0](https://github.com/pilosa/pilosa/releases/tag/v0.7.0). You should also check out the [Range-Encoding Documentation](https://www.pilosa.com/docs/latest/data-model/#bsi-range-encoding).
 
