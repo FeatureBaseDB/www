@@ -11,13 +11,13 @@ overlay_color = "green" # blue, green, or light
 disable_overlay = false
 +++
 
-Pilosa stores integeger values in Base-2, Range-Encoded, Bit-sliced Indexes. This post explains what all that means.
+Pilosa stores integer values in Base-2, Range-Encoded, Bit-sliced Indexes. This post explains what all that means.
 
 <!--more-->
 
 ### Introduction
 
-Pilosa is really good at performing segmentation queries on billions of relationships that are represented internally by boolean values encoded into bitmaps. But often we see use-cases where it would be useful to work with integer values. For example, we might want to performa a query that excludes all records with a value `foo` greater than 1000. This post explains, step-by-step, how we added range-encoded bitmaps to our core platform, giving us the ability to support integer values in our query operations.
+Pilosa is really good at performing segmentation queries on billions of relationships that are represented internally by boolean values encoded into bitmaps. But often we see use-cases where it would be useful to work with integer values. For example, we might want to perform a query that excludes all records with a value `foo` greater than 1000. This post explains, step-by-step, how we added range-encoded bitmaps to our core platform, giving us the ability to support integer values in our query operations.
 
 ### Bitmap Encoding
 To get started, let's assume that we want to catalog every member of the [Animal Kingdom](https://en.wikipedia.org/wiki/Animal) in such a way that we can easily, and efficiently, explore various species based on their traits. Because we're talking about bitmaps, an example data set might look like this:
@@ -30,7 +30,7 @@ To get started, let's assume that we want to catalog every member of the [Animal
 
 The example above shows a set of equality-encoded bitmaps, where each row—each trait—is a bitmap indicating which animals have that trait. Although it's a fairly simple concept, equality-encoding can be pretty powerful. Because it lets us represent everything as a boolean relationship (i.e. a manatee has wings: yes/no), we can perform all sorts of bitwise operations on the data.
 
-The next diagram shows how we find all animals that are air-breating invertebrates by performing a logical AND on the `Invertebrate` and `Breathes Air` bitmaps. Based on our sample data, we can see that the Banana Slug, Garden Snail, and Wheel Bug all have both of those traits.
+The next diagram shows how we find all animals that are air-breathing invertebrates by performing a logical AND on the `Invertebrate` and `Breathes Air` bitmaps. Based on our sample data, we can see that the Banana Slug, Garden Snail, and Wheel Bug all have both of those traits.
 
 ![Bitwise Intersection example](/img/blog/range-encoded-bitmaps/bitwise-intersection.svg)
 *Bitwise Intersection of two traits*
@@ -110,8 +110,8 @@ But remember, just like we saw before with bitmap 9 of the base-10 representatio
 With this encoding, we can represent the range of sample values with only 10 bitmaps! Also, notice that the base-2, range-encoded, bit-sliced index is the inverse of the binary representation of the integer value. What this tells us is that we can represent any range of values with cardinality n using only (n + 1) bitmaps (where the additional bitmap is the "Not Null" bitmap). And it means that we can perform range queries on large integer values without needing to store an unreasonable number of bitmaps.
 
 
-### Range-Encoded Bitmaps at Pilosa
-By implementing range-encoded bitmaps at Pilosa, users can now store integer values that pertain to billions of objects, and very quickly perform queries that filter by a range of values. We also support aggregation queries like `Sum()`. What's the total number of winged vertibrates in captivity? No problem.
+### Range-Encoded Bitmaps in Pilosa
+By implementing range-encoded bitmaps in Pilosa, users can now store integer values that pertain to billions of objects, and very quickly perform queries that filter by a range of values. We also support aggregation queries like `Sum()`. What's the total number of winged vertebrates in captivity? No problem.
 
 As one last exercise, let's demonstrate how we would store and query our example `Captivity` data in Pilosa.
 
