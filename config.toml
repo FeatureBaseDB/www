@@ -6,6 +6,7 @@ enableRobotsTXT = true
 googleAnalytics = "UA-96186501-1"
 ignoreFiles = []
 pygmentsCodeFences = true
+PygmentsStyle = "friendly"
 
 [params]
     version = "v0.7"
