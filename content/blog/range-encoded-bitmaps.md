@@ -174,3 +174,4 @@ We added Range-Encoding support to [Release 0.7.0](https://github.com/pilosa/pil
 
 Try it out, and let us know what you think. We're always looking to make improvements and appreciate any feedback you have!
 
+_Travis is Chief Architect at Pilosa. Find him on Twitter at [@travislturner](https://twitter.com/travislturner?lang=en)._
