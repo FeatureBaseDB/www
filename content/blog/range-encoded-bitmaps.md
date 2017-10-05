@@ -119,7 +119,7 @@ By implementing range-encoded bitmaps in Pilosa, users can now store integer val
 
 As one last exercise, let's demonstrate how we would store and query our example `Captivity` data in Pilosa.
 
-```
+```sh
 # Create an index called "animals".
 curl -X POST localhost:10101/index/animals
 
