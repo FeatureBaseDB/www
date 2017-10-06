@@ -6,7 +6,7 @@ env:
 before_script:
   - wget https://github.com/gohugoio/hugo/releases/download/v0.29/hugo_0.29_Linux-64bit.tar.gz
   - tar -xvzf hugo_0.29_Linux-64bit.tar.gz
-  - cp hugo /bin/
+  - cp hugo ~/bin/
   - pip install awscli --user `whoami`
   - aws configure set preview.cloudfront true
 script:
