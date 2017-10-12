@@ -25,11 +25,11 @@ TODO: diagram kinda ugly, there are others but not sure about usage
 ![SSB star schema diagram](/img/retail-analytics/ssb-schema.png)
 *[SSB star schema diagram](https://www.cs.umb.edu/~poneil/StarSchemaB.PDF), courtesy of Pat O'Neil, Betty O'Neil, Xuedong Chen*
 
-We used the popular [ssb-dbgen](https://github.com/electrum/ssb-dbgen) tool to generate actual data sets conforming to this schema. This is a the same generator [used](https://github.com/cartershanklin/hive-druid-ssb) for the Hortonworks benchmark. Data produced by ssb-dbgen is distributed uniformly, and there is also a consistent correlation between certain fields. Although we are curious about what happens with more skewed distributions, we don't expect a significant performance impact with Pilosa.
+We used the popular [ssb-dbgen](https://github.com/electrum/ssb-dbgen) tool to generate actual data sets conforming to this schema. This is the same generator [used](https://github.com/cartershanklin/hive-druid-ssb) for the Hortonworks benchmark. Data produced by ssb-dbgen is distributed uniformly, and there is also a consistent correlation between certain fields. Although we are curious about what happens with more skewed distributions, we don't expect a significant performance impact with Pilosa.
 
 The data is defined in terms of a *Scale Factor* (`SF`). The size of each table (except `DATE`) varies directly with `SF`, either linearly (`LINEORDER`, `CUSTOMER`, `SUPPLIER`) or logarithmically (`PART`). This allows for a consistent data set of any desired size. We tested with SF 1, 10, and 100 before running our final import and queries with SF 1000, to match the Hortonworks data set.
 
-The data set contains a large number of the core entity, purchased items, or line-orders. Each purchase consists of several products ("line items" in the order), and the line-order table is the denormalized combination of the `LINEITEM` and `ORDER` tables of the TPC-H schema. Almost every non-key field in the above schema diagram can be thought of as an attribute of a line-order. 
+The data set contains a large number of the core entity (purchased items) stored as records in the line-orders table. Each purchase consists of several products ("line items" in the order), and the line-order table is the denormalized combination of the `LINEITEM` and `ORDER` tables of the TPC-H schema. Almost every non-key field in the above schema diagram can be thought of as an attribute of a line-order.
 
 ## Mapping
 
@@ -106,11 +106,11 @@ Flight 1 (Q1.x) sums revenue over a time range, a range of discount values, and 
 
 ```sql
 select sum(lo_extendedprice*lo_discount) as revenue
- from lineorder, date
- where lo_orderdate = d_datekey
- and d_year = 1993
- and lo_discount between1 and 3
- and lo_quantity < 25; 
+from lineorder, date
+where lo_orderdate = d_datekey
+and d_year = 1993
+and lo_discount between1 and 3
+and lo_quantity < 25;
  ```
 
 The same query in Pilosa:
@@ -144,13 +144,13 @@ Flight 2 sums revenue over a time range, and a range of brands. The results are 
 ```sql
 select sum(lo_revenue), d_year, p_brand1
 from lineorder, date, part, supplier
- where lo_orderdate = d_datekey
- and lo_partkey = p_partkey
- and lo_suppkey = s_suppkey
- and p_category = 'MFGR#12'
- and s_region = 'AMERICA'
- group by d_year, p_brand1
- order by d_year, p_brand1; 
+where lo_orderdate = d_datekey
+and lo_partkey = p_partkey
+and lo_suppkey = s_suppkey
+and p_category = 'MFGR#12'
+and s_region = 'AMERICA'
+group by d_year, p_brand1
+order by d_year, p_brand1;
 ```
 
 One way to accomplish this in Pilosa is with this query template:
