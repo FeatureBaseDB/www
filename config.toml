@@ -24,6 +24,7 @@ ignoreFiles = []
     use_case_icon_audience_segmentation = "audience-segmentation.svg"
     use_case_icon_bioinformatics = "bioinformatics.svg"
     use_case_icon_smart_cities = "smart-cities.svg"
+    use_case_icon_star_schema = "star-schema.svg"
     hands = "hands.svg"
     splash_about = "splash_about.svg"
     splash_coc = "splash_coc.svg"
