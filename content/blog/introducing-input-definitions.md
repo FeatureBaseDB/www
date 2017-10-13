@@ -16,11 +16,11 @@ Pilosa has needed an ETL (extract transform load) process to integrate with vari
 Historically the Pilosa API provided a SetBit and bulk Import to preprocess and ingest raw data. Today we are introducing our Import Definition ETL process to manage a JSON data pipeline as the first step toward integrations with various Lambda architectures. Please let us know what you think, we appreciate the feedback as we explore solutions in this area.
 
 Here is the example use case we envisioned when designing this ETL feature. Let's say you have a data source or service that uses JSON as its data protocol. In Pilosa you would create an Input Definition in JSON describing how to process this data, and then pass all the data in that format to Pilosa for interpretation. For example our Stargazer sample data set has information for each Github repo's stargazer in this format:
-```
+```json
     {
         "language_id": "Go", 
         "repo_id": 91720568, 
-        "stargazer_id": 513114
+        "stargazer_id": 513114,
         "time_value": "2017-05-18T20:40"
     }
 ```

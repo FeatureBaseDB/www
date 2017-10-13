@@ -151,7 +151,7 @@ checked the cardinality threshold, and converted to bitmap or array accordingly.
 With RLE containers, we introduced a function to handle the new conversions in a
 single place:
 
-```
+```go
 func (c *container) Optimize() {
   if c.isArray() {
     runs := c.arrayCountRuns()
@@ -173,7 +173,7 @@ of two conversion actions: `arrayToRun` or `bitmapToRun`. But there are *six* po
 `runToArray` and `runToBitmap`. To handle all of these possibilities at once, we should have been
 doing something more like this:
 
-```
+```go
 func (c *container) Optimize() {
   runs := c.countRuns()
 

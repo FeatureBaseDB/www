@@ -71,7 +71,7 @@ We stood up a 3-node Pilosa cluster on AWS c4.8xlarge instances, with an additio
 c4.8xlarge to load the data. We used our open source [pdk](https://www.pilosa.com/docs/pdk/)
 tool to load the data into Pilosa with the following arguments:
 
-```
+```sh
 pdk taxi -b 2000000 -c 50 -p <pilosa-host-ip>:10101 -f
 <pdk_repo_location>/usecase/taxi/greenAndYellowUrls.txt
 ```
