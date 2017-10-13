@@ -7,7 +7,7 @@ title = "Retail Analytics and the Star Schema Benchmark"
 
 Retail transactions happen everywhere, in huge quantities. Whether you're looking at customers, purchases, or products, the data volume is enormous, and always growing. While most retailers have been using a variety of business intelligence tools to glean important information about their consumers from these transactions, this has become increasingly difficult as more and more transactions occur both in-store and online. Extracting valuable insights from all of that data is essential for survival in the cut-throat digital age: retailers have the ability to build a 360-degree understanding of their customers, track brand sentiment, build customized promotions, and even improve their store layout from detailed analyses of their transactions. However, many struggle to run fast, ad-hoc, drill-down queries, despite their growing importance in online marketplaces.
 
-That's part of why the Star Schema Benchmark exists: a well-known test of database query performance, modeled after classical data warehousing problems, with a retail transaction flavor. When we read this [blog post](https://hortonworks.com/blog/sub-second-analytics-hive-druid/) from Hortonworks about running the benchmark on Hive+Druid, we saw it as a challenge. Could we match their query times? Could we do better? This is what we were up against:
+That's part of why the Star Schema Benchmark exists: a well-known test of database query performance, modeled after classical data warehousing problems, with a retail transaction flavor. When we read this [blog post](https://hortonworks.com/blog/sub-second-analytics-hive-druid/) from Hortonworks (in partnership with AtScale) about running the benchmark on Hive+Druid, we saw it as a challenge. Could we match their query times? Could we do better? Could we do it without all of the cumbersome cacheing and pre-computation required in the Hortonwork/AtScale benchmark? This is what we were up against:
 
 ![Hortonworks Druid results](/img/retail-analytics/results-druid.png)
 *Hortonworks Druid results, scale factor 1000, [courtesy of Hortonworks](https://hortonworks.com/blog/sub-second-analytics-hive-druid/)*
@@ -22,9 +22,9 @@ In the star schema terminology, the *fact table* contains *line orders*, with ke
 ![SSB star schema diagram](/img/retail-analytics/ssb-schema-aws.png)
 *SSB star schema diagram, [courtesy of AWS](https://docs.aws.amazon.com/redshift/latest/dg/tutorial-loading-data-create-tables.html)*
 
-We used the popular [ssb-dbgen](https://github.com/electrum/ssb-dbgen) tool to generate actual data sets conforming to this schema. This is the same generator [used](https://github.com/cartershanklin/hive-druid-ssb) for the Hortonworks benchmark. Data produced by ssb-dbgen is distributed uniformly, and there is also a consistent correlation between certain fields. Although we are curious about what happens with more skewed distributions, we don't expect a significant performance impact with Pilosa.
+We used the popular [ssb-dbgen](https://github.com/electrum/ssb-dbgen) tool to generate actual data sets conforming to this schema. This is the same generator [used](https://github.com/cartershanklin/hive-druid-ssb) for the Hortonworks/AtScale benchmark. Data produced by ssb-dbgen is distributed uniformly, and there is also a consistent correlation between certain fields. Although we are curious about what happens with more skewed distributions, we don't expect a significant performance impact with Pilosa.
 
-The data is defined in terms of a *Scale Factor* (`SF`). The size of each table (except `DATE`) varies directly with `SF`, either linearly (`LINEORDER`, `CUSTOMER`, `SUPPLIER`) or logarithmically (`PART`). This allows for a consistent data set of any desired size. We tested with SF 1, 10, and 100 before running our final import and queries with SF 1000, to match the Hortonworks data set.
+The data is defined in terms of a *Scale Factor* (`SF`). The size of each table (except `DATE`) varies directly with `SF`, either linearly (`LINEORDER`, `CUSTOMER`, `SUPPLIER`) or logarithmically (`PART`). This allows for a consistent data set of any desired size. We tested with SF 1, 10, and 100 before running our final import and queries with SF 1000, to match the Hortonworks/AtScale data set.
 
 The data set contains a large number of the core entity (purchased items) stored as records in the line-orders table. Each purchase consists of several products ("line items" in the order), and the line-order table is the denormalized combination of the `LINEITEM` and `ORDER` tables of the TPC-H schema. Almost every non-key field in the above schema diagram can be thought of as an attribute of a line-order.
 
@@ -76,6 +76,8 @@ The SSB `DATE` table includes a number of redundant fields. All of the Pilosa qu
 If you've read through some of our other use cases, you might have seen the Pilosa Development Kit ([PDK](https://github.com/pilosa/pdk)) mentioned. This is our toolkit for shoving data into Pilosa as fast as possible. In addition to some generic components, the repo includes some example usage in the `usecase` directory, which is where you can find [Jaffee's](https://twitter.com/mattjaffee?lang=en) work on the [SSB import](https://github.com/pilosa/pdk/tree/master/usecase/ssb).
 
 Conceptually, there isn't a lot of new ground here; the mapping described above is straightforward. As we've added more use cases, we've improved import performance, and generalized the tools. Common tasks include creating IDs, and mapping attribute values to/from IDs. Recent work improved support for ID/value mapping, backed by [LevelDB](https://github.com/google/leveldb).
+
+But, remember this for later: we did not use any application-specific caching. We simply imported the data according to the static schema.
 
 ### Hardware
 
@@ -160,7 +162,7 @@ Sum(
 
 Note the `<BRAND>` and `<YEAR>` placeholders (the `p_category = 'MFGR#12'` clause is equivalent to selecting a certain set of brands). We need the sum for each (year, brand) combination, and the `Sum` query does not perform any grouping itself. Instead, in our application, we run one query for each (year, brand) pair. In case you're not familiar with the SSB details, this means we iterate this Pilosa query over seven years, and 40 brands, for a total of 280 queries.
 
-280 queries, to produce results that are described by one SQL query! That might sound odd, but this is where Pilosa really shines: we can run many of them concurrently, and **every** CPU on the cluster will be fully utilized until the queryset finishes. It finishes very quickly, even with many nested operations, and then we can move on to the next queryset. Our results are clear, running all those queries is no problem.
+280 queries, to produce results that are described by one SQL query! That might sound odd, but this is where Pilosa really shines: we can run many of them concurrently, and **every** CPU on the cluster will be fully utilized until the queryset finishes. It finishes very quickly, even with many nested operations, and then we can move on to the next queryset. Our results are clear: running all those queries is no problem.
 
 Q3.x and Q4.x have different structure, but they are not especially complicated or surprising. Their queries tend to both produce results of higher dimensionality, and require more iterations, but they're still no challenge for Pilosa.
 
@@ -191,7 +193,7 @@ Here are the final numbers:
 
 We can summarize with an average of all 13 query times: Pilosa clocks in at 831ms, compared to Druid's 960ms. 
 
-It's important to point out that there is no application-specific caching in use here. After importing the data according to the static schema, all queries are ad-hoc. Q2.3 and Q3.4 are so fast, 70ms and 27ms, that you might assume otherwise. Actually, these queries are just great demonstrations of Pilosa's original use-case of individual, ad-hoc queries on huge data sets.
+Again, it's important to point out that there is no application-specific caching in use here. After importing the data according to the static schema, all queries are ad-hoc. Q2.3 and Q3.4 are so fast, 70ms and 27ms, that you might assume otherwise. Actually, these queries are just great demonstrations of Pilosa's original use-case of individual, ad-hoc queries on huge data sets.
 
 You'll notice Pilosa tends to slow down on the high-iteration queries: 2.1, 3.2, 4.3. This is expected; for a given query, when CPUs are saturated, all we can do is throw more hardware at the problem. However, in some cases there are smarter ways to build these queries, that can drastically cut back on the number of iterations necessary. For example, using the equivalent of a `LIMIT 100` can allow the application to use some heuristics to discard much of the tail end of the result rows - *before* the queries happen. 
 
