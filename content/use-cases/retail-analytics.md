@@ -10,7 +10,7 @@ Retail transactions happen everywhere, in huge quantities. Whether you're lookin
 That's part of why the Star Schema Benchmark exists: a well-known test of database query performance, modeled after classical data warehousing problems, with a retail transaction flavor. When we read this [blog post](https://hortonworks.com/blog/sub-second-analytics-hive-druid/) from Hortonworks about running the benchmark on Hive+Druid, we saw it as a challenge. Could we match their query times? Could we do better? This is what we were up against:
 
 ![Hortonworks Druid results](/img/retail-analytics/results-druid.png)
-*[Hortonworks Druid results, scale factor 1000](https://hortonworks.com/blog/sub-second-analytics-hive-druid/), courtesy of Hortonworks*
+*Hortonworks Druid results, scale factor 1000, [courtesy of Hortonworks](https://hortonworks.com/blog/sub-second-analytics-hive-druid/)*
 
 
 ## The Data
@@ -19,9 +19,8 @@ The [Star Schema Benchmark](https://www.cs.umb.edu/~poneil/StarSchemaB.PDF) (SSB
 
 In the star schema terminology, the *fact table* contains *line orders*, with keys to four *dimension tables*, describing dates, customers, suppliers, and parts. Fields and relationships are shown in this diagram:
 
-TODO: diagram kinda ugly, there are others but not sure about usage
-![SSB star schema diagram](/img/retail-analytics/ssb-schema.png)
-*[SSB star schema diagram](https://www.cs.umb.edu/~poneil/StarSchemaB.PDF), courtesy of Pat O'Neil, Betty O'Neil, Xuedong Chen*
+![SSB star schema diagram](/img/retail-analytics/ssb-schema-aws.png)
+*SSB star schema diagram, [courtesy of AWS](https://docs.aws.amazon.com/redshift/latest/dg/tutorial-loading-data-create-tables.html)*
 
 We used the popular [ssb-dbgen](https://github.com/electrum/ssb-dbgen) tool to generate actual data sets conforming to this schema. This is the same generator [used](https://github.com/cartershanklin/hive-druid-ssb) for the Hortonworks benchmark. Data produced by ssb-dbgen is distributed uniformly, and there is also a consistent correlation between certain fields. Although we are curious about what happens with more skewed distributions, we don't expect a significant performance impact with Pilosa.
 
@@ -32,8 +31,6 @@ The data set contains a large number of the core entity (purchased items) stored
 ## Mapping
 
 As it turns out, the star schema is an excellent match for the Pilosa data model. Pilosa was designed to work well with one core entity (in Pilosa's columns), which correspond directly to the rows of the SSB `LINEORDER` table. Each SSB attribute then gets its own frame, of varying cardinality, where each Pilosa row represents one possible value for that attribute. In short, Pilosa was designed as a grid of *people* × attributes. Recently, we've shown how to use *taxi rides* as columns instead of people, as well as *network packets* and *molecular fingerprint components*. Now, we'll show how to use *items in a transaction* as the columns.
-
-TODO: thesaurus for 'attribute' - can't use 'field' either.
 
 {{< note title="Note" >}}
 Note: <i>Pilosa attributes</i> are a distinct concept, not being used here.
@@ -96,9 +93,7 @@ Here's a more detailed hardware comparison:
 
 ## Queries
 
-TODO: I thought the FF info would lead to something interesting, but it didn't...
-
-Just as the SSB schema was modified from TPC-H, so were the queries. Not all TPC-H queries translated to the new schema, so a new set of four flights of three or four queries each was described. The queries in each flight are similar in structure and dimensionality, but sometimes highly variable in selectivity. We can describe the complexity with a *Filter Factor* (`FF`), which is a simple multiplicative measure of the selectivity of a query. If the `WHERE` clauses of an SQL query restrict the number of fact rows that must be examined to one tenth of the total rows in the data set, then `FF = 0.1`.
+Just as the SSB schema was modified from TPC-H, so were the queries. Not all TPC-H queries translated to the new schema, so a new set of four flights of three or four queries each was described. The queries in each flight are similar in structure and dimensionality, but sometimes highly variable in selectivity.
 
 Flight 1 (Q1.x) sums revenue over a time range, a range of discount values, and a range of quantity values, then simply lists the results. In SQL, Q1.1 looks like this:
 
@@ -178,23 +173,21 @@ Here are the final numbers:
 ![Pilosa vs Druid results](/img/retail-analytics/results-comparison.png)
 *Pilosa vs Druid results, Scale Factor 1000*
 
-TODO extra columns probably not interesting to anyone except me
-
-| Query | Pilosa | Druid |         FF | Iterations  | Dimensions |
-|-------|--------|-------|------------|-------------|------------|
-|   1.1 |   .669 | 0.782 |     0.0195 | 1           |          0 |
-|   1.2 |   .486 | 0.673 |   0.000649 | 1           |          0 |
-|   1.3 |   .505 | 0.853 |   0.000075 | 1           |          0 |
-|   2.1 |  1.562 |  1.08 |      0.008 | 280=7*40    |          2 |
-|   2.2 |  .3666 |  2.69 |     0.0016 | 56=7*8      |          2 |
-|   2.3 |  .0699 | 0.577 |     0.0002 | 7           |          1 |
-|   3.1 |  1.453 |   1.5 |     0.0343 | 150=5*5*6   |          3 |
-|   3.2 |  1.335 | 0.673 |    0.00137 | 600=6*10*10 |          3 |
-|   3.3 |   .154 | 0.481 |  0.0000549 | 244*4*6     |          3 |
-|   3.4 |  .0236 | 0.769 | 0.00000457 | 4=2*2       |          2 |
-|   4.1 |  1.082 | 0.994 |      0.016 | 35=7*5      |          2 |
-|   4.2 |  1.170 | 0.731 |    0.00457 | 100=2*5*10  |          3 |
-|   4.3 |  1.934 | 0.635 |  0.0000914 | 800=2*10*40 |          3 |
+| Query | Pilosa | Druid |
+|-------|--------|-------|
+|   1.1 |   .669 | 0.782 |
+|   1.2 |   .486 | 0.673 |
+|   1.3 |   .505 | 0.853 |
+|   2.1 |  1.562 |  1.08 |
+|   2.2 |  .3666 |  2.69 |
+|   2.3 |  .0699 | 0.577 |
+|   3.1 |  1.453 |   1.5 |
+|   3.2 |  1.335 | 0.673 |
+|   3.3 |   .154 | 0.481 |
+|   3.4 |  .0236 | 0.769 |
+|   4.1 |  1.082 | 0.994 |
+|   4.2 |  1.170 | 0.731 |
+|   4.3 |  1.934 | 0.635 |
 
 We can summarize with an average of all 13 query times: Pilosa clocks in at 831ms, compared to Druid's 960ms. 
 
