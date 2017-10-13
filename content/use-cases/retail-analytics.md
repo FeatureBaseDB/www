@@ -5,11 +5,9 @@ title = "Retail Analytics and the Star Schema Benchmark"
 
 ## Motivation
 
-Retail transactions happen everywhere, in huge quantities. Whether you're looking at customers, purchases, or products, the data volume is enormous, and always growing. Extracting valuable insight from that data is tricky, and the ability to run fast, ad-hoc, drill-down queries is more important now than ever.
+Retail transactions happen everywhere, in huge quantities. Whether you're looking at customers, purchases, or products, the data volume is enormous, and always growing. While most retailers have been using a variety of business intelligence tools to glean important information about their consumers from these transactions, this has become increasingly difficult as more and more transactions occur both in-store and online. Extracting valuable insights from all of that data is essential for survival in the cut-throat digital age: retailers have the ability to build a 360-degree understanding of their customers, track brand sentiment, build customized promotions, and even improve their store layout from detailed analyses of their transactions. However, many struggle to run fast, ad-hoc, drill-down queries, despite their growing importance in online marketplaces.
 
-That's part of why the Star Schema Benchmark exists: a well-known test of database query performance, modeled after classical data warehousing problems, with a retail transaction flavor.
-
-When we read this [blog post](https://hortonworks.com/blog/sub-second-analytics-hive-druid/) from Hortonworks about running the benchmark on Hive+Druid, we saw it as a challenge. Could we match their query times? Could we do better? This is what we were up against:
+That's part of why the Star Schema Benchmark exists: a well-known test of database query performance, modeled after classical data warehousing problems, with a retail transaction flavor. When we read this [blog post](https://hortonworks.com/blog/sub-second-analytics-hive-druid/) from Hortonworks about running the benchmark on Hive+Druid, we saw it as a challenge. Could we match their query times? Could we do better? This is what we were up against:
 
 ![Hortonworks Druid results](/img/retail-analytics/results-druid.png)
 *[Hortonworks Druid results, scale factor 1000](https://hortonworks.com/blog/sub-second-analytics-hive-druid/), courtesy of Hortonworks*
