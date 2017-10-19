@@ -3,7 +3,7 @@ date = "2017-05-01"
 title = "Monitoring Network Traffic"
 +++
 
-Pilosa enables humans and machines correlate, filter, query, and otherwise make sense of massive volumes of network packet data.
+Pilosa enables humans and machines to correlate, filter, query, and otherwise make sense of massive volumes of network packet data.
   
 There are myriad reasons to study the data that traverses computer networks. Maybe a researcher wants to understand how traffic patterns change over time, or an operator wants to know what types of traffic happen most frequently so that she can optimize the network for the particular load it sees. Perhaps most importantly, those who defend our computer systems from threats both internal and external require a deep understanding of the traffic which traverses their networks. One cannot detect abnormal traffic without a good understanding of normal traffic.
   
