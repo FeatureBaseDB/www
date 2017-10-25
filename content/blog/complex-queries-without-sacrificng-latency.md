@@ -29,13 +29,13 @@ To us, this seems like putting a bandaid over ravenous flesh-eating bacteria. As
 
 Most of Vinoth's arguments work pretty well whether you're talking about streaming or batch anyway. For example, if your latency requirements are not stringent, then stream processing workers can batch data store updates. Doing this will generally give you an overall increase in throughput per worker allowing you to reduce the number of workers, and therefore save on infrastructure costs. Pilosa has support for configurable batching which shows the latency/throughput trade off clearly:
 
-| batch size | time             | latency to 1st result |
+| Batch Size | Time             | Latency to 1st result |
+|------------|------------------|-----------------------|
 |        100 | 14m47.830748948s | 0.0087s               |
 |       1000 | 2m34.943978702s  | 0.0154s               |
 |      10000 | 1m14.523008057s  | 0.074s                |
 |     100000 | 11.044166203s    | 0.11s                 |
 |    1000000 | 6.535759196s     | 0.65s                 |
-
 
 Another of Vinoth's arguments is that sticking with Hadoop allows you to take advantage of the mature tooling for SQL on Hadoop, and this is certainly valid; it's always tempting to use the latest technology available, but more often than not it will cause as many problems as it solves. 
 
