@@ -11,7 +11,7 @@ overlay_color = "green" # blue, green, or light
 
 The desire to eliminate barriers between raw data and useful insights has driven decades of engineering innovation. Countless databases, datastores, indexes, and query-level solutions promising to make this dream a reality have surfaced at regular intervals, only to fall into obscurity again as the promise remains unrealized. 
 
-In the meantime, an entire class of data-centric professions has stepped in to fill the gaps in our technologies, cleaning, manipulating, and analyzing the data that continue you to stymie our machines. So great is the demand for these skills that the [IDC predicts](https://www.idc.com/getdoc.jsp?containerId=prUS41826116) global revenues for big data and business analytics – the services these data solutions and professionals provide – will grow from $130.1 billion in 2016 to more than $203 billion in 2020. 
+In the meantime, an entire class of data-centric professions has stepped in to fill the gaps left by current technologies. Those professions are doing the work of cleaning, manipulating, and analyzing data that continues to stymie our machines. So great is the demand for these skills that the [IDC predicts](https://www.idc.com/getdoc.jsp?containerId=prUS41826116) global revenues for big data and business analytics – the services these data solutions and professionals provide – will grow from $130.1 billion in 2016 to more than $203 billion in 2020. 
 
 The rise of artificial intelligence (AI) and machine learning (ML) carries even greater promise: the [IDC estimates](https://www.idc.com/getdoc.jsp?containerId=IDC_P33198) that spending on AI/ML capabilities will grow 55%, ultimately reaching $47 billion in three short years. 
 
