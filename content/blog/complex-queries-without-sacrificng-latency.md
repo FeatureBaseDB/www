@@ -27,7 +27,7 @@ Vinoth's post is great by the way, and you should totally go read it. We here at
 
 To us, this seems like putting a bandaid over ravenous flesh-eating bacteria. As we mentioned above, data volumes are only increasing, and latency requirements are plummeting. So why go through Herculean efforts to retrofit a batch-oriented, high-latency technology into working for near real-time use cases, when the need for REAL real-time use cases increases every day? If you're going to collapse the lambda architecture to one side, let's make it the low latency/streaming side, not the "my results are between 5 minutes and a few hours old" side!
 
-Most of the author's arguments work pretty well whether you're talking about streaming or batch anyway. For example, if your latency requirements are not stringent, then stream processing workers can batch data store updates. Doing this will generally give you an overall increase in throughput per worker allowing you to reduce the number of workers, and therefore save on infrastructure costs. Pilosa has support for configurable batching which shows the latency/throughput trade off clearly:
+Most of Vinoth's arguments work pretty well whether you're talking about streaming or batch anyway. For example, if your latency requirements are not stringent, then stream processing workers can batch data store updates. Doing this will generally give you an overall increase in throughput per worker allowing you to reduce the number of workers, and therefore save on infrastructure costs. Pilosa has support for configurable batching which shows the latency/throughput trade off clearly:
 
 | batch size | time             | latency to 1st result |
 |        100 | 14m47.830748948s | 0.0087s               |
@@ -37,7 +37,7 @@ Most of the author's arguments work pretty well whether you're talking about str
 |    1000000 | 6.535759196s     | 0.65s                 |
 
 
-Another argument made by the author is that sticking with Hadoop allows you to take advantage of the mature tooling for SQL on Hadoop, and this is certainly valid; it's always tempting to use the latest technology available, but more often than not it will cause as many problems as it solves. 
+Another of Vinoth's arguments is that sticking with Hadoop allows you to take advantage of the mature tooling for SQL on Hadoop, and this is certainly valid; it's always tempting to use the latest technology available, but more often than not it will cause as many problems as it solves. 
 
 The problem with these SQL on Hadoop packages is that they are fundamentally based on Hadoop's concepts – they operate on immutable data, and require massive amounts of precomputation to be performant. Indeed, the author's proposed extensions to Hadoop revolve primarily around the ability to change and update existing data in an efficient way rather than rewriting entire partitions. Precomputation can be very useful for query acceleration, but it ultimately complicates things, particularly if you have delayed events, or "late data" as Vinoth calls it. If only there were some way to have fast queries without precomputation...
 
