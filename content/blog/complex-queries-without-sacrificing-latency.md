@@ -18,7 +18,7 @@ The rise of artificial intelligence (AI) and machine learning (ML) carries even 
 
 In short, industries need these technologies and services, and they’re paying massive amounts of money to get them.
 
-Take Uber, for example. The [embattled](https://www.nytimes.com/2017/10/21/style/susan-fowler-uber.html) [tech giant’s](https://www.nytimes.com/2017/06/21/technology/uber-ceo-travis-kalanick.html) mission is to make “transportation as reliable as running water, everywhere, for everyone.” In order to accomplish this, the rideshare platform connects people who need rides to strangers with cars in mere seconds, and sweetens the deal by automating payments, thereby eliminate the awkward exchange of cash or the necessity of cards. All on a smartphone. Simple. Brilliant. 
+Take Uber, for example. The [embattled](https://www.nytimes.com/2017/10/21/style/susan-fowler-uber.html) [tech giant’s](https://www.nytimes.com/2017/06/21/technology/uber-ceo-travis-kalanick.html) mission is to make “transportation as reliable as running water, everywhere, for everyone.” In order to accomplish this, the rideshare platform connects people who need rides to strangers with cars in mere seconds, and sweetens the deal by automating payments, thereby eliminate the awkward exchange of cash or the necessity of cards. All on a smartphone. Simple. Brilliant.
 
 But it takes a ton of real-time, data-based decisions to make that happen.
 
@@ -44,4 +44,4 @@ The problem with these SQL on Hadoop packages is that they are fundamentally bas
 
 Vinoth's final, major argument is "fewer moving parts;" any time you can reduce the number of subsystems in a tech stack, you're probably going to make things less expensive, easier to change, simpler to manage, etc. Simplicity is one of our main foundations at Pilosa, so we're nodding enthusiastically at this bit. As we mentioned earlier on though (but it bears repeating): if you're only going to implement one arm of a lambda architecture (batch or streaming), MAKE IT STREAMING! Then take a look at [Pilosa](https://www.pilosa.com/docs/latest/introduction/) to see how you can still get complete, up to date results for complex queries without sacrificing latency.
 
-_Ali is Pilosa's jack of all trades, including resident research nerd. Jaffee is a lead software engineer at Pilosa and is obsessed with optimization. Say hello to them on Twitter at [@ay_em_see](https://twitter.com/ay_em_see?lang=en) and [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
+_Ali is Pilosa's jack of all trades and resident research nerd. Jaffee is a lead software engineer at Pilosa and is obsessed with optimization. Say hello to them on Twitter at [@ay_em_see](https://twitter.com/ay_em_see?lang=en) and [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
