@@ -6,7 +6,7 @@ author = "Ali Cooley and Matt Jaffee"
 author_twitter = "slothware"
 author_img = "1"
 image = "/img/blog/complex-queries-without-sacrificing-latency.jpg"
-overlay_color = "blue" # blue, green, or light
+overlay_color = "green" # blue, green, or light
 +++
 
 The desire to eliminate barriers between raw data and useful insights has driven decades of engineering innovation. Countless databases, datastores, indexes, and query-level solutions promising to make this dream a reality have surfaced at regular intervals, only to fall into obscurity again as the promise remains unrealized. 
