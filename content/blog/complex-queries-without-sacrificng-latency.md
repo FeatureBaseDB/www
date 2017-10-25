@@ -1,7 +1,7 @@
 +++
 date = "2017-10-24"
 publishdate = "2017-10-24"
-title = "Fewer Moving Parts: Complex Queries Without Sacrificing Latency"
+title = "Real Time Queries Without Compromises"
 author = "Ali Cooley and Matt Jaffee"
 author_twitter = "slothware"
 author_img = "1"
@@ -9,7 +9,8 @@ image = "/img/blog/complex-queries-without-sacrificing-latency.jpg"
 overlay_color = "green" # blue, green, or light
 +++
 
-The desire to eliminate barriers between raw data and useful insights has driven decades of engineering innovation. Countless databases, datastores, indexes, and query-level solutions promising to make this dream a reality have surfaced at regular intervals, only to fall into obscurity again as the promise remains unrealized. 
+The desire to eliminate barriers between raw data and useful insights has driven decades of engineering innovation. Countless databases, datastores, indexes, and query-level solutions promising to make this dream a reality have surfaced at regular intervals, only to fall into obscurity again as the promise remains unrealized.
+<!--more-->
 
 In the meantime, an entire class of data-centric professions has stepped in to fill the gaps left by current technologies. Those professions are doing the work of cleaning, manipulating, and analyzing data that continues to stymie our machines. So great is the demand for these skills that the [IDC predicts](https://www.idc.com/getdoc.jsp?containerId=prUS41826116) global revenues for big data and business analytics – the services these data solutions and professionals provide – will grow from $130.1 billion in 2016 to more than $203 billion in 2020. 
 
@@ -42,3 +43,5 @@ Another of Vinoth's arguments is that sticking with Hadoop allows you to take ad
 The problem with these SQL on Hadoop packages is that they are fundamentally based on Hadoop's concepts – they operate on immutable data, and require massive amounts of precomputation to be performant. Indeed, the author's proposed extensions to Hadoop revolve primarily around the ability to change and update existing data in an efficient way rather than rewriting entire partitions. Precomputation can be very useful for query acceleration, but it ultimately complicates things, particularly if you have delayed events, or "late data" as Vinoth calls it. If only there were some way to have fast queries without precomputation...
 
 Vinoth's final, major argument – as we mentioned earlier (and it bears repeating) – is "fewer moving parts;" any time you can reduce the number of subsystems in a tech stack, you're probably going to make things less expensive, easier to change, simpler to manage, etc. Simplicity is one of our main foundations at Pilosa, so we're nodding enthusiastically at this bit. As we mentioned earlier on though (but it bears repeating) if you're only going to implement one arm of a lambda architecture (batch or streaming), MAKE IT STREAMING! Then take a look at [Pilosa](https://www.pilosa.com/docs/latest/introduction/) to see how you can still get complete, up to date results for complex queries without sacrificing latency.
+
+_Jaffee is a lead software engineer at Pilosa and is obsessed with optimization; Ali is Pilosa's jack of all trades, including resident research nerd. Say hello to them on Twitter at [@ay_em_see](https://twitter.com/ay_em_see?lang=en) and [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
