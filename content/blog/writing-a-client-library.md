@@ -10,7 +10,7 @@ overlay_color = "blue" # blue, green, or light
 disable_overlay = false
 +++
 
-In this post, we are going to get an insight into Pilosa client libraries by writing one in Lua.
+In this post, we will cover creating a Pilosa client library by going through the steps of writing one in Lua.
 
 <!--more-->
 
