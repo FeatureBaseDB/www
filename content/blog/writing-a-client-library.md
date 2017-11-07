@@ -16,11 +16,11 @@ In this post, we will cover creating a Pilosa client library by going through th
 
 ### Introduction
 
-Pilosa server has a nice HTTP API which makes interaction with it a breeze. Essentially, a request with one or more PQL (Pilosa Query Language) queries is sent to the Pilosa server and one or more results are returned. A Pilosa client library makes it easier and less error prone to encode requests and decode responses.
+The Pilosa server has a nice HTTP API which makes interaction with it a breeze. Essentially, a request with one or more [PQL (Pilosa Query Language)](https://www.pilosa.com/docs/latest/query-language/) queries is sent to the Pilosa server and one or more results are returned. A Pilosa client library makes it easier and less error prone to encode requests and decode responses.
 
 [Lua](https://www.lua.org) is an embeddable scripting language which is very prevalent among game programmers due to its expressiveness, simplicity and ease of interoperability with C and C++. It is also supported by Nginx.
 
-In this article, we are going to write a Pilosa client library in Lua. Although it won't have all of the features of official client libraries, hopefully we are going to cover the fundamentals and have a base to improve upon. Even if you are not interested in creating a client library, you may find it useful to explore the sample client.
+In this article, we are going to write a Pilosa client library in Lua. Although our sample library won't have all of the features of official client libraries, we will cover the fundamentals and have a base to improve upon. Even if you are not interested in creating a client library, you may find it useful to explore the sample client.
 
 Before delving into client library design, let's have a quick glance at the current official libraries for Pilosa.
 
@@ -28,19 +28,19 @@ Before delving into client library design, let's have a quick glance at the curr
 
 Our primary target is UNIX-like platforms, but our clients run very well on Windows too. Currently we have three official client libraries written in Go, Python and Java.
 
-The Go client is at https://github.com/pilosa/go-pilosa. We support Go version 1.8 and up.
+* The Go client is at https://github.com/pilosa/go-pilosa. We support Go 1.8 and up.
 
-Our Java client at https://github.com/pilosa/java-pilosa. Java 7 and up is supported. We use Maven as our build and packaging system, so it is available to most JVM based projects and languages like Scala, Clojure and Kotlin.
+* Our Java client at https://github.com/pilosa/java-pilosa. Java 7 and up is supported. We use Maven as our build and packaging system, so it is available to most JVM based projects and languages like Scala, Clojure and Kotlin.
 
-Our Python client is at https://github.com/pilosa/python-pilosa and supports Python 2.7 and Python 3.4 and up. Python client library is available on [PYPI](https://pypi.python.org/pypi).
+* The Python client is at https://github.com/pilosa/python-pilosa and supports Python 2.7 and Python 3.4 and up. Python client library is available on [PYPI](https://pypi.python.org/pypi).
 
 ### Creating New Client Libraries
 
 #### Getting Ready
 
-I assume you are on a UNIX-like platform like Linux, MacOS or using [Windows Subsystem for Linux (WSL)](https://msdn.microsoft.com/en-us/commandline/wsl/about). If you are on  another platform, adapt the instructions to your particular platform.
+For the purposes of this post, let's assume you're on a UNIX-like platform such as Linux, MacOS or using [Windows Subsystem for Linux (WSL)](https://msdn.microsoft.com/en-us/commandline/wsl/about). If you are on  another platform, adapt the instructions to your particular platform.
 
-Throughout this article, we will need to run queries against the Pilosa server so let's go ahead and launch a new Pilosa server instance. We provide [precompiled binaries](https://github.com/pilosa/pilosa/releases) for MacOS and Linux (works on WSL too), a [Homebrew package](http://brewformulas.org/Pilosa) for MacOS and a [docker image](https://hub.docker.com/r/pilosa/pilosa/). See our documentation on [acquiring and installing Pilosa](https://www.pilosa.com/docs/latest/installation/) and [starting Pilosa](https://www.pilosa.com/docs/latest/getting-started/#starting-pilosa). I assume Pilosa is running on the default address with the default scheme at `http://localhost:10101`.
+Throughout this article, we will need to run queries against the Pilosa server, so let's go ahead and launch a new Pilosa server instance. We provide [precompiled binaries](https://github.com/pilosa/pilosa/releases) for MacOS and Linux (works on WSL too), a [Homebrew package](http://brewformulas.org/Pilosa) for MacOS and a [docker image](https://hub.docker.com/r/pilosa/pilosa/). See our documentation on [acquiring and installing Pilosa](https://www.pilosa.com/docs/latest/installation/) and [starting Pilosa](https://www.pilosa.com/docs/latest/getting-started/#starting-pilosa) for assistance, if you haven't installed Pilosa already. I assume Pilosa is running on the default address with the default scheme at `http://localhost:10101`.
 
 While writing the code we will need to run requests against Pilosa and analyze the responses. [curl](https://curl.haxx.se) is probably the most popular tool for calling HTTP endpoints. It is usually preinstalled (or easily installable) in many UNIX-like platforms. Let's confirm Pilosa is running and curl is installed. In a terminal, execute the following:
 ```
@@ -86,7 +86,7 @@ The library code is in the `pilosa` directory, unit tests are in `tests` and int
 
 #### Creating a Makefile
  
-It's convenient to be able to use the same commands to execute tasks for all client libraries. All official Pilosa client library projects use a `Makefile` (Or its Windows equivalent `make.cmd`) which has the same targets to accomplish the same task.
+It's convenient to be able to use the same commands to execute tasks for all client libraries. All official Pilosa client library projects use a `Makefile` (or its Windows equivalent `make.cmd`) which has the same targets to accomplish the same task.
 
 We are going to create a trivial `Makefile` for our client library with the following targets:
 
@@ -103,9 +103,9 @@ test-all:
 	busted tests integration-tests
 ```
 
-You can see the equivalent `make.cmd` for Windows at: https://github.com/pilosa/lua-pilosa/blob/master/make.cmd
+You can see the equivalent `make.cmd` [here](https://github.com/pilosa/lua-pilosa/blob/master/make.cmd).
 
-For this client we won't use any other targets, but official Pilosa clients makes use of the following extra targets:
+For this client we won't use any other targets, but official Pilosa clients make use of the following extra targets:
 - `cover`: Runs all tests with coverage.
 - `generate`: Creates the protobuf encoder/decoder from definition files.
 - `release`: Uploads the client library to the corresponding package manager.
@@ -114,7 +114,7 @@ For this client we won't use any other targets, but official Pilosa clients make
 
 #### ORM
 
-The ORM component provides an API to form PQL (Pilosa Query Language) queries. The advantage of using the ORM against raw queries is usually it is less verbose and less error prone. Also, parameters are validated in the client side which allows to catch validation related errors earlier.
+The ORM component provides an API to form PQL (Pilosa Query Language) queries. The advantage of using the ORM against raw queries is that it is usually less verbose and less error prone. Also, parameters are validated on the client side which allows us to catch validation related errors earlier.
 
 We are going put the ORM related code in `pilosa/orm.lua`. Let's start with defining `PQLQuery` which keeps a PQL query and the index to execute it against. `PQLQuery` constructor receives the `index` of type `Index` (to be defined a bit further) and `pql` of type string:
 
@@ -279,7 +279,7 @@ function Frame:inverseBitmap(columnID)
 end
 ```
 
-Pretty straightforward. You can check rest of the methods in the [lua-pilosa]() repository.
+Pretty straightforward. You can check rest of the methods in the [lua-pilosa](https://github.com/pilosa/lua-pilosa) repository.
 
 
 #### Client
@@ -366,7 +366,7 @@ function URI:normalize()
 end
 ```
 
-Pilosa server supports HTTP requests with JSON or [protobuf](https://github.com/google/protobuf) payload for querying, and HTTP request with JSON payload for other endpoints. It is usually more efficient to encode/decode protobuf payloads but JSON support is more prevalent. Pilosa's official client libraries all use protobuf payloads for querying, but for this client library we will use JSON payloads.
+Pilosa server supports HTTP requests with JSON or [protobuf](https://github.com/google/protobuf) payload for querying, and HTTP requests with JSON payload for other endpoints. It is usually more efficient to encode/decode protobuf payloads but JSON support is more prevalent. Pilosa's official client libraries all use protobuf payloads for querying, but for this client library we will use JSON payloads.
 
 `Content-Type` and `Accept` are two HTTP headers which tell the Pilosa server the type of the payload for requests and responses in order. Most of the endpoints of Pilosa server don't require explicitly setting those endpoints and default to `application/json` but we are going to set them anyway in case the default changes in a future release.
 
@@ -429,9 +429,9 @@ function PilosaClient:createIndex(index)
 end
 ```
 
-This method just encodes index options as the payload and creates the HTTP path using the index name. Lua uses a data structure called a table which is used both as a map and array which is a small problem when encoding an empty table. That's why we give a hint to the JSON encoder to encode the data table as an *object*.
+This method just encodes index options as the payload and creates the HTTP path using the index name. Lua uses a data structure called a table, which is used both as a map and array which is a small problem when encoding an empty table. That's why we give a hint to the JSON encoder to encode the data table as an *object*.
 
-When `createIndex` method is called with an index, it will create it on the server side if it doesn't exist. If it already exists, it will raise an error. It would be convenient to have a method which would be more forgiving to trying to create an existing index. Let's call that method `ensureIndex`:
+When `createIndex` method is called with an index, it will create it on the server side if it doesn't exist. If it already exists, it will raise an error. It would be convenient to have a method which would be more forgiving when trying to create an existing index. Let's call that method `ensureIndex`:
 ```lua
 local HTTP_CONFLICT = 409
 
@@ -519,7 +519,7 @@ function QueryResponse:new(response)
 end
 ```
 
-The constructor of `QueryResponse` receives a string response and decodes it. It then extracts the results and stores them in the `results` property. It is convenient to access a result directly when it is the only one. So we set the `result` property the first result.
+The constructor of `QueryResponse` receives a string response and decodes it. It then extracts the results and stores them in the `results` property. It is convenient to access a result directly when it is the only one. So we set the `result` property as the first result.
 
 As we have seen above, a result may contain different fields depending on the corresponding query. `QueryResult` class consolidates those fields in a single data structure. Unset fields have a default value.
 ```lua
@@ -556,7 +556,7 @@ end
 
 It's a good idea to separate unit tests from integration tests since integration tests depend on a running Pilosa server, and they may take longer to complete. Our `Makefile` contains two targets for testing, `make test` runs unit tests and `make test-all` runs both unit and integration tests.
 
-Integration tests require the Pilosa server is running on the default address, but you can change it using the `PILOSA_BIND` environment variable.
+Integration tests require the Pilosa server to be running on the default address, but you can change it using the `PILOSA_BIND` environment variable.
 
 ### Continuous Integration
 
@@ -586,4 +586,6 @@ script:
 
 In this article we explored the fundamentals of writing a client library for Pilosa and wrote a simple one in Lua. Hopefully the article was enjoyable and useful if you'd like to write your own or understand the current ones.
 
-_Yüce is an Independent Software Engineer at Pilosa. Find him on Twitter at [@tklx](https://twitter.com/tklx?lang=en)._
+We're always looking for feedback, so feel free to reach out if you think there's something we missed, or other topics you'd like us to cover.
+
+_Yüce is an Independent Software Engineer at Pilosa. When he's not writing Pilosa client libraries, you can find him watching good bad movies. He is [@yuce](https://github.com/yuce) on GitHub and [@tklx](https://twitter.com/tklx?lang=en) on Twitter._
