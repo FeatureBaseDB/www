@@ -349,6 +349,18 @@ function Frame:inverseBitmap(columnID)
 end
 ```
 
+Let's give it a try our ORM classes. Let's define the schema first:
+```lua
+local schema = Schema()
+local index1 = schema:index("index1")
+local frame1 = myIndex:frame("frame1")
+```
+
+ Below is the code which creates the equivalent of the PQL query `Intersect(Bitmap(frame="frame1", rowID=10), Bitmap(frame="frame1", columnID=20))`:
+```lua
+local query = index1:intersect(frame1:bitmap(10), frame1:bitmap(20))
+```
+
 Pretty straightforward. You can check out the rest of [pilosa/orm.lua](https://github.com/pilosa/lua-pilosa/blob/master/pilosa/orm.lua) file [here](https://github.com/pilosa/lua-pilosa/blob/master/pilosa/orm.lua).
 
 
