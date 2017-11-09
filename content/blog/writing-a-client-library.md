@@ -695,6 +695,52 @@ Rest of [pilosa/response.lua](https://github.com/pilosa/lua-pilosa/blob/master/p
 It's a good idea to separate unit tests from integration tests since integration tests depend on a running Pilosa server, and may take longer to complete. Our `Makefile` contains two targets for testing, `make test` runs unit tests and `make test-all` runs both unit and integration tests.
 
 Integration tests require the Pilosa server to be running on the default address, but you can change it using the `PILOSA_BIND` environment variable.
+```lua
+function getClient()
+    local serverAddress = os.getenv("PILOSA_BIND")
+    if serverAddress == nil then
+        serverAddress = "http://localhost:10101"
+    end
+    return PilosaClient(URI:address(serverAddress))
+end
+```
+
+Below is a part of the `PilosaClient` test case. Note that we create the necessary index and frame in the setup function `before_each` and delete the index (which deletes the frame too) in the teardown function `after_each`. `before_each` and `after_each` runs before and after each test function respectively.
+
+```lua
+describe("PilosaClient", function()
+    local client = getClient()
+    local schema = orm.Schema()
+    local index = schema:index("test-index")
+    local frame = index:frame("test-frame")
+
+    before_each(function()
+        client:ensureIndex(index)
+        client:ensureFrame(frame)
+    end)
+
+    after_each(function()
+        client:deleteIndex(index)
+    end)
+
+    -- Tests are here --
+end)
+```
+
+And here is the test function for `PilosaClient:query`:
+```lua
+    it("can send a query", function()
+        local client = getClient()
+        client:query(frame:setbit(10, 20))        
+        local response1 = client:query(frame:bitmap(10))
+        local bitmap = response1.result.bitmap
+        assert.equals(0, #bitmap.attributes)
+        assert.equals(1, table.getn(bitmap.bits))
+        assert.same(20, bitmap.bits[1])
+    end)
+```
+
+All official Pilosa clients have the same structure and similarly named classes and methods. That makes it easy to port tests between client libraries.
 
 ### Continuous Integration
 
