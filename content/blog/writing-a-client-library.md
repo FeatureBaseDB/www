@@ -356,7 +356,7 @@ local index1 = schema:index("index1")
 local frame1 = myIndex:frame("frame1")
 ```
 
- Below is the code which creates the equivalent of the PQL query `Intersect(Bitmap(frame="frame1", rowID=10), Bitmap(frame="frame1", columnID=20))`:
+ Below is the code which creates the equivalent of the PQL query `Intersect(Bitmap(frame="frame1", rowID=10), Bitmap(frame="frame1", rowID=20))`:
 ```lua
 local query = index1:intersect(frame1:bitmap(10), frame1:bitmap(20))
 ```
