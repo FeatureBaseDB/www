@@ -353,7 +353,7 @@ Let's give a try our ORM classes. We define the schema first:
 ```lua
 local schema = Schema()
 local index1 = schema:index("index1")
-local frame1 = myIndex:frame("frame1")
+local frame1 = index1:frame("frame1")
 ```
 
  Below is the code which creates the equivalent of the PQL query `Intersect(Bitmap(frame="frame1", rowID=10), Bitmap(frame="frame1", rowID=20))`:
