@@ -349,7 +349,7 @@ function Frame:inverseBitmap(columnID)
 end
 ```
 
-Let's give it a try our ORM classes. Let's define the schema first:
+Let's give a try our ORM classes. We define the schema first:
 ```lua
 local schema = Schema()
 local index1 = schema:index("index1")
