@@ -34,9 +34,7 @@ Our primary target is UNIX-like platforms, but our clients run very well on Wind
 
 * The Python client is at https://github.com/pilosa/python-pilosa and supports Python 2.7 and Python 3.4 and up. The Python client library is also available on [PYPI](https://pypi.python.org/pypi).
 
-### Creating New Client Libraries
-
-#### Getting Ready
+### Getting Ready
 
 For the purposes of this post, we will assume you're on a UNIX-like platform such as Linux, MacOS or using [Windows Subsystem for Linux (WSL)](https://msdn.microsoft.com/en-us/commandline/wsl/about). If you are on another platform, adapt the instructions to your particular platform.
 
@@ -54,7 +52,7 @@ We should get a response similar to the following:
 
 If you get the `localhost port 10101: Connection refused` error, make sure Pilosa is running on the default address.
 
-Since we are going to write our client library in [Lua](https://www.lua.org) we need to install Lua. But which version? When it comes to versioning, Lua takes a different stance than many mainstream languages, and the latest main release may not be compatible with earlier main releases. Version 5.1 seems to be the most supported version in the Lua community (due to impressive [LuaJIT](http://luajit.org) and [Nginx](https://github.com/openresty/lua-nginx-module)) so we will use it for this client library.
+Since we are going to write our client library in [Lua](https://www.lua.org) we need to install Lua. But which version? When it comes to versioning, Lua takes a different stance than many mainstream languages, and the latest main release may not be compatible with earlier main releases. Version 5.1 seems to be the most supported version in the Lua community so we will target it for this client library.
 
 Although Lua 5.1 is available with most package managers for UNIX-like platforms and it's easy to compile, it's most convenient to use the Python based [Hererocks](https://github.com/mpeterv/hererocks) script to install it. Hererocks requires a compiler to compile Lua, so install one if you didn't already do so. Clang for MacOS, Visual Studio for Windows, and GCC for Linux, WSL and other UNIX-like platforms works great. The following command creates a Lua 5.1 virtual environment with the latest LuaRocks and activates it:
 ```
@@ -68,21 +66,28 @@ Run `lua -v` to confirm that the virtual environment was created with the correc
 
 Let's install the dependencies for our client library:
 ```
-luarocks install luasocket busted luacov
+luarocks install luasocket
+luarocks install busted
+luarocks install luacov
 ```
 
-We are going to use the following layout for our client library project:
+LuaSocket provides the internal HTTP client we are going to use in our library. There are other, more advanced HTTP libraries for Lua, but their Windows support is not as good. Busted is a popular testing framework. It can use Luacov for generating a test coverage report.
+
+The final project is at the [Lua Client repository](https://github.com/pilosa/lua-pilosa). We are going to use the following layout for our client library project:
 ```
 lua-pilosa/
     pilosa/
-    tests/
     integration-tests/
-    README.md
+    tests/
+    .travis.yml
+    LICENSE
     Makefile
+    README.md
     make.cmd
+    pilosa-0.1.0-1.rockspec
 ```
 
-The library code is in the `pilosa` directory, unit tests are in `tests` and integration tests are (predictably) in `integration-tests`.
+We use the `LANGUAGE-pilosa` convention when naming client libraries at Pilosa. The library code is in the `pilosa` directory, unit tests are in `tests` and integration tests are (predictably) in `integration-tests`. `pilosa-0.1.0-1.rockspec` is the package definition file for LuaRocks. `.travis.yml` is the confiration file for Travis CI.
 
 #### Creating a Makefile
  
@@ -92,27 +97,74 @@ We are going to create a trivial `Makefile` for our client library with the foll
 
 - `test`: Runs unit tests.
 - `test-all`: Runs both unit tests and integration tests.
+- `cover`: Runs all tests with coverage.
 
 ```Makefile
-.PHONY: test test-all
+.PHONY: cover test test-all
 
 test:
 	busted tests
 
 test-all:
 	busted tests integration-tests
+
+cover: luacov.report.out
+	cat luacov.report.out
+
+luacov.report.out: luacov.stats.out
+	busted --coverage tests integration-tests
 ```
 
 You can see the equivalent `make.cmd` [here](https://github.com/pilosa/lua-pilosa/blob/master/make.cmd).
 
-For this client we won't use any other targets, but official Pilosa clients make use of the following extra targets:
-- `cover`: Runs all tests with coverage.
+We won't use any other targets for this client, but official Pilosa clients make use of the following extra targets:
 - `generate`: Creates the protobuf encoder/decoder from definition files.
 - `release`: Uploads the client library to the corresponding package manager.
 - `doc`: Creates the documentation.
 - `build`: Builds the client library.
 
-#### ORM
+#### A Note on Class Definitions
+
+Although we design our client library around *classes*, Lua doesn't have the concept of a *class*. Instead, it emulates object orientation through the use of *metatables* and some syntactic sugar.
+
+For example, we would define the `Schema` *class* as follows:
+```lua
+function Schema.new()
+    local self = setmetatable({}, Schema)
+    self.indexes = {}
+    return self
+end
+
+function Schema:index(name)
+    return Index(name)
+end
+
+-- Create a Schema instance
+local schema = Schema.new()
+-- Note that we use a column instead of a dot.
+-- This is equivalent to: local myIndex = schema.index(schema, "my-index")
+local myIndex = schema:index("my-index")
+```
+
+How to create a class is not obvious unless you are a Lua programmer, so we use the *Lua Classic* module in `pilosa/classic.lua` to make our classes more familiar. The `Schema` class can be re-defined as:
+```lua
+local Object = require "pilosa.classic"
+local Schema = Object:extend()
+
+function Schema:new()
+    self.indexes = {}
+end
+
+function Schema:index(name)
+    return Index(name)
+end
+
+-- We don't call new() explicitly anymore
+local schema = Schema()
+local myIndex = schema:index("my-index"
+```
+
+### ORM
 
 The ORM component provides an API to form PQL (Pilosa Query Language) queries. The advantage of using the ORM against raw queries is that it is usually less verbose and less error prone. Also, parameters are validated on the client side which allows us to catch validation related errors earlier.
 
@@ -150,6 +202,7 @@ function PQLBatchQuery:add(query)
 end
 
 function PQLBatchQuery:serialize()
+    -- concatenate serialized queries as a string
     return table.concat(self.queries)
 end
 ```
@@ -202,8 +255,6 @@ function Index:frame(name, options)
 end
 ```
 
-`Index` constructor takes the name of the index and its options. Currently the only option available for indexes is the time quantum.
-
 The `Index` object keeps a cache of frames. The `frame` method creates a new `Frame` object or returns an already existing `Frame` object. We should be careful when caching `Frame` objects, since `Frame` objects have to keep a reference to their parent `Index` object. This creates a circular reference and that can be problematic for languages with a reference counting memory management scheme.
 
 Let's add a few methods to `Index`:
@@ -233,7 +284,7 @@ function bitmapOp(index, name, ...)
 end
 ```
 
-As each name suggests, `rawQuery` allows the user to send any string to the Pilosa server as a query and `batchQuery` creates a `PQLBatchQuery` object with the given queries passed as arguments.
+`rawQuery` allows the user to send any string to the Pilosa server as a query and `batchQuery` creates a `PQLBatchQuery` object with the given queries passed as arguments.
 
 `union` method creates a `Union` query with the given bitmap queries. It calls the `bitmapOp` helper function to create the query. `intersect`, `difference` and `xor` methods are defined similarly.
 
@@ -253,8 +304,36 @@ function Frame:new(index, name, options)
 end
 ```
 
+`TimeQuantum` and `CacheType` contain string values accepted by the Pilosa server:
+```lua
+local TimeQuantum = {
+    NONE = "",
+    YEAR = "Y",
+    MONTH = "M",
+    DAY = "D",
+    HOUR = "H",
+    YEAR_MONTH = "YM",
+    MONTH_DAY = "MD",
+    DAY_HOUR = "DH",
+    YEAR_MONTH_DAY = "YMD",
+    MONTH_DAY_HOUR = "MDH",
+    YEAR_MONTH_DAY_HOUR = "YMDH"
+}
+
+local CacheType = {
+    DEFAULT = "",
+    LRU = "lru",
+    RANKED = "ranked"
+}
+```
+
 The Frame constructor stores the frame's name, its parent index, and any available frame options. Next, a few methods which implement queries that work on frames:
 ```lua
+function Frame:bitmap(rowID)
+    local query = string.format("Bitmap(rowID=%d, frame='%s')", rowID, self.name)
+    return PQLQuery(self.index, query)
+end
+
 function Frame:setbit(rowID, columnID, timestamp)
     local ts = ""
     if timestamp ~= nil then
@@ -264,21 +343,16 @@ function Frame:setbit(rowID, columnID, timestamp)
     return PQLQuery(self.index, query)
 end
 
-function Frame:bitmap(rowID)
-    local query = string.format("Bitmap(rowID=%d, frame='%s')", rowID, self.name)
-    return PQLQuery(self.index, query)
-end
-
 function Frame:inverseBitmap(columnID)
     local query = string.format("Bitmap(columnID=%d, frame='%s')", columnID, self.name)
     return PQLQuery(self.index, query)
 end
 ```
 
-Pretty straightforward. You can check out the rest of the methods in the [lua-pilosa](https://github.com/pilosa/lua-pilosa) repository.
+Pretty straightforward. You can check out the rest of [pilosa/orm.lua](https://github.com/pilosa/lua-pilosa/blob/master/pilosa/orm.lua) file [here](https://github.com/pilosa/lua-pilosa/blob/master/pilosa/orm.lua).
 
 
-#### Client
+### Client
 
 A Pilosa URI (Uniform Resource Identifier) represents the address of a Pilosa node. It consists of three parts: scheme, host and port. `https://index2.pilosa.com:10501` is a sample URI which points to the Pilosa node running at host `index2.pilosa.com` port `10501` and which uses the `https` scheme. All parts of a Pilosa URI are optional, but at least one of the parts should be specified. The following URIs are equivalent:
 
@@ -289,7 +363,7 @@ A Pilosa URI (Uniform Resource Identifier) represents the address of a Pilosa no
 - `localhost`
 - `:10101`
 
-The following Lua code defines the `URI` class which keeps a Pilosa URI. It lets us write `https://index2.pilosa.com:10501` as `URI("https", "index2.pilosa.com", 10501)`:
+The Lua code below defines the `URI` class which keeps a Pilosa URI. It lets us write `https://index2.pilosa.com:10501` as `URI("https", "index2.pilosa.com", 10501)`:
 
 ```lua
 local DEFAULT_SCHEME = "http"
@@ -307,7 +381,7 @@ function URI:default()
 end
 ```
 
-Generally, it is much more convenient to use a Pilosa URI as is. We can easily parse an address and convert it to a Pilosa URI:
+Generally, it is much more convenient to use a Pilosa URI as is. We can easily parse a string address and convert it to a Pilosa URI:
 ```lua
 function URI:address(address)
     scheme, host, port = parseAddress(address)
@@ -320,7 +394,7 @@ The following regular expression captures all parts of a valid Pilosa URI and is
 ^(([+a-z]+)://)?([0-9a-z.-]+)?(:([0-9]+))?$
 ```
 
-Unfortunately Lua's regular expressions support is not as powerful and each combination of URI parts should be checked separately. Below are regular expressions which should be checked from top to bottom until a match is found:
+Unfortunately Lua's regular expressions support is not as powerful to capture all groups in that regular expression, so each combination of URI parts should be checked separately. Below are regular expressions which should be checked from top to bottom until a match is found:
 ```lua
 local PATTERN_SCHEME_HOST_PORT = "^([+a-z]+)://([0-9a-z.-]+):([0-9]+)$"
 local PATTERN_SCHEME_HOST = "^([+a-z]+)://([0-9a-z.-]+)$"
@@ -362,7 +436,7 @@ function URI:normalize()
 end
 ```
 
-Pilosa server supports HTTP requests with JSON or [protobuf](https://github.com/google/protobuf) payload for querying, and HTTP requests with JSON payload for other endpoints. It is usually more efficient to encode/decode protobuf payloads but JSON support is more prevalent. Pilosa's official client libraries all use protobuf payloads for querying, but for this client library we will use JSON payloads.
+Pilosa server supports HTTP requests with JSON or [protobuf](https://github.com/google/protobuf) payload for querying, and HTTP requests with JSON payload for other endpoints. It is usually more efficient to encode/decode protobuf payloads but JSON support is more prevalent. Although  all of Pilosa's official client libraries use protobuf payloads for querying,  we will use JSON payloads for this client library.
 
 `Content-Type` and `Accept` are two HTTP headers which tell the Pilosa server the type of the payload for requests and responses respectively. Most of the endpoints of Pilosa server don't require explicitly setting those endpoints and default to `application/json` but we are going to set them anyway in case the default changes in a future release.
 
@@ -409,6 +483,20 @@ function httpRequest(client, method, path, data)
 end
 ```
 
+The `httpRequest` function receives a `PilosaClient` object, and the method, path and optionally the data for a request. It returns a string response. LuaSocket has the concept of sources and sinks. `http.request` function reads from a source and saves the response to the sink in chunks. We build the response by concatenating those chunks.
+
+`getHeaders` function is trivially defined as follows:
+```lua
+function getHeaders(data)
+    return {
+        -- Content Length is the size of the data
+        ["content-length"] = #data,
+        ["content-type"] = "application/json",
+        ["accept"] = "application/json"
+    }
+end
+```
+
 All Pilosa queries require specifying an index, so let's try to create one with default options using `curl`:
 ```
 curl -X POST http://localhost:10101/index/sample-index -H "Content-Type: application/json" -H "Accept: application/json" -d ''
@@ -438,21 +526,50 @@ function PilosaClient:ensureIndex(index)
 end
 ```
 
-`createFrame` and `ensureFrame` methods are defined similarly.
+Frames can have options attached to them, so `createFrame` has to POST those options in the request body: `{"options": { ... }}`. `createFrame` is defined as follows:
+```lua
+function PilosaClient:createFrame(frame)
+    local data = {options = frame.options}
+    local path = string.format("/index/%s/frame/%s", frame.index.name, frame.name)
+    httpRequest(self, "POST", path, json.encode(data))
+end
+```
 
+The most important method of our `PilosaClient` class is `query`, which serializes the ORM query we pass and returns a response. It is defined below:
 ```lua
 local QueryResponse = require "pilosa.response".QueryResponse
 
 function PilosaClient:query(query, options)
-    options = options or {}
+    options = QueryOptions(options)
     local data = query:serialize()
-    local path = string.format("/index/%s/query", query.index.name)
+    local path = string.format("/index/%s/query%s", query.index.name, options:encode())
     local response = httpRequest(self, "POST", path, data)
     return QueryResponse(response)
 end
 ```
 
-#### Response
+The `query` method can optionally take a few query options. The user would pass those query options as a table, and we convert it to a `QueryOptions` object which is defined below:
+```lua
+function QueryOptions:new(options)
+    options = options or {}
+    self.options = {
+        columnAttrs = options.columnAttributes == true,
+        excludeAttrs = options.excludeAttributes == true,
+        excludeBits = options.excludeBits == true
+    }
+end
+```
+
+With the `PilosaClient` class defined, the user can run queries similar to the following:
+```lua
+local query = myFrame:bitmap(10)
+local client = PilosaClient(URI:default())
+local response = client:query(query, {excludeAttributes = true})
+```
+
+The rest of [pilosa/client.lua](https://github.com/pilosa/lua-pilosa/blob/master/pilosa/client.lua) is [here](https://github.com/pilosa/lua-pilosa/blob/master/pilosa/client.lua).
+
+### Response
 
 The response from the Pilosa server for a query request may be in JSON or protobuf, depending on the `Accept` header in the HTTP request. The number of results in the response is the same as the number of PQL statements in the query request. Results in a response encoded in protobuf have the same structure with different values for fields. On the other hand, for JSON responses, the structure of a result depends on the corresponding PQL query.
 
@@ -519,14 +636,19 @@ The constructor of `QueryResponse` receives a string response and decodes it. It
 As we have seen above, a result may contain different fields depending on the corresponding query. `QueryResult` class consolidates those fields in a single data structure. Unset fields have a default value.
 ```lua
 function QueryResult:new(result)
+    -- SetBit and ClearBit returns boolean values. We currently do not store them in the response.
     if result == true then
         result = {}
     else
         result = result or {}
     end
+    -- Queries such as Bitmap, Union, etc. return bitmap results
     self.bitmap = BitmapResult(result)
+    -- Count and Sum queries return the count
     self.count = result.count or 0
+    -- Sum query returns the sum
     self.sum = result.sum or 0
+    -- TopN returns a list of (ID, count) pairs. We call each of them count result item.
     local countItems = {}
     if #result > 0 and result[1].id ~= nil and result[1].count ~= nil then
         for i, item in ipairs(result) do
@@ -535,19 +657,40 @@ function QueryResult:new(result)
     end
     self.countItems = countItems
 end
+```
 
+Queries such as Bitmap, Union, etc. return bitmap results. A bitmap result contains the bits set for the corresponding row or column and the attributes.
+```lua
 function BitmapResult:new(result)
     self.bits = result.bits or {}
     self.attributes = result.attrs or {}
 end
+```
 
+`TopN` queries return a list of (ID, count) pairs. We call each of them a count result item. The `CountResultItem` is defined below:
+```lua
 function CountResultItem:new(id, count)
     self.id = id
     self.count = count
 end
 ```
 
-#### Testing
+Here's how our users would retrieve results from a response:
+```lua
+local query = myFrame:bitmap(10)
+local client = PilosaClient(URI:default())
+local response = client:query(query)
+
+for i, result in ipairs(response.results) do
+    print(string.format("There are %d bits in result %d", #result.bitmap.bits, i))
+end
+
+local bitmapResult = response.result.bitmap
+```
+
+Rest of [pilosa/response.lua](https://github.com/pilosa/lua-pilosa/blob/master/pilosa/response.lua) is [here](https://github.com/pilosa/lua-pilosa/blob/master/pilosa/response.lua).
+
+### Testing
 
 It's a good idea to separate unit tests from integration tests since integration tests depend on a running Pilosa server, and may take longer to complete. Our `Makefile` contains two targets for testing, `make test` runs unit tests and `make test-all` runs both unit and integration tests.
 
