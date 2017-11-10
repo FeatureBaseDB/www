@@ -1,11 +1,11 @@
 +++
-date = "2017-11-03"
-publishdate = "2017-11-03"
+date = "2017-11-10"
+publishdate = "2017-11-10"
 title = "Writing a Pilosa Client Library"
 author = "Yüce Tekol"
 author_twitter = "tklx"
 author_img = "4"
-image = "/img/blog/range-encoded-bitmaps/manatee-skeleton.jpg"
+image = "/img/blog/client-libraries.jpg"
 overlay_color = "blue" # blue, green, or light
 disable_overlay = false
 +++
