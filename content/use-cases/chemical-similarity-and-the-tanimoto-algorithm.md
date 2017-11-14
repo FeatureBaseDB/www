@@ -53,7 +53,7 @@ topn = requests.post("http://127.0.0.1:10101/index/mol/query" , data=query_strin
 
 ## More
 
-For a deeper dive on how to implement Chemical Similarity in Pilosa and how to use the Tanimoto Algorithm check out the links below.
+For a deeper dive on how to implement Chemical Similarity in Pilosa and how to use the Tanimoto Algorithm, check out the links below.
 
 <a href="https://www.ebi.ac.uk/chembl/downloads" class="btn-pilosa btn btn-primary m-2">Data</a>
-<a href="https://www.pilosa.com/docs/examples/#chemical-similarity-search" class="btn-pilosa btn btn-primary m-2">Example</a>
+<a href="https://www.pilosa.com/docs/latest/examples/#chemical-similarity-search" class="btn-pilosa btn btn-primary m-2">Example</a>
