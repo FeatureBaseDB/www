@@ -43,4 +43,4 @@ While both of these interventions are highly disease-specific, their consequence
 
 If you have any questions about how Pilosa can help your business unlock your data store for real-time queries, please feel free to [contact us](https://www.pilosa.com/about/#contact).
 
-Ali is Pilosa’s jack of all trades and resident research nerd. on Twitter at @ay_em_see
+Ali is the resident Jack of all trades at Pilosa. She likes health and tech porbably more than she should. Find her on Twitter at [@ay_em_see](https://twitter.com/ay_em_see?lang=en).
