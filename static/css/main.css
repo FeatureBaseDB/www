@@ -80,6 +80,18 @@
   font-weight: 600;
 }
 
+.lang-pane {
+    display: none;
+}
+.lang-pane-curl {
+    display: block;
+}
+.lang-btn {
+    text-transform: capitalize;
+}
+.lang-btn-active {
+    color: #1DB598;
+}
 
 
 .header-control{
