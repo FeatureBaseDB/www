@@ -47,32 +47,36 @@ One could decide that all destination IP addresses would be in a frame together,
 
 Now that one has a data model, what sorts of queries can we easily (and quickly) answer with Pilosa?
 
+{{< note title="Note" >}}
+Note that for brevity, <code>&lt;srcIP=X.X.X.X&gt;</code> for example represents a bitmap corresponding to a certain source IP address.
+{{< /note >}}
+
 Get the top websites accessed by a given person. 
 
-`TopN(Intersect(Bitmap(srcIP=X.X.X.X), Bitmap(user-agent="Mozilla/5.0 (Windows; rv:40.0) Gecko Firefox/40.1")), frame=hostname)`
+`TopN(Intersect(Bitmap(<srcIP=X.X.X.X>), Bitmap(<user-agent="Mozilla/5.0 (Windows; rv:40.0) Gecko Firefox/40.1">)), frame=hostname)`
 
 Analyze packet sizes for a given time range (could be useful in identifying DDoS attacks).
 `TopN(frame="packet_size::timestampHH")`
 
 Find the top ports/protocols/packet sizes between any two hosts: 
-`TopN(Intersect(Bitmap(srcIP=X.X.X.X), Bitmap(dstIP=X.X.X.X)), frame="ports/protocols/packet sizes")`
+`TopN(Intersect(Bitmap(<srcIP=X.X.X.X>), Bitmap(<dstIP=X.X.X.X>)), frame="ports/protocols/packet sizes")`
 
 How much IPv4 vs IPv6 traffic? (in a given time interval?) 
 `Count(Range(id=IPv4, start=ts1, end=ts2)) vs Count(Range(id=IPv6, start=ts1, end=ts2))`
 
 Who is sending the most DNS traffic? 
-`TopN(Bitmap(id=DNS, frame="app_layer_proto"), frame="srcIP")`
+`TopN(Bitmap(<id=DNS>, frame="app_layer_proto"), frame="srcIP")`
 
 Top DNS servers? 
-`TopN(Bitmap(id=DNS, frame="app_layer_proto"), frame="dstIP")`
+`TopN(Bitmap(<id=DNS>, frame="app_layer_proto"), frame="dstIP")`
      
 These are all just single queries. Interesting things can happen by combining multiple queries? Let’s try to identify web communities, not based on hyperlinks between pages, but by which pages users access together. First, choose a target site and find its top users with something like:
   
-`TopN(Bitmap(id=targetsite.com, frame="hostname"), frame="srcIP")`. 
+`TopN(Bitmap(<id=targetsite.com>, frame="hostname"), frame="srcIP")`.
    
 For each of those IPs, look at the top sites they access:
   
- `TopN(Bitmap(srcIP="x.x.x.x"), frame="hostname::timestampHH")`
+ `TopN(Bitmap(<srcIP="x.x.x.x">), frame="hostname::timestampHH")`
   
 With that information, one can build a bigraph of sites and users and analyze cliques to determine groups of sites that are commonly accessed together.
    

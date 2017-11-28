@@ -93,8 +93,11 @@ Because each data point includes pickup/dropoff times and total distance travell
 
 In order to answer questions about congestion, we needed to first determine what speeds constitute slow traffic. One of the basic queries in Pilosa is the TopN function, and we used that to get a list of all the different average speeds. By performing a count on each we built a histogram of how many rides fall into each speed bucket, and decided from there which buckets deviate enough from the norm to constitute congestion.
 
-Here are a few examples of typical requests in the Pilosa Query Language that ships with the Pilosa Community Edition. For brevity, `<slow speeds>` for example represents a list of bitmaps in the speed frame.
+Here are a few examples of typical requests in the Pilosa Query Language that ships with the Pilosa Community Edition. 
 
+{{< note title="Note" >}}
+Note that for brevity, <code>&lt;slow speeds&gt;</code> for example represents a list of bitmaps in the speed frame.
+{{< /note >}}
 
 1. ```TopN(Union(<slow speeds>), frame="pickup_loc")```
 
