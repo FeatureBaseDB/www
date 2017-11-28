@@ -49,22 +49,22 @@ Now that one has a data model, what sorts of queries can we easily (and quickly)
 
 Get the top websites accessed by a given person. 
 
-`TopN(Intersect(Row(srcIP=X.X.X.X), Row(user-agent="Mozilla/5.0 (Windows; rv:40.0) Gecko Firefox/40.1")), frame=hostname)`
+`TopN(Intersect(Bitmap(srcIP=X.X.X.X), Bitmap(user-agent="Mozilla/5.0 (Windows; rv:40.0) Gecko Firefox/40.1")), frame=hostname)`
 
 Analyze packet sizes for a given time range (could be useful in identifying DDoS attacks).
 `TopN(frame="packet_size::timestampHH")`
 
 Find the top ports/protocols/packet sizes between any two hosts: 
-`TopN(Intersect(Row(srcIP=X.X.X.X), Row(dstIP=X.X.X.X)), frame="ports/protocols/packet sizes")`
+`TopN(Intersect(Bitmap(srcIP=X.X.X.X), Bitmap(dstIP=X.X.X.X)), frame="ports/protocols/packet sizes")`
 
 How much IPv4 vs IPv6 traffic? (in a given time interval?) 
 `Count(Range(id=IPv4, start=ts1, end=ts2)) vs Count(Range(id=IPv6, start=ts1, end=ts2))`
 
 Who is sending the most DNS traffic? 
-`TopN(Row(id=DNS, frame="app_layer_proto"), frame="srcIP")`
+`TopN(Bitmap(id=DNS, frame="app_layer_proto"), frame="srcIP")`
 
 Top DNS servers? 
-`TopN(Row(id=DNS, frame="app_layer_proto"), frame="dstIP")`
+`TopN(Bitmap(id=DNS, frame="app_layer_proto"), frame="dstIP")`
      
 These are all just single queries. Interesting things can happen by combining multiple queries? Let’s try to identify web communities, not based on hyperlinks between pages, but by which pages users access together. First, choose a target site and find its top users with something like:
   
@@ -81,7 +81,7 @@ We provide a sample implementation of this functionality which you can try out o
  
 First, [install Pilosa](/docs/installation/) and the [Pilosa Dev Kit](/docs/pdk/)
    
-Now you can run (on most macs): `pdk net -i en0`. This will do several things - `pdk` will use libpcap to inspect all network traffic on interface `en0`, it will extract all the features of packets discussed in the data model, and start importing them into Pilosa. PDK will also start up a proxy server and store all the information to map Pilosa’s bitmap ids, to what they actually represent. This is very important, because Pilosa only knows about integer ids internally, but we’ll want to make queries like `TopN(Row(id=192.168.1.2, frame=srcip), frame=hostname)` PDK’s proxy server will generate something like `TopN(Row(id=3478245, frame=srcip), frame=hostname)` and send that on to Pilosa. Pilosa will generate a response with a list of bitmap ids which represent the top hostnames with which 192.168.1.2 has communicated. PDK will translate those integer ids into hostname strings and return a list of hostnames back to you.
+Now you can run (on most macs): `pdk net -i en0`. This will do several things - `pdk` will use libpcap to inspect all network traffic on interface `en0`, it will extract all the features of packets discussed in the data model, and start importing them into Pilosa. PDK will also start up a proxy server and store all the information to map Pilosa’s bitmap ids, to what they actually represent. This is very important, because Pilosa only knows about integer ids internally, but we’ll want to make queries like `TopN(Bitmap(id=192.168.1.2, frame=srcip), frame=hostname)` PDK’s proxy server will generate something like `TopN(Bitmap(id=3478245, frame=srcip), frame=hostname)` and send that on to Pilosa. Pilosa will generate a response with a list of bitmap ids which represent the top hostnames with which 192.168.1.2 has communicated. PDK will translate those integer ids into hostname strings and return a list of hostnames back to you.
    
 All that being said, you should query PDK’s proxy server rather than Pilosa directly, and you can use IP addresses and hostnames and so on rather than having to know the integer id for each row.
 
