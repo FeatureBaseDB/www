@@ -96,11 +96,11 @@ In order to answer questions about congestion, we needed to first determine what
 Here are a few examples of typical requests in the Pilosa Query Language that ships with the Pilosa Community Edition. For brevity, `<slow speeds>` for example represents a list of bitmaps in the speed frame.
 
 
-1. ```TopN(Union(<slow speeds>), frame="pickup_loc"```
+1. ```TopN(Union(<slow speeds>), frame="pickup_loc")```
 
     This gives us all the pickup locations with the most slow rides. As with all TopN calls, the results are ordered by count, which means the number of slow rides here.
 
-2. ```TopN(Intersect(Union(<slow speeds>), <pickup location A>)), frame="dropoff_loc")```
+2. ```TopN(Intersect(Union(<slow speeds>), <pickup location A>), frame="dropoff_loc")```
 
     This gives us all the dropoff locations associated with slow rides originating at a specific pickup location, which might be as specific as a city block, or as broad as a borough.
 
