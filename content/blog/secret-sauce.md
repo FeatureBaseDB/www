@@ -89,3 +89,6 @@ about how to use Pilosa, to pull requests fixing spelling mistakes, to feature
 requests. 
 
 _Jaffee is a lead software engineer at Pilosa. When he’s not evangelizing independent indexes, you can find him training in jiu-jitsu, woodworking, or building mechanical keyboards. Follow him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
+
+_Banner photo by Caroline Attwood on Unsplash_
+
