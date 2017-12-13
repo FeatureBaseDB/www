@@ -1,6 +1,6 @@
 +++
-date = "2017-12-14"
-publishdate = "2017-12-14"
+date = "2017-12-12"
+publishdate = "2017-12-12"
 title = "Secret Sauce - How is Pilosa Different"
 author = "Matt Jaffee"
 author_twitter = "mattjaffee"
@@ -11,15 +11,18 @@ disable_overlay = false
 +++
 
 By now, most of us have heard a thousand and one pitches for data products - and
-if you're anything like me, you've given a few yourself. There's no real
-shortcut to comparing these things - their features and abilities are the
-summation of hundreds of tiny technical decisions and tradeoffs on a wide and
-deep tree. Many of them are nearly identical except in a few details that may
-only be important to very specific use cases - for example two competing SQL
-databases. Others may inhabit completely separate branches of the tree - finding
-common ground only at the root such as a document store and a graph database.
-Some may have nearly identical APIs, but make wildly different performance
-tradeoffs and so are only appropriate for distinct workloads.
+if you're anything like me, you've given a few yourself. 
+
+<!--more--> 
+
+There's no real shortcut to comparing these things - their features
+and abilities are the summation of hundreds of tiny technical decisions and
+tradeoffs on a wide and deep tree. Many of them are nearly identical except in a
+few details that may only be important to very specific use cases - for example
+two competing SQL databases. Others may inhabit completely separate branches of
+the tree - finding common ground only at the root such as a document store and a
+graph database. Some may have nearly identical APIs, but make wildly different
+performance tradeoffs and so are only appropriate for distinct workloads.
 
 Pilosa is not exempt from this sort of analysis, and is the product of just as
 many careful technical decisions and engineering tradeoffs as anything else.
