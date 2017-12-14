@@ -15,14 +15,15 @@ if you're anything like me, you've given a few yourself.
 
 <!--more--> 
 
-There's no real shortcut to comparing these things, their features
-and abilities are the summation of hundreds of tiny technical decisions and
-tradeoffs on a wide, deep tree. Many of them are nearly identical except in a
-few details that may only be important to very specific use cases, for example
-two competing SQL databases. Others may inhabit completely separate branches of
-the tree, finding common ground only at the root such as a document store and a
-graph database. Some may have nearly identical APIs, but make wildly different
-performance tradeoffs and so are only appropriate for distinct workloads.
+Just wading through this surplus of information software is a challenging task;
+the features and abilities of each product are the summation of hundreds of tiny
+technical decisions and tradeoffs on a wide, deep tree. Many of them are nearly
+identical except in a few details that may only be important to very specific
+use cases, for example two competing SQL databases. Others may inhabit
+completely separate branches of the tree, finding common ground only at the root
+such as a document store and a graph database. Some may have nearly identical
+APIs, but make wildly different performance tradeoffs and so are only
+appropriate for distinct workloads.
 
 Pilosa is not exempt from this sort of analysis, and it is the product of just
 as many careful technical decisions and engineering tradeoffs as anything else.
