@@ -74,10 +74,21 @@ Big data tech is pretty bad at indexing. There are a lot of materialized views,
 denormalized tables, precomputed queries, etc. Most of these are fancy terms for
 silly hacks which boil down to us having forgotten what indexes really are, and
 what they're for. Have you ever written the same data to two different cassandra
-tables which just had different primary keys? Don't. An index should save you
-from doing things like that. Have you ever run an overnight batch job to update
-a separate set of tables which exists to serve certain kinds of queries? Please
-stop. A first class index should make this a non-issue.
+tables which just had different primary keys? Don't. Have you ever run an
+overnight batch job to update a separate set of tables which exists to serve
+certain kinds of queries? Please stop. A pure index should handle these usage
+patterns without storing a complete copy of the data.
+
+We posit that databases are really trying to do two jobs which are completely at
+odds with one another. One the one hand, a database should store your data
+securely and durably - it should be persisted to disk, and preferably replicated
+in multiple physical locations. On the other hand, today's databases are also in
+charge of making the data they store available and queryable in every way
+imaginable as quickly as possible. Consistency and availability are typically
+difficult^(footnote: impossible) to achieve simultaneously, and high speed and
+multi-region durability are similarly antagonistic. Our vision is to separate
+these responsibilities into two pieces of software each of which can do its own
+job well.
 
 We're really just starting this journey, and there are still a lot of unanswered
 questions. It isn't always clear how to model one's data in Pilosa, or how to
