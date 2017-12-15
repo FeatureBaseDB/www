@@ -40,11 +40,12 @@ comes to mind) which claim to be indexes, and in some sense they are, but there
 is a key difference. Products like Elasticsearch store all the data you put into
 them - a complete copy, with all the memory, storage, and processing power that
 entails. The original notion of an index, however, comes from SQL and pre-SQL
-mainframe databases, where an index is an auxiliary datastructure which is
-created and maintained alongside the original data for the purpose of improving
-query performance. The crucial difference is that this data structure doesn't
-replicate the original dataset, it just contains pointers to it, and because of
-that it's much smaller and more manageable than a full copy of the data.
+mainframe databases. In these systems, an index is an auxiliary datastructure
+which is created and maintained alongside the original data for the purpose of
+improving query performance. The crucial difference is that this data structure
+doesn't replicate the original dataset, it just contains pointers to it, and
+because of that it's much smaller and more manageable than a full copy of the
+data.
 
 Pilosa's functionality is analagous to this stricter definition of an index, but
 instead of maintaining the data structure in memory, or on disk alongside the
