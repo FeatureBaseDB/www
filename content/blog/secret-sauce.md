@@ -84,11 +84,10 @@ odds with one another. One the one hand, a database should store your data
 securely and durably - it should be persisted to disk, and preferably replicated
 in multiple physical locations. On the other hand, today's databases are also in
 charge of making the data they store available and queryable in every way
-imaginable as quickly as possible. Consistency and availability are typically
-difficult^(footnote: impossible) to achieve simultaneously, and high speed and
-multi-region durability are similarly antagonistic. Our vision is to separate
-these responsibilities into two pieces of software each of which can do its own
-job well.
+imaginable as quickly as possible. These goals are difficult, and in some cases
+impossible to realize simultaneously. Our vision is to separate these
+responsibilities into two pieces of software each of which can do its own job
+well.
 
 We're really just starting this journey, and there are still a lot of unanswered
 questions. It isn't always clear how to model one's data in Pilosa, or how to
@@ -102,7 +101,7 @@ permissive open source licenses, and we welcome any interaction - from questions
 about how to use Pilosa, to pull requests fixing spelling mistakes, to feature
 requests.
 
-_Jaffee is a lead software engineer at Pilosa. When he’s not evangelizing independent indexes, you can find him training in jiu-jitsu, woodworking, or building mechanical keyboards. Follow him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
+_Jaffee is a lead software engineer at Pilosa. When he’s not evangelizing independent indexes, he enjoys jiu-jitsu, building mechanical keyboards, and spending time with family. Follow him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
 
 _Banner photo by Caroline Attwood on Unsplash_
 
