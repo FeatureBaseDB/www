@@ -81,13 +81,13 @@ certain kinds of queries? Please stop. A pure index should handle these usage
 patterns without storing a complete copy of the data.
 
 We posit that databases are really trying to do two jobs which are completely at
-odds with one another. One the one hand, a database should store your data
-securely and durably - it should be persisted to disk, and preferably replicated
-in multiple physical locations. On the other hand, today's databases are also in
+odds with one another. On one hand, a database should store your data securely
+and durably - it should be persisted to disk, and preferably replicated in
+multiple physical locations. On the other hand, today's databases are also in
 charge of making the data they store available and queryable in every way
 imaginable as quickly as possible. These goals are difficult, and in some cases
 impossible to realize simultaneously. Our vision is to separate these
-responsibilities into two pieces of software each of which can do its own job
+responsibilities into separate tools, so that each can do one job, and do it
 well.
 
 We're really just starting this journey, and there are still a lot of unanswered
