@@ -5,6 +5,7 @@ title = "Secret Sauce - How is Pilosa Different?"
 author = "Matt Jaffee"
 author_twitter = "mattjaffee"
 author_img = "2"
+featured = "true"
 image = "/img/blog/secret-sauce/banner.jpg"
 overlay_color = "green"
 disable_overlay = false
