@@ -6,7 +6,6 @@ author = "Travis Turner"
 author_twitter = "travislturner"
 author_img = "5"
 image = "/img/blog/range-encoded-bitmaps/manatee-skeleton.jpg"
-featured = "true"
 overlay_color = "green" # blue, green, or light
 disable_overlay = false
 +++
