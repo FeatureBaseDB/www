@@ -477,3 +477,30 @@ footer a:hover{
 .get-more-text{
   color: #3c5f8d;
 }
+
+.home-whitepaper-icon {
+    width:200px
+}
+
+.home-whitepaper {
+  margin: 50px 50px;
+}
+
+.the-pilosa {
+    font-size: 30px;
+    font-family: Montserrat;
+    font-weight: 600;
+    color: #102445;
+    margin-left: 20px;
+}
+
+.technical-white-paper {
+    font-size: 80px;
+    color: #102445;
+    margin-top: -30px;
+    margin-left: 20px;
+}
+
+.btn-download-white-paper {
+    margin-left: 20px;
+}
