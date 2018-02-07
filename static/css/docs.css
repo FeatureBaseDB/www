@@ -121,3 +121,13 @@
     color: #7B7B7B;
     width: 0;
 }
+
+pre.request {
+    margin-bottom: 0px;
+}
+pre.response {
+    background-color: #eee;
+    margin-top: 0px;
+    border-top: 0px;
+    font-size: 12px;
+}

@@ -82,6 +82,8 @@ docsearch({
     algoliaOptions: { 'facetFilters': ["version:{{ $version }}"] },
     debug: false // Set debug to true if you want to inspect the dropdown
 });
+$('pre:has(code.language-request)').addClass('request')
+$('pre:has(code.language-response)').addClass('response')
 </script>
 {{ end }}
 </body>
