@@ -9,7 +9,7 @@ ignoreFiles = []
 [params]
     version_major = "0"
     version_minor = "8"
-    version_patch = "7"
+    version_patch = "8"
     company = "Pilosa"
     logo = "logo.svg"
     logo_png = "logo.png"
