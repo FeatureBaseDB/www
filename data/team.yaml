@@ -1,13 +1,7 @@
 team:
-  - name: Michael Baird
-    title: Engineering
-    img: baird.png
   - name: Alan Bernstein
     title: Engineering
     img: bernstein.png
-  - name: Alexia Cooley
-    title: Operations
-    img: cooley.png
   - name: Todd Gruben
     title: Engineering
     img: gruben.png
@@ -17,9 +11,6 @@ team:
   - name: Zach Landry
     title: Operations
     img: landry.png
-  - name: Troy Lanier
-    title: Engineering
-    img: lanier.png
   - name: HO Maycotte
     title: Operations
     img: maycotte.png
@@ -35,6 +26,3 @@ team:
   - name: Travis Turner
     title: Engineering
     img: turner.png
-  - name: Linh Vo
-    title: Engineering
-    img: vo.png
