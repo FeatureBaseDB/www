@@ -29,13 +29,17 @@ Datastore integration is close to our long-term goal. We want Pilosa to be a dro
 
 ## Enter Cosmos DB
 
-Cosmos DB is one of the newer offerings on Microsoft's Azure cloud computing platform. As a multi-model database, it provides access to your data through document, graph and table models, among others. [elaborate on why this is good]
+Cosmos DB is one of the newer offerings on Microsoft's Azure cloud computing platform. As a multi-model database, it provides access to your data through document, graph and table models, among others. 
+This means that while a user could be interacting with CosmosDB via a SQL, MongoDB, or Cassandra API, we can read the changefeed and always see changes in the same format for indexing.
+
 
 One of the things I like about Cosmos DB is its consistency model. Although tunable consistency is not new, the ability to select, per read, between [five consistency levels](https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels#consistency-levels) is an interesting and novel feature. As believers in [the index as a first-class citizen](https://www.pilosa.com/blog/oscon-2017-recap-the-index-as-a-first-class-citizen/), we're happy to see consistency being handled in a more fine-grained way: consistency and availability are both crucial, broadly speaking, but it can make a lot of sense to forfeit consistency for speed, in the context of an index. [compare with cassandra consistency?]
 
-[elaborate on cosmos indexing]
+One of the big draws of Cosmos is that it automatically indexes everything by default. Since Pilosa is an index, you might think there isn't much room for it here, and while we initially wondered that, experiments seem to suggest otherwise. Cosmos' approach to indexing is described in some detail in this [paper](http://www.vldb.org/pvldb/vol8/p1668-shukla.pdf), and it turns out that to be quite complementary to Pilosa's.
 
-All of this makes Cosmos DB and Pilosa a natural fit for each other. Pilosa needs a consistent underlying data store, and the tighter the integration, the better. Cosmos DB benefits by enabling the fastest possible access to your data via the Pilosa API or, looking ahead, an addition to the indexing system. After a bit of exploration, the idea of connecting Pilosa to Cosmos DB via a trigger function looked like a good route: easy to prototype, but powerful enough to show what Pilosa and Cosmos DB can do together. 
+All of this makes Cosmos DB and Pilosa a natural fit for each other. Pilosa needs a consistent underlying data store and support for multiple APIs. Cosmos DB benefits by exposing Pilosa to enable super low latency queries for high cardinality segmentation and other query types at which Pilosa excels. CosmosDB users would benefit in this case by reducing their Cosmos Request Unit usage for queries which can be intensive and only performing simple document fetches which may fall under Cosmos DB's impressive SLAs. Later on, we believe Pilosa could be incorporated more directly into Cosmos DB's indexing system to provide enhanced performance in a way which is completely transparent to the end user.
+
+In order to validate our theories about Cosmos DB and Pilosa, we used an Azure function App to read the CosmosDB changelog and post that to the PDK using it's automated indexing functionality to get the data indexed in Pilosa. Read on for the gory details and some performance comparisons!
 
 ## Pilosa + Cosmos DB
 
