@@ -23,17 +23,17 @@ At Pilosa, we're excited about finding new applications of the distributed bitma
 
 Briefly, the client-integrated approach is an ORM designed to transparently handle both storing data in the canonical store, and indexing it with Pilosa. The datastore-integrated approach is a relatively intrusive modification to an existing database, augmenting the database's existing internal indexing system. The change feed approach simply listens for updates via an existing hook.
 
-Each of these approaches has advantages in different dimensions: how easy is it to use, as an application developer? How well does it guarantee some level of consistency between the canonical store and Pilosa? How much of our development time will it take?
+Each of these approaches has advantages in different dimensions: how easy is it to use? How well does it guarantee some level of consistency between the canonical store and Pilosa? How much of our development time will it take?
 
-Datastore integration is close to our long-term goal. We want Pilosa to be a drop-in tool to enable fast access to any data, and that means minimal setup and configuration. It's also a significant undertaking, especially considering that the work might be largely specific to the database system we're connecting to. The change feed approach is a good intermediate step in that direction - it is a way to reduce, or at least standardize, setup and configuration, providing a consistent process to connect Pilosa with a commonly used database system.
+Datastore integration is close to our long-term goal. We want Pilosa to be a drop-in tool to enable fast access to any data, and that means minimal setup and configuration. It's also a significant undertaking, especially considering that the work might be largely specific to the database system we're connecting to. The change feed approach is a good intermediate step in that direction — it is a way to reduce, or at least standardize, setup and configuration, providing a consistent process to connect Pilosa with a commonly used database system.
 
 ## Enter Cosmos DB
 
-Cosmos DB is one of the newer offerings on Microsoft's Azure cloud computing platform. As a multi-model database, it provides access to your data through document, graph and table models, among others. 
+Cosmos DB is one of the newer offerings on Microsoft's Azure cloud computing platform. As a multi-model database, it provides access to your data through document, graph and table models, among others.
+
 This means that while a user could be interacting with CosmosDB via a SQL, MongoDB, or Cassandra API, we can read the changefeed and always see changes in the same format for indexing.
 
-
-One of the things I like about Cosmos DB is its consistency model. Although tunable consistency is not new, the ability to select, per read, between [five consistency levels](https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels#consistency-levels) is an interesting and novel feature. As believers in [the index as a first-class citizen](https://www.pilosa.com/blog/oscon-2017-recap-the-index-as-a-first-class-citizen/), we're happy to see consistency being handled in a more fine-grained way: consistency and availability are both crucial, broadly speaking, but it can make a lot of sense to forfeit consistency for speed, in the context of an index. [compare with cassandra consistency?]
+One of the things I like about Cosmos DB is its consistency model. Although tunable consistency is not new, the ability to select between [five consistency levels](https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels#consistency-levels) while maintaining SLA guarantees is an interesting and novel feature. As believers in [the index as a first-class citizen](https://www.pilosa.com/blog/oscon-2017-recap-the-index-as-a-first-class-citizen/), we're happy to see consistency being handled in a more fine-grained way: consistency and availability are both crucial, broadly speaking, but it can make a lot of sense to forfeit consistency for speed in the context of an index.
 
 One of the big draws of Cosmos is that it automatically indexes everything by default. Since Pilosa is an index, you might think there isn't much room for it here, and while we initially wondered that, experiments seem to suggest otherwise. Cosmos' approach to indexing is described in some detail in this [paper](http://www.vldb.org/pvldb/vol8/p1668-shukla.pdf), and it turns out that to be quite complementary to Pilosa's.
 
