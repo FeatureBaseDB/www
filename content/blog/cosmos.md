@@ -52,6 +52,4 @@ In addition to the data store (Cosmos DB) and the index (Pilosa), the system inc
 
 That all sounds a little overwhelming, so I want to add some context. What does this system look like to a Cosmos DB user? The database and the data generator represent existing components, and the function app is trivial; you can copy the source from our [instructions](https://github.com/pilosa/cosmosa#create-a-function-app-to-process-the-cosmosdb-change-feed). The Pilosa and PDK servers are the new components that need to be set up separately, at least for now.
 
-What do we get for this? All the raw speed of Pilosa, and all the flexibility of Cosmos DB, woven together into one supercharged system!
-
-[comparison numbers]
+What do we get for this? All the raw speed of Pilosa, and all the flexibility of Cosmos DB, woven together into one supercharged system! As an example, the "intersect 3 count" query from our example shows a factor of 10+ speedup with Pilosa. Although this number is highly dependent on the document structure, the query structure, and the collection size, it illustrates the advantage of Pilosa for real-time queries.
