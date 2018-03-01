@@ -2,7 +2,7 @@
 date = "2018-02-22"
 publishdate = "2018-02-22"
 title = "Pilosa and Azure Cosmos DB: a Match Made in the Heavens"
-author = "Alan Bernstein"
+author = "Alan Bernstein and Matt Jaffee"
 author_twitter = "gsnark"
 author_img = "2"
 image = "/img/blog/cosmos/banner.jpg"
@@ -77,6 +77,42 @@ In addition to the data store (Azure Cosmos DB) and the index (Pilosa), the syst
 
 That all sounds a little overwhelming, so I want to add some context. What does this system look like to a Azure Cosmos DB user? The database and the data generator represent existing components, and the function app is trivial; you can copy the source from our [instructions](https://github.com/pilosa/cosmosa#create-a-function-app-to-process-the-cosmosdb-change-feed). The Pilosa and PDK servers are the new components that need to be set up separately, at least for now.
 
-What do we get for this? All the raw speed of Pilosa, and all the flexibility of Azure Cosmos DB, woven together into one supercharged system! As an example, the "intersect 3 count" query from our example shows a factor of 10+ speedup with Pilosa. Although this number is highly dependent on the document structure, the query structure, and the collection size, it illustrates the advantage of Pilosa for real-time queries.
+What do we get for this? All the raw speed of Pilosa, and all the flexibility of Azure Cosmos DB, woven together into one supercharged system! 
 
-TODO more perf comparison.
+Here are some timed queries into Cosmos:
+
+| Query                                | CosmosDB      |
+| -------------                        | ------------- |
+| Count All Records                    | 80ms          |
+| First Record                         | 32ms          |
+| First Record with 3 particular tiles | 124ms         |
+| Count with tile "p1"                 | 277ms         |
+| Count with tile "bx"                 | 279ms         |
+| Count with tile "jt"                 | 527ms         |
+| Count with tile "wy"                 | 808ms         |
+| Count with tile "e8"                 | 741ms         |
+| Count records with p1,jt,wy          | 806ms         |
+
+These have 5 second sleeps in between them as that seemed to make the performance better. The slower Count queries could probably have benfited from longer breaks between queries. This may have something to do with Cosmos' cost/performance structure and the number of "RUs" we had.
+
+And here are the Pilosa queries:
+| Query                                | Pilosa        |
+| -------------                        | ------------- |
+| Top 20 tiles                         | 20ms          |
+| Count with tile "p1"                 | 9ms           |
+| Count with tile "bx"                 | 7ms           |
+| Count with tile "jt"                 | 8ms           |
+| Count with tile "wy"                 | 8ms           |
+| Count with tile "e8"                 | 11ms          |
+| Count records with p1,jt,wy          | 8ms           |
+
+Note that this isn't exactly the same set as we ran against Cosmos. This whole
+battery executes more or less instantly for what it's worth.
+
+Stay tuned as we dig more into these numbers and figure out how to model filtered TopN queries in CosmosDB!
+
+_Alan is a software engineer at Pilosa. When he’s not mapping the universe, you can find him playing with laser cutters, building fidget spinners for his dog, or practicing his sick photography skills. Find him on Twitter [@gsnark](https://twitter.com/gsnark)._
+
+_Jaffee is a lead software engineer at Pilosa. When he’s not evangelizing independent indexes, he enjoys jiu-jitsu, building mechanical keyboards, and spending time with family. Follow him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
+
+
