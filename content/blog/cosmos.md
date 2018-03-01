@@ -71,7 +71,7 @@ In order to validate our theories about Azure Cosmos DB and Pilosa, we used an A
 
 ### Pilosa + Azure Cosmos DB
 
-We've documented our approach [here](https://github.com/pilosa/cosmosa), so try it out yourself! We did our best to include every detail in those instructions - for newcomers to Go or Cosmos DB, but please feel free to open an issue in that repository or send us a pull reqest! We'll just summarize here.
+We've documented our approach [here](https://github.com/pilosa/cosmosa), so try it out yourself! We did our best to include every detail in those instructions - for newcomers to Go or Cosmos DB, but please feel free to open an issue in that repository or send us a pull request! We'll just summarize here.
 
 ![Azure Cosmos DB integration diagram](/img/blog/cosmos/cosmos-integration-diagram.png)
 *Crude Azure Cosmos DB integration diagram*
