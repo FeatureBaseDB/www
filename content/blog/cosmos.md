@@ -4,6 +4,7 @@ publishdate = "2018-02-22"
 title = "Pilosa and Azure Cosmos DB: a Match Made in the Heavens"
 author = "Alan Bernstein and Matt Jaffee"
 author_twitter = "gsnark"
+featured = "true"
 author_img = "2"
 image = "/img/blog/cosmos/banner.jpg"
 overlay_color = "light" # blue, green, or light
