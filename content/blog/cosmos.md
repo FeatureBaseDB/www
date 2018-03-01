@@ -1,12 +1,12 @@
 +++
 date = "2018-02-22"
 publishdate = "2018-02-22"
-title = "Pilosa and Azure Cosmos DB: a Match Made in the Heavens"
+title = "Supercharge Azure Cosmos DB with Pilosa"
 author = "Alan Bernstein and Matt Jaffee"
 author_twitter = "gsnark"
 featured = "true"
 author_img = "2"
-image = "/img/blog/cosmos/banner.jpg"
+image = "/img/blog/cosmos/banner2.jpg"
 overlay_color = "light" # blue, green, or light
 +++
 
@@ -58,6 +58,8 @@ Azure Cosmos DB is one of the newer offerings on Microsoft's Azure cloud computi
 This means that while a user could be interacting with Azure Cosmos DB via a SQL, MongoDB, or Cassandra API, we can read the change feed and always see changes in the same format for indexing.
 
 One of the things we like about Azure Cosmos DB is its consistency model. Although tunable consistency is not new, the ability to select between [five consistency levels](https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels#consistency-levels) while maintaining SLA guarantees is an interesting and novel feature. As believers in [the index as a first-class citizen](https://www.pilosa.com/blog/oscon-2017-recap-the-index-as-a-first-class-citizen/), we're happy to see consistency being handled in a more fine-grained way: consistency and availability are both crucial, broadly speaking, but it can make a lot of sense to forfeit strong consistency for performance in the context of an index.
+
+![Pilosa loves cosmos](/img/blog/cosmos/banner.jpg)
 
 One of the big draws of Cosmos is that it automatically indexes everything by default. Since Pilosa is an index, you might think there isn't much room for it here, and while we initially wondered that, experiments seem to suggest otherwise. Cosmos' approach to indexing is described in some detail in this [paper](http://www.vldb.org/pvldb/vol8/p1668-shukla.pdf), which turns out to be quite complementary to Pilosa's approach.
 
