@@ -71,14 +71,14 @@ In order to validate our theories about Azure Cosmos DB and Pilosa, we used an A
 
 ### Pilosa + Azure Cosmos DB
 
-With that goal in mind, the rest is just details. We've documented our approach [here](https://github.com/pilosa/cosmosa), so try it out yourself! We did our best to include every detail in those instructions - for newcomers to Go or Cosmos - so I'll summarize here.
+We've documented our approach [here](https://github.com/pilosa/cosmosa), so try it out yourself! We did our best to include every detail in those instructions - for newcomers to Go or Cosmos DB, but please feel free to open an issue in that repository or send us a pull reqest! We'll just summarize here.
 
 ![Azure Cosmos DB integration diagram](/img/blog/cosmos/cosmos-integration-diagram.png)
 *Crude Azure Cosmos DB integration diagram*
 
-In addition to the data store (Azure Cosmos DB) and the index (Pilosa), the system includes a couple of other components. Adapted from one of the Azure Cosmos DB [samples](https://github.com/Azure-Samples/azure-cosmos-db-mongodb-golang-getting-started), the [cosmosla](https://github.com/jaffee/cosmosla) tool handles both data generation and Azure Cosmos DB querying via the Mongo API. The [Pilosa Dev Kit](https://github.com/pilosa/pdk) has a new `http` subcommand, which listens for arbitrary JSON data to index in Pilosa; this plays nicely with the change feed from the Azure Cosmos DB function app, which connects directly to this PDK listener.
+In addition to the data store (Azure Cosmos DB) and the index (Pilosa), the system includes a couple of other components. Adapted from one of the Azure Cosmos DB [samples](https://github.com/Azure-Samples/azure-cosmos-db-mongodb-golang-getting-started), the [cosmosa](https://github.com/pilosa/cosmosa) tool handles both data generation and Azure Cosmos DB querying via the Mongo API. The [Pilosa Dev Kit](https://github.com/pilosa/pdk) has a new `http` subcommand, which listens for arbitrary JSON data to index in Pilosa; this plays nicely with the change feed from the Azure Cosmos DB function app, which connects directly to this PDK listener.
 
-That all sounds a little overwhelming, so I want to add some context. What does this system look like to an Azure Cosmos DB user? The database and the data generator represent existing components, and the function app is trivial; you can copy the source from our [instructions](https://github.com/pilosa/cosmosa#create-a-function-app-to-process-the-cosmosdb-change-feed). The Pilosa and PDK servers are the new components that need to be set up separately, at least for now.
+That all sounds a little overwhelming, so I want to add some context. What does this system look like to an Azure Cosmos DB user? The database and the data generator represent existing components, and the Function App is trivial; you can copy the source from our [instructions](https://github.com/pilosa/cosmosa#create-a-function-app-to-process-the-cosmosdb-change-feed). The Pilosa and PDK servers are the new components that need to be set up separately, at least for now.
 
 What do we get for this? All the raw speed of Pilosa, and all the flexibility of Azure Cosmos DB, woven together into one supercharged system! 
 
@@ -96,7 +96,8 @@ Here are some timed queries into Cosmos:
 | Count with tile "e8"                 | 741ms         |
 | Count records with p1,jt,wy          | 806ms         |
 
-These have 5 second sleeps in between them as that seemed to make the performance better. The slower Count queries could probably have benfited from longer breaks between queries. This may have something to do with Cosmos' cost/performance structure and the number of "RUs" we had.
+These have 5 second sleeps in between them as that seemed to make the performance better. The slower Count queries (greater than 500ms) could probably have benefited from longer breaks between queries. 
+This may have something to do with Cosmos' cost/performance structure and the number of "RUs" we had available.
 
 And here are the Pilosa queries:
 
@@ -110,7 +111,7 @@ And here are the Pilosa queries:
 | Count with tile "e8"                 | 11ms          |
 | Count records with p1,jt,wy          | 8ms           |
 
-This whole battery executes more or less instantly for what it's worth.
+This whole battery executes more or less instantly for what it's worth. As you can see, Pilosa is 30-60x faster than Azure CosmosDB for these queries on this data.
 
 Stay tuned as we dig more into these numbers and figure out how to model filtered TopN queries in CosmosDB!
 
