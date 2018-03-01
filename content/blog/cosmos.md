@@ -32,7 +32,7 @@ possible use of Pilosa. This requires supporting multiple different database
 APIs, but is at least programming language agnostic.
 
 The change feed approach simply listens for updates via an existing hook. 
-Many databases have this kind of functionality, and Pilosa already has some [tooling](github.com/pilosa/pdk) 
+Many databases have this kind of functionality, and Pilosa already has some [tooling](https://github.com/pilosa/pdk) 
 for indexing arbitrary data. 
 While this option doesn't make reads any easier, 
 it is a fairly straightforward way to start indexing in Pilosa without making 
