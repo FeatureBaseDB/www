@@ -434,7 +434,7 @@ if we used some distribution based on real-world data?
 Another great question, for another post. There are quite a few variables to consider
 here: the dataset, the mapping used to index it, and the order data is imported into
 Pilosa, among others. Perhaps most importantly, I've left out any discussion of query
-speed, which is another area RLE shines. I started looking at the [Taxi dataset](use-cases/taming-transportation-data/),
+speed, which is another area RLE shines. I started looking at the [Taxi dataset](/use-cases/taming-transportation-data/),
 where I noticed a number of effects, with a strong dependence on the frame (and the
 structure of the data contained within). I do have a brief summary of some benchmarks,
 which demonstrate the value of adding RLE:
