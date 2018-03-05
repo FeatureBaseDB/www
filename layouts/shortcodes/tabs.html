@@ -1,0 +1,6 @@
+{{ range $i, $lang := .Params }}
+<div class="btn-pilosa btn btn-primary m-2 lang-btn lang-btn-{{ $lang }} {{ if eq $i 0 }}lang-btn-active{{ end }}" onclick="showTabs('{{ $lang }}')">{{ $lang }}</div>
+{{ end }}
+<div class="lang-panes-container">
+    {{ .Inner }}
+</div>

@@ -48,7 +48,26 @@
     &noscript=1"/>
     </noscript>
     <!-- End Facebook Pixel Code -->
-
+    <script type="text/javascript">
+     function showTabs(lang) {
+         els = document.getElementsByClassName("lang-pane")
+         for (var i = 0; i < els.length; i++) {
+             els[i].style.display = "none";
+         }
+         els = document.getElementsByClassName("lang-pane-" + lang)
+         for (var i = 0; i < els.length; i++) {
+             els[i].style.display = "block";
+         }
+         els = document.getElementsByClassName("lang-btn")
+         for (var i = 0; i < els.length; i++) {
+             els[i].classList.remove("lang-btn-active");
+         }
+         els = document.getElementsByClassName("lang-btn-" + lang)
+         for (var i = 0; i < els.length; i++) {
+             els[i].classList.add("lang-btn-active");
+         }
+     }
+    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
 
   {{ template "_internal/google_analytics.html" . }}
