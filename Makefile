@@ -27,7 +27,11 @@ $(DOC_TAG_DIRS):
 	$(eval DOC_TAG := $(@:content/docs/%=%))
 	git -C $(PILOSA_CLONE) --git-dir $(PILOSA_CLONE)/.git checkout $(DOC_TAG)
 	mkdir -p content/docs
+	# add last-updated times per file
+	cd $(PILOSA_CLONE)/docs && git checkout $(DOC_TAG); for f in *.md; do UPDATED="$$(git log -1 --format='%ai' -- $$f)" ; CMD="/title = /a updated = '$$UPDATED'" ; echo $$CMD ; gsed -i "$$CMD" $$f;  done
 	cp -r $(PILOSA_CLONE)/docs $@
+	git -C $(PILOSA_CLONE) --git-dir $(PILOSA_CLONE)/.git reset --hard
+
 
 content/docs/latest: content/docs/$(DOC_TAG_LATEST)
 	cp -r content/docs/$(DOC_TAG_LATEST) $@

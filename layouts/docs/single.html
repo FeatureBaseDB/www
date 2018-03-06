@@ -50,6 +50,12 @@
           </div>
       {{ end }}
       {{ .Content }}
+
+          <div class="info">
+              [TODO replace version="latest" with actual latest tag]<br/>
+              [TODO filename must match title slug, or be defined in front matter (?)]<br/>
+              Generated from <a href="https://github.com/pilosa/pilosa/tree/{{$version}}/docs/{{.Title | urlize}}.md">markdown</a>. Last updated {{ .Params.updated }}.
+          </div>
     </div>
   </div>
 
