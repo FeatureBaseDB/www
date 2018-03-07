@@ -6,6 +6,8 @@ DOC_TAG_LATEST = v0.8
 PILOSA_CLONE = $(PWD)/pilosa
 DOC_NAMES = $(shell find content/docs/* -type f -exec basename {} \; | sort | uniq)
 DOC_REDIRECTS = $(addprefix content/docs/,$(DOC_NAMES))
+# BSD sed will not work. Use gsed if on MacOS (brew install gnome-sed)
+SED := $(shell sed --version &>/dev/null && echo sed || echo gsed )
 
 production:
 	$(eval HUGO_ENV := production)
@@ -26,11 +28,9 @@ $(PILOSA_CLONE):
 $(DOC_TAG_DIRS):
 	$(eval DOC_TAG := $(@:content/docs/%=%))
 	git -C $(PILOSA_CLONE) --git-dir $(PILOSA_CLONE)/.git checkout $(DOC_TAG)
-	mkdir -p content/docs
+	mkdir -p $@
 	# add last-updated times per file
-	cd $(PILOSA_CLONE)/docs && git checkout $(DOC_TAG); for f in *.md; do UPDATED="$$(git log -1 --date=relative --format='%ad' -- $$f)" ; CMD="/title = /a updated = '$$UPDATED'" ; echo $$CMD ; gsed -i "$$CMD" $$f;  done
-	cp -r $(PILOSA_CLONE)/docs $@
-	git -C $(PILOSA_CLONE) --git-dir $(PILOSA_CLONE)/.git reset --hard
+	for f in `ls -1 $(PILOSA_CLONE)/docs/`; do UPDATED="$$(git --git-dir $(PILOSA_CLONE)/.git log -1 --date=relative --format='%ad' -- docs/$$f)" ; CMD="1a updated = '$$UPDATED'" ; $(SED) "$$CMD" $(PILOSA_CLONE)/docs/$$f > $@/$$f;  done
 
 content/docs/latest: content/docs/$(DOC_TAG_LATEST)
 	cp -r content/docs/$(DOC_TAG_LATEST) $@
