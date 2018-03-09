@@ -87,7 +87,7 @@ With that information, one can build a bigraph of sites and users and analyze cl
    
 ## Try it out!  
 {{< note title="Note" >}}
-Note that the subcommand `net` has been pulled out of the PDK. An updated version can be found at https://github.com/pilosa/picap.
+Note that the subcommand <code>net</code> has been pulled out of the PDK. An updated version can be found <a href="https://github.com/pilosa/picap">here</a>.
 {{< /note >}}
 
 We provide a sample implementation of this functionality which you can try out on your personal machine. It can capture live traffic, or read from a pcap file and load the data into Pilosa.
