@@ -7,7 +7,7 @@ PILOSA_CLONE = $(PWD)/pilosa
 DOC_NAMES = $(shell find content/docs/* -type f -exec basename {} \; | sort | uniq)
 DOC_REDIRECTS = $(addprefix content/docs/,$(DOC_NAMES))
 # BSD sed will not work. Use gsed if on MacOS (brew install gnome-sed)
-SED := $(shell sed --version &>/dev/null && echo sed || echo gsed )
+SED := $(shell sed --version > /dev/null 2>&1 && echo sed || echo gsed )
 
 production:
 	$(eval HUGO_ENV := production)
