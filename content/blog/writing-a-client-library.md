@@ -16,7 +16,7 @@ In this post, we will cover creating a Pilosa client library by going through th
 
 ### Introduction
 
-The Pilosa server has a nice HTTP API which makes interaction with it a breeze. Essentially, a request with one or more [PQL (Pilosa Query Language)](https://www.pilosa.com/docs/latest/query-language/) queries is sent to the Pilosa server and one or more results are returned. A Pilosa client library makes it easier and less error prone to encode requests and decode responses.
+The Pilosa server has a nice HTTP API which makes interaction with it a breeze. Essentially, a request with one or more [PQL (Pilosa Query Language)](/docs/latest/query-language/) queries is sent to the Pilosa server and one or more results are returned. A Pilosa client library makes it easier and less error prone to encode requests and decode responses.
 
 [Lua](https://www.lua.org) is an embeddable scripting language which is very prevalent among game programmers due to its expressiveness, simplicity and ease of interoperability with C and C++. It is also supported by Nginx.
 
@@ -38,7 +38,7 @@ Our primary target is UNIX-like platforms, but our clients run very well on Wind
 
 For the purposes of this post, we will assume you're on a UNIX-like platform such as Linux, MacOS or using [Windows Subsystem for Linux (WSL)](https://msdn.microsoft.com/en-us/commandline/wsl/about). If you are on another platform, adapt the instructions to your particular platform.
 
-Throughout this article, we will need to run queries against the Pilosa server, so let's go ahead and launch a new Pilosa server instance. We provide [precompiled binaries](https://github.com/pilosa/pilosa/releases) for MacOS and Linux (works on WSL too), a [Homebrew package](http://brewformulas.org/Pilosa) for MacOS and a [docker image](https://hub.docker.com/r/pilosa/pilosa/). See our documentation on [acquiring and installing Pilosa](https://www.pilosa.com/docs/latest/installation/) and [starting Pilosa](https://www.pilosa.com/docs/latest/getting-started/#starting-pilosa) if you need help installing Pilosa. We'll assume Pilosa is running on the default address with the default scheme at `http://localhost:10101`.
+Throughout this article, we will need to run queries against the Pilosa server, so let's go ahead and launch a new Pilosa server instance. We provide [precompiled binaries](https://github.com/pilosa/pilosa/releases) for MacOS and Linux (works on WSL too), a [Homebrew package](http://brewformulas.org/Pilosa) for MacOS and a [docker image](https://hub.docker.com/r/pilosa/pilosa/). See our documentation on [acquiring and installing Pilosa](/docs/latest/installation/) and [starting Pilosa](/docs/latest/getting-started/#starting-pilosa) if you need help installing Pilosa. We'll assume Pilosa is running on the default address with the default scheme at `http://localhost:10101`.
 
 While writing the new client library, we will need to run requests against Pilosa and analyze the responses. [curl](https://curl.haxx.se) is probably the most popular tool for calling HTTP endpoints. It is usually preinstalled (or easily installable) in many UNIX-like platforms. Let's confirm that Pilosa is running and curl is installed. In a terminal, execute the following:
 ```

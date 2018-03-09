@@ -19,11 +19,11 @@ Some notable features include:
 
 ### StatsD metrics reporting
 
-This release includes support for metrics reporting via the [StatsD](https://github.com/etsy/statsd) protocol. When enabled, this allows you to monitor several metrics in Pilosa like queries per second, garbage collection stats, and snapshot events. Metrics also include Datadog-compatible tags. Learn more [about our metrics support](/docs/administration/#metrics) and [how to configure it](/docs/configuration/#metric-service) in our documentation.
+This release includes support for metrics reporting via the [StatsD](https://github.com/etsy/statsd) protocol. When enabled, this allows you to monitor several metrics in Pilosa like queries per second, garbage collection stats, and snapshot events. Metrics also include Datadog-compatible tags. Learn more [about our metrics support](/docs/latest/administration/#metrics) and [how to configure it](/docs/latest/configuration/#metric-service) in our documentation.
 
 ### WebUI Enhancements
 
-The WebUI is now more useful with the addition of query input autocompletion, a cluster metadata viewer, and a syntax for frame and index creation. [Learn more about the WebUI](https://www.pilosa.com/docs/webui/) in our documentation.
+The WebUI is now more useful with the addition of query input autocompletion, a cluster metadata viewer, and a syntax for frame and index creation. [Learn more about the WebUI](../../docs/webui/) in our documentation.
 
 ### Docker multi-stage build
 

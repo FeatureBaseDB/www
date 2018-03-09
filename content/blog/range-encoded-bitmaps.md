@@ -169,7 +169,7 @@ The examples that I described in this post showed how we can use Bit-sliced inde
 ![Comparison Chart](/img/blog/range-encoded-bitmaps/example-comparison.png)
 *Comparison Chart*
 
-We added Range-Encoding support to [Release 0.7.0](https://github.com/pilosa/pilosa/releases/tag/v0.7.0). You should also check out the [Range-Encoding Documentation](https://www.pilosa.com/docs/latest/data-model/#bsi-range-encoding).
+We added Range-Encoding support to [Release 0.7.0](https://github.com/pilosa/pilosa/releases/tag/v0.7.0). You should also check out the [Range-Encoding Documentation](/docs/latest/data-model/#bsi-range-encoding).
 
 Try it out, and let us know what you think. We're always looking to make improvements and appreciate any feedback you have!
 

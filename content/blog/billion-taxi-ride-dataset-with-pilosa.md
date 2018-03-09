@@ -38,9 +38,9 @@ solutions so that we could get a feel for how we might fare against them. The
 fit the bill perfectly. There are myriad blog posts analyzing the dataset with
 various technologies; here are just a few:
  
-* __[Analyzing 1.1 Billion NYC Taxi and Uber Trips, with a Vengeance]( http://toddwschneider.com/posts/analyzing-1-1-billion-nyc-taxi-and-uber-trips-with-a-vengeance/)__
-* __[Kx 1.1 billion taxi ride benchmark highlights advantages of kdb+ architecture]( https://kx.com/2017/01/25/kx-1-1-billion-taxi-ride-benchmark-highlights-advantages-kdb-architecture/)__
-* __[Should I Stay or Should I Go? NYC Taxis at the Airport](http://chriswhong.com/open-data/should-i-stay-or-should-i-go-nyc-taxis-at-the-airport/)__
+* __[Analyzing 1.1 Billion NYC Taxi and Uber Trips, with a Vengeance](http://toddwschneider.com/posts/analyzing-1-1-billion-nyc-taxi-and-uber-trips-with-a-vengeance/)__
+* __[Kx 1.1 billion taxi ride benchmark highlights advantages of kdb+ architecture](https://kx.com/2017/01/25/kx-1-1-billion-taxi-ride-benchmark-highlights-advantages-kdb-architecture/)__
+* __[Should I Stay or Should I Go? NYC Taxis at the Airport](https://chriswhong.com/open-data/should-i-stay-or-should-i-go-nyc-taxis-at-the-airport/)__
 
 Of particular usefulness to us are the series of posts by Mark Litwintschik and the [performance comparison](http://tech.marksblogg.com/benchmarks.html) table he compiled. Here is the table for reference:
 
