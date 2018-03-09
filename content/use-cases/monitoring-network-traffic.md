@@ -51,23 +51,28 @@ Now that one has a data model, what sorts of queries can we easily (and quickly)
 Note that for brevity, <code>&lt;srcIP=X.X.X.X&gt;</code> for example represents a bitmap corresponding to a certain source IP address.
 {{< /note >}}
 
-Get the top websites accessed by a given person. 
+Get the top websites accessed by a given person:
 
 `TopN(Intersect(Bitmap(<srcIP=X.X.X.X>), Bitmap(<user-agent="Mozilla/5.0 (Windows; rv:40.0) Gecko Firefox/40.1">)), frame=hostname)`
 
-Analyze packet sizes for a given time range (could be useful in identifying DDoS attacks).
+Analyze packet sizes for a given time range (could be useful in identifying DDoS attacks):
+
 `TopN(frame="packet_size::timestampHH")`
 
 Find the top ports/protocols/packet sizes between any two hosts: 
+
 `TopN(Intersect(Bitmap(<srcIP=X.X.X.X>), Bitmap(<dstIP=X.X.X.X>)), frame="ports/protocols/packet sizes")`
 
-How much IPv4 vs IPv6 traffic? (in a given time interval?) 
+How much IPv4 vs IPv6 traffic? (in a given time interval):
+
 `Count(Range(id=IPv4, start=ts1, end=ts2)) vs Count(Range(id=IPv6, start=ts1, end=ts2))`
 
-Who is sending the most DNS traffic? 
+Who is sending the most DNS traffic?
+
 `TopN(Bitmap(<id=DNS>, frame="app_layer_proto"), frame="srcIP")`
 
 Top DNS servers? 
+
 `TopN(Bitmap(<id=DNS>, frame="app_layer_proto"), frame="dstIP")`
      
 These are all just single queries. Interesting things can happen by combining multiple queries? Let’s try to identify web communities, not based on hyperlinks between pages, but by which pages users access together. First, choose a target site and find its top users with something like:
@@ -81,10 +86,14 @@ For each of those IPs, look at the top sites they access:
 With that information, one can build a bigraph of sites and users and analyze cliques to determine groups of sites that are commonly accessed together.
    
 ## Try it out!  
+{{< note title="Note" >}}
+Note that the subcommand `net` has been pulled out of the PDK. An updated version can be found at https://github.com/pilosa/picap.
+{{< /note >}}
+
 We provide a sample implementation of this functionality which you can try out on your personal machine. It can capture live traffic, or read from a pcap file and load the data into Pilosa.
  
 First, [install Pilosa](/docs/installation/) and the [Pilosa Dev Kit](/docs/pdk/)
-   
+
 Now you can run (on most macs): `pdk net -i en0`. This will do several things - `pdk` will use libpcap to inspect all network traffic on interface `en0`, it will extract all the features of packets discussed in the data model, and start importing them into Pilosa. PDK will also start up a proxy server and store all the information to map Pilosa’s bitmap ids, to what they actually represent. This is very important, because Pilosa only knows about integer ids internally, but we’ll want to make queries like `TopN(Bitmap(id=192.168.1.2, frame=srcip), frame=hostname)` PDK’s proxy server will generate something like `TopN(Bitmap(id=3478245, frame=srcip), frame=hostname)` and send that on to Pilosa. Pilosa will generate a response with a list of bitmap ids which represent the top hostnames with which 192.168.1.2 has communicated. PDK will translate those integer ids into hostname strings and return a list of hostnames back to you.
    
 All that being said, you should query PDK’s proxy server rather than Pilosa directly, and you can use IP addresses and hostnames and so on rather than having to know the integer id for each row.
@@ -99,5 +108,5 @@ Handling the mappings from row id to IP address, hostname, user agent, and other
 In a large network, there will likely be many points of capture all writing to Pilosa. Some form of coordination will be necessary to ensure that column ids are not used by more than one packet and row ids map to one and only one value (such as an IP address or hostname). Although the feasibility of actually storing all the raw pcap data is questionable in large networks, it looks slightly less daunting if each point of capture stores the data locally rather than moving it across the network again. If you know which capture point is responsible for a given range of packet ids, you may still be able to quickly retrieve full pcap data after having narrowed down which packets you are looking for in Pilosa. This capability would undoubtedly be extremely valuable.
 
 
-<a href="https://stratosphereips.org/category/dataset.html" class="btn-pilosa btn btn-primary m-2">Data</a>
+<a href="https://www.stratosphereips.org/datasets-overview/" class="btn-pilosa btn btn-primary m-2">Data</a>
 <a href="https://www.pilosa.com/docs/query-language/" class="btn-pilosa btn btn-primary m-2">PQL</a>
