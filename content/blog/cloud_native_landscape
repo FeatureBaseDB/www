@@ -1,0 +1,31 @@
++++
+date = "2018-03-13"
+publishdate = "2018-03-14"
+tite = "Getting On the Map: Joining the Cloud Native Landscape"
+author = "Sarah King"
+author_twitter = "sarahking_atx"
+featured = "IDK"
+author_img = "TBD"
+image = "TBD"
+overlay_color = "light" # blue, green, or light
++++
+
+More enterprises are being faced with migrating their monolith to the cloud—whether it’s due to challenges around scaling, the inability to easily implement better tools, or simply falling behind on innovation. In an effort to stay relevant and cutting edge, many are quickly migrating to fully distributed systems built around cloud native applications. 
+
+As you start to explore the cloud native space, it’s easy to be left scratching your head trying to conceptualize where this complex web of microservices begins and how those services fit together.
+
+### Cloud Native Trail Map
+
+Into view comes the [Cloud Native Landscape Project](https://github.com/cncf/landscape). Created by the Cloud Native Computing Foundation, it was designed to help organizations navigate the hundreds of projects and product offerings in the cloud-native ecosystem. Along with this landscape, they developed an [awesome interactive tool](https://landscape.cncf.io/) that can be filtered based on a number of different product classifications. 
+
+To get you started, CNCF published an easy-to-digest Cloud Native Trail Map to help you embark on the journey of choosing your cloud native microservices.
+
+![Cloud Native Trail Map](https://raw.githubusercontent.com/cncf/landscape/master/trail_map/CNCF_TrailMap_latest.png)
+
+### Pilosa's Mark on the Map
+
+The [Cloud Native Computing Foundation](https://www.cncf.io/), [The Linux Foundation](http://www.linuxfoundation.org/), [Cloud Foundry](https://www.cloudfoundry.org/), and [Open Container Initiative](https://www.opencontainers.org/) were all established to promote continuous, unpolitical innovation (Ramji, OSCON 2015). These foundations allow for unbridaled collaboration with other open source technologies, which significantly enhances the speed at which projects can be built and deployed.
+
+If you know anything about us, speed is our middle name. It is our mission to make it as easy as Pi to drop Pilosa into any environment. Currently, Pilosa easily drops into a Lambda architecture—or any architecture built around a data pipeline—while other implementations require a bit more legwork to get Pilosa integrated. Those latter cases are the backbone for joining the Cloud Native Landscape Project.
+
+We are incredibly excited to collaborate with partners in the cloud native landscape to make Pilosa easy to integrate. If you’re part of this project and want to explore how we can work together, [drop us a line](info@pilosa.com)!
