@@ -4,9 +4,8 @@ publishdate = "2018-03-14"
 tite = "Getting On the Map: Joining the Cloud Native Landscape"
 author = "Sarah King"
 author_twitter = "sarahking_atx"
-featured = "IDK"
-author_img = "TBD"
-image = "TBD"
+author_img = "4"
+image = "tbd"
 overlay_color = "light" # blue, green, or light
 +++
 
