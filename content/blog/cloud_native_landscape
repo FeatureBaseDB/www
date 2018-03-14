@@ -9,7 +9,9 @@ image = "tbd"
 overlay_color = "light" # blue, green, or light
 +++
 
-In an effort to stay relevant and cutting edge, more enterprises are having to swiftly migrate their monolith to fully distributed systems built around cloud native applications.
+In an effort to stay relevant and cutting edge, more enterprises are having to swiftly migrate their monolith to fully distributed systems built around cloud-native applications.
+
+<!--more-->
 
 As you start to explore the cloud native space, it’s easy to be left scratching your head trying to conceptualize where this complex web of microservices begins and how those services fit together.
 
