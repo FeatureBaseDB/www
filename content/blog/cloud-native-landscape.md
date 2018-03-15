@@ -1,11 +1,11 @@
 +++
 date = "2018-03-13"
 publishdate = "2018-03-14"
-tite = "Getting On the Map: Joining the Cloud Native Landscape"
+title = "Getting On the Map: Joining the Cloud Native Landscape"
 author = "Sarah King"
 author_twitter = "sarahking_atx"
 author_img = "4"
-image = "tbd"
+image = "/img/blog/cloud-native-landscape/banner.jpg"
 overlay_color = "light" # blue, green, or light
 +++
 
@@ -29,4 +29,6 @@ The [Cloud Native Computing Foundation](https://www.cncf.io/), [The Linux Founda
 
 As you know, speed is our middle name. It is our mission to make it as easy as Pi to drop Pilosa into any environment. Currently, Pilosa easily drops into a Lambda architecture—or any architecture built around a data pipeline—with a few lines of code, while other implementations require a bit more legwork to get Pilosa integrated. We are actively working on those latter cases, which is why we are so excited to be a part of the Cloud Native Landscape Project.
 
-We are eager to collaborate with partners in the cloud native landscape to compliment and accelerate projects, while also allowing turn key implementation of Pilosa into any cloud environment. If you’re part of this project and want to explore how we can work together, [drop us a line](info@pilosa.com)!
+We are eager to collaborate with partners in the Cloud Native Landscape to complement and accelerate projects, while also allowing turn key implementation of Pilosa into any cloud environment. If you’re part of this project and want to explore how we can work together, [drop us a line](mailto:info@pilosa.com)!
+
+*Sarah is Pilosa’s Community Manager by day. DJ by night. Cat lady by birth. Find her on Twitter at [@sarahking_atx](https://twitter.com/sarahking_atx?lang=en).*
