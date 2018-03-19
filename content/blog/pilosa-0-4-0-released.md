@@ -23,7 +23,7 @@ This release includes support for metrics reporting via the [StatsD](https://git
 
 ### WebUI Enhancements
 
-The WebUI is now more useful with the addition of query input autocompletion, a cluster metadata viewer, and a syntax for frame and index creation. [Learn more about the WebUI](../../docs/webui/) in our documentation.
+The WebUI is now more useful with the addition of query input autocompletion, a cluster metadata viewer, and a syntax for frame and index creation. [Learn more about the WebUI](/docs/webui/) in our documentation.
 
 ### Docker multi-stage build
 
