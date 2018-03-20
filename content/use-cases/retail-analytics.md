@@ -130,7 +130,7 @@ In the context of the Pilosa data model, the Q1.x queries produce zero-dimension
 
 {{< note title="Note" >}}
 
-Note that Pilosa does support one-dimensional sorted results in many situations via the <code>TopN</code> query - as explored in [the transportation use case](/use-cases/taming-transportation-data/) - but the BSI <code>Sum</code> query is not currently compatible with <code>TopN</code>.
+Note that Pilosa does support one-dimensional sorted results in many situations via the <code>TopN</code> query - as explored in <a href="https://www.pilosa.com/use-cases/taming-transportation-data/">the transportation use case</a> - but the BSI <code>Sum</code> query is not currently compatible with <code>TopN</code>.
 
 {{< /note >}}
 
