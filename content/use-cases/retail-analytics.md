@@ -38,9 +38,9 @@ Note: <i>Pilosa attributes</i> are a distinct concept, not being used here.
 
 For example, each line-order has a customer, with corresponding geographical information: city, nation, and region. These fields contain string data, which we represent in Pilosa by mapping to rowIDs via enumeration. Supplier attributes follow the exact same model. Part (i.e., products in auto-parts store) attributes are product information, but modeled similarly with enumeration.
 
-We also have a few more attributes describing purchase date. As in [the transportation use case](https://www.pilosa.com/use-cases/taming-transportation-data/), we avoided Pilosa's built-in timestamp support. This was in part because of the need to query on the "week of year" value, which is not an explicit timestamp component. We could have used Pilosa's timestamps for year and month; without a large number of time range queries, either approach is appropriate.
+We also have a few more attributes describing purchase date. As in [the transportation use case](/use-cases/taming-transportation-data/), we avoided Pilosa's built-in timestamp support. This was in part because of the need to query on the "week of year" value, which is not an explicit timestamp component. We could have used Pilosa's timestamps for year and month; without a large number of time range queries, either approach is appropriate.
 
-Finally, we have the integer-valued attributes. In the past, higher-cardinality integer attributes had to be stored in Pilosa with one bitmap per value (O(cardinality)), or bucketed (low precision). Now that Pilosa supports storing integers with Bit-Sliced Indexes, there is no longer a tradeoff between precision and storage size. BSI integers use O(log(cardinality)) bitmaps, so there is no practical limit to the cardinality. For more details on BSI, check out [Travis'](https://twitter.com/travislturner?lang=en) [introductory blog post](https://www.pilosa.com/blog/range-encoded-bitmaps/) or our [BSI docs](https://www.pilosa.com/docs/latest/data-model/#bsi-range-encoding).
+Finally, we have the integer-valued attributes. In the past, higher-cardinality integer attributes had to be stored in Pilosa with one bitmap per value (O(cardinality)), or bucketed (low precision). Now that Pilosa supports storing integers with Bit-Sliced Indexes, there is no longer a tradeoff between precision and storage size. BSI integers use O(log(cardinality)) bitmaps, so there is no practical limit to the cardinality. For more details on BSI, check out [Travis'](https://twitter.com/travislturner?lang=en) [introductory blog post](/blog/range-encoded-bitmaps/) or our [BSI docs](/docs/latest/data-model/#bsi-range-encoding).
 
 ### Pilosa Data Model
 
@@ -123,8 +123,8 @@ frame=lo_revenue_computed, field=lo_revenue_computed)
 
 There are two things to note here: 
 
-- `lo_discount >= 1` and similar clauses, the syntax for integer [range queries](https://www.pilosa.com/docs/latest/query-language/#range-bsi) on [BSI](https://www.pilosa.com/docs/latest/data-model/#bsi-range-encoding) fields. 
-- `Sum(<bitmap>, frame=<frame>, field=<field>)`, the syntax for integer [summation](https://www.pilosa.com/docs/latest/query-language/#sum) on BSI fields.
+- `lo_discount >= 1` and similar clauses, the syntax for integer [range queries](/docs/latest/query-language/#range-bsi) on [BSI](/docs/latest/data-model/#bsi-range-encoding) fields. 
+- `Sum(<bitmap>, frame=<frame>, field=<field>)`, the syntax for integer [summation](/docs/latest/query-language/#sum) on BSI fields.
 
 In the context of the Pilosa data model, the Q1.x queries produce zero-dimensional results - a single scalar value. This means they can be computed directly with a single Pilosa query. All other SSB flights involve grouping and ordering, which increases the dimensionality of the results, requiring multiple independent Pilosa queries. This is a qualitative difference that demonstrates Pilosa usage well, so let's look at one more query.
 

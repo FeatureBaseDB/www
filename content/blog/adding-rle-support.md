@@ -56,7 +56,7 @@ And of course, unit tests. Roaring is central to Pilosa, so we test it as thorou
 * Expanding fuzz testing.
 * Examining inverted storage, for "sparse zeroes" data.
 
-The work is ongoing in this [branch](https://github.com/pilosa/pilosa/tree/334-rle-rebased), if you'd like to check out the gritty details. We would also love for you to help by forking [Pilosa](https://github.com/pilosa/pilosa) and trying it out!
+Much of the work can be seen in this [pull request](https://github.com/pilosa/pilosa/pull/661/files), or just in the current [Roaring package](https://github.com/pilosa/pilosa/tree/master/roaring), if you'd like to check out the gritty details. We would also love for you to help by forking [Pilosa](https://github.com/pilosa/pilosa) and trying it out!
 
 ### Departures from the spec
 Just for the sake of posterity:
@@ -69,11 +69,7 @@ Just for the sake of posterity:
   * RLE runs are serialized as [start, last], not [start, length].
 * After the container storage section is an operation log, of unspecified length. This maintains a record of updates to the bitmap, which is processed when a file is read. For more details on this, stay tuned for an upcoming post on Pilosa architecture.
 
-<!--
-link doesnt work yet
-Our file format is described in some detail in the [docs](../../docs/architecture/#roaring-bitmap-storage-format).
-
--->
+Our file format is described in some detail in the [docs](/docs/latest/architecture/#roaring-bitmap-storage-format).
 
 <!--
 ### Benchmarks
