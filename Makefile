@@ -30,7 +30,7 @@ $(DOC_TAG_DIRS):
 	git -C $(PILOSA_CLONE) --git-dir $(PILOSA_CLONE)/.git checkout $(DOC_TAG)
 	mkdir -p $@
 	# add last-updated times per file
-	for f in `ls -1 $(PILOSA_CLONE)/docs/`; do UPDATED="$$(git --git-dir $(PILOSA_CLONE)/.git log -1 --date=relative --format='%ad' -- docs/$$f)" ; CMD="1a updated = '$$UPDATED'" ; $(SED) "$$CMD" $(PILOSA_CLONE)/docs/$$f > $@/$$f;  done
+	for f in `ls -1 $(PILOSA_CLONE)/docs/ | grep -v -i README`; do UPDATED="$$(git --git-dir $(PILOSA_CLONE)/.git log -1 --date=relative --format='%ad' -- docs/$$f)" ; CMD="1a updated = '$$UPDATED'" ; $(SED) "$$CMD" $(PILOSA_CLONE)/docs/$$f > $@/$$f;  done
 
 content/docs/latest: content/docs/$(DOC_TAG_LATEST)
 	cp -r content/docs/$(DOC_TAG_LATEST) $@
