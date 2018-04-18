@@ -1,15 +1,17 @@
- +++
-	date = "2018-04-16"
-	publishdate = "2018-04-18"
-	title = "Pilosa featured on Changelog's GoTime: Episode 76"
-	author = "Sarah King"
-	author_twitter = "sarahking_atx"
-	author_img = "4"
-	image = "/img/blog/pilosa-featured-on-changelogs-gotime/banner.png"
-	overlay_color = "green" # blue, green, or light
++++
+date = "2018-04-16"
+publishdate = "2018-04-18"
+title = "Pilosa Featured On Changelog's GoTime Podcast"
+author = "Sarah King"
+author_twitter = "sarahking_atx"
+author_img = "4"
+image = "/img/blog/pilosa-featured-on-changelogs-gotime-podcast/banner.png"
+overlay_color = "green" # blue, green, or light
 +++
 
 Since we write in Go all day, everyday, we LOVE Changelog’s GoTime Podcast. The show consists of a panel of Go experts and special guests discussing the Go programming language, the Go community, and everything in between.
+
+<!--more-->
 
 Pilosa’s very own Matt Jaffee was featured on GoTime last week to talk all things Go: distributed systems, indexing tools, cool Go projects, and more. Matt is our lead software engineer and a Go enthusiast. 
 
