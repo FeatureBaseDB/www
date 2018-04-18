@@ -9,6 +9,10 @@ image = ""
 overlay_color = "green" # blue, green, or light
 +++
 
+<div class="warning">
+Input definition is deprecated as of v0.9.0. Consider using the <a href="https://github.com/pilosa/pdk">Pilosa Dev Kit</a>, which contains tools for connecting Pilosa to a variety of data sources.
+</div>
+
 Pilosa has needed an ETL (extract transform load) process to integrate with various data sources, and the Input Definition is our proposed solution. Please send us your feedback as we continue building ways to connect Pilosa with other services.
 
 <!--more-->

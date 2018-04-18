@@ -21,6 +21,10 @@ This release includes:
 
 ### Input Definition
 
+<div class="warning">
+Input definition is deprecated as of v0.9.0. Consider using the <a href="https://github.com/pilosa/pdk">Pilosa Dev Kit</a>, which contains tools for connecting Pilosa to a variety of data sources.
+</div>
+
 Input Definition is the first in a series of features that enable real-time Extract, Transform, and Load (ETL) processing within Pilosa. While we technically shipped Input Definition in Pilosa 0.5.0 a few days ago, we decided to combine the two announcements for simplicity's sake. Read more about it in [the docs](/docs/input-definition/).
 
 ### Changelog
