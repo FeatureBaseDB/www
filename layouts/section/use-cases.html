@@ -8,7 +8,7 @@
     <div class="uc-hero-header">
       <p class="resonsive-text-white mb-4">In action</p>
       <p class="uc-hero-text">
-        Pilosa was initially built to power lightning fast segmentation queries from a large and disparate data set. Along the way we discovered that it is also especially helpful with data science.
+        Pilosa was first used to power lightning fast segmentation queries from a massive, disparate data set. Along the way we realized its implications far exceeded our initial use case.
       </p>
     </div>
     <div class="uc-hero-overlay"></div>
@@ -18,30 +18,8 @@
     <div  class=" py-5 ">
 
       <div class="use-cases-cards">
-        <div  class="use-cases-card">
 
-          <div class="use-cases-card-img">
-            <div class="use-cases-icon-container">
-              <img src="/img/{{ .Site.Params.use_case_icon_star_schema }}" alt="abstract logo" >
-            </div>
-          </div>
-
-            <h3 class="h-3-bold-green">
-                <a class="unstyled-a" href="/use-cases/retail-analytics/">Retail Analytics and the Star Schema Benchmark</a>
-            </h3>
-
-
-          <h6 class="h-6-caps">Retail Analytics</h6>
-
-          <p >
-              Retail transactions produce huge volumes of data, and only fast queries can pull value out this mess of data. We used Pilosa to explore the well-known Star Schema Benchmark, producing impressive performance numbers in the process.
-          </p>
-          <div  class="use-cases-card-arrow ">
-            <a href="/use-cases/retail-analytics/">&rarr;</a>
-          </div>
-
-        </div>
-
+        <a href="/use-cases/chemical-similarity-and-the-tanimoto-algorithm/" class="use-cases-card-a unstyled-a" style="display:block">
         <div  class="use-cases-card">
 
           <div class="use-cases-card-img">
@@ -51,7 +29,7 @@
           </div>
 
             <h3 class="h-3-bold-green">
-                <a class="unstyled-a" href="/use-cases/chemical-similarity-and-the-tanimoto-algorithm/">Chemical Similarity and the Tanimoto Algorithm</a>
+                Chemical Similarity and the Tanimoto Algorithm
             </h3>
 
 
@@ -61,10 +39,35 @@
             Chemical similarity is essential to pharmaceutical development. Running Tanimoto algorithms over Pilosa clusters allows researchers to conduct exhaustive searches of existing structures to identify target chemicals, accelerating drug development.
           </p>
           <div  class="use-cases-card-arrow ">
-            <a href="/use-cases/chemical-similarity-and-the-tanimoto-algorithm/">&rarr;</a>
+            &rarr;
           </div>
 
         </div>
+        </a>
+
+        <a href="/use-cases/monitoring-network-traffic/" class="use-cases-card-a unstyled-a" style="display:block">
+        <div class="use-cases-card">
+          <div class="use-cases-card-img">
+            <div class="use-cases-icon-container">
+              <img src="/img/{{ .Site.Params.use_case_icon_info_security }}" alt="abstract logo" >
+            </div>
+          </div>
+
+            <h3 class="h-3-bold-green">
+              Monitoring Network Traffic
+            </h3>
+
+          <h6 class="h-6-caps">Network Security</h6>
+          <p >
+            Modern network attacks require an increasingly complex infrastructure of intrusion prevention, creating datastores which grow exponentially. Layering Pilosa atop existing security solutions allows us to analyze high-volume network data and even predict network intrusions.
+          </p>
+          <div class="use-cases-card-arrow">
+            &rarr;
+          </div>
+        </div>
+        </a>
+
+        <a href="/use-cases/taming-transportation-data/" class="use-cases-card-a unstyled-a" style="display:block">
         <div class="use-cases-card">
 
           <div class="use-cases-card-img">
@@ -74,8 +77,7 @@
           </div>
 
             <h3 class="h-3-bold-green">
-              
-              <a class="unstyled-a" href="/use-cases/taming-transportation-data/">Taming Transportation Data</a>
+              Taming Transportation Data
             </h3>
 
           <h6 class="h-6-caps">Smart Cities</h6>
@@ -83,10 +85,13 @@
             Transportation systems are vital to economic networks but produce massive amounts of data that are difficult to analyze. Using New York City taxi data, we harnessed Pilosa's ability to work across datastores while supporting granular attributes.
           </p>
           <div class="use-cases-card-arrow">
-            <a href="/use-cases/taming-transportation-data/">&rarr;</a>
+            &rarr;
           </div>
 
         </div>
+        </a>
+
+        <a href="/use-cases/understanding-fans-at-umbel/" class="use-cases-card-a unstyled-a" style="display:block">
         <div class="use-cases-card">
           <div class="use-cases-card-img">
             <div class="use-cases-icon-container">
@@ -95,7 +100,7 @@
           </div>
 
             <h3 class="h-3-bold-green">
-                <a class="unstyled-a" href="/use-cases/understanding-fans-at-umbel/">Understanding Fans at Umbel</a>
+                Understanding Fans at Umbel
             </h3>
 
           <h6 class="h-6-caps">Audience Segmentation</h6>
@@ -103,29 +108,38 @@
             Umbel is where Pilosa’s journey began. See how the Umbel platform uses Pilosa to create highly-specific customer segments, allowing clients to personalize their messaging and increase revenue with data-driven, targeted campaigns.
           </p>
           <div class="use-cases-card-arrow">
-            <a   href="/use-cases/understanding-fans-at-umbel/">&rarr;</a>
+            &rarr;
           </div>
         </div>
-        <div class="use-cases-card">
+        </a>
+
+        <a href="/use-cases/retail-analytics/" class="use-cases-card-a unstyled-a" style="display:block">
+        <div  class="use-cases-card">
+
           <div class="use-cases-card-img">
             <div class="use-cases-icon-container">
-              <img src="/img/{{ .Site.Params.use_case_icon_info_security }}" alt="abstract logo" >
+              <img src="/img/{{ .Site.Params.use_case_icon_star_schema }}" alt="abstract logo" >
             </div>
           </div>
 
             <h3 class="h-3-bold-green">
-              <a class="unstyled-a" href="/use-cases/monitoring-network-traffic/">Monitoring Network Traffic</a>
+                Retail Analytics and the Star Schema Benchmark
             </h3>
 
-          <h6 class="h-6-caps">Network Security</h6>
+
+          <h6 class="h-6-caps">Retail Analytics</h6>
+
           <p >
-            Modern network attacks require an increasingly complex infrastructure of intrusion prevention, creating datastores which grow exponentially. Layering Pilosa atop existing security solutions allows us to analyze high-volume network data and even predict network intrusions.
+              Retail transactions produce huge volumes of data, and only fast queries can pull value out this mess of data. We used Pilosa to explore the well-known Star Schema Benchmark, producing impressive performance numbers in the process.
           </p>
-          <div class="use-cases-card-arrow">
-            <a href="/use-cases/monitoring-network-traffic/">&rarr;</a>
+          <div  class="use-cases-card-arrow ">
+            &rarr;
           </div>
+
         </div>
-      </div>
+        </a>
+
+
       <div class="use-cases-button">
 
 

@@ -4,11 +4,12 @@
   <div  class='community-hero '>
     <div class="container pt-5 mt-3">
       <div class="row">
-        <div class="communty-hero-content ">
+        <div class="community-hero-content ">
           <div class='pb-5 mb-5 mx-3'>
 
-            <h2 class="h-2-white-responsive mb-5 ">Our Community. Let's hang.</h2>
-            <a class="btn-pilosa btn btn-success" href="/community/code-of-conduct/" role="button">Community Code of Conduct</a>
+              <h2 class="h-2-white-responsive mb-5 ">Our Community.<br/> Let's hang.</h2>
+              <!--<a class="btn-pilosa btn btn-success" href="/community/code-of-conduct/" role="button">Community Code of Conduct</a>-->
+            <a class="btn-pilosa btn btn-danger" href="/docs/installation/" role="button">Install Pilosa</a>
           </div>
 
 
@@ -19,72 +20,47 @@
     </div>
   </div>
 
-  <div class="community-contribute ">
-    <h2 style='text-align: center' class='h-2-blue-responsive mb-4'>Contribution Guidelines</h2>
-    <p class="community-contribute-text mb-4">
-      Since we are an open source company, we always welcome contributions for the community. Please read our guidelines for contributing to Pilosa
-    </p>
-    <div>
-        <!--<button type="button" class="btn-pilosa btn btn-primary m-2">Contribution Docs</button>-->
-      <a href="https://github.com/pilosa/pilosa/blob/master/CONTRIBUTING.md" class="btn-pilosa btn btn-primary m-2">View Contribution Guidelines</a>
-    </div>
-  </div>
-
-    <div id="support" class="community-support py-5 ">
+    <div id="slothparty" class="community-slothparty py-5 ">
       <div class="container ">
         <div class="row align-items-center">
-        <div class="col-md-3 mb-5">
-
-          <h2 class="h-2-blue mb-4">Get Support</h2>
-          <p class="pr-5">
-            Feeling a little lost? Have a look at some of these resources and gain Sloth superpowers. Don’t hesitate to shoot us an email if you can’t find what you’re looking for.
-          </p>
-        </div>
         <div  class="col-lg col-md d-flex justify-content-start">
-          <div class="community-support-grid">
-            <div class="community-support-card community-support-card1">
-              <div class="community-support-icon-container mt-2 my-4">
-                  <a href="/docs/getting-started/"><img  src="/img/{{ .Site.Params.pilosa_docs }}" alt="Documentation icon"></a>
+          <div class="community-slothparty-grid">
+            <div class="community-slothparty-card community-slothparty-card1">
+              <div class="community-slothparty-icon-container  mb-5">
+                  <a href="https://github.com/pilosa/pilosa/releases"><img src="/img/icon-gears.png" alt="Gears icon"></a>
               </div>
-              <h5 class="h-5-blue mb-3">Pilosa Docs</h5>
-              <p>Ready to get started? Learn how to use and install Pilosa.</p>
+              <h5 class="h-5-blue mb-3">New Features</h5>
+              <p>Check out some of our latest patches.</p>
             </div>
-            <div class="community-support-card community-support-card2">
-              <div class="community-support-icon-container  mb-5">
-                  <a href="https://github.com/pilosa/"><img src="/img/{{ .Site.Params.github }}" alt="Github icon"></a>
+            <div class="community-slothparty-card community-slothparty-card2">
+              <div class="community-slothparty-icon-container my-4">
+                  <a href="/docs/latest/tutorials/"><img src="/img/icon-bookmark.png" alt="Bookmark icon"></a>
               </div>
-              <h5 class="h-5-blue mb-3">GitHub</h5>
-              <p>Use the source, Luke.</p>
+              <h5 class="h-5-blue mb-3">Tutorials</h5>
+              <p>Learn a few new tricks of the trade.</p>
             </div>
-            <div class="community-support-card community-support-card3">
-              <div class="community-support-icon-container my-4">
-                  <a href="/about/#contact"><img src="/img/{{ .Site.Params.mail }}" alt="Contact icon" width="80"></a>
+            <div class="community-slothparty-card community-slothparty-card3">
+              <div class="community-slothparty-icon-container my-4">
+                  <a href="/pdf/PILOSA%20-%20Technical%20White%20Paper.pdf"><img src="/img/icon-grid.png" alt="Grid icon"></a>
               </div>
-              <h5 class="h-5-blue mb-3">Contact Us</h5>
-              <p>We love hearing from you.  If you cannot find it in the docs, let us know!</p>
+              <h5 class="h-5-blue mb-3">White Paper</h5>
+              <p>Download our technical white paper here.</p>
             </div>
-            <div class="community-support-card community-support-card4">
-              <div class="community-support-icon-container my-4">
-                <a href="http://stackoverflow.com/questions/tagged/pilosa"><img src="/img/{{ .Site.Params.stack_overflow }}" alt="Stack overflow icon"></a>
+            <div class="community-slothparty-card community-slothparty-card4">
+              <div class="community-slothparty-icon-container my-4">
+                <a href="/about/#contact"><img src="/img/icon-gift.png" alt="Gift icon"></a>
               </div>
-              <h5 class="h-5-blue mb-3">Stack Overflow</h5>
-              <p>Get crowd-sourced answers to your questions on Stack Overflow.</p>
-            </div>
-            <div class="community-support-card community-support-card5">
-              <div class="community-support-icon-container my-4">
-                  <a href="https://groups.google.com/forum/#!forum/pilosa"><img src="/img/{{ .Site.Params.google_groups }}" alt="Mailing list icon" width="80"></a>
-              </div>
-              <h5 class="h-5-blue mb-3">Mailing List</h5>
-              <p>Join our Google Group to discuss Pilosa.</p>
-            </div>
-            <div class="community-support-card community-support-card6">
-              <div class="community-support-icon-container my-4">
-                <a href="https://invite.slack.golangbridge.org/"><img src="/img/{{ .Site.Params.slack }}" alt="Slack icon"></a>
-              </div>
-              <h5 class="h-5-blue mb-3">Slack</h5>
-              <p>Join our Slack channel (#pilosa) on the Go community Slack team.</p>
+              <h5 class="h-5-blue mb-3">Send Me Swag</h5>
+              <p>As a thanks for being part of our community, we'd love to send you some swag. Please enter your address into the body of our Contact Us form.</p>
             </div>
           </div>
+        </div>
+        <div class="community-slothparty-heading col-md-4 mb-5">
+
+          <h2 class="h-2-blue mb-4">Sloth Party</h2>
+          <p class="pr-5">
+            Being part of a community means being part of a family.
+          </p>
         </div>
       </div>
       </div>
@@ -94,7 +70,7 @@
       <div class="communty-events-header   mb-5">
         <h2 id="events" class="h-2-blue mb-4">Upcoming Events</h2>
         <p >
-          While sloths are solitary creatures, we are not.  If you are going to be at one of these events please look us up.
+          Sloths are solitary creatures. We, however, are not. If you are going to be at one of these events, please look us up.
         </p>
       </div>
       <div class='community-events-content'>
@@ -125,8 +101,68 @@
       </div>
     </div>
 
+
+
+    <div id="support" class="community-support py-5 ">
+      <div class="container ">
+        <div class="row align-items-center">
+        <div class="col-md-4 mb-5">
+
+          <h2 class="h-2-blue mb-4">Get Support</h2>
+          <p class="pr-5">
+            Feeling a little lost? Have a look at some of these resources, but don’t hesitate to shoot us an email if you can’t find what you’re looking for.
+          </p>
+        </div>
+        <div  class="col-lg col-md d-flex justify-content-start">
+          <div class="community-support-grid">
+            <div class="community-support-card community-support-card1">
+              <div class="community-support-icon-container  mb-5">
+                  <a href="https://github.com/pilosa/"><img src="/img/{{ .Site.Params.github }}" alt="Github icon"></a>
+              </div>
+              <h5 class="h-5-blue mb-3">GitHub</h5>
+              <p>Use the source, Luke.</p>
+            </div>
+            <div class="community-support-card community-support-card2">
+              <div class="community-support-icon-container my-4">
+                  <a href="/about/#contact"><img src="/img/{{ .Site.Params.mail }}" alt="Contact icon" width="80"></a>
+              </div>
+              <h5 class="h-5-blue mb-3">Contact Us</h5>
+              <p>We love hearing from you.  If you cannot find it in the docs, let us know!</p>
+            </div>
+            <div class="community-support-card community-support-card3">
+              <div class="community-support-icon-container my-4">
+                  <a href="https://groups.google.com/forum/#!forum/pilosa"><img src="/img/{{ .Site.Params.google_groups }}" alt="Mailing list icon" width="80"></a>
+              </div>
+              <h5 class="h-5-blue mb-3">Mailing List</h5>
+              <p>Join our Google Group to discuss Pilosa.</p>
+            </div>
+            <div class="community-support-card community-support-card4">
+              <div class="community-support-icon-container my-4">
+                <a href="https://invite.slack.golangbridge.org/"><img src="/img/{{ .Site.Params.slack }}" alt="Slack icon"></a>
+              </div>
+              <h5 class="h-5-blue mb-3">Slack</h5>
+              <p>Join our Slack channel (#pilosa) on the Go community Slack team.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  <div class="community-contribute ">
+    <h2 style='text-align: center' class='h-2-blue-responsive mb-4'>Contributing to Pilosa</h2>
+    <p class="community-contribute-text mb-4">
+      We are an open source company, so we always welcome contributions from the community. Please read our guidelines for contributing to Pilosa.
+    </p>
+    <div>
+        <!--<button type="button" class="btn-pilosa btn btn-primary m-2">Contribution Docs</button>-->
+      <a href="https://github.com/pilosa/pilosa/blob/master/CONTRIBUTING.md" class="btn-pilosa btn btn-primary m-2">View Contribution Guidelines</a>
+      <a class="btn-pilosa btn btn-success" href="/community/code-of-conduct/" role="button">Community Code of Conduct</a>
+    </div>
+  </div>
+
     <div class="community-social py-5">
-      <h3 class="h-3-blue mb-4">Let's get social</h3>
+      <h3 class="h-3-blue mb-4">Get social</h3>
       <div class="community-social-btns">
         <a href="{{ .Site.Params.twitter_url }}">
           <img src="/img/{{ .Site.Params.twitter }}" alt="Twitter icon">
@@ -140,6 +176,7 @@
       </div>
     </div>
 
+    <!--
     <div class="get-more-container-light">
       <div class="container py-5">
         <div class="get-more-content align-items-center">
@@ -158,5 +195,6 @@
         </div>
       </div>
     </div>
+    -->
 </div>
 {{ partial "footer.html" . }}

@@ -2,9 +2,15 @@
   background: #2a4871;
 }
 
-.communty-hero-content{
+.community-hero-content{
   display: flex;
   align-items: center;
+}
+.community-hero-content h2 {
+    text-align: left;
+}
+.community-hero-img {
+    margin-left: 200px;
 }
 @media (max-width: 1000px) {
   .community-hero-img{
@@ -34,7 +40,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  max-width: 600px;
 }
 .community-support-card{
   padding-left: 14px;
@@ -47,23 +54,67 @@
 }
 .community-support-card2{
   border-bottom: 2px solid #f8fafb;
-  border-right: 2px solid #f8fafb;
+  border-left: 2px solid #f8fafb;
 }
 .community-support-card3{
-  border-bottom: 2px solid #f8fafb;
+  border-top: 2px solid #f8fafb;
+  border-right: 2px solid #f8fafb;
 }
 .community-support-card4{
-  border-right: 2px solid #f8fafb;
-}
-.community-support-card5{
-  border-right: 2px solid #f8fafb;
-}
-.community-support-card6{
+  border-top: 2px solid #f8fafb;
+  border-left: 2px solid #f8fafb;
 }
 
 .community-support-icon-container{
   height:70px;
 }
+
+#slothparty {
+    margin-bottom: 30px;
+}
+
+@media (max-width: 1000px) {
+    .community-slothparty-heading {
+        display: none;
+    }
+}
+.community-slothparty-grid{
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 600px;
+}
+.community-slothparty-card{
+  padding-left: 14px;
+  width: 258px;
+  height:230px;
+}
+.community-slothparty-card1{
+  border-bottom: 2px solid #f8fafb;
+  border-right: 2px solid #f8fafb;
+}
+.community-slothparty-card2{
+  border-bottom: 2px solid #f8fafb;
+  border-left: 2px solid #f8fafb;
+}
+.community-slothparty-card3{
+  border-top: 2px solid #f8fafb;
+  border-right: 2px solid #f8fafb;
+}
+.community-slothparty-card4{
+  border-top: 2px solid #f8fafb;
+  border-left: 2px solid #f8fafb;
+}
+
+.community-slothparty-icon-container{
+  height:70px;
+}
+.community-slothparty-icon-container img {
+    height: 80px;
+}
+
 
 .community-events{
   background: #edfdfe;

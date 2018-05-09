@@ -76,7 +76,7 @@
   font-family: "aaux-next" !important;
   letter-spacing: 1.5px;
   padding: 0.9rem 2rem;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -291,13 +291,16 @@ footer a:hover{
     display: block;
   }
   .concepts-card-container{
-    margin-left: 25%;
+    margin-left: 35%;
   }
 }
 
 @media (max-width: 1200px) {
   .concepts-img-container{
     display: none;
+  }
+  .concepts-card-container{
+    margin-left: 15%;
   }
 }
 
@@ -317,8 +320,6 @@ footer a:hover{
   top:100px;
 }
 
-
-
 .concepts-card-container{
   position: relative;
   z-index: 1;
@@ -326,7 +327,8 @@ footer a:hover{
   width:100%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  align-content: flex-start;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin-top: 50px;
   font-size: 14px;
@@ -334,17 +336,10 @@ footer a:hover{
 
 }
 
-.card-col-1{
-  margin-bottom: -20px;
-}
-
 .home-concept{
-  margin: 20px 10px;
+  margin: 0px 20px;
   width:300px;
-  height: 170px;
 }
-
-
 
 
 
@@ -354,9 +349,6 @@ footer a:hover{
   color: #102445;
   background-color: #f2f7f9;
 }
-
-
-
 
 .use-cases-text{
   color: #3c5f8d;
@@ -377,18 +369,24 @@ footer a:hover{
   flex-direction: column;
 
   width:556px;
-  min-height: 494px;
+  min-height: 520px;
   margin: 13px;
   border-radius: 3px;
   padding: 25px;
   justify-content: space-between;
 }
 
-/*
 .use-cases-card:hover{
   background: #eaf2f6;
 }
+/*
+.use-cases-card:hover .use-cases-card-arrow {
+    text-decoration: underline;
+}
 */
+.use-cases-card:hover h3 {
+    text-decoration: underline;
+}
 .use-cases-card-img{
   display: flex;
   justify-content: flex-end;
@@ -451,7 +449,7 @@ footer a:hover{
 }
 
 .get-more-container{
-  background: #cfeaec;
+  background: white;
 }
 
 .get-more-content{
