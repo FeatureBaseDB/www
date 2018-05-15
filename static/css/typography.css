@@ -22,7 +22,7 @@ a:hover{
 	text-decoration: none;
 }
 
-.unstyled-a{
+a.unstyled-a{
 	font-family: inherit;
 	font-size: inherit;
 	line-height: inherit;

@@ -21,12 +21,23 @@
     background-repeat: no-repeat;
     background-position: right;
   }
+  .enterprise-hero-header {
+    text-align: left;
+  }
 }
 @media (max-width: 1199px) {
   .enterprise-hero{
     background:#2a4871;
     color: white;
   }
+}
+
+.enterprise-preview-blurb p {
+    font-size: 24px;
+}
+
+.enterprise-preview-blurb p a {
+    font-size: 24px;
 }
 
 .enterprise-products-container{
@@ -165,4 +176,20 @@
   align-items: center;
   /*justify-content: center;*/
 
+}
+
+.enterprise-curious-container {
+    display: flex;
+    background: #edfdfe;
+}
+.enterprise-curious-button {
+    width: 240px;
+    padding: 20px;
+    margin-right: 30px;
+}
+
+.enterprise-curious-blurb {
+    width: 600px;
+    font-size: 24px;
+    text-align: right;
 }

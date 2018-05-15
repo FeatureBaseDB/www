@@ -25,8 +25,8 @@
     <div class=" container  py-5 ">
       <div class="row justify-content-center ">
         <div class="col-lg">
-
-        <h2 class='h-2-white col-10'>Accelerate your queries.</h2>
+            <br/> <br/> <!-- TODO: Use CSS instead of BR hack for vertical alignment -->
+        <h2 class='h-2-white col-10'>No More Compromises.</h2>
         <!--
         <h3 class="h-3-red">
           Watch the video
@@ -36,22 +36,27 @@
       </div>
       <div class='col-lg mt-3'>
         <p>
-          Over the past two decades, data volume has grown exponentially, yet query time has remained flat. Scientists and engineers should be able to ask questions of data in real-time, no matter how large the job.
+        Data volume is growing exponentially, but productivity gains are still lagging behind. It's time to stop making compromises that are slowing you down – gone are the days of cumbersome pre-computation, batching, caching, and sampling.
         </p>
         <p>
-          Pilosa abstracts the index from data storage and optimizes it for massive scale.
+          Enterprises need to be able to understand and act on data instantly, no matter how complex, fragmented, or large it is.
+        </p>
+        <p>
+          Pilosa abstracts the index from data storage, optimizes it for massive scale, and makes your data instantly queryable and retrievable.
         </p>
       </div>
     </div>
   </div>
   </div>
 
+  <!-- WHITE PAPER
   <div class="home-whitepaper">
       <img src="/img/{{ .Site.Params.pilosa_docs }}" alt="Glasses icon" class="home-whitepaper-icon" width="200px">
       <div class="the-pilosa">The Pilosa</div>
       <div class="technical-white-paper">Technical White Paper</div>
       <a class="btn-pilosa btn btn-danger btn-download-white-paper" href="/pdf/PILOSA - Technical White Paper.pdf" role="button">Download Now</a>
   </div>
+  -->
 
   <div class="home-concepts">
     <div class='concepts-img-container' >
@@ -63,51 +68,54 @@
 
 
       <div  class="concepts-card-container">
-        <div class='card-col-1'>
           <div class="home-concept">
             <h3 class="h-3-bold-green">
-              Rapid Accessibility
+              Real-Time Accessibility
             </h3>
             <p>
-              Pilosa makes your data instantly accessible through an intuitive query language. No longer is your data locked in a data lake or fragmented across multiple data sources.
+            Pilosa makes your data instantly accessible without the addition of expensive, exotic hardware. No longer is your data locked in a data lake or fragmented across multiple data sources.
             </p>
           </div>
           <div class="home-concept">
             <h3 class="h-3-bold-green">
-              Distributed
+              Continuous Monitoring
             </h3>
             <p>
-              Pilosa is horizontally scalable and automatically shards your data. Queries are executed in parallel across all Pilosa instances.
+              The Pilosa solution remains up-to-date and highly responsive at all times; allowing you to monitor continuous streams of data without placing undue burdens on your existing data store.
             </p>
           </div>
           <div class="home-concept">
             <h3 class="h-3-bold-green">
-              Algorithms
+                Unlimited Federation
             </h3>
             <p>
-              Pilosa's structure allows for easy algorithmic plugins thereby paving the way for faster data science at scale without sampling.
+              Pilosa eliminates the need for joins by combining data from multiple distributed data stores into a single index, regardless of size or location.
             </p>
           </div>
-        </div>
-        <div  class='card-col-2'>
+          <div class="home-concept">
+            <h3 class="h-3-bold-green">
+              Artificial Intelligence
+            </h3>
+            <p >
+              Pilosa allows for algorithmic plugins, thereby paving the way for artificial intelligence and machine learning algorithms.
+            </p>
+          </div>
           <div class="home-concept">
             <h3 class="h-3-bold-green">
               High Cardinality
             </h3>
-            <p >
+            <p>
               Pilosa is built for massive volume. It indexes up to 2^64 objects and is practically unbounded in the number of attributes.
             </p>
           </div>
           <div class="home-concept">
             <h3 class="h-3-bold-green">
-              Segmentation
+              Reduce Costs
             </h3>
             <p>
-              Pilosa can quickly filter giant datasets using arbitrarily complex nested boolean operations.
+              Pilosa can easily integrate into existing architectures and is simple to maintain. With its minimal footprint in memory, the cost-per-query and cost-per-index is substantially lower than other solutions.
             </p>
           </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -119,7 +127,7 @@
         <div class="use-cases-header  col-lg-7 col-md-12 mx-3">
           <h2 class="h-2-blue">Use Cases</h2>
           <p >
-            See how Pilosa solves existing problems by executing ad-hoc queries in milliseconds within high-cardinality datasets and across multiple data stores.
+            Learn how Pilosa executes real-time, ad-hoc queries to solve existing data problems &mdash; without pre-computation. 
           </p>
         </div>
       </div>
@@ -127,6 +135,7 @@
 
       <div class="use-cases-cards">
 
+        <a href="/use-cases/chemical-similarity-and-the-tanimoto-algorithm/" class="use-cases-card-a unstyled-a" style="display:block">
         <div  class="use-cases-card">
 
           <div class="use-cases-card-img">
@@ -136,60 +145,22 @@
           </div>
 
             <h3 class="h-3-bold-green">
-                <a class="unstyled-a" href="/use-cases/chemical-similarity-and-the-tanimoto-algorithm/">Chemical Similarity and the Tanimoto Algorithm</a>
+                Chemical Similarity and the Tanimoto Algorithm
             </h3>
 
 
           <h6 class="h-6-caps">Bioinformatics</h6>
 
           <p >
-            Chemical similarity is essential to pharmaceutical development. Running Tanimoto algorithms over Pilosa clusters allows researchers to conduct exhaustive searches of existing structures to identify target chemicals thereby accelerating drug development.
+          Chemical similarity is essential to pharmaceutical development. Running Tanimoto algorithms over Pilosa clusters allows researchers to conduct exhaustive searches of existing structures to identify target chemicals in seconds -- accelerating drug development rapidly, while driving down cost.
           </p>
           <div  class="use-cases-card-arrow ">
-            <a href="/use-cases/chemical-similarity-and-the-tanimoto-algorithm/">&rarr;</a>
+            &rarr;
           </div>
 
         </div>
-        <div class="use-cases-card">
-
-          <div class="use-cases-card-img">
-            <div class="use-cases-icon-container">
-              <img src="/img/{{ .Site.Params.use_case_icon_smart_cities }}" alt="Transportation data use case abstract icon" >
-            </div>
-          </div>
-
-            <h3 class="h-3-bold-green">
-              <a class="unstyled-a" href="/use-cases/taming-transportation-data/">Taming Transportation Data</a>
-            </h3>
-
-          <h6 class="h-6-caps">Smart Cities</h6>
-          <p >
-            Transportation systems are vital to economic networks but produce massive amounts of data that are difficult to analyze. Using New York City taxi data, we harnessed Pilosa's ability to work across datastores while supporting granular attributes.
-          </p>
-          <div class="use-cases-card-arrow">
-            <a href="/use-cases/taming-transportation-data/">&rarr;</a>
-          </div>
-
-        </div>
-        <div class="use-cases-card">
-          <div class="use-cases-card-img">
-            <div class="use-cases-icon-container">
-              <img src="/img/{{ .Site.Params.use_case_icon_audience_segmentation }}" alt="Audience segmentation use case abstract icon" >
-            </div>
-          </div>
-
-            <h3 class="h-3-bold-green">
-                <a class="unstyled-a" href="/use-cases/understanding-fans-at-umbel/">Understanding Fans at Umbel</a>
-            </h3>
-
-          <h6 class="h-6-caps">Audience Segmentation</h6>
-          <p >
-            Umbel is where Pilosa’s journey began. See how the Umbel platform uses Pilosa to create highly-specific customer segments, allowing clients to personalize their messaging and increase revenue with data-driven, targeted campaigns.
-          </p>
-          <div class="use-cases-card-arrow">
-            <a   href="/use-cases/understanding-fans-at-umbel/">&rarr;</a>
-          </div>
-        </div>
+        </a>
+        <a href="/use-cases/monitoring-network-traffic/" class="use-cases-card-a unstyled-a" style="display:block">
         <div class="use-cases-card">
           <div class="use-cases-card-img">
             <div class="use-cases-icon-container">
@@ -198,7 +169,7 @@
           </div>
 
             <h3 class="h-3-bold-green">
-              <a class="unstyled-a" href="/use-cases/monitoring-network-traffic/">Monitoring Network Traffic</a>
+              Monitoring Network Traffic
             </h3>
 
           <h6 class="h-6-caps">Network Security</h6>
@@ -206,19 +177,19 @@
           Modern network attacks require an increasingly complex infrastructure of intrusion prevention, creating vast datastores that continue to grow. Layering Pilosa atop existing security solutions allows us to analyze high-volume network data and even predict network intrusions.
           </p>
           <div class="use-cases-card-arrow">
-            <a href="/use-cases/monitoring-network-traffic/">&rarr;</a>
+            &rarr;
           </div>
         </div>
+        </a>
       </div>
 
-      <!--
       <div class="use-cases-button">
         <a class="btn-pilosa btn btn-primary" href="/use-cases/" role="button">More use cases</a>
       </div>
-      -->
     </div>
   </div>
 
+  <!-- Events page link
   <div class="oscon-container py-5 my-4 ">
     <div class='oscon-img-container'>
       <img width='300px' src="/img/{{ .Site.Params.badge }}" alt="Sloth hand holding conference badge">
@@ -231,9 +202,29 @@
       <a class="btn-pilosa btn btn-primary" href="/community/#events" role="button">More events</a>
     </div>
   </div>
+  -->
 
 
-  <div class="get-more-container ">
+
+
+  <div class="our-story-container ">
+    <div class="container py-5 d-flex flex-wrap ">
+      <div class="our-story-img">
+        <img height='275px;' src="/img/{{ .Site.Params.animation_home_ourstory }}" alt="Our story illustration">
+      </div>
+      <div class="our-story-content">
+        <h2 class="h-2-white">Our story</h2>
+        <p >
+          Pilosa was founded in 2017 when the engineering team at Umbel, a data management platform, was challenged with creating a scalable way to run ad hoc queries to group and sort massive volumes of data in real-time. After three years of internal testing, we moved to open source with a commitment to unlock the power of data science for everyone.
+        </p>
+        <a class="btn-pilosa btn btn-success" href="/about/" role="button">More about us</a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="get-more-container-light">
     <div class="container py-5">
       <div class="get-more-content align-items-center">
         <div class="col-lg">
@@ -254,21 +245,6 @@
     </div>
   </div>
 
-  <div class="our-story-container ">
-    <div class="container py-5 d-flex flex-wrap ">
-      <div class="our-story-img">
-        <img height='275px;' src="/img/{{ .Site.Params.animation_home_ourstory }}" alt="Our story illustration">
-      </div>
-      <div class="our-story-content">
-        <h2 class="h-2-white">Our story</h2>
-        <p >
-          Pilosa was founded in 2017 with a commitment to building community-driven, open source software that unlocks the full power of data science.  The software grew out of Umbel, a data management platform for sports &amp; entertainment companies, where the engineering team was challenged to create a scalable way to run ad hoc queries to group and sort massive volumes of data with efficiency and reliability.
-        </p>
-        <a class="btn-pilosa btn btn-success" href="/about/" role="button">More about us</a>
-      </div>
-
-    </div>
-  </div>
 
 </div>
 
