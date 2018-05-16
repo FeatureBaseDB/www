@@ -66,7 +66,7 @@ With speed as a main goal, we spun up a 720-core cluster with 1.2TB of RAM (20 x
 
 With hundreds of genomes imported into this index, we were finally able to run some queries. Comparing two genomes, as in query #1 above, takes about 150 milliseconds. Query #2, identifying the most similar genomes to a given one, across the entire index, completes in just seconds. The best part? This scales to a large number of rows, allowing much faster queries across many more genomes.
 
-The work is ongoing, and you can follow new developments in the import process in the [PDK repo](https://github.com/pilosa/pdk/tree/genome/usecase/genome).
+The work is ongoing, and you can follow new developments in the import process in the [PDK repo](https://github.com/pilosa/pdk/tree/genome/usecase/genome). If you are conducting genomics research that you'd like to discuss with our team, please don't hesitate to reach out to [info@pilosa.com](mailto:info@pilosa.com). We're excited to continue making advancements in this space!
 
 ----
 
