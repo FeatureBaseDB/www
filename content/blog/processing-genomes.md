@@ -19,7 +19,7 @@ A genome is just a really long string, how difficult could it be to model it? As
 
 A human genome consists of approximately 3 billion DNA base pairs. For a given sample, each of these is, naively, exactly one nucleotide, `A`, `T`, `G` or `C`, representable with one character (or two bits), at one precisely specified coordinate. When sequencing a genome, things get a little more fuzzy. To start with, the data coming out of a sequencer isn't "just a really long string". It's [hundreds of gigs](https://medium.com/precision-medicine/how-big-is-the-human-genome-e90caa3409b0) of short reads with corresponding metadata. After some processing, that same sample might be represented as a VCF file, representing the variants (mutations) relative to a reference genome.
 
-If a sequenced genome is stored as, more or less, a "diff" based on a reference genome, how is the reference stored? Data is available in many formats, but we chose to use the Genome Reference Consortium Human Build 37 (GRCh37) in FASTA format. This format is, ideally, very close to the "really long string" representation of a genome. A file has several sections, each of which might contain the series of `A`, `T`, `G`, `C`, at precisely-known offsets, for an entire chromosome. However, the format supports more than this: `N`, which represents *any* nucleotide, and `-`, for a "gap of indeterminate length". The reference file is very clean: almost entirely `ATGC`, and a small number of `N`s.
+If a sequenced genome is stored as, more or less, a "diff" based on a reference genome, how is the reference stored? Data is available in many formats, but we chose to use the Genome Reference Consortium Human Build 37 (GRCh37) in FASTA format. This format is, ideally, very close to the "really long string" representation of a genome. A file has several sections, each of which might contain the series of `A`, `T`, `G`, `C`, at precisely-known offsets, for an entire chromosome. However, the format supports more than this: `N`, which represents *any* nucleotide, `-`, for a "gap of indeterminate length", and various other characters which represent combinations of multiple bases. These other characters are useful for representing heterozygousity (among other things) where each of the chromosomes in a pair might have a different base at a particular position.  The reference file is very clean: almost entirely `ATGC`, and a small number of `N`s.
 
 An early idea was to find a source of many real human genomes which we could index. Once we fully appreciated the complexity here, we settled on a simpler proof-of-concept approach. After indexing the clean GRCh37 file, we simply generated additional genomes, as needed, by randomly mutating a small fraction of the nucleotides. This minimized our overhead required in finding data, matching reference versions, and understanding more file formats. We made some simplifying assumptions: uniformly distributed mutations at a rate between 0.1% and 0.5%, and no problems with alignment or variant confidence. This allowed us to work with some representative data, to explore queries and measure performance.
 
@@ -43,9 +43,11 @@ For example, using a reference genome that begins `GTAA`, and another genome tha
 ![Genome model simple](/img/blog/processing-genomes/genome-model-simple.png)
 *Genome data model*
 
-With 3 billion base pairs, we end up with 12 billion columns, and one row per sample. The combination of index width and [`sliceWidth`](../docs/glossary/#slicewidth) affects parallel performance, as well as the number of open files. We took this opportunity to experiment with the `sliceWidth` and found that increasing from our default size of 2<sup>20</sup> to 2<sup>23</sup> was a good balance.
+With 3 billion base pairs, we end up with 12 billion columns, and one row per sample. The combination of index width and [`slice width`](../docs/glossary/#slicewidth) affects parallel performance, as well as the number of open files. We took this opportunity to experiment with the slice width and found that increasing from our default size of 2<sup>20</sup> to 2<sup>23</sup> was a good balance.
 
 Sequenced genomes are the main entity in the index, but we can do more than that! For example, base pairs on chromosome 1 are all stored in the first billion or so columns (chromosome 1 is about 250M base pairs long). We can store a special "mask" bitmap that is all ones for those columns, and zero elsewhere. Do this for each of the 25 chromosomes (1-22, X, Y, and mitochondrial), and you gain the ability to select only base pairs on a given chromosome. Similarly, any gene that lives in a known region on a chromosome can be given a mask bitmap.
+
+Masks are even more useful if you go slightly deeper into the biology. While we're thinking now of DNA as one long string of data, in reality it is all folded up and twisted in different ways within different types of cells. This folding means that only certain parts of the DNA are available for transcription in certain cells. With masks, we can represent which parts of the genome are available for transcription in different cells!
 
 ![Genome model details](/img/blog/processing-genomes/genome-model-details.png)
 *More genome bitmap tricks*
@@ -62,7 +64,13 @@ With this more general data model, some interesting queries become possible:
 
 #### Performance
 
-With speed as a main goal, we spun up a 720-core cluster with 1.2TB of RAM (20 x c4.8xlarge, 60GB RAM, 36 vCPU). We started ingesting new data on this cluster at a rate of less than 15 seconds per genome, or 216M SetBits (nucleotides) per second. This is already plenty fast, but there are clear paths to improve this. We built our import around the FASTA format, but with VCF files, we can run imports that only need to set one bit per variant, rather than one per base pair. This would be partly enabled by restructuring the index to group all base pairs on the reference genome together.
+With speed as a main goal, we spun up a 360-core cluster with 600GB of total RAM (10 x c4.8xlarge, 60GB RAM, 36 vCPU). We started ingesting new data on this cluster at a rate of less than 15 seconds per genome, or 216M SetBits (nucleotides) per second. This is already plenty fast, but there are clear paths to improve this. We built our import around the FASTA format, but with VCF files, we can run imports that only need to set one bit per variant, rather than one per base pair. This would be partly enabled by restructuring the index to group all base pairs on the reference genome together.
+
+<center>
+{{< tweet 991387773587337217 >}}
+</center>
+(we also did some experiments on a 20-node cluster)
+
 
 With hundreds of genomes imported into this index, we were finally able to run some queries. Comparing two genomes, as in query #1 above, takes about 150 milliseconds. Query #2, identifying the most similar genomes to a given one, across the entire index, completes in just seconds. The best part? This scales to a large number of rows, allowing much faster queries across many more genomes.
 
