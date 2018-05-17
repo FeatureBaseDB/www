@@ -2,8 +2,7 @@
 date = "2018-05-01"
 publishdate = "2018-05-11"
 title = "How to Process Human Genomes in Pilosa"
-author = "Alan Bernstein"
-author_twitter = "gsnark"
+author = "Alan Bernstein and Matt Jaffee"
 author_img = "2"
 image = "/img/blog/processing-genomes/banner.jpg"
 overlay_color = "blue" # blue, green, or light
@@ -19,18 +18,27 @@ A genome is just a really long string, how difficult could it be to model it? As
 
 A human genome consists of approximately 3 billion DNA base pairs. For a given sample, each of these is, naively, exactly one nucleotide, `A`, `T`, `G` or `C`, representable with one character (or two bits), at one precisely specified coordinate. When sequencing a genome, things get a little more fuzzy. To start with, the data coming out of a sequencer isn't "just a really long string". It's [hundreds of gigs](https://medium.com/precision-medicine/how-big-is-the-human-genome-e90caa3409b0) of short reads with corresponding metadata. After some processing, that same sample might be represented as a VCF file, representing the variants (mutations) relative to a reference genome.
 
-If a sequenced genome is stored as, more or less, a "diff" based on a reference genome, how is the reference stored? Data is available in many formats, but we chose to use the Genome Reference Consortium Human Build 37 (GRCh37) in FASTA format. This format is, ideally, very close to the "really long string" representation of a genome. A file has several sections, each of which might contain the series of `A`, `T`, `G`, `C`, at precisely-known offsets, for an entire chromosome. However, the format supports more than this: `N`, which represents *any* nucleotide, `-`, for a "gap of indeterminate length", and various other characters which represent combinations of multiple bases. These other characters are useful for representing heterozygousity (among other things) where each of the chromosomes in a pair might have a different base at a particular position.  The reference file is very clean: almost entirely `ATGC`, and a small number of `N`s.
+If a sequenced genome is stored as, more or less, a "diff" based on a reference genome, how is the reference stored? Data is available in many formats, but we chose to use the Genome Reference Consortium Human Build 37 (GRCh37) in FASTA format. This format is, ideally, very close to the "really long string" representation of a genome. A file has several sections, each of which might contain the series of `A`, `T`, `G`, `C`, at precisely-known offsets, for an entire chromosome. However, the format supports more than this: `N`, which represents *any* nucleotide, `-`, for a "gap of indeterminate length", and various other characters which represent combinations of multiple bases. These other characters are useful for representing heterozygosity (among other things) where each of the chromosomes in a pair might have a different base at a particular position.  The reference file is very clean: almost entirely `ATGC`, and a small number of `N`s.
 
 An early idea was to find a source of many real human genomes which we could index. Once we fully appreciated the complexity here, we settled on a simpler proof-of-concept approach. After indexing the clean GRCh37 file, we simply generated additional genomes, as needed, by randomly mutating a small fraction of the nucleotides. This minimized our overhead required in finding data, matching reference versions, and understanding more file formats. We made some simplifying assumptions: uniformly distributed mutations at a rate between 0.1% and 0.5%, and no problems with alignment or variant confidence. This allowed us to work with some representative data, to explore queries and measure performance.
 
 ### Genomes as Bitmaps
 
-Pilosa stores everything as ones and zeros, in an index that can easily scale in both rows and columns. What is a sensible way to represent a genome, given this giant binary matrix? Of course, the answer depends on what you want to do with the index. We had tried two approaches in the past:
+Let's revisit the basic Pilosa data model:
 
-* One genome per column, each row representing a different nucleotide [helix].
-* One genome per row, each column representing a [k-mer](https://en.wikipedia.org/wiki/K-mer) match to a reference genome.
+![Pilosa data model](/img/docs/data-model.svg)
+*Pilosa data model*
 
-The genome-per-column model matches Pilosa's original design, with columns as records, and rows as attributes. However, it is very awkward to handle, even for just a few genomes because each node in the cluster needs to know about all the rows. As more genomes are added, it can scale very well, but it has a lot of overhead at the outset and requires high memory machines even for small tests. Although each row only represents a single position on the genome, the internal memory needed to track each row is around 100 bytes. This doesn't sound like much, but if you have 1 billion rows, that means you need 100GB of memory!
+Pilosa stores relationships as ones and zeros, in an index that can easily scale in both rows and columns, and performs operations across rows. What is a sensible way to represent a genome, given this giant binary matrix? Of course, the answer depends on what you want to do with the index. We had tried two approaches in the past:
+
+1) One genome per column, each row representing a different nucleotide.
+
+ This matches Pilosa's original design, with columns as records, and rows as attributes. However, it is very awkward to handle, even for just a few genomes because each node in the cluster needs to know about all the rows. As more genomes are added, it can scale very well, but it has a lot of overhead at the outset and requires high memory machines even for small tests. Although each row only represents a single position on the genome, the internal memory needed to track each row is around 100 bytes. This doesn't sound like much, but if you have 1 billion rows, that means you need 100GB of memory!
+
+2) One genome per row, each column representing a [k-mer](https://en.wikipedia.org/wiki/K-mer) match to a sample genome.
+
+![K-mer data model](/img/blog/processing-genomes/kmer-model.png)
+*K-mer data model*
 
 The k-mer model works very well, but only stores the k-mer matches, not the genomes themselves. We want something that's both general and scalable.
 
