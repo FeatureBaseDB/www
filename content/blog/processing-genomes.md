@@ -55,7 +55,7 @@ With 3 billion base pairs, we end up with 12 billion columns, and one row per sa
 
 Sequenced genomes are the main entity in the index, but we can do more than that! For example, base pairs on chromosome 1 are all stored in the first billion or so columns (chromosome 1 is about 250M base pairs long). We can store a special "mask" bitmap that is all ones for those columns, and zero elsewhere. Do this for each of the 25 chromosomes (1-22, X, Y, and mitochondrial), and you gain the ability to select only base pairs on a given chromosome. Similarly, any gene that lives in a known region on a chromosome can be given a mask bitmap.
 
-Masks are even more useful if you go slightly deeper into the biology. While we're thinking now of DNA as one long string of data, in reality it is all folded up and twisted in different ways within different types of cells. This folding means that only certain parts of the DNA are available for transcription in certain cells. With masks, we can represent which parts of the genome are available for transcription in different cells!
+Masks are even more useful if you go slightly deeper into the biology. While we're thinking now of DNA as one long string of data, in reality DNA is tightly wrapped and compacted around nucleosomes. The specifics of this compacting allows for each cell type to have different characteristics, with the same DNA blueprint. With "cell type masks", we can represent which parts of the genome are available for transcription in different cells!
 
 ![Genome model details](/img/blog/processing-genomes/genome-model-details.png)
 *More genome bitmap tricks*
