@@ -1,9 +1,10 @@
 +++
 date = "2018-05-01"
 publishdate = "2018-05-11"
-title = "How to Process Human Genomes in Pilosa"
+title = "Processing Genomes in Pilosa"
 author = "Alan Bernstein and Matt Jaffee"
 author_img = "2"
+featured = "true"
 image = "/img/blog/processing-genomes/banner.jpg"
 overlay_color = "blue" # blue, green, or light
 +++
