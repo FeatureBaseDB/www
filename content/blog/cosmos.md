@@ -4,7 +4,6 @@ publishdate = "2018-02-22"
 title = "Supercharge Azure Cosmos DB with Pilosa"
 author = "Alan Bernstein and Matt Jaffee"
 author_twitter = "gsnark"
-featured = "true"
 author_img = "2"
 image = "/img/blog/cosmos/banner2.jpg"
 overlay_color = "light" # blue, green, or light
