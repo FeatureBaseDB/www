@@ -1,7 +1,7 @@
 +++
 date = "2018-05-01"
 publishdate = "2018-05-11"
-title = "Processing Genomes in Pilosa"
+title = "Genome Comparisons in 4 Milliseconds"
 author = "Alan Bernstein and Matt Jaffee"
 author_img = "2"
 featured = "true"
@@ -87,6 +87,8 @@ We were able to ingest new genomes on this cluster at a rate of less than 15 sec
 
 With hundreds of genomes imported into this index, we were finally able to run some queries. Comparing two genomes, as in query #1 above, takes about 150 milliseconds. Query #2, identifying the most similar genomes to a given one, across the entire index, completes in just seconds. The best part? This scales to a large number of rows, allowing much faster queries across many more genomes.
 
+OK, but... 4 milliseconds? Where's that come from? We performed the following query `TopN(Difference(Bitmap(frame=sequences, row=1), Bitmap(frame=sequences, row=0)), frame=sequences)`. This is subtracting the reference genome from Person 1's genome to get all the places where Person 1 varies from the reference, and then using that as a filter to a TopN query. The result is a list of genomes ordered by the number of variants they have in common with Person 1. This query takes about 260ms on our cluster with 29 genomes loaded + the reference. 260ms/29 equals about 9ms per genome. We then loaded 100 genomes and ran the same query - the median run time was about 400ms or 4ms per genome! Upping the ante, we loaded 200 genomes - this time the median was 1.2s giving us about 6ms per genome. Interestingly, the minimum time we observed for this query was a fairly astounding 554ms which gives us hope that with some refinement, we may be able to process genome comparisons in under 3ms consistently.
+
 The work is ongoing, and you can follow new developments in the import process in the [PDK repo](https://github.com/pilosa/pdk/tree/genome/usecase/genome). If you are conducting genomics research that you'd like to discuss with our team, please don't hesitate to reach out to [info@pilosa.com](mailto:info@pilosa.com). We're excited to continue making advancements in this space!
 
 ----
@@ -95,4 +97,4 @@ Banner image by the original authors of the Protein Data Bank (PDB) structural d
 
 _Alan is a software engineer at Pilosa. When he’s not mapping the universe, you can find him playing with laser cutters, building fidget spinners for his dog, or practicing his sick photography skills. Find him on Twitter [@gsnark](https://twitter.com/gsnark)._
 
-_Jaffee is a lead software engineer at Pilosa. When he’s not evangelizing independent indexes, he enjoys jiu-jitsu, building mechanical keyboards, and spending time with family. Follow him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
+_Jaffee is a lead software engineer at Pilosa. When he’s not dabbling in bioinformatics, he enjoys jiu-jitsu, building mechanical keyboards, and spending time with family. Follow him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
