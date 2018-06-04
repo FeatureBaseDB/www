@@ -102,3 +102,15 @@ Pilosa for uses outside of its original intent. We know that Pilosa's internal
 bitmap compression format is not optimized for dense data, and more research has
 been done in this area with exciting results (e.g. [roaring-run](https://arxiv.org/pdf/1603.06549.pdf)),
 so we have reason to believe that there is significant room for improvement in these numbers.
+
+UPDATE: After implementing run-length encoding, and some other optimizations, Pilosa is *significantly*  faster on many of these queries and beats every other system on Query 3!
+
+![Mark's benchmarks with Pilosa - updated](/img/blog/billion-taxi-table3.png)
+
+-----
+
+_Jaffee is a lead software engineer at Pilosa. When he’s not crunching a billion taxi rides, he enjoys jiu-jitsu, building mechanical keyboards, and spending time with family. Follow him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
+
+_Alan is a software engineer at Pilosa. When he’s not mapping the universe, you can find him playing with laser cutters, building fidget spinners for his dog, or practicing his sick photography skills. Find him on Twitter [@gsnark](https://twitter.com/gsnark)._
+
+
