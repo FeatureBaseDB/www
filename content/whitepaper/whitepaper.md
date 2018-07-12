@@ -1,10 +1,10 @@
 ---
-title: Pilosa: A Technical Overview
-author:
-- name: Pilosa Engineering
-  affiliation: Pilosa
-  email: dev@pilosa.com
+title: "Pilosa: A Technical Overview"
+author: Pilosa Engineering Team
 date: July 2018
+bibliography: example.bib
+abstract: 'This document will introduce you to the Pilosa distributed index.'
+titlepage: true
 ...
 
 # Introduction
@@ -31,7 +31,7 @@ represent foods which people like (or don't), ages, links clicked, or even other
 people with whom they are related. In a given matrix (or *index* in Pilosa
 parlance), all of these different types of rows might be present.
 
-[Figure 1: Illustration of the Pilosa data model, a binary index, showcasing groupings of columns called "frames."](../img/whitepaper/fig1.png)
+![Illustration of the Pilosa data model, a binary index, showcasing groupings of columns called "frames."](./figs/fig1.png)
 
 ## Roaring Bitmaps
 Each row in an *index* is stored in a format called [Roaring](http://roaringbitmap.org/) which both
@@ -135,17 +135,44 @@ require only 20 bitmaps.
 
 ### Range-Encoding Concepts
 
-In order to support range and aggregate queries, it's necessary to apply range-encoding methods to bitmaps. This entails setting bits per component as described in the bit-sliced index concepts above, but in addition to setting the bit corresponding to the component's value, all bit values greater than the bit are also set. In the previous example using the base-10 value 392, where bit 3 is set in component 2, the range-encoded representation would require setting bit 3 as well as setting bits 4 through 9. This encoding method supports range queries; for example, one could easily query for all values greater than 300.
+In order to support range and aggregate queries, it's necessary to apply
+range-encoding methods to bitmaps. This entails setting bits per component as
+described in the bit-sliced index concepts above, but in addition to setting the
+bit corresponding to the component's value, all bit values greater than the bit
+are also set. In the previous example using the base-10 value 392, where bit 3
+is set in component 2, the range-encoded representation would require setting
+bit 3 as well as setting bits 4 through 9. This encoding method supports range
+queries; for example, one could easily query for all values greater than 300.
 
-An interesting aspect of a range-encoded, bit-sliced index is that the most significant bit of each component is always set to 1; in the base-10 example, bitmap 9 is always set to 1. Because of this, the most significant bit doesn't need to be stored. In the case of a base-10, three-component bit-sliced index, only 27 bitmaps would be required to range-encode values from 0 to 999. Applying this to a base-2 encoding bit-sliced index, the most significant bit (which is 1) will always be set to 1, so it can be omitted. This means that range-encoding values using a base-2, ten-component scheme will only require 10 bitmaps.
+An interesting aspect of a range-encoded, bit-sliced index is that the most
+significant bit of each component is always set to 1; in the base-10 example,
+bitmap 9 is always set to 1. Because of this, the most significant bit doesn't
+need to be stored. In the case of a base-10, three-component bit-sliced index,
+only 27 bitmaps would be required to range-encode values from 0 to 999. Applying
+this to a base-2 encoding bit-sliced index, the most significant bit (which is
+1) will always be set to 1, so it can be omitted. This means that range-encoding
+values using a base-2, ten-component scheme will only require 10 bitmaps.
 
-[Figure 2: Example of a base-10, three-component bit-sliced index](../img/whitepaper/fig2.png)
-[Figure 3: Example of a base-2, ten-component bit-sliced index](../img/whitepaper/fig3.png)
+![Example of a base-10, three-component bit-sliced index](./figs/fig2.png)
+
+![Example of a base-2, ten-component bit-sliced index](./figs/fig3.png)
 
 
 ### Range-Encoded Bit-sliced Indexes
 
-Pilosa uses a base-2, range-encoded bit-sliced index strategy to encode scalar values. Integer values are stored in fields which have been configured with a minimum and maximum value range. This possible range determines the number of bitmaps that Pilosa uses internally to represent values in the field. For example, if a field is configured to accept integers in the range from -10 to 110, Pilosa will determine that seven bitmaps can represent all possible values within the range. In addition to the seven bitmaps representing the values, Pilosa uses an additional bitmap to indicate "not null" values. For every column containing a value, the "not null" bit is set. This additional bitmap allows Pilosa to distinguish between a column having a value of 0 and one that has no value at all, and it also provides some performance enhancements by allowing Pilosa to bypass certain computations depending on values in the "not null" bitmap.
+Pilosa uses a base-2, range-encoded bit-sliced index strategy to encode scalar
+values. Integer values are stored in fields which have been configured with a
+minimum and maximum value range. This possible range determines the number of
+bitmaps that Pilosa uses internally to represent values in the field. For
+example, if a field is configured to accept integers in the range from -10 to
+110, Pilosa will determine that seven bitmaps can represent all possible values
+within the range. In addition to the seven bitmaps representing the values,
+Pilosa uses an additional bitmap to indicate "not null" values. For every column
+containing a value, the "not null" bit is set. This additional bitmap allows
+Pilosa to distinguish between a column having a value of 0 and one that has no
+value at all, and it also provides some performance enhancements by allowing
+Pilosa to bypass certain computations depending on values in the "not null"
+bitmap.
 
 
 ## Per-Bit TimeQuantums
@@ -184,14 +211,35 @@ and "pql" (the parser for the query language), but these are not discussed in
 detail here.
 
 ## Data
-This subsection will discuss the parts of Pilosa's software which implement its data model.
-At the top level in Pilosa is a structure called a *holder*, which holds references to all the indexes that Pilosa is managing. Each *index* represents a separate binary matrix which is not necessarily related to any other *index* in Pilosa. Column attributes are managed at the *index* level since columns are shared among all *frames*. Each *index* has one or more *frames*, each of which holds some of the *index's* rows. *Frames* are user created, and 
-an *index* might only have one frame, or it might have hundreds of *frames*, depending on a user's needs. The TopN section, below, describes more about the motivation for categorizing rows into different *frames*. Row attributes are managed at the *frame* level since rows are not further partitioned beyond *frames*. Each *frame* may have one or more *views*. The most common reason for a *frame* to have more than one *view* is if it is inverseEnabled. *Frames* which are configured to be inverseEnabled store the matrix both in its standard format and in the inverted format, which allows efficient queries on columns. A frame's BSI fields are also stored as separate *views* under that frame.  
-Below the *view* is the *fragment* - *views* are broken up into *fragments* based on slices. A slice is a contiguous group of columns (220 by default), described in further detail in following sections. 
-Each *fragment* corresponds to two files stored on disk. One file contains the serialized bitmap data for the *fragment* consisting of all rows in the *fragment's* *frame* by all columns in the *fragment's* slice. The other file contains the row rank cache for the *fragment*, which is an in-order list of the rows in the slice with the ranking score for each row. There are different possible ranking types, but the most common is based on the number of set bits in the row.
+This subsection will discuss the parts of Pilosa's software which implement its
+data model. At the top level in Pilosa is a structure called a *holder*, which
+holds references to all the indexes that Pilosa is managing. Each *index*
+represents a separate binary matrix which is not necessarily related to any
+other *index* in Pilosa. Column attributes are managed at the *index* level
+since columns are shared among all *frames*. Each *index* has one or more
+*frames*, each of which holds some of the *index's* rows. *Frames* are user
+created, and an *index* might only have one frame, or it might have hundreds of
+*frames*, depending on a user's needs. The TopN section, below, describes more
+about the motivation for categorizing rows into different *frames*. Row
+attributes are managed at the *frame* level since rows are not further
+partitioned beyond *frames*. Each *frame* may have one or more *views*. The most
+common reason for a *frame* to have more than one *view* is if it is
+inverseEnabled. *Frames* which are configured to be inverseEnabled store the
+matrix both in its standard format and in the inverted format, which allows
+efficient queries on columns. A frame's BSI fields are also stored as separate
+*views* under that frame. Below the *view* is the *fragment* - *views* are
+broken up into *fragments* based on slices. A slice is a contiguous group of
+columns (220 by default), described in further detail in following sections.
+Each *fragment* corresponds to two files stored on disk. One file contains the
+serialized bitmap data for the *fragment* consisting of all rows in the
+*fragment's* *frame* by all columns in the *fragment's* slice. The other file
+contains the row rank cache for the *fragment*, which is an in-order list of the
+rows in the slice with the ranking score for each row. There are different
+possible ranking types, but the most common is based on the number of set bits
+in the row.
 
 
-[Figure 4: Visualization of Pilosa data architecture](../img/whitepaper/fig3.png)
+![Visualization of Pilosa data architecture](./figs/fig4.png)
 
 
 ## Logic
