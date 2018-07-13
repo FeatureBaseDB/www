@@ -8,30 +8,140 @@ titlepage: true
 ...
 
 # Introduction
-Pilosa is a standalone index for big data. Its goal is to help big data storage
-solutions support real time, complex queries without resorting to
-pre-computation or approximation. Pilosa achieves this goal by implementing a
-distributed bitmap index which provides a compact representation not of the data
-itself, but of the relationships present in the data. By encoding only
-relationships in an efficient manner, Pilosa is able to operate in-memory using
-low-level machine instructions to process queries at unparalleled speed on
-commodity hardware. The remainder of this paper gives a technical overview of
-Pilosa covering the data model, clustering strategy, typical usage, and advanced
-features.
+Pilosa is a standalone index for big data. Its goal is to support real time,
+complex queries without resorting to pre-computation or approximation. Pilosa
+achieves this by implementing a distributed bitmap index and using it to
+represent data in a variety of ways to achieve optimal performance on various
+query workloads.
 
-# Binary Matrices
-The core data abstraction in Pilosa is the binary matrix. Each matrix is
-centered around some "items of interest" which are represented by the columns of
-the matrix. For example, the items of interest could be people, web servers,
-taxi rides, etc. Each row in the matrix represents something with which a column
-might have some relation. While all of the columns generally represent the same
-type of item, the rows typically represent many different types of things. For
-example, in the case where the items of interest are people, the rows could
-represent foods which people like (or don't), ages, links clicked, or even other
-people with whom they are related. In a given matrix (or *index* in Pilosa
-parlance), all of these different types of rows might be present.
+Pilosa is built for simplicity. Its core engine is focused entirely on the
+efficient storage and manipulation of many very wide bitmaps. This spartan
+kernel can be made to serve a wide variety of data types and query workloads as
+we will see throughout this paper.
 
-![Illustration of the Pilosa data model, a binary index, showcasing groupings of columns called "frames."](./figs/fig1.png)
+We'll cover data modeling, low level storage details, use cases, software
+architecture, and external tooling with the goal of giving the reader an idea of
+how Pilosa fits into the complex and ever-expanding big data ecosystem. After
+reading this paper, one should have a good understanding of how Pilosa operates
+and scales, and where it might fit into an existing stack or new project.
+
+
+# Core Concepts
+At Pilosa's core is an engine for efficiently manipulating many huge and
+potentially sparse bitmaps which represent sets of integers. One can think these
+bitmaps as rows in a binary matrix. Pilosa's engine does not impose any
+particular structure or usage patterns on this matrix, and it turns out to be a
+very flexible and performant building block for a variety of data systems.
+
+
+## Indexes, Rows, Columns and Shards
+An index is a binary matrix, and may span many or all nodes in a Pilosa cluster.
+Each row in an index is stored as a bitmap and sharded across the cluster. A
+shard is a continous set of columns, and all rows in a shard are stored on the
+same node in the cluster. One can think of a shard visually as a vertical slice
+of the matrix - it contains all of the rows, but only a portion of the columns.
+
+## Field
+A field is a group of related rows in an index. There are several different
+types of fields, and the type of a field affects how Pilosa stores and operates
+on that set of rows. For example, one field type is "int". In an int field, each
+row represents a binary digit of a number, and so integers can be encoded in the
+columns of an int field. Int fields typically have between 1 and 64 rows for
+representing different integer ranges.
+
+Another field type is "set". The defining feature of set fields is that a
+separated ranked cache of their rows is maintained. Normally, the rows are
+ranked by the number of set bits in each row, the size of the cache is also
+configurable. Set fields can have anywhere from just a few to 10s or even 100s
+of millions of rows. They are often used to represents sets of possible values
+such as a person's interests.
+
+The final field type at the time of writing is the "time" field. These work
+similar to set fields, but for each logical row, they maintain several rows
+under the hood representing different portions of a timestamp.
+
+
+# Usage Categories
+
+There are two broad categories of use for Pilosa which have varying degrees of
+support within Pilosa and in external tooling. The first of these is the more
+common; let's call it the relational model. Using this model, standard
+relational data (such as a SQL database) is mapped into Pilosa's internal
+representation such that every value of every field effectively becomes a bitmap
+(row) in the binary matrix. This turns out to be a performant representation for
+many traditional OLAP style workloads.
+
+The other cateogry of usage is the "direct encoding" model. In this model
+complex entities are directly represented as bitmaps, and then a variety of
+similarity scores can be computed between various entities. Pilosa excels with
+extremely wide bitmaps, so this strategy is most effective with things like
+genetic sequences or chemical structure data which might be billions of bits
+wide.
+
+## Relational Model
+
+In this model, there is a fairly straightforward mapping from a set of SQL
+tables into a set of Pilosa indexes. There are a number of subtle choices and
+tradeoffs, but at a high level, the following basic mapping holds:
+
+| SQL    | Pilosa |
+|--------|--------|
+| Table  | Index  |
+| Row    | Column |
+| Column | Field  |
+| Value  | Row    |
+
+
+Each index is centered around some "items of interest" which are represented by
+the columns of the matrix, these would be the records in a SQL table. For
+example, the items of interest could be people, web servers, or taxi rides. Each
+row in the matrix represents something with which a column might have some
+relation. While all of the columns generally represent the same type of item,
+the rows typically represent many different types of things. For example, in the
+case where the items of interest are people, the rows could represent foods
+which people like (or don't), ages, websites visited, or even other people with
+whom they are related. In a given index, all of these different types of rows
+might be present. Since each row can only represent one value, rows are grouped
+together into fields which are analagous to SQL columns. In the "foods" field,
+you might have a rows for yogurt, steak, lima beans, and many more.
+
+### Segmentation (WHERE on steroids)
+The lima beans row, for example is a bitmap, and represents the set of people
+(columns) who like lima beans in our dataset. The most basic Pilosa query in the
+relational model is a segmentation query. "All of the poeple who like lima
+beans" is a segment. Pilosa can easily (and very quickly) find all of the people
+who like lima beans and steak, by performing a logical AND on the two bitmaps.
+It can just as easily find the people who like lima beans, but don't like steak,
+and can feed the result of that query to others, building up highly specific
+segments out of arbitrarily nested boolean logic. It should be noted that values
+from different fields can be combined as well, so one could for example find all
+the people who like lima beans and are 35 but haven't visited limabeans.com.
+Pilosa's integer fields are discussed in more detail below, but they support
+arbitrary ranges which are fully compatible with other segmentation queries.
+
+### Group By
+Going beyond segmentation, Pilosa offers ever-improving support for grouped and
+ordered queries. For example, if instead of finding the people who liked a
+certain set of foods, you wanted to find the foods that the most people liked,
+Pilosa's set fields with their ranked cache suppport this. One can also use any
+segmentation query as a filter to this, so instead of finding the most liked
+foods across your whole dataset, you might want to see the most liked foods of
+people who visited pilosa.com.
+
+
+![Illustration of the Pilosa data model, a binary index, showcasing groupings of rows called "fields."](./figs/fig1.png)
+
+
+
+## Direct Encoding Model
+
+The direct encoding model is less commonly used, but can be very powerful. We
+won't go too much into it here, but check out our blog post on 
+[genome comparisons](https://www.pilosa.com/blog/processing-genomes/) 
+ an in-depth look at how Pilosa could be used to find commonalities in large
+groups of people, predict diseases or disorders, and more!
+
+# Internals
 
 ## Roaring Bitmaps
 Each row in an *index* is stored in a format called [Roaring](http://roaringbitmap.org/) which both
@@ -77,43 +187,20 @@ number of columns. There is an official specification for the Roaring storage
 format, which the Pilosa library follows in spirit, but exact compatibility is
 not possible.
 
-## Logical Operations
-The most basic query in Pilosa (and the basis for most of the more advanced
-queries) is the so-called segmentation query. Given some arbitrary boolean
-combination of rows (e.g. Row 1 and Row 3, but not Row 7), return the set of
-columns who have set bits in those rows such that they satisfy the boolean
-statement. Pilosa executes these queries by performing bitwise logic on the
-rows - the result of each logical operation on two rows is another bitmap which
-can be used for the next stage of the computation. These operations can be
-executed independently, and in parallel by nodes in the cluster.
 
-
-## Frames and TopN
-
-Rows in Pilosa indexes may be grouped into categories called *frames*. *Frames* may
-have various ranking strategies associated with them, where each ranking keeps
-an ordered list of the rows in the *frame* based on the strategy. (The most common
-strategy is simply the count of set bits in the row.) These ranked lists are
-accessed with "TopN" queries. While segmentation queries return lists of
-columns, TopN queries return lists of rows. A TopN query can actually take any
-segmentation query as an argument and will return the ranked set of rows based
-only on the columns which satisfy the segmentation query.
-
-
-## BSI
-
+## Int Fields
 Since each row/column pair in Pilosa can encode a relationship as only a single
-bit, one might wonder how Pilosa could efficiently store scalar numeric data
-like mass, duration, speed, etc. which can have many possible values. There are
-a number of possible strategies available, but the most flexible method that
-Pilosa supports is a technique called bit-sliced indexing (BSI). With BSI, an
-integer value is encoded using several rows in Pilosa in binary format. For
-example, a 32-bit number (up to 4 billion or so) could be encoded using 32
-Pilosa rows. With some clever query generation, Pilosa can support queries over
-arbitrary ranges of a value. These queries simply return a bitmap (the set of
-columns which contain a value in the given range), and this result can be
-combined with other segmentation and TopN queries. BSI gives Pilosa enormous
-power in storing data compactly and supporting complex queries.
+bit, a different approach is used to store scalar numeric data like mass,
+duration, speed, etc. in "int" fields. There are a number of possible strategies
+available, but the most flexible method that Pilosa supports is a technique
+called bit-sliced indexing (BSI). With BSI, an integer value is encoded using
+several rows in Pilosa in binary format. For example, a 32-bit number (up to 4
+billion or so) could be encoded using 32 Pilosa rows. With some clever query
+generation, Pilosa can support queries over arbitrary ranges of a value. These
+queries simply return a bitmap (the set of columns which contain a value in the
+given range), and this result can be combined with other segmentation and TopN
+queries. BSI gives Pilosa enormous power in storing data compactly and
+supporting complex queries.
 
 ### Bit-sliced Index Concepts
 
@@ -175,13 +262,13 @@ Pilosa to bypass certain computations depending on values in the "not null"
 bitmap.
 
 
-## Per-Bit TimeQuantums
+## Time Fields
 
 While one could use BSI to associate a very precise timestamp, or indeed,
 multiple timestamps with each column in Pilosa, it is also possible to associate
-a coarse time value with any single bit in Pilosa. Upon creating a frame, one
+a coarse time value with any single bit in Pilosa. Upon creating a field, one
 may specify a supported time granularity as coarse as a year, or as granular as
-an hour. Said another way, the timestamps associated with bits in a given frame
+an hour. Said another way, the timestamps associated with bits in a given field
 can have year, month, day, or hour precision. The reason for this restriction
 lies in the carefully efficient way that Pilosa handles timestamp support.
 Instead of naively writing a timestamp alongside the set bit, or in a separate
@@ -216,25 +303,23 @@ data model. At the top level in Pilosa is a structure called a *holder*, which
 holds references to all the indexes that Pilosa is managing. Each *index*
 represents a separate binary matrix which is not necessarily related to any
 other *index* in Pilosa. Column attributes are managed at the *index* level
-since columns are shared among all *frames*. Each *index* has one or more
-*frames*, each of which holds some of the *index's* rows. *Frames* are user
-created, and an *index* might only have one frame, or it might have hundreds of
-*frames*, depending on a user's needs. The TopN section, below, describes more
-about the motivation for categorizing rows into different *frames*. Row
-attributes are managed at the *frame* level since rows are not further
-partitioned beyond *frames*. Each *frame* may have one or more *views*. The most
-common reason for a *frame* to have more than one *view* is if it is
-inverseEnabled. *Frames* which are configured to be inverseEnabled store the
-matrix both in its standard format and in the inverted format, which allows
-efficient queries on columns. A frame's BSI fields are also stored as separate
-*views* under that frame. Below the *view* is the *fragment* - *views* are
-broken up into *fragments* based on slices. A slice is a contiguous group of
-columns (220 by default), described in further detail in following sections.
+since columns are shared among all *fields*. Each *index* has one or more
+*fields*, each of which holds some of the *index's* rows. *Fields* are user
+created, and an *index* might only have one field, or it might have hundreds of
+*fields*, depending on a user's needs.
+Row attributes are managed at the *field* level since rows are not further
+partitioned beyond *fields*. Each *field* may have one or more *views*. The most
+common reason for a *field* to have more than one *view* is if it is
+a time *field*, in which case each time quantum is stored as a separate *view*, 
+and each row appears in every *view*.
+Below the *view* is the *fragment* - *views* are
+broken up into *fragments* based on shards. A shard is a contiguous group of
+columns (2^20 by default), described in further detail in following sections.
 Each *fragment* corresponds to two files stored on disk. One file contains the
 serialized bitmap data for the *fragment* consisting of all rows in the
-*fragment's* *frame* by all columns in the *fragment's* slice. The other file
-contains the row rank cache for the *fragment*, which is an in-order list of the
-rows in the slice with the ranking score for each row. There are different
+*fragment's* *field* by all columns in the *fragment's* shard. The other file
+only exists for set fields and contains the row rank cache for the *fragment*, which is an in-order list of the
+rows in the shard with the ranking score for each row. There are different
 possible ranking types, but the most common is based on the number of set bits
 in the row.
 
@@ -246,21 +331,21 @@ in the row.
 
 This subsection will discuss the parts of Pilosa's software which are not
 directly related to the data model. Pilosa contains a *server* structure which
-manages the various routines that comprise PIlosa's running state. These include
+manages the various routines that comprise Pilosa's running state. These include
 an HTTP handler for Pilosa's main API, a number of internal communication
 handlers, and several background monitoring tasks. 
 
 The HTTP handler has direct access to the *holder*, and can therefore answer
-requests about what *indexes* and *frames* are available, create new *indexes*,
-*frames*, and fields, etc. One can access the full [API documentation](https://www.pilosa.com/docs/latest/api-reference/) to see what
+requests about what *indexes* and *fields* are available, create new *indexes*,
+*fields*, and fields, etc. One can access the full [API documentation](https://www.pilosa.com/docs/latest/api-reference/) to see what
 endpoints are implemented.
 
 When the *handler* receives a PQL query, it uses the "pql" subpackage to parse it,
 and then passes the parsed structure along to the *executor*. Each PQL call in a
 query is processed serially. The *executor* behaves somewhat differently, based on
 which call it is processing, but generally it processes the call for all
-relevant slices on the local node, and concurrently issues requests to process
-the call for slices which reside on remote nodes in the cluster. Once all local
+relevant shards on the local node, and concurrently issues requests to process
+the call for shards which reside on remote nodes in the cluster. Once all local
 and remote processing is finished, it performs any aggregation or reduction work
 which is required and returns the results back to the *handler*. The coordination
 of remote and local execution is handled by a lightweight map/reduce framework
@@ -276,9 +361,15 @@ Pilosa runs as a cluster of one or more nodes - there is no designated master
 node. All nodes run the same standalone Pilosa binary which has no external
 dependencies.
 
-## Slices
+## Shards
 
-Pilosa performs parallelized query execution over all cores of all nodes in a cluster. The data unit of parallelism is called a slice. A slice is a group of 1,048,576 (220) columns and all rows within an *index*. The data is sliced vertically in this way so that the processing of segmentation queries can occur independently on each slice. Each slice is wholly contained on a single node (though it may have replicas on other nodes), and a node may contain multiple slices.
+Pilosa performs parallelized query execution over all cores of all nodes in a
+cluster. The data unit of parallelism is called a shard. A shard is a group of
+1,048,576 (2^20) columns and all rows within an *index*. The data is sharded
+vertically in this way so that the processing of segmentation queries can occur
+independently on each shard. Each shard is wholly contained on a single node
+(though it may have replicas on other nodes), and a node may contain multiple
+shards.
 
 ## Replication
 
@@ -305,7 +396,7 @@ receive a NodeJoin event along with information about the joining node. In
 addition to management node membership, memberlist also provides Pilosa with the
 ability to send messages between nodes in the cluster. Pilosa uses this
 functionality to broadcast messages about cluster state and schema changes. For
-example, when a *frame* is created on a node, Pilosa broadcasts a FrameCreation
+example, when a *field* is created on a node, Pilosa broadcasts a FieldCreation
 message to all other nodes in the cluster. This ensures that every node is aware
 of the latest schema and can therefore appropriately respond to future queries.
 
@@ -330,10 +421,10 @@ In an example where the columns of an *index* represent individual people, one
 might store each person's name in the column attributes. In that case, a query
 could be specified to return the list of *columnIds* that represent the query, as
 well as the list of names that make up that result set. Second, attributes on
-rows can be used as filters in TopN queries. If a Pilosa *frame* contains rows
+rows can be used as filters in TopN queries. If a Pilosa *field* contains rows
 that represent movies, and each row is given an attribute called genre with
 values like "comedy" and "drama", then one could perform a TopN query on the
-movie *frame* filtered by genre.
+movie *field* filtered by genre.
 
 # API
 
@@ -359,7 +450,7 @@ Kafka into Pilosa without writing any code or configuration. The PDK's libraries
 will reflectively examine data and try to automatically determine the best
 possible Pilosa representation for that data. By default, any record coming from
 Kafka would be assigned a new column in the *index*, and the various fields and
-their values would be broken out into *frames* and rows respectively. While using
+their values would be broken out into *fields* and rows respectively. While using
 this automatic tooling may be a great way to get started with Pilosa, it's
 almost always possible to gain efficiency and flexibility benefits with some
 application specific configuration.
