@@ -3,7 +3,7 @@ title: "Pilosa: A Technical Overview"
 author: Pilosa Engineering Team
 date: July 2018
 bibliography: example.bib
-abstract: 'This document will introduce you to the Pilosa distributed index.'
+abstract: 'This document introduces the Pilosa distributed index.'
 titlepage: true
 ...
 
@@ -19,11 +19,11 @@ efficient storage and manipulation of many very wide bitmaps. This spartan
 kernel can be made to serve a wide variety of data types and query workloads as
 we will see throughout this paper.
 
-We'll cover data modeling, low level storage details, use cases, software
-architecture, and external tooling with the goal of giving the reader an idea of
-how Pilosa fits into the complex and ever-expanding big data ecosystem. After
-reading this paper, one should have a good understanding of how Pilosa operates
-and scales, and where it might fit into an existing stack or new project.
+Data modeling, low level storage details, use cases, software architecture, and
+external tooling will be covered, with the goal of giving the reader an idea of
+how Pilosa fits into the big data ecosystem. After reading this paper, one
+should have a good understanding of how Pilosa operates, scales, and where it
+might fit into an existing stack or new project.
 
 
 # Core Concepts
@@ -103,7 +103,7 @@ which people like (or don't), ages, websites visited, or even other people with
 whom they are related. In a given index, all of these different types of rows
 might be present. Since each row can only represent one value, rows are grouped
 together into fields which are analagous to SQL columns. In the "foods" field,
-you might have a rows for yogurt, steak, lima beans, and many more.
+one might have a rows for yogurt, steak, lima beans, and many more.
 
 ### Segmentation (WHERE on steroids)
 The lima beans row, for example is a bitmap, and represents the set of people
@@ -122,16 +122,13 @@ arbitrary ranges which are fully compatible with other segmentation queries.
 ### Group By
 Going beyond segmentation, Pilosa offers ever-improving support for grouped and
 ordered queries. For example, if instead of finding the people who liked a
-certain set of foods, you wanted to find the foods that the most people liked,
+certain set of foods, one wanted to find the foods that the most people liked,
 Pilosa's set fields with their ranked cache suppport this. One can also use any
-segmentation query as a filter to this, so instead of finding the most liked
-foods across your whole dataset, you might want to see the most liked foods of
+segmentation query as a filter to a group by query, so instead of finding the
+most liked foods across the whole dataset, one can see the most liked foods of
 people who visited pilosa.com.
 
-
 ![Illustration of the Pilosa data model, a binary index, showcasing groupings of rows called "fields."](./figs/fig1.png)
-
-
 
 ## Direct Encoding Model
 
@@ -198,68 +195,26 @@ several rows in Pilosa in binary format. For example, a 32-bit number (up to 4
 billion or so) could be encoded using 32 Pilosa rows. With some clever query
 generation, Pilosa can support queries over arbitrary ranges of a value. These
 queries simply return a bitmap (the set of columns which contain a value in the
-given range), and this result can be combined with other segmentation and TopN
+given range), and this result can be combined with other segmentation and group by
 queries. BSI gives Pilosa enormous power in storing data compactly and
-supporting complex queries.
-
-### Bit-sliced Index Concepts
-
-In order to represent scalar data using BSI, the value being encoded is broken
-up into different components based on a specific scheme. For example, one might
-decide to encode integer values ranging from 0 to 999 as a base-10,
-three-component bit-sliced index. This entails representing each component of a
-value—the ones, tens, and hundreds digits—as a set of 10 bitmaps representing
-the possible values 0 to 9. If a value to be encoded is 392, then a bit would be
-set in bitmap 2 for component-0, bitmap 9 for component-1, and bitmap 3 for
-component-2. This encoding scheme would require 30 bitmaps. Depending on the
-values being encoded, it may be more efficient to use a different BSI encoding
-scheme. For example, the same range of integer values from 0 to 999 can be
-encoded using a base-2, ten-component bit-sliced index. In this case, the
-example base-10 value 392 would become the base-2 value 0110001000. Here, a bit
-would be set in bitmap 1 for components 4, 8, and 9. This encoding scheme would
-require only 20 bitmaps.
-
-
-### Range-Encoding Concepts
-
-In order to support range and aggregate queries, it's necessary to apply
-range-encoding methods to bitmaps. This entails setting bits per component as
-described in the bit-sliced index concepts above, but in addition to setting the
-bit corresponding to the component's value, all bit values greater than the bit
-are also set. In the previous example using the base-10 value 392, where bit 3
-is set in component 2, the range-encoded representation would require setting
-bit 3 as well as setting bits 4 through 9. This encoding method supports range
-queries; for example, one could easily query for all values greater than 300.
-
-An interesting aspect of a range-encoded, bit-sliced index is that the most
-significant bit of each component is always set to 1; in the base-10 example,
-bitmap 9 is always set to 1. Because of this, the most significant bit doesn't
-need to be stored. In the case of a base-10, three-component bit-sliced index,
-only 27 bitmaps would be required to range-encode values from 0 to 999. Applying
-this to a base-2 encoding bit-sliced index, the most significant bit (which is
-1) will always be set to 1, so it can be omitted. This means that range-encoding
-values using a base-2, ten-component scheme will only require 10 bitmaps.
-
-![Example of a base-10, three-component bit-sliced index](./figs/fig2.png)
-
-![Example of a base-2, ten-component bit-sliced index](./figs/fig3.png)
-
+supporting complex queries. 
 
 ### Range-Encoded Bit-sliced Indexes
 
 Pilosa uses a base-2, range-encoded bit-sliced index strategy to encode scalar
-values. Integer values are stored in fields which have been configured with a
-minimum and maximum value range. This possible range determines the number of
-bitmaps that Pilosa uses internally to represent values in the field. For
-example, if a field is configured to accept integers in the range from -10 to
-110, Pilosa will determine that seven bitmaps can represent all possible values
-within the range. In addition to the seven bitmaps representing the values,
-Pilosa uses an additional bitmap to indicate "not null" values. For every column
-containing a value, the "not null" bit is set. This additional bitmap allows
-Pilosa to distinguish between a column having a value of 0 and one that has no
-value at all, and it also provides some performance enhancements by allowing
-Pilosa to bypass certain computations depending on values in the "not null"
-bitmap.
+values. For those interested in the theory behind this see the [blog
+post](https://www.pilosa.com/blog/range-encoded-bitmaps/). Briefly though,
+"int" fields are configured with a minimum and maximum value range. 
+This possible range determines the number of bitmaps
+that Pilosa uses internally to represent values in the field. For example, if a
+field is configured to accept integers in the range from -10 to 110, Pilosa will
+determine that seven bitmaps can represent all possible values within the range.
+In addition to the seven bitmaps representing the values, Pilosa uses an
+additional bitmap to indicate "not null" values. For every column containing a
+value, the "not null" bit is set. This additional bitmap allows Pilosa to
+distinguish between a column having a value of 0 and one that has no value at
+all, and it also provides some performance enhancements by allowing Pilosa to
+bypass certain computations depending on values in the "not null" bitmap.
 
 
 ## Time Fields
@@ -284,9 +239,22 @@ For example if there were a query for the time range from January 1st of 2016 to
 February 28th of 2017, Pilosa would only need to run the query in three bit
 matrices, the "2016" matrix, the "January 2017" matrix, and the "February 2017"
 matrix. These time range queries return bitmaps like other queries in Pilosa, so
-they can naturally be combined with boolean logic, and used as filters in TopN
-queries.
+they can naturally be combined with boolean logic, and used as filters in group
+by queries.
 
+# Attributes
+Pilosa can store metadata pertaining to rows and columns in an embedded [BoltDB](https://github.com/boltdb/bolt)
+key/value database. The intention is that attributes should be used to store
+information that is specific to a row or column. There are a couple of uses for
+attributes. First, row and column attributes can be returned in query results.
+In an example where the columns of an *index* represent individual people, one
+might store each person's name in the column attributes. In that case, a query
+could be specified to return the list of *columnIds* that represent the query, as
+well as the list of names that make up that result set. Second, attributes on
+rows can be used as filters in TopN queries. If a Pilosa *field* contains rows
+that represent movies, and each row is given an attribute called genre with
+values like "comedy" and "drama", then one could perform a TopN query on the
+movie *field* filtered by genre.
 
 # Software Architecture
 
@@ -315,11 +283,11 @@ and each row appears in every *view*.
 Below the *view* is the *fragment* - *views* are
 broken up into *fragments* based on shards. A shard is a contiguous group of
 columns (2^20 by default), described in further detail in following sections.
-Each *fragment* corresponds to two files stored on disk. One file contains the
+Each *fragment* corresponds to a file stored on disk. This file contains the
 serialized bitmap data for the *fragment* consisting of all rows in the
-*fragment's* *field* by all columns in the *fragment's* shard. The other file
-only exists for set fields and contains the row rank cache for the *fragment*, which is an in-order list of the
-rows in the shard with the ranking score for each row. There are different
+*fragment's* *field* by all columns in the *fragment's* shard. For "set" fields, another file
+exists for each *fragment* that contains the row rank cache for that *fragment*. This is an in-order list of the
+rows in the *fragment* with the ranking score for each row. There are different
 possible ranking types, but the most common is based on the number of set bits
 in the row.
 
@@ -330,28 +298,52 @@ in the row.
 ## Logic
 
 This subsection will discuss the parts of Pilosa's software which are not
-directly related to the data model. Pilosa contains a *server* structure which
-manages the various routines that comprise Pilosa's running state. These include
-an HTTP handler for Pilosa's main API, a number of internal communication
-handlers, and several background monitoring tasks. 
+directly related to the data model. Pilosa makes heavy use of dependency
+injection to modularize its various components. Even things like the HTTP Server
+and its interface are injected dependencies. This strategy keeps Pilosa's core
+functionality small which makes it easier to define new ways to interact with
+it, or embed it in other applications. 
 
-The HTTP handler has direct access to the *holder*, and can therefore answer
-requests about what *indexes* and *fields* are available, create new *indexes*,
-*fields*, and fields, etc. One can access the full [API documentation](https://www.pilosa.com/docs/latest/api-reference/) to see what
-endpoints are implemented.
+| Component                   | Default                              |
+|-----------------------------|--------------------------------------|
+| Logger                      | A wrapped version of Go's "log"      |
+| Attribute Store             | BoltDB                               |
+| System Info Reporter        | github.com/shirou/gopsutil           |
+| Garbage Collection Notifier | github.com/CAFxX/gcnotifier          |
+| Statsd Client               | github.com/DataDog/datadog-go/statsd |
+| Internal Communication      | pilosa/http/client.go                |
+| Key translation/allocation  | pilosa.TranslateFile                 |
+| Serialization format        | protobufs                            |
+| Cluster Membership          | github.com/hashicorp/memberlist      |
+| External API                | pilosa/http/handler.go               |
 
-When the *handler* receives a PQL query, it uses the "pql" subpackage to parse it,
-and then passes the parsed structure along to the *executor*. Each PQL call in a
-query is processed serially. The *executor* behaves somewhat differently, based on
-which call it is processing, but generally it processes the call for all
+Pilosa's server subpackage contains all the logic which "puts Pilosa together".
+It creates a `pilosa.Server` which is the core Pilosa object which manages the
+various services that a Pilosa node runs, and provides the main internal
+interface to Pilosa. The server subpackage then creates a `pilosa.API` which takes
+a `pilosa.Server` and wraps it in the external interface which pilosa provides to
+external handlers. Finally, it passes the API to a handler (an http server by
+default) which defines Pilosa HTTP API and is largely based on `pilosa.API`. The
+server subpackage also separately instantiates the Cluster Membership component
+which also gets a reference to the `pilosa.API`, so that it can notify Pilosa when
+nodes join and leave the cluster as well acting as a synchronizing mechanism for
+some basic node state.
+
+Placeholder for figure:
+External Handler -> `pilosa.API` -> `pilosa.Server` -> (internal services and data).
+
+When the API receives a PQL query, it uses the "pql" subpackage to parse it, and
+then passes the parsed structure along to the *executor*. Each PQL call in a
+query is processed serially. The *executor* behaves somewhat differently, based
+on which call it is processing, but generally it processes the call for all
 relevant shards on the local node, and concurrently issues requests to process
 the call for shards which reside on remote nodes in the cluster. Once all local
 and remote processing is finished, it performs any aggregation or reduction work
-which is required and returns the results back to the *handler*. The coordination
-of remote and local execution is handled by a lightweight map/reduce framework
+which is required and returns the results back to the API. The coordination of
+remote and local execution is handled by a lightweight map/reduce framework
 inside Pilosa.
 
-The *server* also runs a number of background processes to keep data in sync
+The `pilosa.Server` also runs a number of background processes to keep data in sync
 across the cluster, send optional telemetry data back to Pilosa HQ, and collect
 various metrics.
 
@@ -359,7 +351,11 @@ various metrics.
 
 Pilosa runs as a cluster of one or more nodes - there is no designated master
 node. All nodes run the same standalone Pilosa binary which has no external
-dependencies.
+dependencies. Note: currently, a "coordinator" node must be specified which acts
+as a leader during cluster resizing events - for the time being, this is defined
+via config (though can be changed at run time), eventually the coordinator will
+likely be chosen through automatic leader election, and the configuration option
+will be deprecated.
 
 ## Shards
 
@@ -385,20 +381,14 @@ returned.
 
 ## Gossip
 
-Pilosa uses HashiCorp's memberlist protocol to manage cluster state and to
-broadcast internode messages within the cluster. Memberlist is a gossip
-implementation based on the SWIM protocol that supports both synchronous and
-asynchronous communication. By providing a gossip seed—the address of a node in
-the cluster—memberlist determines cluster membership for all nodes, and delivers
-node membership events to all nodes in the cluster. For example, when a new node
-joins the cluster, memberlist ensures that all other nodes in the cluster
-receive a NodeJoin event along with information about the joining node. In
-addition to management node membership, memberlist also provides Pilosa with the
-ability to send messages between nodes in the cluster. Pilosa uses this
-functionality to broadcast messages about cluster state and schema changes. For
-example, when a *field* is created on a node, Pilosa broadcasts a FieldCreation
-message to all other nodes in the cluster. This ensures that every node is aware
-of the latest schema and can therefore appropriately respond to future queries.
+Pilosa uses HashiCorp's memberlist protocol (by default) to manage cluster
+state. Memberlist is a gossip implementation based on the SWIM protocol that
+supports both synchronous and asynchronous communication. By providing a list of
+gossip seeds—the addresses of other nodes in the cluster—memberlist determines
+cluster membership for all nodes, and delivers node membership events to all
+nodes in the cluster. For example, when a new node joins the cluster, memberlist
+ensures that all other nodes in the cluster receive a NodeJoin event along with
+information about the joining node.
 
 ## Guarantees
 
@@ -411,25 +401,6 @@ the data. Pages are located in the operating system page cache, so they remain
 cached even between process restarts. As an additional safeguard against data
 loss, all writes are written to an append-only log on disk, and then applied to
 the in-memory representation.
-
-# Attributes
-Pilosa can store metadata pertaining to rows and columns in an embedded [BoltDB](https://github.com/boltdb/bolt)
-key/value database. The intention is that attributes should be used to store
-information that is specific to a row or column. There are a couple of uses for
-attributes. First, row and column attributes can be returned in query results.
-In an example where the columns of an *index* represent individual people, one
-might store each person's name in the column attributes. In that case, a query
-could be specified to return the list of *columnIds* that represent the query, as
-well as the list of names that make up that result set. Second, attributes on
-rows can be used as filters in TopN queries. If a Pilosa *field* contains rows
-that represent movies, and each row is given an attribute called genre with
-values like "comedy" and "drama", then one could perform a TopN query on the
-movie *field* filtered by genre.
-
-# API
-
-Communication with a Pilosa cluster happens over an HTTP API supporting both
-JSON and [protocol buffers](https://developers.google.com/protocol-buffers/) serialization.
 
 # Client Libraries
 
