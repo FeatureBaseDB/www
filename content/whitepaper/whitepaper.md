@@ -10,27 +10,27 @@ titlepage: true
 # Introduction
 Pilosa is a standalone index for big data. Its goal is to support real time,
 complex queries without resorting to pre-computation or approximation. Pilosa
-achieves this by implementing a distributed bitmap index and using it to
-represent data in a variety of ways to achieve optimal performance on various
-query workloads.
+achieves this by implementing a distributed bitmap index and using that index to
+represent data in a variety of ways. This strategy allows Pilosa to achieve optimal
+performance on various query workloads.
 
 Pilosa is built for simplicity. Its core engine is focused entirely on the
-efficient storage and manipulation of many very wide bitmaps. This spartan
-kernel can be made to serve a wide variety of data types and query workloads as
+efficient storage and manipulation of many very wide bitmaps. The bitmap as
+a building block can be made to serve a wide variety of data types and query workloads as
 we will see throughout this paper.
 
 Data modeling, low level storage details, use cases, software architecture, and
 external tooling will be covered, with the goal of giving the reader an idea of
 how Pilosa fits into the big data ecosystem. After reading this paper, one
-should have a good understanding of how Pilosa operates, scales, and where it
+should have a good understanding of how Pilosa operates and scales, and where it
 might fit into an existing stack or new project.
 
 
 # Core Concepts
-At Pilosa's core is an engine for efficiently manipulating many huge and
-potentially sparse bitmaps which represent sets of integers. One can think these
+At Pilosa's core is an engine for efficiently manipulating many large and
+potentially sparse bitmaps, each representing a set of integers. One can think of these
 bitmaps as rows in a binary matrix. Pilosa's engine does not impose any
-particular structure or usage patterns on this matrix, and it turns out to be a
+particular structure or usage patterns on this matrix, resulting in a
 very flexible and performant building block for a variety of data systems.
 
 
@@ -39,19 +39,20 @@ An index is a binary matrix, and may span many or all nodes in a Pilosa cluster.
 Each row in an index is stored as a bitmap and sharded across the cluster. A
 shard is a continous set of columns, and all rows in a shard are stored on the
 same node in the cluster. One can think of a shard visually as a vertical slice
-of the matrix - it contains all of the rows, but only a portion of the columns.
+of the matrix—it contains all of the rows, but only a portion of the columns.
 
 ## Field
 A field is a group of related rows in an index. There are several different
-types of fields, and the type of a field affects how Pilosa stores and operates
-on that set of rows. For example, one field type is "int". In an int field, each
-row represents a binary digit of a number, and so integers can be encoded in the
-columns of an int field. Int fields typically have between 1 and 64 rows for
-representing different integer ranges.
+types of fields, and a field's type affects how Pilosa stores and operates
+on the set of rows in that field. For example, one field type is "int". In an int field, each
+row represents one binary digit of the base-2 representation of an integer.
+This allows an iteger to be encoded into a single column of an int field.
+Int fields typically have between 1 and 64 rows for representing different
+integer ranges.
 
 Another field type is "set". The defining feature of set fields is that a
-separated ranked cache of their rows is maintained. Normally, the rows are
-ranked by the number of set bits in each row, the size of the cache is also
+separate ranked cache of their rows is maintained. Normally, the rows are
+ranked by the number of set bits in each row, and the size of the cache is
 configurable. Set fields can have anywhere from just a few to 10s or even 100s
 of millions of rows. They are often used to represents sets of possible values
 such as a person's interests.
@@ -64,14 +65,14 @@ under the hood representing different portions of a timestamp.
 # Usage Categories
 
 There are two broad categories of use for Pilosa which have varying degrees of
-support within Pilosa and in external tooling. The first of these is the more
-common; let's call it the relational model. Using this model, standard
+support within Pilosa and in external tooling. The first, and more common of
+this is the relational model. Using this model, standard
 relational data (such as a SQL database) is mapped into Pilosa's internal
 representation such that every value of every field effectively becomes a bitmap
 (row) in the binary matrix. This turns out to be a performant representation for
 many traditional OLAP style workloads.
 
-The other cateogry of usage is the "direct encoding" model. In this model
+The other cateogry of usage is the "direct encoding" model. In this model,
 complex entities are directly represented as bitmaps, and then a variety of
 similarity scores can be computed between various entities. Pilosa excels with
 extremely wide bitmaps, so this strategy is most effective with things like
@@ -93,7 +94,7 @@ tradeoffs, but at a high level, the following basic mapping holds:
 
 
 Each index is centered around some "items of interest" which are represented by
-the columns of the matrix, these would be the records in a SQL table. For
+the columns of the matrix. These would be equivalent to the records in a SQL table. For
 example, the items of interest could be people, web servers, or taxi rides. Each
 row in the matrix represents something with which a column might have some
 relation. While all of the columns generally represent the same type of item,
@@ -103,19 +104,20 @@ which people like (or don't), ages, websites visited, or even other people with
 whom they are related. In a given index, all of these different types of rows
 might be present. Since each row can only represent one value, rows are grouped
 together into fields which are analagous to SQL columns. In the "foods" field,
-one might have a rows for yogurt, steak, lima beans, and many more.
+one might have one row for yogurt, another row for steak, another for lima beans,
+and so on.
 
 ### Segmentation (WHERE on steroids)
-The lima beans row, for example is a bitmap, and represents the set of people
+The lima beans row, for example, is a bitmap, and it represents the set of people
 (columns) who like lima beans in our dataset. The most basic Pilosa query in the
 relational model is a segmentation query. "All of the poeple who like lima
-beans" is a segment. Pilosa can easily (and very quickly) find all of the people
-who like lima beans and steak, by performing a logical AND on the two bitmaps.
+beans" is a segment. Pilosa can easily (and quickly) find all of the people
+who like lima beans and steak by performing a logical AND on the two bitmaps.
 It can just as easily find the people who like lima beans, but don't like steak,
-and can feed the result of that query to others, building up highly specific
+and can feed the result of that query to other queries, building up highly specific
 segments out of arbitrarily nested boolean logic. It should be noted that values
 from different fields can be combined as well, so one could for example find all
-the people who like lima beans and are 35 but haven't visited limabeans.com.
+the people who like lima beans and are age 35 but haven't visited limabeans.com.
 Pilosa's integer fields are discussed in more detail below, but they support
 arbitrary ranges which are fully compatible with other segmentation queries.
 
@@ -133,9 +135,9 @@ people who visited pilosa.com.
 ## Direct Encoding Model
 
 The direct encoding model is less commonly used, but can be very powerful. We
-won't go too much into it here, but check out our blog post on 
-[genome comparisons](https://www.pilosa.com/blog/processing-genomes/) 
- an in-depth look at how Pilosa could be used to find commonalities in large
+won't go into detail here, but check out our blog post on
+[genome comparisons](https://www.pilosa.com/blog/processing-genomes/),
+ an in-depth look at how Pilosa can be used to find commonalities in large
 groups of people, predict diseases or disorders, and more!
 
 # Internals
@@ -150,9 +152,9 @@ saving both CPU and memory.
 
 ### Roaring Compression
 Roaring stores each bitmap in one of three ways. Two metrics of a bitmap
-determine the compression method: a count of the set bits in the bitmap, or
-cardinality, and a measure of bit grouping in the bitmap, or run count. Based on
-these values, the storage format is chosen—to minimize size— with either
+determine which of the three compression methods are employed: a count of the set bits in the bitmap
+(cardinality) and a measure of bit grouping in the bitmap (run count). Based on
+these values, the storage format is chosen—to minimize size—with either
 uncompressed bitmap encoding, array encoding, or run-length encoding. 
 
 Uncompressed bitmap encoding stores each bit directly. It is often used for
@@ -260,7 +262,7 @@ movie *field* filtered by genre.
 
 Pilosa is written in the Go programming language. The functionality described in
 this section is in the top level "pilosa" package in the repository at
-github.com/pilosa/pilosa. There are several sub-package which contain important
+github.com/pilosa/pilosa. There are several sub-packages which contain important
 functionality, such as "roaring" (Pilosa's implementation of roaring bitmaps)
 and "pql" (the parser for the query language), but these are not discussed in
 detail here.
@@ -271,7 +273,7 @@ data model. At the top level in Pilosa is a structure called a *holder*, which
 holds references to all the indexes that Pilosa is managing. Each *index*
 represents a separate binary matrix which is not necessarily related to any
 other *index* in Pilosa. Column attributes are managed at the *index* level
-since columns are shared among all *fields*. Each *index* has one or more
+since columns are shared among all *fields* of an index. Each *index* has one or more
 *fields*, each of which holds some of the *index's* rows. *Fields* are user
 created, and an *index* might only have one field, or it might have hundreds of
 *fields*, depending on a user's needs.
@@ -280,7 +282,7 @@ partitioned beyond *fields*. Each *field* may have one or more *views*. The most
 common reason for a *field* to have more than one *view* is if it is
 a time *field*, in which case each time quantum is stored as a separate *view*, 
 and each row appears in every *view*.
-Below the *view* is the *fragment* - *views* are
+Below the *view* is the *fragment*; *views* are
 broken up into *fragments* based on shards. A shard is a contiguous group of
 columns (2^20 by default), described in further detail in following sections.
 Each *fragment* corresponds to a file stored on disk. This file contains the
@@ -301,8 +303,8 @@ This subsection will discuss the parts of Pilosa's software which are not
 directly related to the data model. Pilosa makes heavy use of dependency
 injection to modularize its various components. Even things like the HTTP Server
 and its interface are injected dependencies. This strategy keeps Pilosa's core
-functionality small which makes it easier to define new ways to interact with
-it, or embed it in other applications. 
+functionality small, making it easier to define new ways to interact with
+Pilosa, or embed it into other applications.
 
 | Component                   | Default                              |
 |-----------------------------|--------------------------------------|
@@ -323,10 +325,10 @@ various services that a Pilosa node runs, and provides the main internal
 interface to Pilosa. The server subpackage then creates a `pilosa.API` which takes
 a `pilosa.Server` and wraps it in the external interface which pilosa provides to
 external handlers. Finally, it passes the API to a handler (an http server by
-default) which defines Pilosa HTTP API and is largely based on `pilosa.API`. The
+default) which defines the Pilosa HTTP API and is largely based on `pilosa.API`. The
 server subpackage also separately instantiates the Cluster Membership component
 which also gets a reference to the `pilosa.API`, so that it can notify Pilosa when
-nodes join and leave the cluster as well acting as a synchronizing mechanism for
+nodes join and leave the cluster as well as hacting as a synchronizing mechanism for
 some basic node state.
 
 Placeholder for figure:
@@ -334,12 +336,12 @@ External Handler -> `pilosa.API` -> `pilosa.Server` -> (internal services and da
 
 When the API receives a PQL query, it uses the "pql" subpackage to parse it, and
 then passes the parsed structure along to the *executor*. Each PQL call in a
-query is processed serially. The *executor* behaves somewhat differently, based
+query is processed serially. The *executor* behaves somewhat differently based
 on which call it is processing, but generally it processes the call for all
-relevant shards on the local node, and concurrently issues requests to process
+relevant shards on the local node and concurrently issues requests to process
 the call for shards which reside on remote nodes in the cluster. Once all local
 and remote processing is finished, it performs any aggregation or reduction work
-which is required and returns the results back to the API. The coordination of
+required, then returns the results back to the API. The coordination of
 remote and local execution is handled by a lightweight map/reduce framework
 inside Pilosa.
 
@@ -349,11 +351,11 @@ various metrics.
 
 # Clustering
 
-Pilosa runs as a cluster of one or more nodes - there is no designated master
+Pilosa runs as a cluster of one or more nodes—there is no designated master
 node. All nodes run the same standalone Pilosa binary which has no external
 dependencies. Note: currently, a "coordinator" node must be specified which acts
-as a leader during cluster resizing events - for the time being, this is defined
-via config (though can be changed at run time), eventually the coordinator will
+as a leader during cluster resizing events. For the time being, this is defined
+via config (though it can be changed at run time), but eventually the coordinator will
 likely be chosen through automatic leader election, and the configuration option
 will be deprecated.
 
@@ -430,11 +432,11 @@ application specific configuration.
 # Conclusion
 
 We’ve seen how Pilosa’s data model, clustering strategy, typical usage, and
-advanced features allow it to operate in-memory using low-level machine
+advanced features allow it to operate in memory using low-level machine
 instructions to process queries at unparalleled speed on commodity hardware.
 Pilosa is, first and foremost, an open source project built and maintained by a
 community of dedicated engineers. We are always looking to make improvements,
-and appreciate any feedback you may have. Please visit our GitHub repository to
+and appreciate any feedback you may have. Please visit our [GitHub repository](https://github.com/pilosa/pilosa) to
 learn more about our software. For details and instructions on how to download
 and install the open source version of our software, please visit [our website](https://www.pilosa.com/docs/latest/installation/).
 Pilosa is also available as an enterprise-level solution. Pilosa Enterprise
