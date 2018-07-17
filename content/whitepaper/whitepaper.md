@@ -15,9 +15,9 @@ represent data in a variety of ways. This strategy allows Pilosa to achieve opti
 performance on various query workloads.
 
 Pilosa is built for simplicity. Its core engine is focused entirely on the
-efficient storage and manipulation of many very wide bitmaps. The bitmap as
-a building block can be made to serve a wide variety of data types and query workloads as
-we will see throughout this paper.
+efficient storage and manipulation of many very wide bitmaps. Though conceptually
+straightforward, this foundation can be made to serve a wide variety of data types
+and query workloads as we will see throughout this paper.
 
 Data modeling, low level storage details, use cases, software architecture, and
 external tooling will be covered, with the goal of giving the reader an idea of
@@ -46,7 +46,7 @@ A field is a group of related rows in an index. There are several different
 types of fields, and a field's type affects how Pilosa stores and operates
 on the set of rows in that field. For example, one field type is "int". In an int field, each
 row represents one binary digit of the base-2 representation of an integer.
-This allows an iteger to be encoded into a single column of an int field.
+This allows an integer to be encoded into a single column of an int field.
 Int fields typically have between 1 and 64 rows for representing different
 integer ranges.
 
@@ -66,7 +66,7 @@ under the hood representing different portions of a timestamp.
 
 There are two broad categories of use for Pilosa which have varying degrees of
 support within Pilosa and in external tooling. The first, and more common of
-this is the relational model. Using this model, standard
+these is the relational model. Using this model, standard
 relational data (such as a SQL database) is mapped into Pilosa's internal
 representation such that every value of every field effectively becomes a bitmap
 (row) in the binary matrix. This turns out to be a performant representation for
@@ -328,7 +328,7 @@ external handlers. Finally, it passes the API to a handler (an http server by
 default) which defines the Pilosa HTTP API and is largely based on `pilosa.API`. The
 server subpackage also separately instantiates the Cluster Membership component
 which also gets a reference to the `pilosa.API`, so that it can notify Pilosa when
-nodes join and leave the cluster as well as hacting as a synchronizing mechanism for
+nodes join and leave the cluster as well as acting as a synchronizing mechanism for
 some basic node state.
 
 Placeholder for figure:
