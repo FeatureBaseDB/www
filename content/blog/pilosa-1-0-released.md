@@ -5,17 +5,18 @@ title = "Pilosa 1.0 Released"
 author = "Alan Bernstein"
 author_twitter = "gsnark"
 author_img = "2"
+featured = "true"
 image = "/img/blog/pilosa-1-0-released/banner.png"
 overlay_color = "blue" # blue, green, or light
 +++
 
-Pilosa is happy to announce version 1.0, available as of this week! After eight feature-heavy major releases since our launch, there were a lot of loose ends to clean up. As followers of [semantic versioning](https://semver.org/), 1.0 is a big milestone, and a binding one. Although Pilosa is far from "complete", this release signifies a certain stability. We plan to support the current feature set and API through all 1.x releases, and that entails more than you might think.
+Pilosa is happy to announce version 1.0, available as of last week! After eight feature-heavy major releases since our launch, there were a lot of loose ends to clean up. As followers of [semantic versioning](https://semver.org/), 1.0 is a big milestone, and a binding one. Although Pilosa is far from "complete", this release signifies a certain stability. We plan to support the current feature set and API through all 1.x releases, and that entails more than you might think.
 
 <!--more-->
 
 What's in an API, anyway? The more we thought about that question, the more answers popped up. There is an obvious place to start—our HTTP interface and query language—but it keeps going. Since we're an open-source project, the code itself is another facet of the API. Every public line of code is potentially a part of the API surface that requires support throughout 1.x.
 
-Among the components we considered including in 1.0:
+Among the components we considered going into 1.0:
 
 - HTTP API
 - Query language
@@ -30,7 +31,7 @@ As we approached our 1.0 release, the ability to maintain compatibility promises
 
 A large portion of the work in this release focused on these API changes, but there were some more publicly visible changes as well:
 
-- PQL syntax has been updated significantly. See the (docs)[../docs/query-language/] for details.
+- PQL syntax has been updated significantly. See the [docs](../docs/query-language/) for details.
 - Frames are now known as fields, and the nesting of fields within frames no longer exists; each field exists at the top level in an index.
 - Field creation has been revamped, with a more sensible field type system. For example, fields that were "rangeEnabled" are now simply fields of type "int".
 - Slices are now officially known simply as shards.
