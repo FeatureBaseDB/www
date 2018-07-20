@@ -16,7 +16,7 @@ Pilosa is happy to announce version 1.0, available as of last week! After eight 
 
 What's in an API, anyway? The more we thought about that question, the more answers popped up. There is an obvious place to start—our HTTP interface and query language—but it keeps going. Since we're an open-source project, the code itself is another facet of the API. Every public line of code is potentially a part of the API surface that requires support throughout 1.x.
 
-Among the components we considered going into 1.0:
+Among the components we considered, as we were going into 1.0:
 
 - HTTP API
 - Query language
