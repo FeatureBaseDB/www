@@ -25,7 +25,7 @@ Among the components we considered, as we were going into 1.0:
 - Data storage format
 - Golang package structure and exported variables
 - Multiple language-specific clients, officially supported and otherwise
-- [Pilosa dev kit](https://github.com/pilosa/pdk), which includes examples and connectors
+- [Pilosa dev kit](https://github.com/pilosa/console), which includes examples and connectors
 
 As we approached our 1.0 release, the ability to maintain compatibility promises became increasingly important. We began to audit all of these components for long-term support, with the primary goal of paring things down to our core functionality. Each of these components of our API surface has its own quirks, so they each need special attention.
 
@@ -34,8 +34,8 @@ A large portion of the work in this release focused on these API changes, but th
 - PQL syntax has been updated significantly. See the [docs](../docs/query-language/) for details.
 - Frames are now known as fields, and the nesting of fields within frames no longer exists; each field exists at the top level in an index.
 - Field creation has been revamped, with a more sensible field type system. For example, fields that were "rangeEnabled" are now simply fields of type "int".
-- Slices are now officially known simply as shards.
-- "bits" in query responses are now "columns".
+- Slices are now known as shards.
+- Query responses now refer to "columns" rather than "bits".
 - WebUI has been removed from Pilosa, and is now available [separately](https://github.com/pilosa/webui).
 
 
