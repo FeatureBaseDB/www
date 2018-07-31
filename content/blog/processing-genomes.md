@@ -10,7 +10,7 @@ overlay_color = "blue" # blue, green, or light
 +++
 
 
-3 Gigabytes. That's about how much data is encoded in your DNA. That may sound like a lot, or a little depending on your comfort level, but with 7 billion humans on the planet, that we're in "big data" territory is undeniable. Can we bend Pilosa to a problem of this mind boggling size? How fast can we compare two genomes? Or two thousand? What about finding groups of related individuals, or certain disease markers? How do you even represent this kind of data as a binary matrix? Let's take a look...
+6 Gigabits. That's about how much data is encoded in your DNA. That may sound like a lot, or a little depending on your comfort level, but with 7 billion humans on the planet, that we're in "big data" territory is undeniable. Can we bend Pilosa to a problem of this mind boggling size? How fast can we compare two genomes? Or two thousand? What about finding groups of related individuals, or certain disease markers? How do you even represent this kind of data as a binary matrix? Let's take a look...
 
 
 <!--more-->
