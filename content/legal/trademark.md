@@ -32,9 +32,9 @@ Pilosa
 
 ![Pilosa Logo 1](/img/logo.svg)
 
-[logo2](/img/logo_stacked.png)
+[logo2](/img/logo-stacked.svg)
 
-![Pilosa Logo 2](/img/logo_stacked.png)
+![Pilosa Logo 2](/img/logo-stacked.svg)
 
 
 3. And the unique visual styling of our website and packaging (the "Trade Dress").
