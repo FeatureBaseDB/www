@@ -31,7 +31,7 @@ As we approached our 1.0 release, the ability to maintain compatibility promises
 
 A large portion of the work in this release focused on these API changes, but there were some more publicly visible changes as well:
 
-- PQL syntax has been updated significantly. See the [docs](../docs/query-language/) for details.
+- PQL syntax has been updated significantly. See the [docs](/docs/query-language/) for details.
 - Frames are now known as fields, and the nesting of fields within frames no longer exists; each field exists at the top level in an index.
 - Field creation has been revamped, with a more sensible field type system. For example, fields that were "rangeEnabled" are now simply fields of type "int".
 - Slices are now known as shards.
