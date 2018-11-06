@@ -54,7 +54,7 @@ For example, using a reference genome that begins `GTAA`, and another genome tha
 ![Genome model simple](/img/blog/processing-genomes/genome-model-simple.png)
 *Genome data model*
 
-With 3 billion base pairs, we end up with 12 billion columns, and one row per sample. In Pilosa, the combination of index width and [`slice width`](../docs/glossary/#slicewidth) affects parallel performance, as well as the number of open files. We took this opportunity to experiment with the slice width and found that increasing from our default size of 2<sup>20</sup> to 2<sup>23</sup> was a good balance.
+With 3 billion base pairs, we end up with 12 billion columns, and one row per sample. In Pilosa, the combination of index width and [`shard width`](/docs/glossary/#shardwidth) affects parallel performance, as well as the number of open files. We took this opportunity to experiment with the slice width and found that increasing from our default size of 2<sup>20</sup> to 2<sup>23</sup> was a good balance.
 
 Sequenced genomes are the main entity in the index, but we can do more than that! For example, base pairs on chromosome 1 are all stored in the first billion or so columns (chromosome 1 is about 250M base pairs long). We can store a special "mask" bitmap that is all ones for those columns, and zero elsewhere. Do this for each of the 25 chromosomes (1-22, X, Y, and mitochondrial), and you gain the ability to select only base pairs on a given chromosome. Similarly, any gene that lives in a known region on a chromosome can be given a mask bitmap.
 
@@ -75,7 +75,7 @@ With this more general data model, some interesting queries become possible:
 
 #### Performance
 
-With speed as a main goal, we spun up a 360-core cluster with 600GB of total RAM (10 x c4.8xlarge, 60GB RAM, 36 vCPU). Because we know ahead of time which Pilosa column each position on the genome maps to, we were able to parallelize the ingestion of each genome based on Pilosa's slice width. Basically we cut each genome into portions that corresponded to 2<sup>23</sup> Pilosa columns, and gave each portion to a separate CPU core to process and send to Pilosa. Both client and cluster side, the ingestion was totally parallel.
+With speed as a main goal, we spun up a 360-core cluster with 600GB of total RAM (10 x c4.8xlarge, 60GB RAM, 36 vCPU). Because we know ahead of time which Pilosa column each position on the genome maps to, we were able to parallelize the ingestion of each genome based on Pilosa's shard width. Basically we cut each genome into portions that corresponded to 2<sup>23</sup> Pilosa columns, and gave each portion to a separate CPU core to process and send to Pilosa. Both client and cluster side, the ingestion was totally parallel.
 
 We were able to ingest new genomes on this cluster at a rate of less than 15 seconds each, or 216M SetBits (nucleotides) per second. This is already plenty fast, but there are several obvious improvements that could be made. Specifically, we built our import around the FASTA format, but with VCF files, we can run imports that only need to set one bit per variant, rather than one per base pair. Our import protocol is also built around specifying each bit as a row/column pair, but for this use case, we could specify the row once and then all the columns that need to be set, saving a ton of bandwith.
 
