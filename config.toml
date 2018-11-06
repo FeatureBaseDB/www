@@ -67,12 +67,12 @@ ignoreFiles = []
     inclusive = "inclusive.svg"
     learning_and_growing = "learning_and_growing.svg"
     title = "Pilosa"
-    subtitle = "Insanely Fast Queries on Really Big Data"
+    subtitle = "Continuous Analysis on Really Big Data"
     twitter_url = "https://twitter.com/slothware"
     facebook_url = "https://www.facebook.com/pilosaco"
     linkedin_url = "https://linkedin.com/company/pilosa"
     github_url = "https://github.com/pilosa"
-    description = "Pilosa is an open source, distributed bitmap index that dramatically accelerates queries across multiple, massive data sets."
+    description = "Pilosa is an open source, distributed bitmap index that dramatically accelerates continuous analysis across multiple, massive data sets."
 
 [taxonomies]
     featured = "featured"
