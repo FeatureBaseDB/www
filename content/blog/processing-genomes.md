@@ -4,7 +4,6 @@ publishdate = "2018-05-11"
 title = "Genome Comparisons in 4 Milliseconds"
 author = "Alan Bernstein and Matt Jaffee"
 author_img = "2"
-featured = "true"
 image = "/img/blog/processing-genomes/banner.jpg"
 overlay_color = "blue" # blue, green, or light
 +++

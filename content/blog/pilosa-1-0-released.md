@@ -5,7 +5,6 @@ title = "Pilosa 1.0 Released"
 author = "Alan Bernstein"
 author_twitter = "gsnark"
 author_img = "2"
-featured = "true"
 image = "/img/blog/pilosa-1-0-released/banner.png"
 overlay_color = "blue" # blue, green, or light
 +++
