@@ -1,6 +1,6 @@
 +++
-date = "2018-11-06"
-publishdate = "2018-11-06"
+date = "2018-11-12"
+publishdate = "2018-11-12"
 title = "We Raised our Seed Round"
 author = "HO Maycotte"
 author_twitter = "maycotte"
