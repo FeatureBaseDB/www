@@ -1,0 +1,47 @@
+version: 2
+defaults: &defaults
+  working_directory: /go/src/github.com/pilosa/www
+  docker:
+    - image: circleci/golang:1.10
+jobs:
+  deploy-staging:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: wget https://github.com/gohugoio/hugo/releases/download/v0.29/hugo_0.29_Linux-64bit.tar.gz
+      - run: tar -xvzf hugo_0.29_Linux-64bit.tar.gz
+      - run: sudo cp hugo /go/bin/
+      - run: sudo apt install -y python-pip
+      - run: sudo pip install awscli
+      - run: aws configure set preview.cloudfront true
+      - run: make staging deploy
+  deploy-production:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: wget https://github.com/gohugoio/hugo/releases/download/v0.29/hugo_0.29_Linux-64bit.tar.gz
+      - run: tar -xvzf hugo_0.29_Linux-64bit.tar.gz
+      - run: sudo cp hugo /go/bin/
+      - run: sudo apt install -y python-pip
+      - run: sudo pip install awscli
+      - run: aws configure set preview.cloudfront true
+      - run: make production deploy
+workflows:
+  version: 2
+  test:
+    jobs:
+      - deploy-staging:
+          filters:
+              branches:
+                  only: staging
+      - deploy-production-approval:
+          type: approval
+          filters:
+              branches:
+                  only: master
+      - deploy-production:
+          filters:
+              branches:
+                  only: master
+          requires:
+              - deploy-production-approval
