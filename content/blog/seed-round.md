@@ -10,7 +10,7 @@ image = "/img/blog/seed-round/banner.jpg"
 overlay_color = "green" # blue, green, or light
 +++
 
-Today, we are excited to announce the first close of a $5.4 million Seed Round led by Skylark Partners. With this investment, John Porter of Skylark will join Tom Meredith and me on our three person board. Other investors in the round include Ben Lamm, Hypergiant, Andrew Busey and Tony Robbins.
+Today, we are excited to announce the first close of a $5.4 million Seed Round led by Skylark Partners. With this investment, John Porter of Skylark will join Tom Meredith and me on our three person board. Other investors in the round include Ben Lamm, Hypergiant, Chris Aniszczyk, Andrew Busey and Tony Robbins.
 
 <!--more-->
 
