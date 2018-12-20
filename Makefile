@@ -1,6 +1,6 @@
 .PHONY: public server upload reset-cache staging deploy clean
 
-DOC_TAGS = master v0.4 v0.5 v0.6 v0.7 v0.8 v0.9 v0.10 v1.0 v1.1
+DOC_TAGS = master v0.4 v0.5 v0.6 v0.7 v0.8 v0.9 v0.10 v1.0 v1.1 v1.2
 DOC_TAG_DIRS = $(addprefix content/docs/,$(DOC_TAGS))
 DOC_TAG_LATEST = v1.1
 PILOSA_CLONE = $(PWD)/pilosa
