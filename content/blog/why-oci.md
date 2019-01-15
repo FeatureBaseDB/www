@@ -43,18 +43,18 @@ As we started to take it for a spin, we were pleasantly surprised by a number of
 
 Check out this table:
 
-| Cloud | Type            | n |   $/hr | Total Mem | Total Threads | Storage/node |
-|-------|-----------------|---|--------|-----------|---------------|--------------|
-| OCI   | VM.Standard2.16 | 3 | 3.0624 |       720 |            96 | 0            |
-| OCI   | VM.DenseIO2.16  | 3 |   6.12 |       720 |            96 | 12.8 TB NVME |
-| OCI   | BM.Standard2.52 | 1 | 3.3176 |       768 |           104 | 12.8 TB NVME |
-| OCI   | BM.HPC2.36      | 2 |    5.4 |       768 |           144 | 6.7 TB NVME  |
-| Azure | F32s v2         | 3 |  4.059 |       192 |            96 | 256 GB SSD   |
-| Azure | F16             | 6 |  4.776 |       192 |            96 | 256 GB SSD   |
-| Azure | Standard_E64_v3 | 2 |  7.258 |       864 |           128 | 864 GB SSD   |
-| AWS   | c4.8xlarge      | 3 |  4.773 |       180 |           108 | 0            |
-| AWS   | c5.9xlarge      | 3 |   4.59 |       216 |           108 | 0            |
-| AWS   | r5d.12xlarge    | 2 |  6.912 |       768 |            96 | 1.8 TB NVME  |
+| Cloud | Type            | n |   $/hr | RAM | Threads | Fast Disk/node |
+|-------|-----------------|---|--------|-----|---------|----------------|
+| OCI   | VM.Standard2.16 | 3 | 3.0624 | 720 |      96 | 0              |
+| OCI   | VM.DenseIO2.16  | 3 |   6.12 | 720 |      96 | 12.8 TB NVME   |
+| OCI   | BM.Standard2.52 | 1 | 3.3176 | 768 |     104 | 12.8 TB NVME   |
+| OCI   | BM.HPC2.36      | 2 |    5.4 | 768 |     144 | 6.7 TB NVME    |
+| Azure | F32s v2         | 3 |  4.059 | 192 |      96 | 256 GB SSD     |
+| Azure | F16             | 6 |  4.776 | 192 |      96 | 256 GB SSD     |
+| Azure | Standard_E64_v3 | 2 |  7.258 | 864 |     128 | 864 GB SSD     |
+| AWS   | c4.8xlarge      | 3 |  4.773 | 180 |     108 | 0              |
+| AWS   | c5.9xlarge      | 3 |   4.59 | 216 |     108 | 0              |
+| AWS   | r5d.12xlarge    | 2 |  6.912 | 768 |      96 | 1.8 TB NVME    |
 
 
 In particular, a 2 node HPC2.36 cluster on OCI is comparable in price to a 3
@@ -108,7 +108,7 @@ After loading about 100GB (half) of the taxi data into each cluster, we ran 20
 iterations of each of the following queries on each of our configurations:
 
 | benchmark                                         | Description                                                                      |
-|---------------------------------------------------|----------------------------------------------------------------------------------|
+|----------------------------------------------------|---------------------------------------------------------------------------------  |
 | TopN(distance, Row(pickup year=2011))             | # of rides broken down by distance in miles for the year 2011                    |
 | TopN(distance)                                    | # of rides broken down by distance in miles                                      |
 | TopN(cab type)                                    | # of rides by cab type (yellow or green)                                         |
@@ -142,6 +142,10 @@ optimized instances are winning at what are probably the 3 simplest queries
 while the r5 instances are dominating some of the heavier queries. The OCI HPC
 instances snuck in on one of the 3 field group by queries, and Azure's compute
 optimized Standard_F32s won the long segmentation query.
+
+[[Insert TopN chart]]
+
+[[Insert 29 seg chart]]
 
 
 This is a good start, but it has a few problems. Since the data set fits into
@@ -187,10 +191,11 @@ for the other clouds.
 ## Microbenchmarks
 
 The main Pilosa package contains 120 different micro-benchmarks, most of which
-involve some form of data ingestion, which depending on the paramters is both
-intensive both computationally and in I/O to disk. These benchmarks take
-advantage of at most 32 hyperthreads, so the per-thread performance of a CPU is
-more important than the total performance.
+involve some form of data ingestion. Depending on the paramters these are both
+CPU and disk intensive.
+
+These benchmarks take advantage of at most 32 hyperthreads, so the per-thread
+performance of a CPU is more important than the total performance.
 
 The most compute intensive benchmarks are dominated by the c5.9xlarge which
 isn't too surprising, but I would have expected similar performance out of
@@ -215,6 +220,21 @@ pretty well compared to the NVME SSDs - only about a factor of 2 slower.
 
 ![I/O](/img/blog/why-oci/filewrite.svg)
 *I/O Intensive*
+
+## Puzzles
+
+A number of things didn't quite add up that I'd like to dig into more:
+
+- Azure didn't perform as well as expected overall - especially in I/O. I'm not
+  sure what type of SSDs Azure uses for its temporary storage, but we should
+  probably look into other storage options.
+- OCI's BM.Standard2.52 performed fairly abysmally. On paper it looks extremely
+  cost effective though: 104 hyper threads, 2 massive SSDs, and more RAM than
+  you can shake a stick at for $3.31/hr. With the same processor as the as the
+  `.16` models, its lack of performance is confusing.
+- The r5d.12xlarge won the Filtered TopN query by a healthy margin, but got 6th
+  in the 29 value segmentation by a factor of 4. Those two queries aren't
+  terribly different from a workload perspective, however.
 
 ## Conclusion and Future Work
 
