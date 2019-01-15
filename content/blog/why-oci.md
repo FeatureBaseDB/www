@@ -1,6 +1,6 @@
 +++
 date = "2019-01-13"
-publishdate = "2019-01-16"
+publishdate = "2019-01-15"
 title = "Multi-cloud Pilosa Benchmarking Shootout (AWS, Azure, and Oracle)"
 author = "Matt Jaffee"
 author_twitter = "mattjaffee"
