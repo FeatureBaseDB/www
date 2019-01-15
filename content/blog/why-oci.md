@@ -195,14 +195,16 @@ The most compute intensive benchmarks are dominated by the c5.9xlarge which
 isn't too surprising, but I would have expected similar performance out of
 Azure's F32s as they are also running high-end Intel processors.
 
-[[insert intersection count benchmark chart]]
+![CPU](/img/blog/why-oci/intersection-count.svg)
+*CPU Intensive*
 
 Those benchmarks which are both compute and I/O intensive are mostly swept by
 the r5d.12xlarge which is also running Xeon Platinum (at a slightly lower
 clock), and has 2 SSDs which we bonded into a single logical volume using LVM
 striping.
 
-[[insert importroaringconcurrent chart]]
+![CPU and I/O](/img/blog/why-oci/import-roaring-concurrent.svg)
+*CPU and I/O Intensive*
 
 The pure I/O benchmarks (literally just writing a file) were taken by Oracle's
 DenseIO instances which also have 2 SSDs striped by LVM. This would seem to
@@ -210,7 +212,8 @@ indicate that Oracle's disks are slightly faster, or its I/O subsytem slightly
 more optimized an AWS. On another note, the c5.9xlarge on EBS actually fare
 pretty well compared to the NVME SSDs - only about a factor of 2 slower.
 
-[[Insert filewrite chart here]]
+![I/O](/img/blog/why-oci/filewrite.svg)
+*I/O Intensive*
 
 ## Conclusion and Future Work
 
