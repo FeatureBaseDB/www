@@ -1,12 +1,12 @@
 +++
 date = "2019-01-13"
-publishdate = "2018-11-13"
+publishdate = "2019-01-16"
 title = "Multi-cloud Pilosa Benchmarking Shootout (AWS, Azure, and Oracle)"
 author = "Matt Jaffee"
 author_twitter = "mattjaffee"
 author_img = "2"
 featured = "true"
-image = "/img/blog/seed-round/banner.jpg"
+image = "/img/blog/why-oci/banner.jpg"
 overlay_color = "green" # blue, green, or light
 +++
 
@@ -92,7 +92,7 @@ unwieldy.
 In order to aid repeatability and speed deployment, we produced a set of
 parameterized [Terraform](https://www.terraform.io/) modules for each cloud
 provider so that we could easily launch clusters with varying instance sizes.
-Provisioning the machines was taking care of by a suite of
+Provisioning the machines was taken care of by a suite of
 [Ansible](https://www.ansible.com/) playbooks. All of this is contained in the
 `terraform` and `ansible` subdirectories of our
 [infrastructure](https://github.com/pilosa/infrastructure) repository on Github.
@@ -104,7 +104,8 @@ good sampling of the various CPU and storage options available on these clouds.
 We would very much welcome any suggestions for additional configurations which
 might be more performant or cost effective.
 
-After loading about 100GB (half) of the taxi data into each cluster, we ran 20 iterations of each of the following queries on each of our configurations:
+After loading about 100GB (half) of the taxi data into each cluster, we ran 20
+iterations of each of the following queries on each of our configurations:
 
 | benchmark                                         | Description                                                                      |
 |---------------------------------------------------|----------------------------------------------------------------------------------|
@@ -246,5 +247,5 @@ Thanks for reading, and please reach out if you have any questions!
 
 _Jaffee is a lead software engineer at Pilosa. When he’s not burning cloud credits for science, he enjoys jiu-jitsu, building mechanical keyboards, and spending time with family. Follow him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
 
-_Banner photo by TODO_
+_Banner Photo by Daniele Levis Pelusi on Unsplash_
 
