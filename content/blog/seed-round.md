@@ -5,7 +5,6 @@ title = "We Raised our Seed Round"
 author = "HO Maycotte"
 author_twitter = "maycotte"
 author_img = "3"
-featured = "false"
 image = "/img/blog/seed-round/banner.jpg"
 overlay_color = "green" # blue, green, or light
 +++

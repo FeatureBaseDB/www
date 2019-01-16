@@ -1,7 +1,7 @@
 +++
 date = "2019-01-13"
 publishdate = "2019-01-15"
-title = "Multi-cloud Pilosa Benchmarking Shootout (AWS, Azure, and Oracle)"
+title = "Oracle, AWS, and Azure Benchmarking Shootout"
 author = "Matt Jaffee"
 author_twitter = "mattjaffee"
 author_img = "2"
@@ -22,7 +22,7 @@ overall price/performance ratio.
 
 
 For this initial foray, we've run a massive suite of Pilosa-centric benchmarks
-on 10 different configurations spread across Azure, AWS, and Oracle's cloud.
+on 10 different configurations spread across Azure, AWS, and Oracle's cloud (OCI).
 
 Now, when it comes to choosing a cloud provider, Oracle probably isn't the first
 company that comes to mind. I think most people would agree that the order is
@@ -35,9 +35,9 @@ something like:
 
 We recently had the good fortune of being chosen to participate in the [Oracle
 Startup Accelerator](https://www.oracle.com/startup/) program, and they've
-strongly encouraged us to put Oracle's cloud offering (OCI) to the test.
+strongly encouraged us to put OCI to the test.
 
-As we started to take OCI for a spin, we were pleasantly surprised by a number of things:
+As we started to take it for a spin, we were pleasantly surprised by a number of things:
 
 1. It emulates AWS in a lot of ways, so it feels fairly familiar.
 2. It was built from the ground up to work with [Terraform](https://www.terraform.io/) which is muy bueno.
