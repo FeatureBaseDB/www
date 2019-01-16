@@ -147,7 +147,7 @@
   margin-bottom: 30px;
   /*color:#3c5f8d;*/
 }
-.single-body-content th{
+.single-body-content th {
 
   font-size: 14px;
   font-weight: bold;
@@ -155,7 +155,7 @@
   letter-spacing: 2px;
   color: #102445;
   text-transform: uppercase;
-  padding: 21px  30px;
+  padding: 11px  12px;
   background-color: white;
 
 }
@@ -165,8 +165,9 @@
 .single-body-content tr:nth-child(odd) {
     background-color: #f2f7f9;
 }
-.single-body-content td{
-    padding: 21px  30px;
+.single-body-content td {
+    padding: 8px  12px;
+    white-space: nowrap;
 }
 .single-body-content blockquote>p {
     font-size: 36px;
