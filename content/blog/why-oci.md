@@ -107,12 +107,11 @@ We would very much welcome any suggestions for additional configurations which
 might be more performant or cost effective.
 
 After loading about 100GB (half) of the taxi data into each cluster, we ran 20
-iterations of each of the following queries on each of our configurations - each
-gets the number of rides for one or more combinations of filters:
+iterations of each of the following queries on each of our configurations:
 
 1. `TopN(distance, Row(pickup year=2011))` - Number of rides for each integer distance (in miles) in the year 2011
-2. `TopN(distance)` - Number of rides for each integers distance in miles.
-3. `TopN(cab type)` - Number of rides in each cab type (yellow or green)                                         |
+2. `TopN(distance)` - Number of rides for each integer distance in miles.
+3. `TopN(cab type)` - Number of rides in each cab type (yellow or green)
 4. `GroupBy(year, passengers, distance)` - Number of rides for every combination of year, number of passengers, and distance in miles
 5. `GroupBy(cab type, year, month)` - Number of rides for every combination of cab type, year, and month.
 6. `GroupBy(cab type, year, passengers)` - Number of rides for every combination of cab type, year, and number of passengers.
@@ -124,7 +123,7 @@ and I/O related functions with fewer variables to consider.
 
 ### Results
 
-First, let's take a look at raw performance and see which configuration performed the best on each query on average over the 20 iterations.
+First, let's take a look at raw performance and see which configuration was fastest for each query on average over the 20 iterations.
 
 | cloud | instance type    | nodes | query                                             |
 |-------|------------------|-------|---------------------------------------------------|
@@ -141,8 +140,12 @@ Wow! AWS is looking pretty good here, taking 6 of the 8 benchmarks evenly split
 across their compute and memory optimized instances. Interestingly, the compute
 optimized instances are winning at what are probably the 3 simplest queries
 while the r5 instances are dominating some of the heavier queries. The OCI HPC
-instances snuck in on one of the 3 field group by queries, and Azure's compute
+instances snuck in on one of the 3 field "Group By" queries, and Azure's compute
 optimized Standard_F32s won the long segmentation query.
+
+To get an idea of how much variation there is between the hardware types, this
+is the relative performance of each configuration for one of the "Group By"
+queries:
 
 ![RawGroupByPerf](/img/blog/why-oci/raw-query-perf-horizontal.png)
 *Group By Cab, Year, Passengers*
@@ -152,11 +155,12 @@ This is a good start, but it has a few problems. Since the data set fits into
 memory on all the configurations, any extra memory is effectively wasted. It
 also doesn't exercise disk performance at all, and most importantly, it doesn't
 take cost into account. This last is fairly easy to remedy; instead of looking
-at the minimum average latency for each query, we can look at the minimum of the
+at the minimum average latency for each query, we can look at the minimum
 average latency multipled by the cluster cost. With the right unit conversions,
 this effectively gives us how much it would cost to run 1 Million of each given
 query back to back on a particular configuration... or as we like to call it
-"Dollars per Megaquery". Let's look at the best $/MQ for each query:
+"Dollars per Megaquery". Let's look at which configuration has the best $/MQ for
+each of these benchmarks:
 
 
 | cloud | instance type    | nodes | query                                             |   $/MQ |
@@ -200,8 +204,8 @@ for the other clouds.
 
 ### Microbenchmarks
 
-The main Pilosa package contains 120 different micro-benchmarks, most of which
-involve some form of data ingestion. Depending on the paramters these are both
+The main Pilosa package contains hundreds of micro-benchmarks, many of which
+involve some form of data ingestion. Depending on the paramters, these are both
 CPU and disk intensive.
 
 These benchmarks take advantage of at most 32 hyperthreads, so the per-thread
@@ -266,9 +270,10 @@ based `ping` tool, etc.), and then compare that with our assumptions about what
 the various Pilosa benchmarks *should* be testing.
 
 For those who wish to look at the data more closely, we've been munging all the
-results on [data.world](https://data.world/jaffee/benchmarks), which has been a
-pretty nice platform for sharing data and various queries as well as producing
-charts.
+results on
+[data.world](https://data.world/jaffee/benchmarks/workspace/file?filename=allresults.csv),
+which has been a pretty nice platform for sharing data and various queries as
+well as producing charts.
 
 For those who wish to try to reproduce or expand on these benchmarks, we have a
 variety of tooling available in our [Infrastructure repository.](https://github.com/pilosa/infrastructure/tree/master/terraform/examples)
