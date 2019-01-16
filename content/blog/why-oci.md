@@ -32,10 +32,10 @@ something like:
 3. Google Cloud Platform
 4. Others...
 
-We recently had the good fortune of recently being chosen to participate in the
-[Oracle Startup Accelerator](https://www.oracle.com/startup/) program, which
-among other things means we got a whole boatload of credits for Oracle's cloud
-offering (OCI).
+We recently had the good fortune of being chosen to participate in the [Oracle
+Startup Accelerator](https://www.oracle.com/startup/) program, which among other
+things means we got a whole boatload of credits for Oracle's cloud offering
+(OCI).
 
 As we started to take OCI for a spin, we were pleasantly surprised by a number of things:
 
