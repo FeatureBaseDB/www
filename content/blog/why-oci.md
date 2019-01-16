@@ -45,18 +45,18 @@ As we started to take OCI for a spin, we were pleasantly surprised by a number o
 
 Check out this table:
 
-| Cloud | Type            | n |   $/hr | RAM | Threads | Fast Disk/node |
-|-------|-----------------|---|--------|-----|---------|----------------|
-| OCI   | VM.Standard2.16 | 3 | 3.0624 | 720 |      96 | 0              |
-| OCI   | VM.DenseIO2.16  | 3 |   6.12 | 720 |      96 | 12.8 TB NVME   |
-| OCI   | BM.Standard2.52 | 1 | 3.3176 | 768 |     104 | 12.8 TB NVME   |
-| OCI   | BM.HPC2.36      | 2 |    5.4 | 768 |     144 | 6.7 TB NVME    |
-| Azure | F32s v2         | 3 |  4.059 | 192 |      96 | 256 GB SSD     |
-| Azure | F16             | 6 |  4.776 | 192 |      96 | 256 GB SSD     |
-| Azure | Standard_E64_v3 | 2 |  7.258 | 864 |     128 | 864 GB SSD     |
-| AWS   | c4.8xlarge      | 3 |  4.773 | 180 |     108 | 0              |
-| AWS   | c5.9xlarge      | 3 |   4.59 | 216 |     108 | 0              |
-| AWS   | r5d.12xlarge    | 2 |  6.912 | 768 |      96 | 1.8 TB NVME    |
+| Cloud | Type            | n | $/hr    | RAM | Threads | Fast Disk/node |
+|-------|-----------------|---|---------|-----|---------|----------------|
+| OCI   | VM.Standard2.16 | 3 | $3.0624 | 720 |      96 | N/A            |
+| OCI   | VM.DenseIO2.16  | 3 | $6.12   | 720 |      96 | 12.8 TB NVME   |
+| OCI   | BM.Standard2.52 | 1 | $3.3176 | 768 |     104 | 12.8 TB NVME   |
+| OCI   | BM.HPC2.36      | 2 | $5.40   | 768 |     144 | 6.7 TB NVME    |
+| Azure | F32s v2         | 3 | $4.059  | 192 |      96 | 256 GB SSD     |
+| Azure | F16             | 6 | $4.776  | 192 |      96 | 256 GB SSD     |
+| Azure | Standard_E64_v3 | 2 | $7.258  | 864 |     128 | 864 GB SSD     |
+| AWS   | c4.8xlarge      | 3 | $4.773  | 180 |     108 | EBS only       |
+| AWS   | c5.9xlarge      | 3 | $4.59   | 216 |     108 | EBS only       |
+| AWS   | r5d.12xlarge    | 2 | $6.912  | 768 |      96 | 1.8 TB NVME    |
 
 
 In particular, a 2-node HPC2.36 cluster on OCI is comparable in price to a
@@ -194,9 +194,9 @@ effectiveness on two pretty intensive queries, while AWS's c5.9xlarges topped
 the two simplest queries which are most likely to be affected by network
 performance rather than computation. More dedicated testing would probably be
 needed to determine whether AWS's networking provides consistently lower latency
-between VMs, or whether this is just a fluke. We did, however use the placement
-group feature for AWS, but did not use any comparable features (if they exist)
-for the other clouds.
+between VMs, or whether this is just a fluke. We did use the placement group
+feature for AWS, but did not use any comparable features (if they exist) for the
+other clouds.
 
 ![GroupByCabYearPassengers](/img/blog/why-oci/groupby-dpmq-horizontal.png)
 *GroupBy Cab, Year, Passengers*
