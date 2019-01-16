@@ -14,8 +14,9 @@ For those unfamiliar, Pilosa is an open source, distributed index which is
 designed to help analyze huge datasets at "UI latency". Basically we want all
 queries to return in under a second regardless of complexity.
 
-This is a fairly tall order, and we're in the midst of launching a managed
-service around Pilosa that makes it a reality. We're very interested in which
+This is a fairly tall order, and we're in the midst of launching
+[Molecula](https://www.molecula.com), a managed service around Pilosa that makes
+these kinds of low latency analytics a reality. We're very interested in which
 cloud providers—and which instance configurations on each provider—have the best
 overall price/performance ratio.
 
@@ -33,9 +34,8 @@ something like:
 4. Others...
 
 We recently had the good fortune of being chosen to participate in the [Oracle
-Startup Accelerator](https://www.oracle.com/startup/) program, which among other
-things means we got a whole boatload of credits for Oracle's cloud offering
-(OCI).
+Startup Accelerator](https://www.oracle.com/startup/) program, and they've
+strongly encouraged us to put Oracle's cloud offering (OCI) to the test.
 
 As we started to take OCI for a spin, we were pleasantly surprised by a number of things:
 
