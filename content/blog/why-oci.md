@@ -223,7 +223,7 @@ pretty well compared to the NVME SSDs - only about a factor of 2 slower.
 
 And also this:
 
-![Segmentation](/img/blog/why-oci/29seg-horizontal.png)
+![Segmentation](/img/blog/why-oci/29seg-dpmq-horizontal.png)
 *Segmentation*
 
 ## Puzzles
