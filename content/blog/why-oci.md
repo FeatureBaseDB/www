@@ -16,8 +16,9 @@ queries to return in under a second regardless of complexity.
 
 This is a fairly tall order, and we're in the midst of launching a managed
 service around Pilosa that makes it a reality. We're very interested in which
-cloud providers, and which instance configurations on that provider have the
-best overall price/performance ratio.
+cloud providers—and which instance configurations on each provider—have the best
+overall price/performance ratio.
+
 
 For this initial foray, we've run a massive suite of Pilosa-centric benchmarks
 on 10 different configurations spread across Azure, AWS, and Oracle's cloud.
@@ -31,11 +32,12 @@ something like:
 3. Google Cloud Platform
 4. Others...
 
-We've the good fortune of recently being chosen to participate in the Oracle
-Startup Accelerator program, which among other things meant we got a whole
-boatload of credits for Oracle's cloud offering.
+We recently had the good fortune of recently being chosen to participate in the
+[Oracle Startup Accelerator](https://www.oracle.com/startup/) program, which
+among other things means we got a whole boatload of credits for Oracle's cloud
+offering (OCI).
 
-As we started to take it for a spin, we were pleasantly surprised by a number of things:
+As we started to take OCI for a spin, we were pleasantly surprised by a number of things:
 
 1. It emulates AWS in a lot of ways, so it feels fairly familiar.
 2. It was built from the ground up to work with [Terraform](https://www.terraform.io/) which is muy bueno.
@@ -57,8 +59,8 @@ Check out this table:
 | AWS   | r5d.12xlarge    | 2 |  6.912 | 768 |      96 | 1.8 TB NVME    |
 
 
-In particular, a 2 node HPC2.36 cluster on OCI is comparable in price to a 3
-node c5d.9xlarge on AWS, but has 5x the SSD space, significantly more
+In particular, a 2-node HPC2.36 cluster on OCI is comparable in price to a
+3-node c5d.9xlarge on AWS, but has 5x the SSD space, significantly more
 processors, and triple the memory.
 
 These basic numbers don't tell the whole story of course - there are hundreds,
@@ -76,7 +78,7 @@ Pilosa is a fairly interesting piece of software to benchmark as it works out a
 few different areas of the hardware. During data ingest and startup, sequential
 disk I/O is of critical importance. During most queries, Pilosa is heavily CPU
 bound due to its almost unhealthy obsession with bitmap indexes. It's also
-written in Go and eats cores for breakfast - it will squeeze every inch CPU
+written in Go and eats cores for breakfast - it will squeeze every inch of CPU
 performance out of a machine. Pilosa holds its bitmap data in RAM, so memory
 bandwidth is also a significant factor. Network throughput is probably the least
 important aspect, though latency between hosts can make up a significant
@@ -149,10 +151,10 @@ optimized Standard_F32s won the long segmentation query.
 This is a good start, but it has a few problems. Since the data set fits into
 memory on all the configurations, any extra memory is effectively wasted. It
 also doesn't exercise disk performance at all, and most importantly, it doesn't
-take cost into account. This last is fairly easy to remedy. Instead of looking
+take cost into account. This last is fairly easy to remedy; instead of looking
 at the minimum average latency for each query, we can look at the minimum of the
 average latency multipled by the cluster cost. With the right unit conversions,
-this effectively gives us how much it would cost to run 1 Million of the given
+this effectively gives us how much it would cost to run 1 Million of each given
 query back to back on a particular configuration... or as we like to call it
 "Dollars per Megaquery". Let's look at the best $/MQ for each query:
 
@@ -223,8 +225,9 @@ striping.
 The pure I/O benchmarks (literally just writing a file) were taken by Oracle's
 DenseIO instances which also have 2 SSDs striped by LVM. This would seem to
 indicate that Oracle's disks are slightly faster, or its I/O subsytem slightly
-more optimized an AWS. On another note, the c5.9xlarge on EBS actually fare
-pretty well compared to the NVME SSDs - only about a factor of 2 slower.
+more optimized than AWS. On another note, the c5.9xlarge instances on EBS
+actually fare pretty well compared to the NVME SSDs - only about a factor of 2
+slower.
 
 ![I/O](/img/blog/why-oci/filewrite-horizontal.png)
 *I/O Intensive*
@@ -239,16 +242,16 @@ A number of things didn't quite add up that I'd like to dig into more:
   probably look into other storage options.
 - OCI's BM.Standard2.52 performed fairly abysmally. On paper it looks extremely
   cost effective though: 104 hyper threads, 2 massive SSDs, and more RAM than
-  you can shake a stick at for $3.31/hr. With the same processor as the as the
-  `.16` models, its lack of performance is confusing.
+  you can shake a stick at for $3.31/hr. With the same processor as the `.16`
+  models, its lack of performance is confusing.
 - The r5d.12xlarge won the Filtered TopN query by a healthy margin, but got 6th
   in the 29 value segmentation by a factor of 4. Those two queries aren't
   terribly different from a workload perspective, however.
 
 ### Conclusion and Future Work
 
-For pure cost-effectiveness, Oracle is pretty compelling, especially given that
-the amount of memory and SSD you get compared to other cloud providers. The I/O
+For pure cost-effectiveness, Oracle is pretty compelling, especially given the
+amount of memory and SSD you get compared to other cloud providers. The I/O
 performance is also excellent.
 
 For pure speed, AWS seems to provide the fastest processors, although it's
