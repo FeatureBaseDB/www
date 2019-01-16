@@ -82,7 +82,7 @@ bandwidth is also a significant factor. Network throughput is probably the least
 important aspect, though latency between hosts can make up a significant
 percentage of query times for simpler queries.
 
-## Setup 
+### Setup 
 
 For our main Pilosa benchmarks, we decided to use the venerable [Billion Taxi
 Ride](https://www.pilosa.com/blog/billion-taxi-ride-dataset-with-pilosa/)
@@ -105,23 +105,22 @@ We would very much welcome any suggestions for additional configurations which
 might be more performant or cost effective.
 
 After loading about 100GB (half) of the taxi data into each cluster, we ran 20
-iterations of each of the following queries on each of our configurations:
+iterations of each of the following queries on each of our configurations - each
+gets the number of rides for one or more combinations of filters:
 
-| benchmark                                         | Description                                                                      |
-|----------------------------------------------------|---------------------------------------------------------------------------------  |
-| TopN(distance, Row(pickup year=2011))             | # of rides broken down by distance in miles for the year 2011                    |
-| TopN(distance)                                    | # of rides broken down by distance in miles                                      |
-| TopN(cab type)                                    | # of rides by cab type (yellow or green)                                         |
-| GroupBy year, passengers, dist,                   | # of rides for every combination of year, # of passengers, and distance in miles |
-| Group By cab type, year, month                    | # of rides for every combination of cab type, year, month                        |
-| Group By cab type, year, passengers               | # of rides for every combination of cab type, year, # of passengers              |
-| Count Union of 3 rows                             | # of rides that happened in 2012, 2013, or March of any year                     |
-| Count Of intersection of unions involving 29 rows | # of rides in a complex boolean combination of 29 different values               |
+1. `TopN(distance, Row(pickup year=2011))` - Number of rides for each integer distance (in miles) in the year 2011
+2. `TopN(distance)` - Number of rides for each integers distance in miles.
+3. `TopN(cab type)` - Number of rides in each cab type (yellow or green)                                         |
+4. `GroupBy(year, passengers, distance)` - Number of rides for every combination of year, number of passengers, and distance in miles
+5. `GroupBy(cab type, year, month)` - Number of rides for every combination of cab type, year, and month.
+6. `GroupBy(cab type, year, passengers)` - Number of rides for every combination of cab type, year, and number of passengers.
+7. `Count(Union(Row(year=2012), Row(year=2013), Row(month=March)))` - Number of rides in 2012, 2013, or March of any year.
+8. `Count(Intersect(Row...)...)` -  Number of rides matching a nested boolean combination of 29 values.
 
 We also ran Pilosa's extensive suite of micro-benchmarks which test some compute
 and I/O related functions with fewer variables to consider.
 
-## Results
+### Results
 
 First, let's take a look at raw performance and see which configuration performed the best on each query on average over the 20 iterations.
 
@@ -143,9 +142,8 @@ while the r5 instances are dominating some of the heavier queries. The OCI HPC
 instances snuck in on one of the 3 field group by queries, and Azure's compute
 optimized Standard_F32s won the long segmentation query.
 
-[[Insert TopN chart]]
-
-[[Insert 29 seg chart]]
+![RawGroupByPerf](/img/blog/why-oci/raw-query-perf-horizontal.png)
+*Group By Cab, Year, Passengers*
 
 
 This is a good start, but it has a few problems. Since the data set fits into
@@ -174,9 +172,16 @@ It appears that OCI's VM.Standard2.16 is the king of cost effectiveness. This is
 particularly interesting as these instances have 240 GB of memory to go with
 their 32 hyperthreads whereas AWS's c5.9xlarge (36 hyperthreads) and Azure's
 F32s have 72GB and 64GB respectively. So, although Oracle's Standard2.16 VMs are
-running on slower processors than the Xeon Platinum's that AWS and Azure have,
-Oracle is able to offer them at a significantly lower price and with far more
-memory. 
+running on slower processors than the 3+ GHz Xeon Platinums that AWS and Azure
+have, Oracle is able to offer them at a significantly lower price and with far
+more memory.
+
+![FilteredTopN](/img/blog/why-oci/filtered-topn-dpmq-horizontal.png)
+*Filtered TopN*
+
+
+![Segmentation](/img/blog/why-oci/29seg-dpmq-horizontal.png)
+*29 Value Segmentation*
 
 It's also worth noting that Azure's F32s machines performed best in cost
 effectiveness on two pretty intensive queries, while AWS's c5.9xlarges topped
@@ -187,8 +192,11 @@ between VMs, or whether this is just a fluke. We did, however use the placement
 group feature for AWS, but did not use any comparable features (if they exist)
 for the other clouds.
 
+![GroupByCabYearPassengers](/img/blog/why-oci/groupby-dpmq-horizontal.png)
+*GroupBy Cab, Year, Passengers*
 
-## Microbenchmarks
+
+### Microbenchmarks
 
 The main Pilosa package contains 120 different micro-benchmarks, most of which
 involve some form of data ingestion. Depending on the paramters these are both
@@ -221,12 +229,8 @@ pretty well compared to the NVME SSDs - only about a factor of 2 slower.
 ![I/O](/img/blog/why-oci/filewrite-horizontal.png)
 *I/O Intensive*
 
-And also this:
 
-![Segmentation](/img/blog/why-oci/29seg-dpmq-horizontal.png)
-*Segmentation*
-
-## Puzzles
+### Puzzles
 
 A number of things didn't quite add up that I'd like to dig into more:
 
@@ -241,7 +245,7 @@ A number of things didn't quite add up that I'd like to dig into more:
   in the 29 value segmentation by a factor of 4. Those two queries aren't
   terribly different from a workload perspective, however.
 
-## Conclusion and Future Work
+### Conclusion and Future Work
 
 For pure cost-effectiveness, Oracle is pretty compelling, especially given that
 the amount of memory and SSD you get compared to other cloud providers. The I/O
