@@ -205,7 +205,7 @@ for the other clouds.
 ### Microbenchmarks
 
 The main Pilosa package contains hundreds of micro-benchmarks, many of which
-involve some form of data ingestion. Depending on the paramters, these are both
+involve some form of data ingestion. Depending on the parameters, these are both
 CPU and disk intensive.
 
 These benchmarks take advantage of at most 32 hyperthreads, so the per-thread
