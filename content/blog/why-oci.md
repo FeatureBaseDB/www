@@ -45,18 +45,18 @@ As we started to take OCI for a spin, we were pleasantly surprised by a number o
 
 Check out this table:
 
-| Cloud | Type            | n | $/hr    | RAM | Threads | Fast Disk/node |
-|-------|-----------------|---|---------|-----|---------|----------------|
-| OCI   | VM.Standard2.16 | 3 | $3.0624 | 720 |      96 | N/A            |
-| OCI   | VM.DenseIO2.16  | 3 | $6.12   | 720 |      96 | 12.8 TB NVME   |
-| OCI   | BM.Standard2.52 | 1 | $3.3176 | 768 |     104 | 12.8 TB NVME   |
-| OCI   | BM.HPC2.36      | 2 | $5.40   | 768 |     144 | 6.7 TB NVME    |
-| Azure | F32s v2         | 3 | $4.059  | 192 |      96 | 256 GB SSD     |
-| Azure | F16             | 6 | $4.776  | 192 |      96 | 256 GB SSD     |
-| Azure | Standard_E64_v3 | 2 | $7.258  | 864 |     128 | 864 GB SSD     |
-| AWS   | c4.8xlarge      | 3 | $4.773  | 180 |     108 | EBS only       |
-| AWS   | c5.9xlarge      | 3 | $4.59   | 216 |     108 | EBS only       |
-| AWS   | r5d.12xlarge    | 2 | $6.912  | 768 |      96 | 1.8 TB NVME    |
+| Cloud | Type            | n | $/hr  | RAM | Threads | Fast Disk/node |
+|-------|-----------------|--:|------:|----:|--------:|---------------- |
+| OCI   | VM.Standard2.16 | 3 | $3.06 | 720 |      96 | N/A            |
+| OCI   | VM.DenseIO2.16  | 3 | $6.12 | 720 |      96 | 12.8 TB NVME   |
+| OCI   | BM.Standard2.52 | 1 | $3.32 | 768 |     104 | 12.8 TB NVME   |
+| OCI   | BM.HPC2.36      | 2 | $5.40 | 768 |     144 | 6.7 TB NVME    |
+| Azure | F32s v2         | 3 | $4.06 | 192 |      96 | 256 GB SSD     |
+| Azure | F16             | 6 | $4.78 | 192 |      96 | 256 GB SSD     |
+| Azure | Standard_E64_v3 | 2 | $7.26 | 864 |     128 | 864 GB SSD     |
+| AWS   | c4.8xlarge      | 3 | $4.77 | 180 |     108 | EBS only       |
+| AWS   | c5.9xlarge      | 3 | $4.59 | 216 |     108 | EBS only       |
+| AWS   | r5d.12xlarge    | 2 | $6.91 | 768 |      96 | 1.8 TB NVME    |
 
 
 In particular, a 2-node HPC2.36 cluster on OCI is comparable in price to a
@@ -72,7 +72,7 @@ any of which might have a drastic impact on performance. Some of these things
 are published, or can be determined from inside of an instance, but many or even
 most of them are intentionally abstracted away from the user. The only really
 reliable way to see how different providers stack up is to run your workload on
-them and measure its performance!
+them and measure the performance!
 
 Pilosa is a fairly interesting piece of software to benchmark as it works out a
 few different areas of the hardware. During data ingest and startup, sequential
@@ -126,7 +126,7 @@ and I/O related functions with fewer variables to consider.
 First, let's take a look at raw performance and see which configuration was fastest for each query on average over the 20 iterations.
 
 | cloud | instance type    | nodes | query                                             |
-|-------|------------------|-------|---------------------------------------------------|
+|-------|------------------|------:|--------------------------------------------------- |
 | AWS   | r5d.12xlarge     |     2 | TopN(distance, Row(pickup year=2011))             |
 | AWS   | c5.9xlarge       |     3 | TopN(distance)                                    |
 | AWS   | c5.9xlarge       |     3 | TopN(cab type)                                    |
@@ -164,15 +164,15 @@ each of these benchmarks:
 
 
 | cloud | instance type    | nodes | query                                             |   $/MQ |
-|-------|------------------|-------|---------------------------------------------------|--------|
-| OCI   | VM.Standard2.16  |     3 | TopN(distance, Row(pickup year=2011))             |   8.08 |
-| AWS   | c5.9xlarge       |     3 | TopN(distance)                                    |  13.17 |
-| AWS   | c5.9xlarge       |     3 | TopN(cab type)                                    |   3.65 |
-| OCI   | BM.HPC2.36       |     2 | GroupBy year, passengers, dist                    | 281.12 |
-| Azure | Standard F32s v2 |     3 | Group By cab type, year, month                    |   5.51 |
-| Azure | Standard F32s v2 |     3 | Group By cab type, year, passengers               |   8.13 |
-| OCI   | VM.Standard2.16  |     3 | Count Union of 3 rows                             |   3.59 |
-| OCI   | VM.Standard2.16  |     3 | Count Of intersection of unions involving 29 rows | 141.75 |
+|-------|------------------|------:|---------------------------------------------------|--------: |
+| OCI   | VM.Standard2.16  |     3 | TopN(distance, Row(pickup year=2011))             |   $8.08 |
+| AWS   | c5.9xlarge       |     3 | TopN(distance)                                    |  $13.17 |
+| AWS   | c5.9xlarge       |     3 | TopN(cab type)                                    |   $3.65  |
+| OCI   | BM.HPC2.36       |     2 | GroupBy year, passengers, dist                    | $281.12 |
+| Azure | Standard F32s v2 |     3 | Group By cab type, year, month                    |   $5.51 |
+| Azure | Standard F32s v2 |     3 | Group By cab type, year, passengers               |   $8.13 |
+| OCI   | VM.Standard2.16  |     3 | Count Union of 3 rows                             |   $3.59 |
+| OCI   | VM.Standard2.16  |     3 | Count Of intersection of unions involving 29 rows | $141.75 |
 
 It appears that OCI's VM.Standard2.16 is the king of cost effectiveness. This is
 particularly interesting as these instances have 240 GB of memory to go with
