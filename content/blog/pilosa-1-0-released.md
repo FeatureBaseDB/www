@@ -35,7 +35,7 @@ A large portion of the work in this release focused on these API changes, but th
 - Field creation has been revamped, with a more sensible field type system. For example, fields that were "rangeEnabled" are now simply fields of type "int".
 - Slices are now known as shards.
 - Query responses now refer to "columns" rather than "bits".
-- WebUI has been removed from Pilosa, and is now available [separately](https://github.com/pilosa/webui).
+- WebUI has been removed from Pilosa, and is now available [separately](https://github.com/pilosa/console).
 
 
 ### Changelog
