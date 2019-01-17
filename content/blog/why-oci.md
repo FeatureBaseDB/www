@@ -158,7 +158,7 @@ take cost into account. This last is fairly easy to remedy; instead of looking
 at the minimum average latency for each query, we can look at the minimum
 average latency multipled by the cluster cost. With the right unit conversions,
 this effectively gives us how much it would cost to run 1 Million of each given
-query back to back on a particular configuration... or as we like to call it
+query back to back on a particular configuration... or as we like to call it,
 "Dollars per Megaquery". Let's look at which configuration has the best $/MQ for
 each of these benchmarks:
 
@@ -270,10 +270,10 @@ based `ping` tool, etc.), and then compare that with our assumptions about what
 the various Pilosa benchmarks *should* be testing.
 
 For those who wish to look at the data more closely, we've been munging all the
-results on
-[data.world](https://data.world/jaffee/benchmarks/workspace/file?filename=allresults.csv),
-which has been a pretty nice platform for sharing data and various queries as
-well as producing charts.
+results on [data.world](https://data.world/jaffee/benchmarks), which has been a
+pretty nice platform for sharing data and various queries as well as producing
+charts. Click "Launch Workspace" on the top right to start playing with the
+data - you will have to create a (free) account.
 
 For those who wish to try to reproduce or expand on these benchmarks, we have a
 variety of tooling available in our [Infrastructure repository.](https://github.com/pilosa/infrastructure/tree/master/terraform/examples)
