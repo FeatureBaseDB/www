@@ -20,7 +20,6 @@ these kinds of low latency analytics a reality. We're very interested in which
 cloud providers—and which instance configurations on each provider—have the best
 overall price/performance ratio.
 
-
 For this initial foray, we've run a massive suite of Pilosa-centric benchmarks
 on 10 different configurations spread across Azure, AWS, and Oracle's cloud (OCI).
 
@@ -36,6 +35,12 @@ something like:
 We recently had the good fortune of being chosen to participate in the [Oracle
 Startup Accelerator](https://www.oracle.com/startup/) program, and they've
 strongly encouraged us to put OCI to the test.
+
+<div class="note">
+Disclaimer: While we are in the Oracle Startup Accelerator, Azure and AWS
+have also provided us with free credits as part of their respective startup
+programs and we've used those to run these benchmarks.
+</div>
 
 As we started to take it for a spin, we were pleasantly surprised by a number of things:
 
@@ -244,10 +249,19 @@ A number of things didn't quite add up that I'd like to dig into more:
 - Azure didn't perform as well as expected overall - especially in I/O. I'm not
   sure what type of SSDs Azure uses for its temporary storage, but we should
   probably look into other storage options.
-- OCI's BM.Standard2.52 performed fairly abysmally. On paper it looks extremely
-  cost effective though: 104 hyper threads, 2 massive SSDs, and more RAM than
-  you can shake a stick at for $3.31/hr. With the same processor as the `.16`
-  models, its lack of performance is confusing.
+- OCI's BM.Standard2.52 performed poorly. On paper it looks extremely cost
+  effective though: 104 hyper threads, ~~2 massive SSDs~~, and more RAM than you
+  can shake a stick at for $3.31/hr. With the same processor as the
+  `VM.Standard2.16` models, its lack of performance is confusing.
+  
+<div class="note">
+Correction: The BM.Standard2.52 does not have SSDs. That would be the
+BM.DenseIO2.52 which has 8 (!!) NVMe SSDs for a whopping 51.2 TB of total
+storage, and otherwise identical specs. It's about twice the cost at $6.63/hr.
+This doesn't explain, however, why it's 15-20% slower than the `VM.*.16` models
+on the IntersectionCount (single threaded CPU performance) benchmark.
+</div>
+
 - The r5d.12xlarge won the Filtered TopN query by a healthy margin, but got 6th
   in the 29 value segmentation by a factor of 4. Those two queries aren't
   terribly different from a workload perspective, however.
