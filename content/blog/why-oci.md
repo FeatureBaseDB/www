@@ -255,10 +255,10 @@ A number of things didn't quite add up that I'd like to dig into more:
   `VM.Standard2.16` models, its lack of performance is confusing.
   
 <div class="note">
-Correction: The BM.Standard2.52 does not have SSDs. That would be the
-BM.DenseIO2.52 which has 8 (!!) NVMe SSDs for a whopping 51.2 TB of total
+Correction: The <code>BM.Standard2.52</code> does not have SSDs. That would be the
+<code>BM.DenseIO2.52</code> which has 8 (!!) NVMe SSDs for a whopping 51.2 TB of total
 storage, and otherwise identical specs. It's about twice the cost at $6.63/hr.
-This doesn't explain, however, why it's 15-20% slower than the `VM.*.16` models
+This doesn't explain, however, why it's 15-20% slower than the <code>VM.*.16</code> models
 on the IntersectionCount (single threaded CPU performance) benchmark.
 </div>
 
