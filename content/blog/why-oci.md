@@ -54,7 +54,7 @@ Check out this table:
 |-------|-----------------|--:|------:|----:|--------:|---------------- |
 | OCI   | VM.Standard2.16 | 3 | $3.06 | 720 |      96 | N/A            |
 | OCI   | VM.DenseIO2.16  | 3 | $6.12 | 720 |      96 | 12.8 TB NVME   |
-| OCI   | BM.Standard2.52 | 1 | $3.32 | 768 |     104 | 12.8 TB NVME   |
+| OCI   | BM.Standard2.52 | 1 | $3.32 | 768 |     104 | N/A            |
 | OCI   | BM.HPC2.36      | 2 | $5.40 | 768 |     144 | 6.7 TB NVME    |
 | Azure | F32s v2         | 3 | $4.06 | 192 |      96 | 256 GB SSD     |
 | Azure | F16             | 6 | $4.78 | 192 |      96 | 256 GB SSD     |
