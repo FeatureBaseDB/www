@@ -68,6 +68,12 @@ Ubuntu images, so we used those.
 
 Let's look first at raw performance for the queries:
 
+![29-way Intersect](/img/blog/cloud-bench-redux/perf/29-way-intersect.png)
+*29-way Intersect - performance*
+
+![29-way Intersect](/img/blog/cloud-bench-redux/dpmq/29-way-intersect.png)
+*29-way Intersect - cost per megaquery*
+
 
 
 _Banner Photo by Victor Rodriguez on Unsplash_
