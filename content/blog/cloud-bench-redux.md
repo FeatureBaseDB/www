@@ -1,7 +1,7 @@
 +++
 date = "2019-01-13"
 publishdate = "2019-01-15"
-title = "Benchmarking Redux"
+title = "I Hope You Like Charts"
 author = "Matt Jaffee"
 author_twitter = "mattjaffee"
 author_img = "2"
@@ -10,7 +10,7 @@ image = "/img/blog/cloud-bench-redux/banner.jpg"
 overlay_color = "" # blue, green, or light
 +++
 
-_This is a follow-on post to our [previous multi-cloud benchmarks.](../why-oci)_
+_This is a follow-on post to our [multi-cloud benchmarks.](../why-oci)_
 
 Previously, we ran a number of [Pilosa](https://github.com/pilosa/pilosa)
 specific benchmarks across a variety of configurations of hosts on AWS, Azure,
@@ -101,7 +101,7 @@ perhaps differences in the memory subsytems give OCI the edge here.
 Now what about basic disk I/O?
 
 ![FileWrite](/img/blog/cloud-bench-redux/perf/benchmarkfilewriterows100000.png)
-n
+
 Very interesting! The bare metal HPC instance using Oracle Linux with 1 SSD
 outperforms the 2 SSD VM instances (running Ubuntu) both on Oracle and AWS. The
 non-SSD Oracle and AWS instances also show marked improvement running their
@@ -199,6 +199,36 @@ and way, way more if you run the entire suite yourself. (one run is 1500 tests,
 and we ran them all on four different concurrency levels):
 
 
+#### Random 1MB reads at concurrency 1, 16, 36, 52
+
+![random-read-1-mb-conc1](/img/blog/cloud-bench-redux/bw/bwrandom-read-64-bit-size--1-mb-conc1.png)
+
+![random-read-1-mb-conc16](/img/blog/cloud-bench-redux/bw/bwrandom-read-64-bit-size--1-mb-conc16.png)
+
+![random-read-1-mb-conc36](/img/blog/cloud-bench-redux/bw/bwrandom-read-64-bit-size--1-mb-conc36.png)
+
+![random-read-1-mb-conc52](/img/blog/cloud-bench-redux/bw/bwrandom-read-64-bit-size--1-mb-conc52.png)
+
+You can really watch the `BM.Standard2.52` pull away from the `VM.Standard2.16` at higher concurrencies.
+
+#### Random 1MB writes at concurrency 1 and 52
+
+![random-write-1-mb-conc1](/img/blog/cloud-bench-redux/bw/bwrandom-write-64-bit-size--1-mb-conc1.png)
+
+![random-write-1-mb-conc52](/img/blog/cloud-bench-redux/bw/bwrandom-write-64-bit-size--1-mb-conc52.png)
+
+1 MB writes follow the same pattern.
+
+#### Sequential 1MB reads at 1 and 52
+
+![sequential-read-1-mb-conc1](/img/blog/cloud-bench-redux/bw/bwsequential-read-64-bit-size--1-mb-conc1.png)
+
+![sequential-read-1-mb-conc52](/img/blog/cloud-bench-redux/bw/bwsequential-read-64-bit-size--1-mb-conc52.png)
+
+More of the same. There are *lots* of other combinations, but the story is pretty similar all over.
+
+
+#### Analysis
 
 
 Essentially, it doesn't appear that the performance difference between the
