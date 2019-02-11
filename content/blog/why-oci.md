@@ -5,7 +5,7 @@ title = "Oracle, AWS, and Azure Benchmarking Shootout"
 author = "Matt Jaffee"
 author_twitter = "mattjaffee"
 author_img = "2"
-featured = "true"
+featured = "false"
 image = "/img/blog/why-oci/banner.jpg"
 overlay_color = "green" # blue, green, or light
 +++
