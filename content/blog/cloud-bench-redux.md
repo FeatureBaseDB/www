@@ -10,7 +10,7 @@ image = "/img/blog/cloud-bench-redux/banner.jpg"
 overlay_color = "" # blue, green, or light
 +++
 
-_This is a follow-on post to our [multi-cloud benchmarks.](../why-oci)_
+_This is a follow-on post to [multi-cloud benchmarks.](../why-oci)_
 
 Previously, we ran a number of [Pilosa](https://github.com/pilosa/pilosa)
 specific benchmarks across a variety of configurations of hosts on AWS, Azure,
@@ -143,7 +143,7 @@ Let's look at raw performance for the queries - this time around, I've posted al
 We see all 4 clouds making appearances in the top 3 of these query benchmarks
 which have no disk I/O component. AWS wins 6 of 8, and Azure comes in first or
 second in 6. Oracle has 4 top-3 appearances with 1 win, and GCP has 2 3rds and
-some very close 4ths. To be fair, we've only tested on GCP configuration, so
+some very close 4ths. To be fair, we've only tested one GCP configuration, so
 they have fewer chances to win.
 
 ### Cluster Cost/Performance
@@ -264,7 +264,8 @@ still do pretty well.
 ### Future Work
 
 I'd still like to do some more low level benchmarking (like the memory bandwidth
-stuff) to get baseline performance each aspect of each configuration's hardware.
+stuff) to get baseline performance of each aspect of each configuration's
+hardware.
 
 More importantly though, I think, I'd like to do more repeated runs on the same
 configurations and see what kind of consistency we're getting. Some of the

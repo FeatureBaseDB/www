@@ -10,6 +10,8 @@ image = "/img/blog/why-oci/banner.jpg"
 overlay_color = "green" # blue, green, or light
 +++
 
+_Psst - when you're done with this, [check out part 2](../cloud-bench-redux)._
+
 For those unfamiliar, Pilosa is an open source, distributed index which is
 designed to help analyze huge datasets at "UI latency". Basically we want all
 queries to return in under a second regardless of complexity.
@@ -295,6 +297,8 @@ This helps with deploying servers, installing and running Pilosa, loading data,
 and running the benchmarks.
 
 Thanks for reading, and please reach out if you have any questions!
+
+_Update: Part 2 with GCP, memory bandwidth, and more is [here!](../cloud-bench-redux)_
 
 _Jaffee is a lead software engineer at Pilosa. When he’s not burning cloud credits for science, he enjoys jiu-jitsu, building mechanical keyboards, and spending time with family. Follow him on Twitter at [@mattjaffee](https://twitter.com/mattjaffee?lang=en)._
 
