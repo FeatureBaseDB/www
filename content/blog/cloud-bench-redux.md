@@ -5,7 +5,6 @@ title = "I Hope You Like Charts"
 author = "Matt Jaffee"
 author_twitter = "mattjaffee"
 author_img = "2"
-featured = "true"
 image = "/img/blog/cloud-bench-redux/banner.jpg"
 overlay_color = "" # blue, green, or light
 +++
@@ -30,7 +29,7 @@ We've got a few exciting updates in this second edition:
    with the Oracle benchmarks.
 4. We ran some low level memory bandwidth benchmarks.
 5. We've updated our
-   [tooling](https://github.com/pilosa/infrastructure/tree/terraform/examples)
+   [tooling](https://github.com/pilosa/infrastructure/tree/master/terraform/examples)
    to make it significantly easier to add new configurations to our existing
    results on [data.world](https://data.world/jaffee/benchmarks).
    
