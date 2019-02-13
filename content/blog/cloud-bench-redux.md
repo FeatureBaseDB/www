@@ -41,10 +41,11 @@ clusters configured in each cloud, as well as a set of microbenchmarks that just
 ran on one instance of each cluster.
 
 So, without further ado, here is the full set of configurations that we've
-benchmarked against.
+benchmarked against. These are the aggregate numbers across each *cluster*, not
+for a single instance of the given type.
 
 
-| Cloud | InstanceType               | Num | OS           | Cost/ Hr | CPUs | Mem (GB) | NVME SSDs |
+| Cloud | Instance Type              | Num | OS           | Cost/ Hr | CPUs | Mem (GB) | NVME SSDs |
 |-------|----------------------------|----: |--------------|--------: |-----: |--------: |----------: |
 | OCI   | VM.Standard2.16            |   3 | Oracle Linux |    3.06 |   96 |     720 |         0 |
 | OCI   | VM.Standard2.16            |   3 | Ubuntu       |    3.06 |   96 |     720 |         0 |
@@ -62,6 +63,8 @@ benchmarked against.
 | AWS   | r5d.12xlarge               |   2 | Ubuntu       |   6.91  |   96 |     768 |         4 |
 | AWS   | r5d.12xlarge               |   2 | Amazon Linux |   6.91  |   96 |     768 |         4 |
 | Azure | Standard_E64s_v3           |   2 | Ubuntu       |   7.26  |  128 |     864 |         0 |
+
+_"CPUs" here is the number of logical cores as reported by `/proc/cpuinfo` - usually that means hyperthreads, though for Azure's F16, it does mean physical cores._
 
 There are a few nuances to note here. Oracle and Amazon provide custom linux
 distributions (both based on CentOS), and we've run some of the configurations
