@@ -1,7 +1,7 @@
 +++
 date = "2019-02-13"
 publishdate = "2019-02-13"
-title = "I Hope You Like Charts: Benchmarking On 4 Clouds"
+title = "I Hope You Like Charts: Benchmarks On 4 Clouds"
 author = "Matt Jaffee"
 author_twitter = "mattjaffee"
 author_img = "2"
