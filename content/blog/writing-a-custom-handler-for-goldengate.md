@@ -19,8 +19,10 @@ In this post, we will cover creating a custom handler for Oracle GoldenGate whic
 [Oracle GoldenGate](https://www.oracle.com/middleware/technologies/goldengate.html) captures and delivers real-time change data from a compatible database to other databases, data warehouses and applications. The change data is directly read from database logs, having minimal impact on the database itself.
 
 GoldenGate has three primary components:
-1. Capture: Extract groups retrive change information from database logs and write it to a *trail files*. Since GoldenGate uses transaction logs of databases, capturing changes has a low impact on the source system.
+1. Capture: Extract groups retrieve change information from database logs and write it to *trail files*. Since GoldenGate uses the transaction logs from databases, capturing changes has a low impact on the source system.
+
 2. Trail files: A trail file contains changes in a database, such as inserts, updates and deletes in a platfrom independent data format. The changes are ordered by the time they are committed.
+
 3. Delivery: The trail is sent over the network from the source system to the target and written in a remote trail. A replication group applies the changes to the target system. The extract group which reads the local trail and sends the changes is called a *pump*.
 
 In the simplest case, GoldenGate can be used for unidirectional replication from a source to a target. GoldenGate also supports bidirectional and multi-master replication where there may be more than one writer to a database table.
@@ -59,7 +61,7 @@ $ cd docker-images
 
 ##### Creating the Oracle Database Image
 
-Create the Oracle Database 12c image (`oracle/database:18.3.0-ee`) using the following steps:
+Create the Oracle Database 12c image (`oracle/database:12.2.0.1-ee`) using the following steps:
 1. Switch to `OracleDatabase/SingleInstance/dockerfiles` directory:
     ```
     $ cd OracleDatabase/SingleInstance/dockerfiles
@@ -79,45 +81,70 @@ Create the Oracle GoldenGate 18 image using the following steps:
     $ cd OracleGoldenGate
     ```
 
+2. Download Oracle GoldenGate for Big Data 12.3.2.1.1 on Linux x86-64  (`OGG_BigData_Linux_x64_12.3.2.1.1.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
+
+3. Run the image creation script:
+    ```
+    $ BASE_IMAGE=oracle/database:12.2.0.1-ee ./dockerBuild.sh OGG_BigData_Linux_x64_12.3.2.1.1.zip --build-arg BASE_COMMAND="su -c '/opt/oracle/runOracle.sh' oracle"
+    ```
+
+##### Creating the Oracle GoldenGate Image
+
+Create the Oracle GoldenGate 18 image using the following steps:
+1. Switch to `OracleGoldenGate` directory:
+    ```
+    $ cd OracleGoldenGate
+    ```
+
 2. Download Oracle GoldenGate 18.1 standard edition from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
 3. Run the image creation script:
     ```
-    $ BASE_IMAGE=oracle/database:12.2.0.1-ee ./dockerBuild.sh 181000_fbo_ggs_Linux_x64_shiphome.zip --build-arg BASE_COMMAND="su -c '/opt/oracle/runOracle.sh' oracle"
+    $ BASE_IMAGE=oracle/database:12.2.0.1-ee ./dockerBuild.sh 181000_fbo_ggs_Linux_x64_shiphome.zip --build-arg BASE_COMMAND="su -c '/opt/oracle/runOracle.sh' oracle" --tag oracle/db-12.2-goldengate-standard:18.1.0.0.0
     ```
 
-##### Creating the GoldenGate Java Adapter Image
+##### Creating the GoldenGate for BigData Image
 
-Create the GoldenGate Java adapter image using the following steps:
+Create the GoldenGate for BigData image using the following steps:
 1. Switch to `OracleGoldenGate` directory.
 
-2. Download Oracle GoldenGate Application Adapters 12.2.0.1.2 for Linux x86-64 (`ggs_Adapters_Linux_x64.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
+2. Download Oracle GoldenGate for Big Data 12.3.2.1.1 on Linux x86-64  (`OGG_BigData_Linux_x64_12.3.2.1.1.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
 3. Run the image creation script:
     ```
-    BASE_IMAGE="oraclelinux:7-slim" ./dockerBuild.sh ggs_Adapters_Linux_x64.zip --tag pilosa/gg-jadapter:12.3
+    BASE_IMAGE="oraclelinux:7-slim" ./dockerBuild.sh OGG_BigData_Linux_x64_12.3.2.1.1.zip --tag oracle/goldengate-standard-bigdata:12.3.0.1.2
     ```
+
 
 ##### Patching the Oracle Database Image
 
-After completing the *Creating the Oracle GoldenGate Image* section above, we should end up with the `oracle/goldengate-standard:18.1.0.0.0` image. The `root` user in the created image doesn't have the correct [PAM](http://www.linux-pam.org) so we need to add them. The simplest way of doing it is creating another Docker image based on the image we have created.
+After completing the *Creating the Oracle GoldenGate Image* section above, we should end up with the `oracle/db-12.2-goldengate-standard:18.1.0.0.0` image. The `root` user in the created image doesn't have the correct [PAM](http://www.linux-pam.org) so we need to add them. The simplest way of doing it is creating another Docker image based on the image we have created.
 1. Clone https://github.com/pilosa/sample-ogg-handler to somewhere in your system.
 2. Switch to the `sample-ogg-handler/docker` directory.
 2. Run the following to create the patched image:
     ```
-    $ docker build -t oracle/goldengate-standard:18.1.0.0.0-patched .
+    $ docker build -t oracle/db-12.2-goldengate-standard:18.1.0.0.0-patched .
     ```
 
 ### Running the Setup
 
 The sample setup is composed of an Oracle database container, the replication container which also contains the custom adapter, and a Pilosa container.
 
-You have already cloned the sample project in the *Patching the Oracle Database Image* section. The sample project includes a Docker compose file. Let's run it:
+We have already cloned the sample project in the *Patching the Oracle Database Image* section. The sample project includes a Docker compose file. Let's run it:
     ```
     $ docker-compose up
     ```
 
 This takes a while.
+
+Before carrying on with enabling GoldenGate support, we have to modify the `tnsnames.ora` file which contains database service names mapped to listener protocol addresses. The default installed one doesn't seem to be in the correct format:
+```
+$ docker exec -it sampleogghandler_extract_1 cp /prv/tnsnames.ora /opt/oracle/oradata/dbconfig/ORCLCDB/tnsnames.ora
+```
+
+Make sure running the following commands end with `OK`:
+* `docker exec -it sampleogghandler_extract_1 tnsping ORCLCDB`
+* `docker exec -it sampleogghandler_extract_1 tnsping ORCLPDB1`
 
 #### Enabling GoldenGate Support on an Oracle Database
 
@@ -141,6 +168,8 @@ The support for GoldenGate is not enabled on Oracle databases by default. Follow
     alter database archivelog;
     alter database open;
     ```
+
+    This may take a while.
 
     Create the extract user. The user must be added to the root database when the integrated mode is used:
     ```
@@ -185,19 +214,17 @@ The support for GoldenGate is not enabled on Oracle databases by default. Follow
     Create the schema:
     ```
     CREATE USER ogguser IDENTIFIED BY w;
-    GRANT CONNECT, RESOURCE, UNLIMITED TABLESPACE TO ogguser;
+    GRANT CONNECT, RESOURCE, UNLIMITED TABLESPACE, CREATE VIEW TO ogguser;
     ```
 
     Exit `sqlplus` using `Ctrl+D`.
 
 4. Create demo tables:
     ```
-    $ sqlplus ogguser@ORCLPDB1/w @demo_ora_create.sql
+    $ echo EXIT | sqlplus ogguser@ORCLPDB1/w @$ORACLE_HOME/demo/schema/human_resources/hr_cre.sql
     ```
 
     Do not mind the `ORA-00942: table or view does not exist` errors.
-
-    Exit `sqlplus` using `Ctrl+D`.
 
 5. Create the GoldenGate credentials store and add the user for extract:
 
@@ -208,8 +235,8 @@ The support for GoldenGate is not enabled on Oracle databases by default. Follow
 
     Add a credential store and store the root database user credentials:
     ```
-    add credentialstore
-    alter credentialstore add user c##ggadmin@ORCLCDB password w alias c##ggadmin
+    ADD CREDENTIALSTORE
+    ALTER CREDENTIALSTORE ADD USER c##ggadmin@ORCLCDB PASSWORD w ALIAS c##ggadmin
     ```
 
 6. Enable schema-level supplemental logging for the database tables:
@@ -237,14 +264,12 @@ While still in the GoldenGate console, follow these steps to create and start ex
     LOGALLSUPCOLS
     UPDATERECORDFORMAT COMPACT
     DDL INCLUDE MAPPED
-    EXTTRAIL ./dirdat/et, FORMAT RELEASE 12.1
+    EXTTRAIL ./dirdat/et
 
     SOURCECATALOG ORCLPDB1
     TABLE ogguser.*;
     SEQUENCE ogguser.*;
     ```
-
-    Note that we set the trail format to `12.1`. GoldenGate Java adapter seems to be the most happy with that version.
 
     Add the extract group. We limit each trail file to be at most 5 megabytes; that's adequate for the sample project.
     ```
@@ -273,7 +298,7 @@ While still in the GoldenGate console, follow these steps to create and start ex
                         SCN 0.0 (0)
     ```
 
-2. The pump group is used to send the local trail to the remote container over the network.
+2. The pump group is used to send the local trail to a remote location over the network, in our case the `replicat` container.
 
     Check the contents of the pump group:
     ```
@@ -284,7 +309,7 @@ While still in the GoldenGate console, follow these steps to create and start ex
     ```
     EXTRACT pump
     RMTHOST replicat, MGRPORT 7809, COMPRESS
-    RMTTRAIL ./dirdat/pm, FORMAT RELEASE 12.1
+    RMTTRAIL ./dirdat/pm
     PASSTHRU
 
     SOURCECATALOG ORCLPDB1
@@ -302,8 +327,8 @@ While still in the GoldenGate console, follow these steps to create and start ex
 
 3. Start the extract and pump groups:
     ```
-    start extract ext
-    start extract pump
+    START EXTRACT EXT
+    START EXTRACT PUMP
     ```
 
     Check that the extract groups are running:
@@ -320,9 +345,23 @@ While still in the GoldenGate console, follow these steps to create and start ex
     EXTRACT     RUNNING     PUMP        00:00:00      00:00:08
     ```
 
-    If any of the items in that list has `STOPPED` or `ABENDED` status, check the logs using `VIEW REPORT GROUP_NAME`, e.g., for `ext`:
+    If any of the items in that list has `STOPPED` or `ABENDED` status, check the logs for errors using `VIEW REPORT GROUP_NAME`, e.g., for `ext`:
     ```
     VIEW REPORT ext
+    ```
+
+#### Generating the Definitions File
+
+Since the replicat group does not have access to the source Oracle database, we have to generate definitions file for the tables on the source side and copy it to the replicat container.
+
+1. Generate the definitions file.
+    ```
+    $ docker exec -it sampleogghandler_extract_1 su oracle -c "defgen paramfile dirprm/ddemo.prm"
+    ```
+
+2. Copy the definitions to `/common` so the replicat container can access it:
+    ```
+    $ docker exec -it sampleogghandler_extract_1 su -c "cp /u01/app/ogg/dirdef/demo.def /common"
     ```
 
 #### Setting Up the Pilosa Handler Project
@@ -333,11 +372,11 @@ Requirements:
 * JDK 1.8
 * Maven 3.6 or better
 
-A skeleton project for a custom GoldenGate handler is included in the `handler` directory in `sample-ogg-handler` we have cloned before.
+A skeleton project for a custom GoldenGate handler is included in the `handler` directory in `sample-ogg-handler` that we cloned earlier.
 
-1. You have already downloaded `ggs_Adapters_Linux_x64.zip` before. Extract `ggs_Adapters_Linux_x64.tar` from `ggs_Adapters_Linux_x64.zip`.
+1. You have already downloaded `OGG_BigData_Linux_x64_12.3.2.1.1.zip` before. Extract `OGG_BigData_Linux_x64_12.3.2.1.1.tar` from `OGG_BigData_Linux_x64_12.3.2.1.1.zip`.
 
-2. Extract `ggjava` directory from `ggs_Adapters_Linux_x64.tar` and copy it to `local` directory of `handler`, so `handler/local/ggjava` directory contains the GoldenGate libraries.
+2. Extract `ggjava` directory from `OGG_BigData_Linux_x64_12.3.2.1.1.tarr` and copy it to `local` directory of `handler`, so `handler/local/ggjava` directory contains the GoldenGate libraries.
 
 3. In a shell, register the libraries for the GoldenGate Java Adapter. This has to be done only once:
     ```
@@ -350,7 +389,7 @@ A skeleton project for a custom GoldenGate handler is included in the `handler` 
 
 6. You can open the GoldenGate handler project in the `handler` directory with your favorite IDE/editor and check the contents of `src\main\java\sample\GoldengateHandler.java`. This is the source file that contains all the logic for the handler.
 
-#### Running the Replicat Container
+#### Setting Up Replication
 
 Our custom handler will run in the replicat container and react to the changes to the trail file. The trail file is updated using the data sent by the pump in the extract container.
 
@@ -362,10 +401,10 @@ Our custom handler will run in the replicat container and react to the changes t
 2. (*replicat container*) Check that properties for the custom handler are correct:
 
     ```
-    r$ cat dirprm/pilosa.properties
+    $ cat dirprm/pilosa.properties
     ```
 
-    Should output something like:
+    Should output:
     ```
     gg.log = log4j
     gg.log.level = info
@@ -376,15 +415,15 @@ Our custom handler will run in the replicat container and react to the changes t
     gg.handler.pilosa.address = pilosa:10101
     ```
 
-    The properties file contain settings for the custom handler. Most of the entries in the properties file should be self-explanatory. Most import entries are:
+    The properties file contains settings for the custom handler. Most of the entries in the properties file should be self-explanatory. Most import entries are:
     * `gg.classpath` should contain the class path for the handler. You can specify a comma delimited list of directories and jar files.
-    * `gg.handlerlist` should contain comma delimited list of handler names. You can choose any name you would like, but it should match the entries for other settings for the handler.
+    * `gg.handlerlist` should contain a comma delimited list of handler names. You can choose any name you would like, but it should match the entries for other settings for the handler.
     * `gg.handler.HANDLER_NAME.type` should contain the complete name of the handler, including the package name.
     * `gg.handler.HANDLER_NAME.address` is a setting directly passed to `setAddress` method of `sample.PilosaHandler`.
 
     The name of the properties file is the same as the extract group we will be adding next, so it is found automatically.
 
-3. Replicat groups process a trail file and apply the changes to a database, or execute an handler in our case.
+3. Replicat groups process a trail file and apply the changes to a database, or execute a handler in our case.
 
     Run the GoldenGate console:
 
@@ -397,10 +436,10 @@ Our custom handler will run in the replicat container and react to the changes t
     VIEW PARAM pilosa
     ```
 
-    Should output something like:
+    Should output:
     ```
     REPLICAT pilosa
-    SOURCEDEFS /prv/dpilosa.def
+    SOURCEDEFS /common/demo.def
     TARGETDB LIBFILE libggjava.so
     REPORTCOUNT EVERY 1 MINUTES, RATE
     MAP ORCLPDB1.ogguser.*, TARGET ogguser.*;
@@ -444,7 +483,7 @@ Our custom handler will run in the replicat container and react to the changes t
     REPLICAT    RUNNING     PILOSA      00:00:00      00:00:05
     ```
 
-    If the group has `STOPPED` or `ABENDED` status, check the logs using:
+    If the group has `STOPPED` or `ABENDED` status, check the logs for errors using:
     ```
     VIEW REPORT pilosa
     ```
@@ -455,23 +494,23 @@ Our custom handler will run in the replicat container and react to the changes t
     VIEW REPORT pilosa
     ```
 
-    The log is here on the replicat container: `dirrpt/PILOSA_info_log4j.log`
+    TThe replicat container log is located at: `dirrpt/PILOSA_info_log4j.log`
 
 #### Insert Data to the Source Database
 
-Start a shell on the extract container with the `oracle` user:
+Start a shell on the Pilosa container with `oracle` user:
 ```
 $ docker exec -it sampleogghandler_extract_1 su oracle
 ```
 
-Insert sample records into the database:
+Insert sample records into the source database:
 ```
-$ sqlplus ogguser@ORCLPDB1/w @demo_ora_insert.sql
+$ echo EXIT | sqlplus ogguser@ORCLPDB1/w @$ORACLE_HOME/demo/schema/human_resources/hr_popul.sql
 ```
 
 #### Check the Data on the Pilosa Side
 
-Let's confim the data on the Pilosa side was updated when we inserted some records to the source database.
+Let's confirm the data on the Pilosa side was updated when we inserted some records to the source database.
 
 Start a shell on the Pilosa container:
 ```
