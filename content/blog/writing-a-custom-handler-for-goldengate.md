@@ -66,55 +66,40 @@ Create the Oracle Database 12c image (`oracle/database:12.2.0.1-ee`) using the f
     ```
     $ cd OracleDatabase/SingleInstance/dockerfiles
     ```
-Download Oracle Database 12c Release 2 archive (linuxx64_12201_database.zip) from https://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html and copy it to `12.2.0.1` directory/
+
+2. Download Oracle Database 12c Release 2 archive (linuxx64_12201_database.zip) from https://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html and copy it to `12.2.0.1` directory/
 
 3. Run the image creation script:
     ```
     $ ./buildDockerImage.sh -v 12.2.0.1 -e -i
     ```
 
-##### Creating the Oracle GoldenGate Image
+##### Creating Oracle GoldenGate Images
+
+We need to crate two Oracle GoldenGate images:
+* Oracle GoldenGate 18 for the `extract` container.
+* Oracle GoldenGate for BigData image for the `replicat` container.
+
+First, switch to `OracleGoldenGate` directory:
+```
+cd ../../../OracleGoldenGate
+```
 
 Create the Oracle GoldenGate 18 image using the following steps:
-1. Switch to `OracleGoldenGate` directory:
-    ```
-    $ cd OracleGoldenGate
-    ```
+1. Download Oracle GoldenGate 18.1.0.0.0 for Oracle on Linux x86-64 (`181000_fbo_ggs_Linux_x64_shiphome.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
-2. Download Oracle GoldenGate for Big Data 12.3.2.1.1 on Linux x86-64  (`OGG_BigData_Linux_x64_12.3.2.1.1.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
-
-3. Run the image creation script:
-    ```
-    $ BASE_IMAGE=oracle/database:12.2.0.1-ee ./dockerBuild.sh OGG_BigData_Linux_x64_12.3.2.1.1.zip --build-arg BASE_COMMAND="su -c '/opt/oracle/runOracle.sh' oracle"
-    ```
-
-##### Creating the Oracle GoldenGate Image
-
-Create the Oracle GoldenGate 18 image using the following steps:
-1. Switch to `OracleGoldenGate` directory:
-    ```
-    $ cd OracleGoldenGate
-    ```
-
-2. Download Oracle GoldenGate 18.1 standard edition from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
-
-3. Run the image creation script:
+2. Run the image creation script:
     ```
     $ BASE_IMAGE=oracle/database:12.2.0.1-ee ./dockerBuild.sh 181000_fbo_ggs_Linux_x64_shiphome.zip --build-arg BASE_COMMAND="su -c '/opt/oracle/runOracle.sh' oracle" --tag oracle/db-12.2-goldengate-standard:18.1.0.0.0
     ```
 
-##### Creating the GoldenGate for BigData Image
-
 Create the GoldenGate for BigData image using the following steps:
-1. Switch to `OracleGoldenGate` directory.
+1. Download Oracle GoldenGate for Big Data 12.3.2.1.1 on Linux x86-64 (`OGG_BigData_Linux_x64_12.3.2.1.1.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
-2. Download Oracle GoldenGate for Big Data 12.3.2.1.1 on Linux x86-64  (`OGG_BigData_Linux_x64_12.3.2.1.1.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
-
-3. Run the image creation script:
+2. Run the image creation script:
     ```
     BASE_IMAGE="oraclelinux:7-slim" ./dockerBuild.sh OGG_BigData_Linux_x64_12.3.2.1.1.zip --tag oracle/goldengate-standard-bigdata:12.3.0.1.2
     ```
-
 
 ##### Patching the Oracle Database Image
 
