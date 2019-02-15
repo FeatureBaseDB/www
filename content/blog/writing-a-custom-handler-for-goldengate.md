@@ -415,7 +415,7 @@ Our custom handler will run in the replicat container and react to the changes t
     gg.handler.pilosa.address = pilosa:10101
     ```
 
-    The properties file contains settings for the custom handler. Most of the entries in the properties file should be self-explanatory. Most import entries are:
+    The properties file contains settings for the custom handler. Most of the entries in the properties file should be self-explanatory. The most import entries are:
     * `gg.classpath` should contain the class path for the handler. You can specify a comma delimited list of directories and jar files.
     * `gg.handlerlist` should contain a comma delimited list of handler names. You can choose any name you would like, but it should match the entries for other settings for the handler.
     * `gg.handler.HANDLER_NAME.type` should contain the complete name of the handler, including the package name.
