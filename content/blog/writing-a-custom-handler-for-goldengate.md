@@ -427,6 +427,7 @@ Our custom handler will run in the replicat container and react to the changes t
     SOURCEDEFS /common/demo.def
     TARGETDB LIBFILE libggjava.so
     REPORTCOUNT EVERY 1 MINUTES, RATE
+    GROUPTRANSOPS 1000
     MAP ORCLPDB1.ogguser.*, TARGET ogguser.*;
     ```
 
