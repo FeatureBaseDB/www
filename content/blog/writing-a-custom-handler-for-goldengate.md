@@ -154,36 +154,36 @@ The support for GoldenGate is not enabled on Oracle databases by default. Follow
 
     Turn on the archive log:
     ```
-    shutdown immediate;
-    startup mount exclusive;
-    alter database archivelog;
-    alter database open;
+    SHUTDOWN IMMEDIATE;
+    STARTUP MOUNT EXCLUSIVE;
+    ALTER DATABASE ARCHIVELOG;
+    ALTER DATABASE OPEN;
     ```
 
     This may take a while.
 
     Create the extract user. The user must be added to the root database when the integrated mode is used:
     ```
-    create user c##ggadmin identified by w
-    default tablespace users
-    temporary tablespace temp;
-    grant dba TO c##ggadmin CONTAINER=all;
-    exec dbms_goldengate_auth.grant_admin_privilege('c##ggadmin',container=>'all');
+    CREATE USER c##ggadmin IDENTIFIED BY w
+    DEFAULT TABLESPACE users
+    TEMPORARY TABLESPACE temp;
+    GRANT DBA TO c##ggadmin container=all;
+    EXEC dbms_goldengate_auth.grant_admin_privilege('c##ggadmin',container=>'all');
     ```
 
     Check whether GoldenGate replication was enabled on this database:
     ```
-    show parameter ENABLE_GOLDENGATE_REPLICATION;
+    SHOW PARAMETER ENABLE_GOLDENGATE_REPLICATION;
     ```
 
     If it is not already enabled, enable it:
     ```
-    alter system set ENABLE_GOLDENGATE_REPLICATION=true scope=both;
+    ALTER SYSTEM SET ENABLE_GOLDENGATE_REPLICATION=true SCOPE=both;
     ```
 
     Chech whether supplemental logging is enabled:
     ```
-    SELECT supplemental_log_data_min, force_logging FROM v$database;
+    SELECT SUPPLEMENTAL_LOG_DATA_MIN, FORCE_LOGGING FROM v$database;
     ```
 
     If it is not already enabled, enable it:
@@ -517,8 +517,8 @@ $ docker exec -it sampleogghandler_extract_1 su oracle -c 'sqlplus ogguser@ORCLP
 
 Delete the employee with ID 150, who is a sales representative:
 ```
-delete from ogguser.employees where employee_id=150;
-commit;
+DELETE FROM ogguser.employees WHERE employee_id=150;
+COMMIT;
 ```
 
 How many sales representatives left?
