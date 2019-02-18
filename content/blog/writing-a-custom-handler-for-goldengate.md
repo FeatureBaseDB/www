@@ -22,7 +22,7 @@ GoldenGate has three primary components:
 
 1. Capture: *Extract groups* retrieve change information from database logs and write it to *trail files*. Since GoldenGate uses the transaction logs from databases, capturing changes has a low impact on the source system.
 
-2. Trail files: A trail file contains changes in a database, such as inserts, updates and deletes in a platfrom independent data format. The changes are ordered by the time they are committed.
+2. Trail files: A trail file contains changes in a database, such as inserts, updates and deletes in a platfrom independent data format. The changes are ordered by commit time.
 
 3. Delivery: The trail is sent over the network from the source system to the target and written in a remote trail. A replication group applies the changes to the target system. The extract group which reads the local trail and sends the changes is called a *pump*.
 
