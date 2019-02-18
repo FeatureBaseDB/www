@@ -79,6 +79,7 @@ Create the Oracle Database 12c image (`oracle/database:12.2.0.1-ee`) using the f
 ##### Creating Oracle GoldenGate Images
 
 We need to create two Oracle GoldenGate images:
+
 * Oracle GoldenGate 18 for the `extract` container.
 * Oracle GoldenGate for BigData image for the `replicat` container.
 
