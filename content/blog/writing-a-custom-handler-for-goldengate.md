@@ -134,6 +134,7 @@ $ docker exec -it sampleogghandler_extract_1 cp /prv/tnsnames.ora /opt/oracle/or
 ```
 
 Make sure running the following commands end with `OK`:
+
 * `docker exec -it sampleogghandler_extract_1 tnsping ORCLCDB`
 * `docker exec -it sampleogghandler_extract_1 tnsping ORCLPDB1`
 
