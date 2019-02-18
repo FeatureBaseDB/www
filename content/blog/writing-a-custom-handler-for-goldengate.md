@@ -147,6 +147,7 @@ Make sure running the following commands end with `OK`:
 
 The support for GoldenGate is not enabled on Oracle databases by default. Follow the steps below to enable it:
 
+
 1. Start a shell on the extract container with the `oracle` user:
     ```
     $ docker exec -it sampleogghandler_extract_1 su oracle
