@@ -33,13 +33,12 @@ It is possible to extend Oracle GoldenGate's functionality with customer handler
 
 Using GoldenGate with Pilosa has the following benefits:
 * Pilosa is distributed and fast. It may be used for a lot of the tasks a database is used for, offloading the tasks to Pilosa so freeing up database resources.
-* Using GoldenGate, updates from a database to the Pilosa server can be delivered in a low impact way.
-* The data in the database is replicated to a Pilosa server in real-time.
+* Using GoldenGate, updates from a database to the Pilosa server can be delivered in a low impact way. GoldenGate extracts changes in the database from logs instead of running queries.
+* The data in the database is replicated to a Pilosa server in real-time, making the data in the Pilosa side always up-to-date.
 
 ### Getting Ready
 
 Requirements:
-
 * Linux or MacOS, Bash or compatible shell
 * Docker 17.05 or better
 * Docker Compose
@@ -209,8 +208,6 @@ The support for GoldenGate is not enabled on Oracle databases by default. Follow
     $ echo EXIT | sqlplus ogguser@ORCLPDB1/w @$ORACLE_HOME/demo/schema/human_resources/hr_cre.sql
     ```
 
-    Do not mind the `ORA-00942: table or view does not exist` errors.
-
 5. Create the GoldenGate credentials store and add the user for extract:
 
     Start GoldenGate console:
@@ -246,10 +243,9 @@ While still in the GoldenGate console, follow these steps to create and start ex
     EXTRACT ext
     SETENV (ORACLE_SID = ORCLCDB)
     USERIDALIAS c##ggadmin
-    LOGALLSUPCOLS
-    UPDATERECORDFORMAT COMPACT
-    DDL INCLUDE MAPPED
     EXTTRAIL ./dirdat/et
+    GETUPDATEBEFORES
+    UPDATERECORDFORMAT COMPACT
 
     SOURCECATALOG ORCLPDB1
     TABLE ogguser.*;
@@ -335,20 +331,6 @@ While still in the GoldenGate console, follow these steps to create and start ex
     VIEW REPORT ext
     ```
 
-#### Generating the Definitions File
-
-Since the replicat group does not have access to the source Oracle database, we have to generate definitions file for the tables on the source side and copy it to the replicat container.
-
-1. Generate the definitions file.
-    ```
-    $ docker exec -it sampleogghandler_extract_1 su oracle -c "defgen paramfile dirprm/ddemo.prm"
-    ```
-
-2. Copy the definitions to `/common` so the replicat container can access it:
-    ```
-    $ docker exec -it sampleogghandler_extract_1 su -c "cp /u01/app/ogg/dirdef/demo.def /common"
-    ```
-
 #### Setting Up the Pilosa Handler Project
 
 We are going to take a detour to setup the custom handler project here.
@@ -357,7 +339,7 @@ Requirements:
 * JDK 1.8
 * Maven 3.6 or better
 
-A skeleton project for a custom GoldenGate handler is included in the `handler` directory in `sample-ogg-handler` that we cloned earlier.
+A sample Pilosa handler for GoldenGate is included in the `handler` directory in `sample-ogg-handler` that we cloned earlier.
 
 1. You have already downloaded `OGG_BigData_Linux_x64_12.3.2.1.1.zip` before. Extract `OGG_BigData_Linux_x64_12.3.2.1.1.tar` from `OGG_BigData_Linux_x64_12.3.2.1.1.zip`.
 
@@ -383,7 +365,7 @@ Our custom handler will run in the replicat container and react to the changes t
     $ docker exec -it sampleogghandler_replicat_1 su oracle
     ```
 
-2. (*replicat container*) Check that properties for the custom handler are correct:
+2. Check that properties for the custom handler are correct:
 
     ```
     $ cat dirprm/pilosa.properties
@@ -411,7 +393,6 @@ Our custom handler will run in the replicat container and react to the changes t
 3. Replicat groups process a trail file and apply the changes to a database, or execute a handler in our case.
 
     Run the GoldenGate console:
-
     ```
     $ ggsci
     ```
@@ -424,7 +405,6 @@ Our custom handler will run in the replicat container and react to the changes t
     Should output:
     ```
     REPLICAT pilosa
-    SOURCEDEFS /common/demo.def
     TARGETDB LIBFILE libggjava.so
     REPORTCOUNT EVERY 1 MINUTES, RATE
     GROUPTRANSOPS 1000
@@ -433,7 +413,7 @@ Our custom handler will run in the replicat container and react to the changes t
 
     Add the replicat group:
     ```
-    ADD REPLICAT pilosa, EXTTRAIL ./dirdat/pm
+    ADD REPLICAT pilosa, EXTTRAIL ./dirdat/pm, NODBCHECKPOINT
     ```
 
     Check that the extract group was created:
@@ -456,7 +436,6 @@ Our custom handler will run in the replicat container and react to the changes t
     ```
 
     Check that the extract group is running:
-
     ```
     info all
     ```
@@ -475,7 +454,6 @@ Our custom handler will run in the replicat container and react to the changes t
     ```
 
 12. View the custom handler logs:
-
     ```
     VIEW REPORT pilosa
     ```
@@ -505,7 +483,7 @@ $ docker exec -it sampleogghandler_pilosa_1 sh
 
 Let's find out what are the top 5 jobs and the number of employees having those jobs:
 ```
-# curl pilosa:10101/index/employees/query -d 'TopN(job, n=5)'
+# curl pilosa:10101/index/employees/query -d 'TopN(job, Row(ok=true), n=5)'
 ```
 
 Turns out there are 30 sales representatives, 20 shipping clerks, etc.:
@@ -513,22 +491,45 @@ Turns out there are 30 sales representatives, 20 shipping clerks, etc.:
 {"results":[[{"id":0,"key":"SA_REP","count":30},{"id":0,"key":"SH_CLERK","count":20},{"id":0,"key":"ST_CLERK","count":20},{"id":0,"key":"FI_ACCOUNT","count":5},{"id":0,"key":"SA_MAN","count":5}]]}
 ```
 
-Which sales representatives earn $10000 or more?
+Which sales representatives earn $10000 or more and what do we know about them?
 ```
-# Intersect(Row(salary >= 10000), Row(job="SA_REP"))
+# curl pilosa:10101/index/employees/query -d 'Options(Intersect(Row(ok=true), Row(salary >= 10000), Row(job="SA_REP")), columnAttrs=true)'
 ```
 
 Outputs:
 ```
-{"results":[{"attrs":{},"columns":[150,156,162,168,169,174]}]}
+{"results":[{"attrs":{},"columns":[150,156,162,168,169,174]}],"columnAttrs":[{"id":150,"attrs":{"email":"PTUCKER"}},{"id":156,"attrs":{"email":"JKING"}},{"id":162,"attrs":{"email":"CVISHNEY"}},{"id":168,"attrs":{"email":"LOZER"}},{"id":169,"attrs":{"email":"HBLOOM"}},{"id":174,"attrs":{"email":"EABEL"}}]}
 ```
 
-The query language of Pilosa is called **PQL**. You can find more about PQL in our [documentation](https://www.pilosa.com/docs/master/query-language/).
+Let's delete one of the employees from the source table to confirm that the corresponding column is marked non-existent.
+
+Open `sqlplus`:
+```
+$ docker exec -it sampleogghandler_extract_1 su oracle -c 'sqlplus ogguser@ORCLPDB1/w'
+```
+
+Delete the employee with ID 150, who is a sales representative:
+```
+delete from ogguser.employees where employee_id=150;
+commit;
+```
+
+How many sales representatives left?
+```
+ # curl pilosa:10101/index/employees/query -d 'Count(Intersect(Row(ok=true), Row(job="SA_REP")))'
+```
+
+Outputs:
+```
+{"results":[29]}
+```
+
+Check out our [documentation](https://www.pilosa.com/docs/master/query-language/) for PQL, the query language of Pilosa for more.
 
 ### Conclusion
 
-In this article we explored how to write a custom handler for GoldenGate, specifically a Pilosa handler.
+In this article we explored how to write a custom handler for Oracle GoldenGate, specifically a Pilosa handler. GoldenGate custom handlers enable acting on trail files in an efficient and fast way.
 
-We're always looking for feedback, so feel free to reach out if you think there's something we missed, or other topics you'd like us to cover.
+We are developing a Pilosa adapter for Oracle GoldenGate, which provides a Javascript based API for programming the translation logic. It is still in early phase of development, but [let us know](https://www.pilosa.com/about/#contact) if you are interested in integrating Pilosa in your workflow or providing feedback.
 
 _Yüce is an Independent Software Engineer at Pilosa. When he's not writing Pilosa client libraries, you can find him watching good bad movies. He is [@yuce](https://github.com/yuce) on GitHub and [@tklx](https://twitter.com/tklx) on Twitter._
