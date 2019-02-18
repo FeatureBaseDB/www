@@ -66,6 +66,7 @@ $ cd docker-images
 
 Create the Oracle Database 12c image (`oracle/database:12.2.0.1-ee`) using the following steps:
 
+
 1. Switch to `OracleDatabase/SingleInstance/dockerfiles` directory:
     ```
     $ cd OracleDatabase/SingleInstance/dockerfiles
