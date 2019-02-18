@@ -34,6 +34,7 @@ It is possible to extend Oracle GoldenGate's functionality with custom handlers.
 
 Using GoldenGate with Pilosa has the following benefits:
 
+
 * Pilosa is distributed and fast. It may be used for a lot of the tasks a database is used for, offloading the tasks to Pilosa so freeing up database resources.
 * Using GoldenGate, updates from a database to the Pilosa server can be delivered in a low impact way. GoldenGate extracts changes in the database from logs instead of running queries.
 * The data in the database is replicated to a Pilosa server in real-time, making the data in the Pilosa side always up-to-date.
