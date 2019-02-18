@@ -20,6 +20,7 @@ In this post, we will cover creating a custom handler for Oracle GoldenGate whic
 
 GoldenGate has three primary components:
 
+
 1. Capture: *Extract groups* retrieve change information from database logs and write it to *trail files*. Since GoldenGate uses the transaction logs from databases, capturing changes has a low impact on the source system.
 
 2. Trail files: A trail file contains changes in a database, such as inserts, updates and deletes in a platfrom independent data format. The changes are ordered by commit time.
