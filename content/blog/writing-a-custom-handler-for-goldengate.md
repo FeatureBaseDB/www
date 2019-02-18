@@ -352,6 +352,7 @@ While still in the GoldenGate console, follow these steps to create and start ex
 We are going to take a detour to set up the custom handler project here.
 
 Requirements:
+
 * JDK 1.8
 * Maven 3.6 or better
 
