@@ -19,7 +19,8 @@ In this post, we will cover creating a custom handler for Oracle GoldenGate whic
 [Oracle GoldenGate](https://www.oracle.com/middleware/technologies/goldengate.html) captures and delivers real-time change data from a compatible database to other databases, data warehouses and applications. The change data is directly read from database logs, having minimal impact on the database itself.
 
 GoldenGate has three primary components:
-1. Capture: Extract groups retrieve change information from database logs and write it to *trail files*. Since GoldenGate uses the transaction logs from databases, capturing changes has a low impact on the source system.
+
+1. Capture: *Extract groups* retrieve change information from database logs and write it to *trail files*. Since GoldenGate uses the transaction logs from databases, capturing changes has a low impact on the source system.
 
 2. Trail files: A trail file contains changes in a database, such as inserts, updates and deletes in a platfrom independent data format. The changes are ordered by the time they are committed.
 
@@ -27,11 +28,12 @@ GoldenGate has three primary components:
 
 In the simplest case, GoldenGate can be used for unidirectional replication from a source to a target. GoldenGate also supports bidirectional and multi-master replication where there may be more than one writer to a database table.
 
-It is possible to extend Oracle GoldenGate's functionality with customer handlers. We are going to use that feature to deliver and map real-time updates from an Oracle database to a Pilosa server using Pilosa Java client library.
+It is possible to extend Oracle GoldenGate's functionality with custom handlers. We are going to use that feature to deliver and map real-time updates from an Oracle database to a Pilosa server using Pilosa Java client library.
 
 [Pilosa](https://www.pilosa.com) is an open source distributed index which enables updating and querying massive data sets in real-time. See the [Pilosa whitepaper (PDF)](https://www.pilosa.com/pdf/PILOSA%20-%20Technical%20White%20Paper.pdf) for more information.
 
 Using GoldenGate with Pilosa has the following benefits:
+
 * Pilosa is distributed and fast. It may be used for a lot of the tasks a database is used for, offloading the tasks to Pilosa so freeing up database resources.
 * Using GoldenGate, updates from a database to the Pilosa server can be delivered in a low impact way. GoldenGate extracts changes in the database from logs instead of running queries.
 * The data in the database is replicated to a Pilosa server in real-time, making the data in the Pilosa side always up-to-date.
@@ -61,6 +63,7 @@ $ cd docker-images
 ##### Creating the Oracle Database Image
 
 Create the Oracle Database 12c image (`oracle/database:12.2.0.1-ee`) using the following steps:
+
 1. Switch to `OracleDatabase/SingleInstance/dockerfiles` directory:
     ```
     $ cd OracleDatabase/SingleInstance/dockerfiles
@@ -75,7 +78,7 @@ Create the Oracle Database 12c image (`oracle/database:12.2.0.1-ee`) using the f
 
 ##### Creating Oracle GoldenGate Images
 
-We need to crate two Oracle GoldenGate images:
+We need to create two Oracle GoldenGate images:
 * Oracle GoldenGate 18 for the `extract` container.
 * Oracle GoldenGate for BigData image for the `replicat` container.
 
@@ -85,14 +88,16 @@ cd ../../../OracleGoldenGate
 ```
 
 Create the Oracle GoldenGate 18 image using the following steps:
+
 1. Download Oracle GoldenGate 18.1.0.0.0 for Oracle on Linux x86-64 (`181000_fbo_ggs_Linux_x64_shiphome.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
 2. Run the image creation script:
     ```
-    $ BASE_IMAGE=oracle/database:12.2.0.1-ee ./dockerBuild.sh 181000_fbo_ggs_Linux_x64_shiphome.zip --build-arg BASE_COMMAND="su -c '/opt/oracle/runOracle.sh' oracle" --tag oracle/db-12.2-goldengate-standard:18.1.0.0.0
+    $ BASE_IMAGE=oracle/database:18.3.0-ee ./dockerBuild.sh 181000_fbo_ggs_Linux_x64_shiphome.zip --build-arg BASE_COMMAND="su -c '/opt/oracle/runOracle.sh' oracle" --tag oracle/db-18.3-goldengate-standard:18.1.0.0.0
     ```
 
 Create the GoldenGate for BigData image using the following steps:
+
 1. Download Oracle GoldenGate for Big Data 12.3.2.1.1 on Linux x86-64 (`OGG_BigData_Linux_x64_12.3.2.1.1.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
 2. Run the image creation script:
@@ -103,9 +108,10 @@ Create the GoldenGate for BigData image using the following steps:
 ##### Patching the Oracle Database Image
 
 After completing the *Creating the Oracle GoldenGate Image* section above, we should end up with the `oracle/db-12.2-goldengate-standard:18.1.0.0.0` image. The `root` user in the created image doesn't have the correct [PAM](http://www.linux-pam.org) so we need to add them. The simplest way of doing it is creating another Docker image based on the image we have created.
+
 1. Clone https://github.com/pilosa/sample-ogg-handler to somewhere in your system.
 2. Switch to the `sample-ogg-handler/docker` directory.
-2. Run the following to create the patched image:
+3. Run the following to create the patched image:
     ```
     $ docker build -t oracle/db-12.2-goldengate-standard:18.1.0.0.0-patched .
     ```
@@ -133,6 +139,7 @@ Make sure running the following commands end with `OK`:
 #### Enabling GoldenGate Support on an Oracle Database
 
 The support for GoldenGate is not enabled on Oracle databases by default. Follow the steps below to enable it:
+
 1. Start a shell on the extract container with the `oracle` user:
     ```
     $ docker exec -it sampleogghandler_extract_1 su oracle
