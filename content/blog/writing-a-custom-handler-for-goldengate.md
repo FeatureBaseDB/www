@@ -503,15 +503,27 @@ Start a shell on the Pilosa container:
 $ docker exec -it sampleogghandler_pilosa_1 sh
 ```
 
-Run a query against Pilosa:
+Let's find out what are the top 5 jobs and the number of employees having those jobs:
 ```
-# curl pilosa:10101/index/gg/query -d 'Row(customer=1)'
+# curl pilosa:10101/index/employees/query -d 'TopN(job, n=5)'
 ```
 
-Should output:
+Turns out there are 30 sales representatives, 20 shipping clerks, etc.:
 ```
-{"results":[{"attrs":{},"columns":[1000]}]}
+{"results":[[{"id":0,"key":"SA_REP","count":30},{"id":0,"key":"SH_CLERK","count":20},{"id":0,"key":"ST_CLERK","count":20},{"id":0,"key":"FI_ACCOUNT","count":5},{"id":0,"key":"SA_MAN","count":5}]]}
 ```
+
+Which sales representatives earn $10000 or more?
+```
+# Intersect(Row(salary >= 10000), Row(job="SA_REP"))
+```
+
+Outputs:
+```
+{"results":[{"attrs":{},"columns":[150,156,162,168,169,174]}]}
+```
+
+The query language of Pilosa is called **PQL**. You can find more about PQL in our [documentation](https://www.pilosa.com/docs/master/query-language/).
 
 ### Conclusion
 
