@@ -349,7 +349,7 @@ While still in the GoldenGate console, follow these steps to create and start ex
 
 #### Setting Up the Pilosa Handler Project
 
-We are going to take a detour to setup the custom handler project here.
+We are going to take a detour to set up the custom handler project here.
 
 Requirements:
 * JDK 1.8
