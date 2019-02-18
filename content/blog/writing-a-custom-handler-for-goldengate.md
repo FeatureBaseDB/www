@@ -114,6 +114,7 @@ Create the GoldenGate for BigData image using the following steps:
 
 After completing the *Creating the Oracle GoldenGate Image* section above, we should end up with the `oracle/db-12.2-goldengate-standard:18.1.0.0.0` image. The `root` user in the created image doesn't have the correct [PAM](http://www.linux-pam.org) so we need to add them. The simplest way of doing it is creating another Docker image based on the image we have created.
 
+
 1. Clone https://github.com/pilosa/sample-ogg-handler to somewhere in your system.
 2. Switch to the `sample-ogg-handler/docker` directory.
 3. Run the following to create the patched image:
