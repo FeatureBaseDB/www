@@ -66,7 +66,6 @@ $ cd docker-images
 
 Create the Oracle Database 12c image (`oracle/database:12.2.0.1-ee`) using the following steps:
 
-
 1. Switch to `OracleDatabase/SingleInstance/dockerfiles` directory:
     ```
     $ cd OracleDatabase/SingleInstance/dockerfiles
@@ -88,11 +87,22 @@ We need to create two Oracle GoldenGate images:
 
 First, switch to `OracleGoldenGate` directory:
 ```
-cd ../../../OracleGoldenGate
+$ cd ../../../OracleGoldenGate
 ```
 
-Create the Oracle GoldenGate 18 image using the following steps:
+Make sure that `strings`, `unzip` and GNU `tar` utilities are installed in your system. These are required by Oracle's GoldenGate Docker image creation script. On Linux, GNU `tar` should be already installed, but on MacOS follow the steps below:
 
+1. Download the patch:
+    ```
+    $ curl -O https://raw.githubusercontent.com/pilosa/sample-ogg-handler/master/macos/dockerBuild.sh.patch
+    ```
+
+ 2. Apply the patch:
+    ```
+    $ patch < dockerBuild.sh.patch
+    ```
+
+Create the Oracle GoldenGate 18 image using the following steps:
 
 1. Download Oracle GoldenGate 18.1.0.0.0 for Oracle on Linux x86-64 (`181000_fbo_ggs_Linux_x64_shiphome.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
@@ -102,7 +112,6 @@ Create the Oracle GoldenGate 18 image using the following steps:
     ```
 
 Create the GoldenGate for BigData image using the following steps:
-
 
 1. Download Oracle GoldenGate for Big Data 12.3.2.1.1 on Linux x86-64 (`OGG_BigData_Linux_x64_12.3.2.1.1.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
@@ -114,7 +123,6 @@ Create the GoldenGate for BigData image using the following steps:
 ##### Patching the Oracle Database Image
 
 After completing the *Creating the Oracle GoldenGate Image* section above, we should end up with the `oracle/db-12.2-goldengate-standard:18.1.0.0.0` image. The `root` user in the created image doesn't have the correct [PAM](http://www.linux-pam.org) so we need to add them. The simplest way of doing it is creating another Docker image based on the image we have created.
-
 
 1. Clone https://github.com/pilosa/sample-ogg-handler to somewhere in your system.
 2. Switch to the `sample-ogg-handler/docker` directory.
@@ -147,7 +155,6 @@ Make sure running the following commands end with `OK`:
 #### Enabling GoldenGate Support on an Oracle Database
 
 The support for GoldenGate is not enabled on Oracle databases by default. Follow the steps below to enable it:
-
 
 1. Start a shell on the extract container with the `oracle` user:
     ```
