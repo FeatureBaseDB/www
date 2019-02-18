@@ -102,6 +102,7 @@ Create the Oracle GoldenGate 18 image using the following steps:
 
 Create the GoldenGate for BigData image using the following steps:
 
+
 1. Download Oracle GoldenGate for Big Data 12.3.2.1.1 on Linux x86-64 (`OGG_BigData_Linux_x64_12.3.2.1.1.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
 2. Run the image creation script:
