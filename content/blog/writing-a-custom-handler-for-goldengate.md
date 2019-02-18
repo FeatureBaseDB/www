@@ -93,6 +93,7 @@ cd ../../../OracleGoldenGate
 
 Create the Oracle GoldenGate 18 image using the following steps:
 
+
 1. Download Oracle GoldenGate 18.1.0.0.0 for Oracle on Linux x86-64 (`181000_fbo_ggs_Linux_x64_shiphome.zip`) from https://www.oracle.com/technetwork/middleware/goldengate/downloads/index.html
 
 2. Run the image creation script:
