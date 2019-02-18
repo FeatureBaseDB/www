@@ -540,7 +540,7 @@ Outputs:
 {"results":[29]}
 ```
 
-Check out our [documentation](https://www.pilosa.com/docs/master/query-language/) for PQL, the query language of Pilosa for more.
+Check out our [documentation](https://www.pilosa.com/docs/master/query-language/) for PQL, the query language of Pilosa, for more.
 
 ### Conclusion
 
