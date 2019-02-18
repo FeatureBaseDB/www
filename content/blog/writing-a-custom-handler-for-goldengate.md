@@ -98,7 +98,7 @@ Create the Oracle GoldenGate 18 image using the following steps:
 
 2. Run the image creation script:
     ```
-    $ BASE_IMAGE=oracle/12.2.0.1-ee ./dockerBuild.sh 181000_fbo_ggs_Linux_x64_shiphome.zip --build-arg BASE_COMMAND="su -c '/opt/oracle/runOracle.sh' oracle" --tag oracle/db-12.2-goldengate-standard:18.1.0.0.0
+    $ BASE_IMAGE=oracle/database:12.2.0.1-ee ./dockerBuild.sh 181000_fbo_ggs_Linux_x64_shiphome.zip --build-arg BASE_COMMAND="su -c '/opt/oracle/runOracle.sh' oracle" --tag oracle/db-12.2-goldengate-standard:18.1.0.0.0
     ```
 
 Create the GoldenGate for BigData image using the following steps:
