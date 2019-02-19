@@ -94,13 +94,11 @@ $ cd ../../../OracleGoldenGate
 Make sure that `strings`, `unzip` and GNU `tar` utilities are installed in your system. These are required by Oracle's GoldenGate Docker image creation script. On Linux, GNU `tar` should be already installed, but on MacOS follow the steps below:
 
 1. Download the patch:
-
     ```
     $ curl -O https://raw.githubusercontent.com/pilosa/sample-ogg-handler/master/macos/dockerBuild.sh.patch
     ```
 
  2. Apply the patch:
-
     ```
     $ patch < dockerBuild.sh.patch
     ```
