@@ -461,7 +461,7 @@ Our custom handler will run in the replicat container and react to the changes t
 
     Check that the extract group is running:
     ```
-    info all
+    INFO ALL
     ```
 
     Should output something like:
