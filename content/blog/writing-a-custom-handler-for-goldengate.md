@@ -99,7 +99,7 @@ Make sure that `strings`, `unzip` and GNU `tar` utilities are installed in your 
     $ curl -O https://raw.githubusercontent.com/pilosa/sample-ogg-handler/master/macos/dockerBuild.sh.patch
     ```
 
- 2. Apply the patch:
+2. Apply the patch:
 
     ```
     $ patch < dockerBuild.sh.patch
