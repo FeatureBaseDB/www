@@ -1,6 +1,6 @@
 +++
-date = "2019-02-13"
-publishdate = "2019-02-13"
+date = "2019-02-18"
+publishdate = "2019-02-18"
 title = "Writing a Custom Handler for Oracle GoldenGate"
 author = "Yüce Tekol"
 author_twitter = "tklx"
