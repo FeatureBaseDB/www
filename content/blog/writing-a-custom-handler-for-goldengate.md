@@ -367,7 +367,7 @@ A sample Pilosa handler for GoldenGate is included in the `handler` directory in
 
 1. You have already downloaded `OGG_BigData_Linux_x64_12.3.2.1.1.zip` before. Extract `OGG_BigData_Linux_x64_12.3.2.1.1.tar` from `OGG_BigData_Linux_x64_12.3.2.1.1.zip`.
 
-2. Extract `ggjava` directory from `OGG_BigData_Linux_x64_12.3.2.1.1.tarr` and copy it to `local` directory of `handler`, so `handler/local/ggjava` directory contains the GoldenGate libraries.
+2. Extract `ggjava` directory from `OGG_BigData_Linux_x64_12.3.2.1.1.tar` and copy it to `local` directory of `handler`, so `handler/local/ggjava` directory contains the GoldenGate libraries.
 
 3. In a shell, register the libraries for the GoldenGate Java Adapter. This has to be done only once:
     ```
