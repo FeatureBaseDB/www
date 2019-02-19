@@ -378,7 +378,7 @@ A sample Pilosa handler for GoldenGate is included in the `handler` directory in
 
 5. Copy `sample-ogg-handler/handler/target/sample-ogg-handler-0.1.0-all.jar` to the `sample-ogg-handler/v_dirprm/handler` directory. We  will need to do that any time we modify the handler.
 
-6. You can open the GoldenGate handler project in the `handler` directory with your favorite IDE/editor and check the contents of `src\main\java\sample\GoldengateHandler.java`. This is the source file that contains all the logic for the handler.
+6. You can open the GoldenGate handler project in the `sample-ogg-handler/handler` directory with your favorite IDE/editor and check the contents of `src\main\java\sample\GoldengateHandler.java`. This is the source file that contains all the logic for the handler.
 
 #### Setting Up Replication
 
