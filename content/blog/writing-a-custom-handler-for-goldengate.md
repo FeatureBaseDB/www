@@ -482,7 +482,7 @@ Our custom handler will run in the replicat container and react to the changes t
     VIEW REPORT pilosa
     ```
 
-    TThe replicat container log is located at: `dirrpt/PILOSA_info_log4j.log`
+    The replicat container log is located at: `dirrpt/PILOSA_info_log4j.log`
 
 #### Insert Data to the Source Database
 
