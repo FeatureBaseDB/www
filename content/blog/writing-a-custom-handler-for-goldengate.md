@@ -43,6 +43,7 @@ Using GoldenGate with Pilosa has the following benefits:
 ### Getting Ready
 
 Requirements:
+
 * Linux or MacOS, Bash or compatible shell
 * Docker 17.05 or better
 * Docker Compose
@@ -138,9 +139,9 @@ After completing the *Creating the Oracle GoldenGate Image* section above, we sh
 The sample setup is composed of an Oracle database container, the replication container which also contains the custom adapter, and a Pilosa container.
 
 We have already cloned the sample project in the *Patching the Oracle Database Image* section. The sample project includes a Docker compose file. Let's run it:
-    ```
-    $ docker-compose up
-    ```
+```
+$ docker-compose up
+```
 
 This takes a while.
 
