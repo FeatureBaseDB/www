@@ -5,7 +5,7 @@ title = "Building On a Strong Foundation"
 author = "Cody Soyland"
 author_twitter = "codysoyland"
 author_img = "7"
-image = "/img/blog/a-new-chapter/banner.png"
+image = "/img/blog/building-on-a-strong-foundation/banner.png"
 overlay_color = "blue" # blue, green, or light
 featured = "true"
 +++
