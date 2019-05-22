@@ -4,9 +4,10 @@ publishdate = "2019-05-22"
 title = "A New Chapter"
 author = "Cody Soyland"
 author_twitter = "codysoyland"
-author_img = "2"
+author_img = "7"
 image = "/img/blog/a-new-chapter/banner.png"
 overlay_color = "blue" # blue, green, or light
+featured = "true"
 +++
 
 In 2017, we [open-sourced](/blog/hello-world/) Pilosa with the goal of transforming the world of big data analytics using the power of bitmap indices and distributed computing. After two years of development, 38 releases, and tens of thousands of downloads, we couldn't be more proud of the work we've done.
