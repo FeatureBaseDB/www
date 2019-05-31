@@ -1,7 +1,10 @@
 footer{
   background-color: #2a4871;
   color:white;
+  margin:auto;
+  max-width:1366px;
 }
+
 footer a{
   color: white;
   font-size: 14px;
