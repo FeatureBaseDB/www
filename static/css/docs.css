@@ -1,3 +1,8 @@
+.docs-wrapper {
+  max-width: 1366px;
+  margin: 0 auto;
+}
+
 .docs-nav-container{
   background: #f8fafb;
 }
@@ -131,3 +136,4 @@ pre.response {
     border-top: 0px;
     font-size: 12px;
 }
+
