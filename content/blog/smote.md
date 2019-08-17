@@ -10,7 +10,7 @@ overlay_color = "blue" # blue, green, or light
 disable_overlay = false
 +++
 
-Have you ever looked at some publicly available data, and thought, "I wish this data set were 100 times larger"? It seems like there should be an easy way to do that, and it turns out, there is!
+Have you ever looked at some publicly available data, and thought, "I wish this data set was 100 times larger"? It seems like there should be an easy way to do that, and it turns out, there is!
 
 <!--more-->
 
@@ -37,7 +37,7 @@ Analyzing each column, we can approximate its distribution independently of the 
 
 ### SMOTE
 
-The other two oversampling methods listed on Wikipedia are variants of [SMOTE](https://arxiv.org/pdf/1106.1813.pdf) (Synthetic Minority Over-sampling TEchnique), an antique AI algorithm that is deceptively simple, even elegant. SMOTE provides a solution to the correlation problem, without needing to explicitly understand the full distribution. We have taken the core idea of this algorithm, twisted it and abused it, to synthesize silly amounts of test data.
+The other two oversampling methods listed on Wikipedia are variants of [SMOTE](https://arxiv.org/pdf/1106.1813.pdf) (Synthetic Minority Over-sampling TEchnique), an old-fashioned AI algorithm that is deceptively simple, even elegant. SMOTE provides a solution to the correlation problem, without needing to explicitly understand the full distribution. We have taken the core idea of this algorithm, twisted it and abused it, to synthesize silly amounts of test data.
 
 ![SMOTE concept](/img/blog/smote/smote-diagram.png)
 *Illustration of synthesizing data points in SMOTE. Graphic from a [survey](https://www.jair.org/index.php/jair/article/view/11192) of SMOTE extensions.*
