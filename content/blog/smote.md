@@ -1,6 +1,6 @@
 +++
-date = "2019-08-13"
-publishdate = "2019-08-13"
+date = "2019-08-21"
+publishdate = "2019-08-21"
 title = "How to generate an arbitrarily large amount of test data"
 author = "Alan Bernstein"
 author_twitter = "gsnark"
@@ -42,13 +42,13 @@ The other two oversampling methods listed on Wikipedia are variants of [SMOTE](h
 ![SMOTE concept](/img/blog/smote/smote-diagram.png)
 *Illustration of synthesizing data points in SMOTE. Graphic from a [survey](https://www.jair.org/index.php/jair/article/view/11192) of SMOTE extensions.*
 
-The basic algorithm is described [here](https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume16/chawla02a-html/node6.html). Briefly, an original data point (x<sub>i</sub>, in N-dimensional space **R**<sup>N</sup>) is chosen, one of K [nearest neighbors](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) (x<sub>i3</sub>, for example) is selected, and a random linear combination of those two is produced (r<sub>3</sub>). That's it! Do that, say, 100 times for each data point, and you get a huge oversampling factor, with reasonable computational efficiency. SMOTE takes advantage of the local structure of the dataset to synthesize statistically reasonable data, without explicitly understanding the full correlations.
+The basic algorithm is described [here](https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume16/chawla02a-html/node6.html). Briefly, an original data point (x<sub>i</sub>, in N-dimensional space **R**<sup>N</sup>) is chosen, one of K [nearest neighbors](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) (x<sub>i3</sub>, for example) is selected, and a random linear interpolation of those two is produced (r<sub>3</sub>). That's it! Do that, say, 100 times for each data point, and you get a huge oversampling factor, with reasonable computational efficiency. SMOTE takes advantage of the local structure of the dataset to synthesize statistically reasonable data, without explicitly understanding the full correlations.
 
 This works great for real-valued (floating point) data. What if the dataset contains other types, like integers, categorical string values, or even arbitrary text? Although [some variants](https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume16/chawla02a-html/node15.html) handle some of these cases, we had a few other minor modifications in mind.
 
 ### Pilosa-SMOTE
 
-The practical goal is to run this algorithm on a wide range of CSV files, which means supporting more data types is important. Supporting integers and categorical values should go a long way, so we started with those. Let's look at the last step of the basic SMOTE algorithm, the random linear combination (r<sub>3</sub>) of the original point x<sub>i</sub>) and the neighbor (x<sub>i3</sub>). We can write this as r<sub>3</sub> = αx<sub>i</sub> + (1-α)x<sub>i3</sub>, where α is a random floating point value. In pseudocode, with a single floating-point value for the data point `x`:
+The practical goal is to run this algorithm on a wide range of CSV files, which means supporting more data types is important. Supporting integers and categorical values should go a long way, so we started with those. Let's look at the last step of the basic SMOTE algorithm, the random combination (r<sub>3</sub>) of the original point (x<sub>i</sub>) and the neighbor (x<sub>i3</sub>). We can write this as r<sub>3</sub> = αx<sub>i</sub> + (1-α)x<sub>i3</sub>, where α is a random floating point value in [0, 1]. In pseudocode, with a single floating-point value for the data point `x`:
 
 ```
 neighborIdx = rand.Intn(5)
