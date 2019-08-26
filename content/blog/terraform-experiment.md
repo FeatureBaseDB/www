@@ -21,7 +21,7 @@ if i run my experiments on my local laptop, it becomes cluttered and the kruft
 builds up into an unmanageable rats nest.  When I run my experiments on
 machines in the cloud, many juicy artifacts are often lost when my cloud machine
 is destroyed.  I usually capture the major focus of the experiement in notes,
-but later i realize that I missed something that was contained in the output of
+but later I realize that I missed something that was contained in the output of
 a command or even what commands I actually executed.  So following the grunt
 work principle, this task must be automated.
 
