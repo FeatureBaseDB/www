@@ -17,7 +17,7 @@ Looking for an easy way to quickly try out some new whiz-bang software safely an
 At my day job at [Molecula](https://www.molecula.com/), I often find myself needing to perform a simple experiment and I
 run off and install a bunch of tools, run a bunch of tests, make brilliant
 observations and then go onto the next Big Thing.  The problem with this approach is
-if I run my experiments on my local laptop, it becomes cluttered and the kruft
+if I run my experiments on my local laptop, it becomes cluttered and the cruft
 builds up into an unmanageable rats nest.  When I run my experiments on
 machines in the cloud, many juicy artifacts are often lost when my cloud machine
 is destroyed.  I usually capture the major focus of the experiement in notes,
@@ -27,10 +27,10 @@ work principle, this task must be automated.
 
 ### Setup
 First, install the awesome terraform, a cloud provisioning tool from
-hashicorp. Its basically just putting an executeable in your path, but the
-install process is decribed in detail at [Hashicorp](https://learn.hashicorp.com/terraform/getting-started/install.html)
+[HashiCorp](https://www.hashicorp.com/). This basically requires putting an executable in your path, but the
+install process is described in detail at [HashiCorp](https://learn.hashicorp.com/terraform/getting-started/install.html)
 
-Once this is installed you have to craft a few files that describe what cloud
+Once this is installed, you have to craft a few files that describe which cloud
 provider to connect to and how to set it up.  The links below are the ones I use
 for GCP (Google Cloud Platform), and those files assume you have exported your google
 credentials to a local file `credentials.json` file from the GCP dashboard and you use an RSA key
