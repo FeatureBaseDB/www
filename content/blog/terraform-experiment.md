@@ -26,7 +26,7 @@ a command or even what commands I actually executed.  So following the grunt
 work principle, this task must be automated.
 
 ### Setup
-First step is to install the awesome terraform, a cloud provisioning tool from
+First, install the awesome terraform, a cloud provisioning tool from
 hashicorp. Its basically just putting an executeable in your path, but the
 install process is decribed in detail at [Hashicorp](https://learn.hashicorp.com/terraform/getting-started/install.html)
 
