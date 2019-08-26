@@ -18,7 +18,7 @@ At my day job at [Molecula](https://www.molecula.com/), I often find myself need
 run off and install a bunch of tools, run a bunch of tests, make brilliant
 observations and then go onto the next Big Thing.  The problem with this approach is
 if i run my experiments on my local laptop, it becomes cluttered and the kruft
-builds up to a rats nest becomes unmanageable.  When I run my experiments on
+builds up into an unmanageable rats nest.  When I run my experiments on
 machines in the cloud, many juicy artifacts are often lost when my cloud machine
 is destroyed.  I usually capture the major focus of the experiement in notes,
 but later i realize that I missed something that was contained in the output of
