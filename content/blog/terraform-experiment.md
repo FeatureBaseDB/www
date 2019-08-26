@@ -45,7 +45,7 @@ simply `init` and `apply` and you are off to the races.
 terraform init
 terraform apply
 ```
-Once its all up and running you can access that machine by
+Once it's all up and running you can access that machine by
 
 ```
 ssh ubuntu@`terraform output ip`
