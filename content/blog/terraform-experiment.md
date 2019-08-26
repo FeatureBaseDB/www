@@ -35,7 +35,7 @@ provider to connect to and how to set it up.  The links below are the ones I use
 for GCP (Google Cloud Platform), and those files assume you have exported your google
 credentials to a local file `credentials.json` file from the GCP dashboard and you use an RSA key
 (~/.ssh/id_rsa.pub) in your home directory. After those files are in place
-simply init and apply and you are off to the races.
+simply `init` and `apply` and you are off to the races.
 
 {{< gist tgruben f74305a2e9b36e48ddef689d90271e9f "main.tf" >}}
 
