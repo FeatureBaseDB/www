@@ -51,7 +51,7 @@ Once it's all up and running you can access that machine by
 ssh ubuntu@`terraform output ip`
 ```
 
-And finally cleanup when your done with
+And finally cleanup when you're done with
 
 ```
 terraform destroy
