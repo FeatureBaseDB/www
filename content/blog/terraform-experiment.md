@@ -17,7 +17,7 @@ Looking for an easy way to quickly try out some new whiz-bang software safely an
 At my day job at [Molecula](https://www.molecula.com/), I often find myself needing to perform a simple experiment and I
 run off and install a bunch of tools, run a bunch of tests, make brilliant
 observations and then go onto the next Big Thing.  The problem with this approach is
-if i run my experiments on my local laptop, it becomes cluttered and the kruft
+if I run my experiments on my local laptop, it becomes cluttered and the kruft
 builds up into an unmanageable rats nest.  When I run my experiments on
 machines in the cloud, many juicy artifacts are often lost when my cloud machine
 is destroyed.  I usually capture the major focus of the experiement in notes,
