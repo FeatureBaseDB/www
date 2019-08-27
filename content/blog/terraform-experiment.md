@@ -37,7 +37,7 @@ credentials to a local file `credentials.json` file from the GCP dashboard and y
 (~/.ssh/id_rsa.pub) in your home directory. After those files are in place
 simply `init` and `apply` and you are off to the races.
 
-{{< gist tgruben f74305a2e9b36e48ddef689d90271e9f "main.tf" >}}
+{{< gist tgruben b50de6bed565cc3d66fef755bb0c8d13 "main.tf" >}}
 
 {{< gist tgruben f1a3060569192f04d6407757e6e70ae7"output.tf" >}}
 
