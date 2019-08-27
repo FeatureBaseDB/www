@@ -1,7 +1,7 @@
 +++
 date = "2019-08-27"
 publishdate = "2019-08-27"
-title = "Building throwaway machines with terraform"
+title = "Building Throwaway Machines with Terraform"
 author = "Todd Gruben"
 author_twitter = "tgruben"
 author_img = "1"
