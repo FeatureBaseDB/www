@@ -37,9 +37,7 @@ credentials to a local file `credentials.json` file from the GCP dashboard and y
 (~/.ssh/id_rsa.pub) in your home directory. After those files are in place
 simply `init` and `apply` and you are off to the races.
 
-{{< gist tgruben b50de6bed565cc3d66fef755bb0c8d13 "main.tf" >}}
-
-{{< gist tgruben f1a3060569192f04d6407757e6e70ae7"output.tf" >}}
+{{< gist tgruben 564653ee27d617ecab8cf262ffedee8e >}}
 
 ```
 terraform init
@@ -56,5 +54,6 @@ And finally cleanup when you're done with
 ```
 terraform destroy
 ```
+
 
 I hope you find this useful.
