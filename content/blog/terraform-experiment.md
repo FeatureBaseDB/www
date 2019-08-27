@@ -1,10 +1,10 @@
 +++
 date = "2019-08-27"
 publishdate = "2019-08-27"
-title = "Building throwaway Machines with terraform"
+title = "Building throwaway machines with terraform"
 author = "Todd Gruben"
 author_twitter = "tgruben"
-author_img = "2"
+author_img = "1"
 image = "/img/blog/experiment/banner.jpg"
 overlay_color = "blue" # blue, green, or light
 disable_overlay = false
@@ -33,8 +33,8 @@ install process is described in detail at [HashiCorp](https://learn.hashicorp.co
 Once this is installed, you have to craft a few files that describe which cloud
 provider to connect to and how to set it up.  The links below are the ones I use
 for GCP (Google Cloud Platform), and those files assume you have exported your google
-credentials to a local file `credentials.json` file from the GCP dashboard and you use an RSA key
-(~/.ssh/id_rsa.pub) in your home directory. After those files are in place
+credentials to a local file `credentials.json` file from the GCP dashboard, you use an RSA key
+(~/.ssh/id_rsa.pub) in your home directory and you have generated a gist cli access token (~/.gist), the process to generate is described [here](https://github.com/defunkt/gist). After those files are in place
 simply `init` and `apply` and you are off to the races.
 
 {{< gist tgruben 564653ee27d617ecab8cf262ffedee8e >}}
@@ -55,5 +55,6 @@ And finally cleanup when you're done with
 terraform destroy
 ```
 
+All ssh sessions are recorded to log files which preside in the ubuntu home directory `/home/ubuntu` of the generated machine.  When the machine is destroyed via terraform those logs are uploaded to a [gist](https://gist.github.com) which has the nice feature of making the content of the gist indexed and searchable via [search](https://gist.github.com/search).  Don't forget to limit to just your gists by adding the user filter that looks something like `user:tgruben`.  It should be noted that gists are viewable by the public unless you add in the private flag `-p` to the destroy hook in `main.tf`.
 
 I hope you find this useful.
