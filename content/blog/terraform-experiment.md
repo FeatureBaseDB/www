@@ -34,7 +34,7 @@ Once this is installed, you have to craft a few files that describe which cloud
 provider to connect to and how to set it up.  The links below are the ones I use
 for GCP (Google Cloud Platform), and those files assume you have exported your google
 credentials to a local file `credentials.json` file from the GCP dashboard, you use an RSA key
-(~/.ssh/id_rsa.pub) in your home directory and you have generated a gist cli access token (~/.gist), the process to generate is described [here](https://github.com/defunkt/gist). After those files are in place
+(`~/.ssh/id_rsa.pub`) in your home directory and you have generated a gist cli access token (`~/.gist`), the process to generate is described [here](https://github.com/defunkt/gist). After those files are in place
 simply `init` and `apply` and you are off to the races. You will have to replace the project value in the `main.tf` with `project_id` value located in `credentials.json`
 
 {{< gist tgruben 79b22e07fd6d9782c5c7112aed6520aa >}}
