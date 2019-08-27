@@ -1,7 +1,7 @@
 +++
 date = "2019-08-27"
 publishdate = "2019-08-27"
-title = "Building throw away Machines with terraform"
+title = "Building throwaway Machines with terraform"
 author = "Todd Gruben"
 author_twitter = "tgruben"
 author_img = "2"
@@ -22,13 +22,13 @@ builds up into an unmanageable rats nest.  When I run my experiments on
 machines in the cloud, many juicy artifacts are often lost when my cloud machine
 is destroyed.  I usually capture the major focus of the experiement in notes,
 but later I realize that I missed something that was contained in the output of
-a command or even what commands I actually executed.  So following the grunt
+a command or even what commands I actually executed.  So following the [grunt work principle](http://www.jasontconnell.com/comment/grunt-work-principle)
 work principle, this task must be automated.
 
 ### Setup
-First, install the awesome terraform, a cloud provisioning tool from
+First, install the awesome Terraform, a cloud provisioning tool from
 [HashiCorp](https://www.hashicorp.com/). This basically requires putting an executable in your path, but the
-install process is described in detail at [HashiCorp](https://learn.hashicorp.com/terraform/getting-started/install.html)
+install process is described in detail at [HashiCorp](https://learn.hashicorp.com/terraform/getting-started/install.html).
 
 Once this is installed, you have to craft a few files that describe which cloud
 provider to connect to and how to set it up.  The links below are the ones I use
