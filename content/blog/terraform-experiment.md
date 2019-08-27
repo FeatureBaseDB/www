@@ -55,6 +55,6 @@ And finally cleanup when you're done with
 terraform destroy
 ```
 
-All ssh sessions are recorded to log files which preside in the ubuntu home directory `/home/ubuntu` of the generated machine.  When the machine is destroyed via terraform those logs are uploaded to a [gist](https://gist.github.com) which has the nice feature of making the content of the gist indexed and searchable via [search](https://gist.github.com/search).  Don't forget to limit to just your gists by adding the user filter that looks something like `user:tgruben`.  It should be noted that gists are publicly viewable.  You can add  the private flag `-p` from the destroy hook in `main.tf` and the content is not `discoverable` but it is still viewable by the public if you can find the link.
+All ssh sessions are recorded to log files which reside in the ubuntu home directory `/home/ubuntu` of the generated machine.  When the machine is destroyed via terraform those logs are uploaded to a [gist](https://gist.github.com) which has the nice feature of making the content of the gist indexed and searchable via [search](https://gist.github.com/search).  Don't forget to limit to just your gists by adding the user filter that looks something like `user:tgruben`.  It should be noted that gists are publicly viewable.  You can add  the private flag `-p` from the destroy hook in `main.tf` and the content is not `discoverable` but it is still viewable by the public if you can find the link.
 
 I hope you find this useful.
