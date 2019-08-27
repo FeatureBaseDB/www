@@ -37,7 +37,7 @@ credentials to a local file `credentials.json` file from the GCP dashboard, you 
 (`~/.ssh/id_rsa.pub`) in your home directory and you have generated a gist cli access token (`~/.gist`), the process to generate is described [here](https://github.com/defunkt/gist). After those files are in place
 simply `init` and `apply` and you are off to the races. You will have to replace the project value in the `main.tf` with `project_id` value located your `credentials.json`
 
-{{< gist tgruben 79b22e07fd6d9782c5c7112aed6520aa >}}
+{{< gist tgruben b89299c25438e15129c25e7f14cee217 >}}
 
 ```
 terraform init
