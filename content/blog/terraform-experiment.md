@@ -22,7 +22,7 @@ builds up into an unmanageable rats nest.  When I run my experiments on
 machines in the cloud, many juicy artifacts are often lost when my cloud machine
 is destroyed.  I usually capture the major focus of the experiement in notes,
 but later I realize that I missed something that was contained in the output of
-a command or even what commands I actually executed.  So following the [grunt work principle](http://www.jasontconnell.com/comment/grunt-work-principle)
+a command or even what commands I actually executed.  So following the [grunt work principle](http://www.jasontconnell.com/comment/grunt-work-principle),
 this task must be automated.
 
 ### Setup
