@@ -1,6 +1,6 @@
 +++
-date = "2019-08-26"
-publishdate = "2019-08-26"
+date = "2019-08-29"
+publishdate = "2019-08-29"
 title = "Apophenia -- Seeking Patterns in Randomness"
 author = "Seebs"
 author_twitter = "gsnark"
@@ -15,7 +15,7 @@ predict them?
 
 <!--more-->
 
-# Introduction
+### Introduction
 
 One of the difficulties of working with large data sets is that large data
 sets take up a large amount of space. For testing and benchmarking, it
@@ -34,9 +34,8 @@ in different ways. For instance, generating all the column values for one row,
 then moving on to the next row, or generating all the row values for one column,
 then moving on to the next column. But what if differences between the data sets
 made them perform differently? Obviously, the solution is to make sure the data
-will be the same regardless of the order in which it's generated.
-
-Which suggests that what we really want is not just a PRNG, but a PRNG where
+will be the same regardless of the order in which it's generated. And that
+suggests that what we really want is not just a PRNG, but a PRNG where
 we can seek to a given point in its output stream arbitrarily.
 
 I spent some time looking into existing work in this field, and there's a lot
@@ -47,32 +46,41 @@ a lot of them, really fast.
 Enter the realization that AES-128 is very similar to a PRNG. If you initialize
 an AES block cipher with a given key (think of that as a seed), and then treat
 its 128-bit inputs as a 128-bit integers, start at 0, and count up, you get a
-series of 128-bit values. But you can seek around in this sequence -- you will
-always get the same value from any given combination of key and input value.
+series of 128-bit values. This isn't a novel idea; there's a lot of existing
+implementations out there that do things basically like it, but the ones I've
+found typically use the counter (CTR) mode, or one of the chained modes.
+Apophenia runs in the default block cipher mode, maintaining an offset/counter
+internally, so we can jump to specific locations in the stream.
 
-That's simple enough, and you can build other things that consume random values
-on top of it. However, there's a lot of similar functionality between these
-things, and there's a lot of bookkeeping to it, so we went a bit further.
+And I could have stopped there, and just built anything else that wanted
+random values of more specific types in terms of it in our other code, but
+there's some conceptual overlap, so I built some of that additional
+functionality into the same package, to make the implementation more
+consistent.
 
 As a side note: Throughout, I'm referring to powers of two as `1<<N` rather than
 `2^N`. This is because we're writing in Go, and in Go, `2^16` is just a fancy
 way of spelling `18`, and I am trying to get out of that habit before it bites
 me.
 
-## That sure is a lot of bits
+#### That sure is a lot of bits
 
 First off, while AES-128 is usually conceived of as 16 byte inputs and outputs,
 for our purposes, I wanted to treat it as a single `uint128`, only that's not
 a type in Go. Enter `apophenia.Uint128`, a structure that holds a pair of
 `uint64` values named `Hi` and `Lo`. (I am not the most creative person when
 it comes to naming things.) So we're looking at AES-128, not so much as a
-sequence of `1<<135` bits, as a sequence of `1<<128` 128-bit values.
+sequence of `1<<135` bits, as a sequence of `1<<128` 128-bit values. You
+might wonder why it's a structure, and not `[2]uint64`; the answer is the
+compiler appears to be slightly smarter about the structure, and it's a bit
+less ambiguous. (Should `u[0]` be the high-order-bits? Always, or just on
+big-endian hardware? Let's just call them Hi and Lo and be done.)
 
 I was raised by mathematicians and still think it's weird when people call
-a number large even though it's obviously finite, but I will grant, there's a
-fair amount of space in a 128-bit input. What we want to do is ensure that if
-you're grabbing sequences of values from the 128-bit space, you don't get the
-same sequence for two different things.
+a number large even though it's obviously finite, but I will admit, there's a
+fair amount of space in a 128-bit input. We take advantage of this to ensure
+that if you're grabbing sequences of values from the 128-bit space, you don't
+get the same sequence for two different things.
 
 For our purposes, we're mostly concerned with things where we might be iterating
 over a 64-bit range of "columns", so let's use the column values as the low
@@ -111,7 +119,7 @@ There's also a convenience function to create these offsets:
 
 `OffsetFor(sequence SequenceType, seed uint32, iteration uint32, id uint64) Uint128`
 
-## Useful Generators
+#### Useful Generators
 
 It's great to have a seekable PRNG, but usually you want values which follow
 specific patterns. Apophenia provides a handful of prebuilt generators which
@@ -148,9 +156,24 @@ using bitwise operations on `Uint128`, using log2(denominator) steps. It
 doesn't try to solve the case where the denominator isn't a power of two,
 but it can generally be as close as you need, and it's a significant speedup.
 
-## Future Directions
+#### Future Directions
 
 The apophenia package is pretty new, but it's been fairly stable from an API
 standpoint for a while now. It will probably get more sequence types and
 functionality added, but this seems like a good point for a release. So,
 here you go: https://github.com/molecula/apophenia
+
+Note that this implementation, despite being based on a crypto function, is
+not itself reasonable for cryptographic purposes; it is entirely too possible
+to derive information about the "state" of the PRNG and predict its behavior.
+The tradeoff from security to controlled reproducibility is intentional, and
+is not a bug, but it's a real tradeoff.
+
+#### Useful Links
+
+Some background reading if you want to read more about this:
+
+* https://en.wikipedia.org/wiki/Cryptographic_hash_function
+* https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
+* https://crypto.stackexchange.com/questions/32495/how-to-convert-aes-to-a-prng-in-order-to-run-nist-statistical-test-suite
+* https://github.com/paragonie/seedspring
