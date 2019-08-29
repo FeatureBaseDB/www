@@ -1,7 +1,7 @@
 +++
 date = "2019-08-29"
 publishdate = "2019-08-29"
-title = "Apophenia -- Seeking Patterns in Randomness"
+title = "Apophenia: Seeking Patterns in Randomness"
 author = "Seebs"
 author_twitter = "the_real_seebs"
 image = "/img/blog/apophenia/banner.jpg"
