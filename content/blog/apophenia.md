@@ -4,7 +4,7 @@ publishdate = "2019-08-29"
 title = "Apophenia -- Seeking Patterns in Randomness"
 author = "Seebs"
 author_twitter = "gsnark"
-image = "/img/blog/universe-map/banner.png"
+image = "/img/blog/apophenia/banner.jpg"
 overlay_color = "blue" # blue, green, or light
 disable_overlay = false
 +++
@@ -98,15 +98,7 @@ want multiple consecutive values which they iterate on. Let's call those
 
 So this gives us our layout:
 
-```
-High-order word:
-0-23                     24-31   32-63
-[iteration              ][seq   ][seed                         ]
-
-Low-order word:
-0-63
-[id                                                            ]
-```
+![Apophenia seed structure](/img/blog/apophenia/seed-structure.svg)
 
 This allows some neat tricks. One is that you can compute the next iteration
 from a given value just by incrementing the high-order word. Most of these
