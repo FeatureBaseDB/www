@@ -1,7 +1,7 @@
 +++
 date = "2019-08-21"
 publishdate = "2019-08-21"
-title = "How to generate an arbitrarily large amount of test data"
+title = "How to Generate an Arbitrarily Large Amount of Test Data"
 author = "Alan Bernstein"
 author_twitter = "gsnark"
 author_img = "2"
