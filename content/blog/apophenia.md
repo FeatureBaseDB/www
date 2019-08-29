@@ -98,7 +98,7 @@ want multiple consecutive values which they iterate on. Let's call those
 
 So this gives us our layout:
 
-![Apophenia seed structure](/img/blog/apophenia/seed-structure.svg)
+![Apophenia seed structure](/img/blog/apophenia/seed-structure.png)
 
 This allows some neat tricks. One is that you can compute the next iteration
 from a given value just by incrementing the high-order word. Most of these
