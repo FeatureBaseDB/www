@@ -7,6 +7,7 @@ author_twitter = "mattjaffee"
 author_img = "2"
 image = "/img/blog/pilosa-1-4-released/banner.png"
 overlay_color = "blue" # blue, green, or light
+featured = "true"
 +++
 
 Yesterday we cut Pilosa v1.4.0 — our first new minor version since
