@@ -53,7 +53,7 @@ For example, using a reference genome that begins `GTAA`, and another genome tha
 ![Genome model simple](/img/blog/processing-genomes/genome-model-simple.png)
 *Genome data model*
 
-With 3 billion base pairs, we end up with 12 billion columns, and one row per sample. In Pilosa, the combination of index width and [`shard width`](/docs/glossary/#shardwidth) affects parallel performance, as well as the number of open files. We took this opportunity to experiment with the slice width and found that increasing from our default size of 2<sup>20</sup> to 2<sup>23</sup> was a good balance.
+With 3 billion base pairs, we end up with 12 billion columns, and one row per sample. In Pilosa, the combination of index width and [`shard width`](/docs/latest/glossary/#shardwidth) affects parallel performance, as well as the number of open files. We took this opportunity to experiment with the shard width and found that increasing from our default size of 2<sup>20</sup> to 2<sup>23</sup> was a good balance.
 
 Sequenced genomes are the main entity in the index, but we can do more than that! For example, base pairs on chromosome 1 are all stored in the first billion or so columns (chromosome 1 is about 250M base pairs long). We can store a special "mask" bitmap that is all ones for those columns, and zero elsewhere. Do this for each of the 25 chromosomes (1-22, X, Y, and mitochondrial), and you gain the ability to select only base pairs on a given chromosome. Similarly, any gene that lives in a known region on a chromosome can be given a mask bitmap.
 
