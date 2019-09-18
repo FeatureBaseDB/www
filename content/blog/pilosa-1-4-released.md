@@ -99,9 +99,9 @@ of CPU resources are taken up by GC work.
 This problem is compounded if there are many goroutines all vying for
 attention from the scheduler, and there's no way to tell the scheduler
 that this one tiny background task in a single one of those goroutines
-is actually somehwat latency sensitive, and "hey could you maybe run
+is actually somewhat latency sensitive, and "hey could you maybe run
 this one thing pretty regularly so that it doesn't look like this
-whole machine has fallen off the face of planet causing a total
+whole machine has fallen off the face of the planet causing a total
 failure of the cluster until it re-establishes contact??"
 
 So... in addition to a variety of other improvements we've made to
@@ -144,7 +144,7 @@ that there was a lot of contention in our
 [tracing](https://opentracing.io/) subsystem which probabilistically
 samples queries and provides detailed timing and metadata about each
 processing step. Manually disabling tracing and other sources of lock
-contention resulted in similar performance to what we acheived after
+contention resulted in similar performance to what we achieved after
 implementing the worker pool. With the worker pool, however, we were
 able to re-enable important services like tracing without running into
 lock contention issues.
@@ -187,4 +187,3 @@ Be on the lookout for another release before too long with interesting things li
 - An overhauled, and more scalable key translation system.
 - New types of queries (e.g. GROUP BY with aggregates over integer fields).
 - [Contributions](https://github.com/pilosa/pilosa/blob/master/CONTRIBUTING.md) from viewers like you!
-
