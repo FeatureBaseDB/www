@@ -136,8 +136,8 @@ mechanism for determining the number of logical CPUs available with
 `runtime.NumCPU()`, so at startup time, we create a pool of goroutines
 of that size to process queries.
 
-Amazingly, actual performance issue that we were experiencing around
-this was not that 20,000 goroutines were popping in and out of
+Amazingly, the actual performance issue that we were experiencing
+around this was not that 20,000 goroutines were popping in and out of
 existence each second, which the runtime handled pretty well, but that
 in some cases they were all contending for the same mutexes. We
 discovered via [profiling](https://golang.org/pkg/net/http/pprof/)
