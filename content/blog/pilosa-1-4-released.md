@@ -12,8 +12,9 @@ featured = "true"
 
 Yesterday we cut Pilosa v1.4.0 — our first new minor version since
 April! While we haven't made an official release since then, several
-of Molecula's clients have been using much of the new Pilosa code for
-some time and some of the improvements are **vast**.
+of [Molecula's](https://www.molecula.com/) clients have been using
+much of the new Pilosa code for some time and some of the improvements
+are **vast**.
 
 <!--more-->
 
