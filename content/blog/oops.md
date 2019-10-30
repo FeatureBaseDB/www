@@ -19,7 +19,7 @@ what *would* work. Here's a case study.
 
 ### Some background
 
-This one is a bit complicated, so bear with me. There's two central
+This one is a bit complicated, so bear with me. There are two central
 requirements that turn out to be in tension here.
 
 #### Memory-mapping and memory-remapping
