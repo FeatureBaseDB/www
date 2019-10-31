@@ -101,7 +101,7 @@
 }
 
 .single-body-content img{
-  width: 100%;
+  max-width: 100%;
 }
 
 .single-body-content .blog-card-author-content img{
