@@ -1,11 +1,11 @@
 +++
-date = "2019-10-29"
-publishdate = "2019-10-29"
+date = "2019-12-20"
+publishdate = "2019-12-20"
 title = "Oops, I Need To Do It Again"
 author = "Seebs"
 author_img = "7"
 author_twitter = "the_real_seebs"
-image = "/img/blog/apophenia/banner.jpg"
+image = "/img/blog/oops/banner.jpg"
 overlay_color = "blue" # blue, green, or light
 disable_overlay = false
 +++
@@ -275,3 +275,5 @@ experimental designs extra carefully and thoroughly; if the reason you're in
 this situation is that you don't fully understand what problems you need to
 solve, you shouldn't assume that you'll have thought of all the problems that
 might crop up.
+
+[Hero image credit](https://www.pexels.com/photo/close-up-of-pictures-185933/)
