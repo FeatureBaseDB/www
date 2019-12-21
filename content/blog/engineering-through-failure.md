@@ -1,11 +1,11 @@
 +++
 date = "2019-12-20"
 publishdate = "2019-12-20"
-title = "Oops, I Need To Do It Again"
+title = "The Value in Failed Prototypes"
 author = "Seebs"
 author_img = "7"
 author_twitter = "the_real_seebs"
-image = "/img/blog/oops/banner.jpg"
+image = "/img/blog/engineering-through-failure/banner.jpg"
 overlay_color = "blue" # blue, green, or light
 disable_overlay = false
 +++
@@ -170,7 +170,7 @@ its current memory-map is. So I wanted to make a separate object that represents
 the memory-mapping and handles that bookkeeping.
 
 And that gave me an idea: Part of the problem is that we need to know the
-address to unmap to unmap it, so if we overwrite the fragment's memory-map
+address to unmap it, so if we overwrite the fragment's memory-map
 attribute, we've got to have unmapped the old one before that. But this separate
 object could track the old mapping separately, and unmap it at some other
 time.
