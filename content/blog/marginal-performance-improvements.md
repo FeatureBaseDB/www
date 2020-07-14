@@ -73,4 +73,4 @@ Below is a chart comparing performance before and after adding `unionRunRunInPla
 ![Performance Improvement](/img/blog/marginal-performance-improvements/performance-chart.png)
 *Performance Improvement*
 
-In short, the performance improvement was fantastic: an order of magnitude faster, and two orders of magnitude less memory usage. This doesn't look ike a "marginal improvement," you might say. That's true, for this case in itself. As just one of five union-in-place functions, and one of 23 in-place functions, the overall effect on general query performance is tempered somewhat. Still, we're proud of the progress.
+In short, the performance improvement was fantastic: an order of magnitude faster, and two orders of magnitude less memory usage. This doesn't look like a "marginal improvement," you might say. That's true, for this case in itself. As just one of five union-in-place functions, and one of 23 in-place functions, the overall effect on general query performance is tempered somewhat. Still, we're proud of the progress.
