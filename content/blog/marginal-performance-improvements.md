@@ -14,7 +14,7 @@ A look at the amount of effort that we sometimes put into pursuing performance.
 
 ## Background
 
-Pilosa is built on the [https://roaringbitmap.org/](Roaring bitmaps) concept, a high-performance technique for operations on compressed sets of bits. It starts by representing all data in terms of bitmaps, each defined as one of three "container types":
+Pilosa is built on the [Roaring bitmaps](https://roaringbitmap.org/) concept, a high-performance technique for operations on compressed sets of bits. It starts by representing all data in terms of bitmaps, each defined as one of three "container types":
 
 - Array: a list of integers indicating set bit positions.
 - Bitmap: a direct binary representation of the bitmap.
