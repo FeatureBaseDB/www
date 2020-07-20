@@ -2,7 +2,7 @@
 date = "2020-07-13"
 publishdate = "2020-07-13"
 title = "The effort behind marginal performance improvements"
-author = "Kuba Podgorski and Alan Bernstein"
+author = "Kuba Podgórski and Alan Bernstein"
 author_twitter = "gsnark"
 author_img = "2"
 image = "/img/blog/marginal-performance-improvements/banner.jpg"
