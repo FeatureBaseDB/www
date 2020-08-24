@@ -1,7 +1,7 @@
 +++
-date = "2020-07-13"
-publishdate = "2020-07-13"
-title = "The effort behind marginal performance improvements"
+date = "2020-08-24"
+publishdate = "2020-08-24"
+title = "The Effort Behind Marginal Performance Improvements"
 author = "Kuba Podgórski and Alan Bernstein"
 author_twitter = "gsnark"
 author_img = "2"
