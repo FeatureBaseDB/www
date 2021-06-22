@@ -76,3 +76,6 @@ ignoreFiles = []
 
 [taxonomies]
     featured = "featured"
+
+[markup.goldmark.renderer]
+    unsafe = true
