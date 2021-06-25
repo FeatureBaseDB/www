@@ -11,6 +11,7 @@ jobs:
       - run: wget https://github.com/gohugoio/hugo/releases/download/v0.29/hugo_0.29_Linux-64bit.tar.gz
       - run: tar -xvzf hugo_0.29_Linux-64bit.tar.gz
       - run: sudo cp hugo /go/bin/
+      - run: sudo apt update --fix-missing
       - run: sudo apt install -y python-pip
       - run: sudo pip install awscli
       - run: aws configure set preview.cloudfront true
@@ -22,6 +23,7 @@ jobs:
       - run: wget https://github.com/gohugoio/hugo/releases/download/v0.29/hugo_0.29_Linux-64bit.tar.gz
       - run: tar -xvzf hugo_0.29_Linux-64bit.tar.gz
       - run: sudo cp hugo /go/bin/
+      - run: sudo apt update --fix-missing
       - run: sudo apt install -y python-pip
       - run: sudo pip install awscli
       - run: aws configure set preview.cloudfront true
